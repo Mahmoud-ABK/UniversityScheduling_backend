@@ -1,10 +1,10 @@
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
-import jakarta.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class TechnicienDTO extends PersonneDTO {
-    @NotNull
     private String codeTechnicien;
 }

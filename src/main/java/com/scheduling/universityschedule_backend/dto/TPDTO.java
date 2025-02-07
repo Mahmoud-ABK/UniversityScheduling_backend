@@ -1,10 +1,14 @@
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
-import jakarta.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 public class TPDTO {
-    @NotNull
     private Long id;
+    private int nb;
+    // Represent the associated TD by its ID
+    private Long tdId;
+    // List of associated Etudiant IDs
+    private List<Long> etudiantIds;
 }

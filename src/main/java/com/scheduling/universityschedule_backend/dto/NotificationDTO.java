@@ -1,22 +1,16 @@
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Email;
+import java.time.LocalDateTime;
 
 @Data
 public class NotificationDTO {
-    @NotNull
+    private Long id;
     private String message;
-
-    private String date;
-
-    @NotNull
-    private String recepteur;
-
-    @NotNull
-    private String expediteur;
-
+    private LocalDateTime date;
     private String type;
+    private Boolean read;
+    // Represent associated Personne entities by their IDs
+    private Long recepteurId;
+    private Long expediteurId;
 }
-

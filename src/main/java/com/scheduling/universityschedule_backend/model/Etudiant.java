@@ -23,11 +23,7 @@ public class Etudiant extends Personne {
     @JoinColumn(name = "branche_id")
     private Branche branche;
 
-    @ManyToMany
-    @JoinTable(
-            name = "etudiant_tp",
-            joinColumns = @JoinColumn(name = "etudiant_id"),
-            inverseJoinColumns = @JoinColumn(name = "tp_id")
-    )
-    private List<TP> tpList;
+    @ManyToOne
+    @JoinColumn(name="tp_id")
+    private TP tp;
 }

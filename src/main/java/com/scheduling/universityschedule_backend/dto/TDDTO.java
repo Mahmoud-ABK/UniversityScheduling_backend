@@ -1,13 +1,15 @@
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
-import jakarta.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 public class TDDTO {
-    @NotNull
     private Long id;
-
-    @NotNull
+    private int nb;
     private int nbTP;
+    // Represent associated Branche by its ID
+    private Long brancheId;
+    // List of associated TP IDs
+    private List<Long> tpIds;
 }

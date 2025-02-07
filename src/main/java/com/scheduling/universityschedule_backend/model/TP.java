@@ -1,13 +1,6 @@
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,11 +15,12 @@ public class TP {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int nb;
 
     @ManyToOne
     @JoinColumn(name = "td_id")
     private TD td;
 
-    @ManyToMany(mappedBy = "tpList")
+    @OneToMany(mappedBy = "tp")
     private List<Etudiant> etudiants;
 }

@@ -1,27 +1,26 @@
 package com.scheduling.universityschedule_backend.service;
 
+import com.scheduling.universityschedule_backend.dto.PropositionDeRattrapageDTO;
+import com.scheduling.universityschedule_backend.dto.SignalDTO;
 import com.scheduling.universityschedule_backend.exception.CustomException;
-import com.scheduling.universityschedule_backend.model.PropositionDeRattrapage;
-import com.scheduling.universityschedule_backend.model.Signal;
 import java.util.List;
 import java.util.Optional;
 
 public interface FeedbackService {
     // PropositionDeRattrapage operations
-    PropositionDeRattrapage createProposition(PropositionDeRattrapage proposition);
-    Optional<PropositionDeRattrapage> getPropositionById(Long id);
-    List<PropositionDeRattrapage> getAllPropositions();
-    PropositionDeRattrapage updateProposition(PropositionDeRattrapage proposition) throws CustomException;
+    PropositionDeRattrapageDTO createProposition(PropositionDeRattrapageDTO proposition);
+    Optional<PropositionDeRattrapageDTO> getPropositionById(Long id);
+    List<PropositionDeRattrapageDTO> getAllPropositions();
+    PropositionDeRattrapageDTO updateProposition(PropositionDeRattrapageDTO proposition) throws CustomException;
     void deleteProposition(Long id) throws CustomException;
 
     // Signal operations
-    Signal createSignal(Signal signal);
-    Optional<Signal> getSignalById(Long id);
-    List<Signal> getAllSignals();
-    Signal updateSignal(Signal signal) throws CustomException;
+    SignalDTO createSignal(SignalDTO signal);
+    Optional<SignalDTO> getSignalById(Long id);
+    List<SignalDTO> getAllSignals();
+    SignalDTO updateSignal(SignalDTO signal) throws CustomException;
     void deleteSignal(Long id) throws CustomException;
 
-    // New Methods (for admin review actions):
     // Mark a teacher's signal as resolved (with an optional resolution message)
     void resolveFeedback(Long signalId, String resolution) throws CustomException;
 

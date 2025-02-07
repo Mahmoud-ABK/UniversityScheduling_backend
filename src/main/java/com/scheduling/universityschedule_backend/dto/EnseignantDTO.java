@@ -1,17 +1,15 @@
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
-import jakarta.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class EnseignantDTO extends PersonneDTO {
-    @NotNull
     private String codeEnseignant;
-
-    private List<String> heures;
-
-    private List<String> seances;
-
-    private List<String> propositionsDeRattrapage;
+    private int heures;
+    // Association fields represented by IDs
+    private List<Long> seanceIds;
+    private List<Long> propositionsDeRattrapageIds;
 }

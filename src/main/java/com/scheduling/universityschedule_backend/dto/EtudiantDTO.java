@@ -1,16 +1,15 @@
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
-import jakarta.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class EtudiantDTO extends PersonneDTO {
-    @NotNull
     private String matricule;
-
-    @NotNull
-    private String branche;
-
-    private List<String> tp;
+    // Representing the associated Branche by its ID
+    private Long brancheId;
+    // Representation of associated TP record by its ID
+    private Long tpId;
 }

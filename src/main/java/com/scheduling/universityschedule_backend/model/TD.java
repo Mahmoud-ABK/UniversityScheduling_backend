@@ -22,6 +22,7 @@ public class TD {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int nb;
     private int nbTP;
 
     @ManyToOne
