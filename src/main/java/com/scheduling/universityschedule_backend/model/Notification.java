@@ -24,6 +24,7 @@ public class Notification {
     private String message;
     private LocalDateTime date;
     private String type;
+    private Boolean read;
 
     @ManyToOne
     @JoinColumn(name = "recepteur_id")
@@ -32,4 +33,8 @@ public class Notification {
     @ManyToOne
     @JoinColumn(name = "expediteur_id")
     private Personne expediteur;
+
+    public boolean isRead() {
+        return read;
+    }
 }

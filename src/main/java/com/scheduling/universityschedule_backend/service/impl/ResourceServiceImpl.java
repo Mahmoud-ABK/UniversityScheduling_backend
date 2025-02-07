@@ -1,5 +1,6 @@
 package com.scheduling.universityschedule_backend.service.impl;
 
+import com.scheduling.universityschedule_backend.exception.CustomException;
 import com.scheduling.universityschedule_backend.model.FichierExcel;
 import com.scheduling.universityschedule_backend.model.Salle;
 import com.scheduling.universityschedule_backend.repository.FichierExcelRepository;
@@ -7,8 +8,10 @@ import com.scheduling.universityschedule_backend.repository.SalleRepository;
 import com.scheduling.universityschedule_backend.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {
@@ -23,6 +26,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     // Salle operations
+
     @Override
     public Salle createSalle(Salle salle) {
         return salleRepository.save(salle);
@@ -39,19 +43,31 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public Salle updateSalle(Salle salle) {
-        return salleRepository.save(salle);
+    public Salle updateSalle(Salle salle) throws CustomException {
+        if (salle.getId() == null || !salleRepository.existsById(salle.getId())) {
+            throw new CustomException("Salle not found with id: " + salle.getId());
+        }
+        // Retrieve the existing salle, update its fields, and save
+        Salle existingSalle = salleRepository.findById(salle.getId()).get();
+        existingSalle.setIdentifiant(salle.getIdentifiant());
+        existingSalle.setType(salle.getType());
+        existingSalle.setCapacite(salle.getCapacite());
+        existingSalle.setDisponibilite(salle.getDisponibilite());
+        return salleRepository.save(existingSalle);
     }
 
     @Override
-    public void deleteSalle(Long id) {
+    public void deleteSalle(Long id) throws CustomException {
+        if (!salleRepository.existsById(id)) {
+            throw new CustomException("Salle not found with id: " + id);
+        }
         salleRepository.deleteById(id);
     }
 
     // FichierExcel operations
+
     @Override
     public FichierExcel importExcel(FichierExcel fichierExcel) {
-        // Add any custom processing logic here if needed.
         return fichierExcelRepository.save(fichierExcel);
     }
 
@@ -66,7 +82,23 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public void deleteFichierExcel(Long id) {
+    public void deleteFichierExcel(Long id) throws CustomException {
+        if (!fichierExcelRepository.existsById(id)) {
+            throw new CustomException("FichierExcel not found with id: " + id);
+        }
         fichierExcelRepository.deleteById(id);
+    }
+
+    // New method: Retrieve a list of available rooms for a given time slot
+
+    @Override
+    public List<Salle> getAvailableSalles(String timeSlot) throws CustomException {
+        if (timeSlot == null || timeSlot.trim().isEmpty()) {
+            throw new CustomException("Time slot must be provided");
+        }
+        List<Salle> allSalles = salleRepository.findAll();
+        return allSalles.stream()
+                .filter(salle -> salle.getDisponibilite() != null && salle.getDisponibilite().contains(timeSlot))
+                .collect(Collectors.toList());
     }
 }
