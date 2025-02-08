@@ -23,4 +23,8 @@ public class TP {
 
     @OneToMany(mappedBy = "tp")
     private List<Etudiant> etudiants;
+
+    // Inverse side for many-to-many with Seance
+    @ManyToMany(mappedBy = "tps")
+    private List<Seance> seances;
 }

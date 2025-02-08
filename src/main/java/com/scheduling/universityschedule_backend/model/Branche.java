@@ -1,13 +1,10 @@
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,4 +19,8 @@ public class Branche {
     private String specialite;
     private int nbTD;
     private String departement;
+
+    // Inverse side for many-to-many with Seance
+    @ManyToMany(mappedBy = "branches")
+    private List<Seance> seances;
 }
