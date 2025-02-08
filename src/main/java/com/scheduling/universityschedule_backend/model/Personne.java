@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) // Creates a separate table for each subclass
-public abstract class Personne {
+public class Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
