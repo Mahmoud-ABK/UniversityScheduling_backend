@@ -1,0 +1,157 @@
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.FichierExcelDTO;
+import com.scheduling.universityschedule_backend.dto.PropositionDeRattrapageDTO;
+import com.scheduling.universityschedule_backend.dto.SignalDTO;
+import com.scheduling.universityschedule_backend.dto.NotificationDTO;
+import com.scheduling.universityschedule_backend.dto.SalleDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+
+public interface AdminService {
+    // Fetch all teacher signals for review
+    List<SignalDTO> fetchAllSignals();
+
+    // Mark a signal as resolved
+    void markSignalResolved(Long signalId, String resolution) throws CustomException;
+
+    // Fetch all catch-up proposals submitted by teachers
+    List<PropositionDeRattrapageDTO> fetchAllCatchUpProposals();
+
+    // Approve or reject catch-up proposals
+    void approveCatchUpProposal(Long proposalId) throws CustomException;
+    void rejectCatchUpProposal(Long proposalId, String rejectionReason) throws CustomException;
+
+    // Import Excel data
+    FichierExcelDTO importExcelData(MultipartFile file) throws CustomException;
+
+    // Retrieve only the unread notifications for a user
+    List<NotificationDTO> getUnreadNotifications(Long userId) throws CustomException;
+
+    // Retrieve a list of available rooms for a given time slot
+    List<SalleDTO> getAvailableSalles(String timeSlot) throws CustomException;
+}
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.PropositionDeRattrapageDTO;
+import com.scheduling.universityschedule_backend.dto.SignalDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+import java.util.Optional;
+
+public interface FeedbackService {
+    // PropositionDeRattrapage operations
+    PropositionDeRattrapageDTO createProposition(PropositionDeRattrapageDTO proposition);
+    Optional<PropositionDeRattrapageDTO> getPropositionById(Long id);
+    List<PropositionDeRattrapageDTO> getAllPropositions();
+    PropositionDeRattrapageDTO updateProposition(PropositionDeRattrapageDTO proposition) throws CustomException;
+    void deleteProposition(Long id) throws CustomException;
+
+    // Signal operations
+    SignalDTO createSignal(SignalDTO signal);
+    Optional<SignalDTO> getSignalById(Long id);
+    List<SignalDTO> getAllSignals();
+    SignalDTO updateSignal(SignalDTO signal) throws CustomException;
+    void deleteSignal(Long id) throws CustomException;
+
+    // Mark a teacher's signal as resolved (with an optional resolution message)
+    void resolveFeedback(Long signalId, String resolution) throws CustomException;
+
+    // Approve or reject a catch-up proposal
+    void approveCatchUpProposal(Long proposalId) throws CustomException;
+    void rejectCatchUpProposal(Long proposalId, String rejectionReason) throws CustomException;
+}
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.NotificationDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+import java.util.Optional;
+
+public interface NotificationService {
+    NotificationDTO createNotification(NotificationDTO notification);
+    Optional<NotificationDTO> getNotificationById(Long id);
+    List<NotificationDTO> getAllNotifications();
+    NotificationDTO updateNotification(NotificationDTO notification) throws CustomException;
+    void deleteNotification(Long id) throws CustomException;
+
+    // Send notifications (e.g., push/email)
+    void sendNotification(NotificationDTO notification);
+
+    // Retrieve only the unread notifications for a user
+    List<NotificationDTO> getUnreadNotifications(Long userId) throws CustomException;
+}
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.FichierExcelDTO;
+import com.scheduling.universityschedule_backend.dto.SalleDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+import java.util.Optional;
+
+public interface ResourceService {
+    // Salle operations
+    SalleDTO createSalle(SalleDTO salle);
+    Optional<SalleDTO> getSalleById(Long id);
+    List<SalleDTO> getAllSalles();
+    SalleDTO updateSalle(SalleDTO salle) throws CustomException;
+    void deleteSalle(Long id) throws CustomException;
+
+    // FichierExcel operations
+    FichierExcelDTO importExcel(FichierExcelDTO fichierExcel);
+    Optional<FichierExcelDTO> getFichierExcelById(Long id);
+    List<FichierExcelDTO> getAllFichiersExcel();
+    void deleteFichierExcel(Long id) throws CustomException;
+
+    // Retrieve a list of available rooms for a given time slot
+    List<SalleDTO> getAvailableSalles(String timeSlot) throws CustomException;
+}
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.SeanceDTO;
+import com.scheduling.universityschedule_backend.dto.TDDTO;
+import com.scheduling.universityschedule_backend.dto.TPDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+import java.util.Optional;
+
+public interface ScheduleService {
+    // Seance operations
+    SeanceDTO createSeance(SeanceDTO seance);
+    SeanceDTO getSeanceById(Long id) throws CustomException;
+    List<SeanceDTO> getAllSeances();
+    SeanceDTO updateSeance(SeanceDTO seance) throws CustomException;
+    void deleteSeance(Long id) throws CustomException;
+
+    // TD (Tutorial) operations
+    TDDTO createTD(TDDTO td);
+    Optional<TDDTO> getTDById(Long id);
+    List<TDDTO> getAllTDs();
+    TDDTO updateTD(TDDTO td) throws CustomException;
+    void deleteTD(Long id) throws CustomException;
+
+    // TP (Practical) operations
+    TPDTO createTP(TPDTO tp);
+    Optional<TPDTO> getTPById(Long id);
+    List<TPDTO> getAllTPs();
+    TPDTO updateTP(TPDTO tp) throws CustomException;
+    void deleteTP(Long id) throws CustomException;
+
+    // Return sessions for a given teacher (for his/her schedule view)
+    List<SeanceDTO> getSeancesForTeacher(Long enseignantId);
+
+    // Return sessions for a given student (by branch or direct enrollment)
+    List<SeanceDTO> getSeancesForStudent(Long etudiantId);
+
+    // Retrieve the total teaching hours for a teacher
+    int getTeachingHoursForTeacher(Long enseignantId) throws CustomException;
+
+    // Query sessions by branch/program (for a student’s perspective)
+    List<SeanceDTO> getSeancesByBranche(Long brancheId) throws CustomException;
+    // Query sessions by TP and TD
+    List<SeanceDTO> getSeancesByTP(Long TPId) throws CustomException;
+    List<SeanceDTO> getSeancesByTD(Long TDId) throws CustomException;
+
+}

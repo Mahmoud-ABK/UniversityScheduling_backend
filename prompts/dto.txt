@@ -1,0 +1,230 @@
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class AdministrateurDTO extends PersonneDTO {
+    private String codeAdmin;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class BrancheDTO {
+    private Long id;
+    private String niveau;
+    private String specialite;
+    private int nbTD;
+    private String departement;
+
+    private List<SeanceDTO> seances;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import java.util.List;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class EnseignantDTO extends PersonneDTO {
+    private String codeEnseignant;
+    private int heures;
+    // Association fields represented by IDs
+    private List<Long> seanceIds;
+    private List<Long> propositionsDeRattrapageIds;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import java.util.List;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class EtudiantDTO extends PersonneDTO {
+    private String matricule;
+    // Representing the associated Branche by its ID
+    private Long brancheId;
+    // Representation of associated TP record by its ID
+    private Long tpId;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.Data;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+public class FichierExcelDTO {
+    private Long id;
+    private String fileName;
+    private String status;
+    private List<String> errors;
+    private LocalDateTime importDate;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.Data;
+import java.time.LocalDateTime;
+
+@Data
+public class NotificationDTO {
+    private Long id;
+    private String message;
+    private LocalDateTime date;
+    private String type;
+    private Boolean read;
+    // Represent associated Personne entities by their IDs
+    private Long recepteurId;
+    private Long expediteurId;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.Data;
+
+@Data
+public class PersonneDTO {
+    private Long id;
+    private String cin;
+    private String nom;
+    private String prenom;
+    private String email;
+    private String tel;
+    private String adresse;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.Data;
+import java.time.LocalDateTime;
+
+@Data
+public class PropositionDeRattrapageDTO {
+    private Long id;
+    private LocalDateTime date;
+    private String reason;
+    private String status;
+    // Represent the associated Enseignant by its ID
+    private Long enseignantId;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.Data;
+import java.util.List;
+
+@Data
+public class SalleDTO {
+    private Long id;
+    private String identifiant;
+    private String type;
+    private int capacite;
+    private List<String> disponibilite;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class SeanceConflictDTO {
+    private SeanceDTO seance1;
+    private SeanceDTO seance2;
+    private List<String> conflictTypes; // A list to hold the conflict types
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class SeanceDTO {
+    private Long id;
+    private String jour;
+    private String heureDebut;
+    private String heureFin;
+    private String type; // CR, CI, TD, TP
+    private String matiere;
+    private String frequence; // empty string for weekly sessions, "1/15" for biweekly, or specific session date for catch-up
+
+    private SalleDTO salle; // Salle is assumed to be a DTO
+    private EnseignantDTO enseignant; // Enseignant is assumed to be a DTO
+
+    private List<BrancheDTO> branches;
+    private List<TDDTO> tds;
+    private List<TPDTO> tps;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.Data;
+import java.time.LocalDateTime;
+
+@Data
+public class SignalDTO {
+    private Long id;
+    private String message;
+    private String severity;
+    private LocalDateTime timestamp;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class TDDTO {
+    private Long id;
+    private int nb;
+    private int nbTP;
+
+    private BrancheDTO branche; // Branche is assumed to be a DTO
+    private List<TPDTO> tpList;
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class TechnicienDTO extends PersonneDTO {
+    private String codeTechnicien;
+
+}
+package com.scheduling.universityschedule_backend.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class TPDTO {
+    private Long id;
+    private int nb;
+
+    private TDDTO td; // TD is assumed to be a DTO
+    private List<EtudiantDTO> etudiants; // Etudiant is assumed to be a DTO
+}
