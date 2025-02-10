@@ -1,3 +1,5 @@
+Here are the entities : 
+
 package com.scheduling.universityschedule_backend.model;
 
 import jakarta.persistence.Entity;

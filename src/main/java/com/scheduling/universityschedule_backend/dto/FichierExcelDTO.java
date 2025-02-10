@@ -4,11 +4,18 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Data Transfer Object for FichierExcel entity.
+ * Represents scheduling data imported into the system.
+ */
 @Data
 public class FichierExcelDTO {
-    private Long id;
-    private String fileName;
-    private String status;
+    private Long id;  // Unique identifier for the file
+    private String fileName;  // Name of the Excel file
+    private String status;  // Import status (e.g., successful, failed)
+    
+    // List of errors encountered during import
     private List<String> errors;
-    private LocalDateTime importDate;
+
+    private LocalDateTime importDate;  // Date and time of import
 }

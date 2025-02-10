@@ -2,14 +2,19 @@ package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import java.util.List;
 
+/**
+ * Data Transfer Object for Etudiant entity.
+ * Extends PersonneDTO to include additional attributes specific to a Student.
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class EtudiantDTO extends PersonneDTO {
-    private String matricule;
-    // Representing the associated Branche by its ID
-    private Long brancheId;
-    // Representation of associated TP record by its ID
-    private Long tpId;
+    private String matricule;  // Student ID
+
+    // Associated BrancheDTO object representing the student's program or specialization
+    private BrancheDTO branche;
+
+    // Associated TPDTO object representing the student's practical session
+    private TPDTO tp;
 }

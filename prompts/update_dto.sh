@@ -1,5 +1,23 @@
-here are the dtos :
+#!/bin/bash
 
+# Directory containing the DTOs
+dto_dir="$srcprj/dto"
+
+# Ensure the DTO directory exists
+if [ ! -d "$dto_dir" ]; then
+  echo "DTO directory does not exist: $dto_dir"
+  exit 1
+fi
+
+# Function to create a DTO file with the given content
+create_dto_file() {
+  local file_name=$1
+  local content=$2
+  echo "$content" > "$dto_dir/$file_name"
+}
+
+# DTO class contents
+administrateur_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -14,6 +32,10 @@ import lombok.EqualsAndHashCode;
 public class AdministrateurDTO extends PersonneDTO {
     private String codeAdmin;  // Unique code for the administrator
 }
+EOF
+)
+
+branche_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
@@ -38,6 +60,10 @@ public class BrancheDTO {
     // List of SeanceDTO objects associated with this Branche
     private List<SeanceDTO> seances;
 }
+EOF
+)
+
+enseignant_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -60,6 +86,10 @@ public class EnseignantDTO extends PersonneDTO {
     // List of PropositionDeRattrapageDTO objects representing proposed catch-up sessions
     private List<PropositionDeRattrapageDTO> propositionsDeRattrapage;
 }
+EOF
+)
+
+etudiant_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -80,6 +110,10 @@ public class EtudiantDTO extends PersonneDTO {
     // Associated TPDTO object representing the student's practical session
     private TPDTO tp;
 }
+EOF
+)
+
+fichier_excel_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -101,6 +135,10 @@ public class FichierExcelDTO {
 
     private LocalDateTime importDate;  // Date and time of import
 }
+EOF
+)
+
+notification_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -124,6 +162,10 @@ public class NotificationDTO {
     // Associated PersonneDTO object representing the sender of the notification
     private PersonneDTO expediteur;
 }
+EOF
+)
+
+personne_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -142,6 +184,10 @@ public class PersonneDTO {
     private String tel;  // Telephone number
     private String adresse;  // Physical address
 }
+EOF
+)
+
+proposition_de_rattrapage_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -161,6 +207,10 @@ public class PropositionDeRattrapageDTO {
     // Associated EnseignantDTO object representing the teacher who proposed the catch-up session
     private EnseignantDTO enseignant;
 }
+EOF
+)
+
+salle_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -183,6 +233,10 @@ public class SalleDTO {
     // List of SeanceDTO objects representing sessions scheduled in the room
     private List<SeanceDTO> seances;
 }
+EOF
+)
+
+seance_conflict_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
@@ -204,6 +258,10 @@ public class SeanceConflictDTO {
     // List of conflict types between the two sessions
     private List<String> conflictTypes;
 }
+EOF
+)
+
+seance_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
@@ -238,6 +296,10 @@ public class SeanceDTO {
     private List<TDDTO> tds;
     private List<TPDTO> tps;
 }
+EOF
+)
+
+signal_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -254,6 +316,10 @@ public class SignalDTO {
     private String severity;  // Importance level
     private LocalDateTime timestamp;  // Date and time the signal was submitted
 }
+EOF
+)
+
+td_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
@@ -279,6 +345,10 @@ public class TDDTO {
     // List of associated TPDTO objects representing practical sessions
     private List<TPDTO> tpList;
 }
+EOF
+)
+
+technicien_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -293,6 +363,10 @@ import lombok.EqualsAndHashCode;
 public class TechnicienDTO extends PersonneDTO {
     private String codeTechnicien;  // Unique code for the technician
 }
+EOF
+)
+
+tp_dto=$(cat <<'EOF'
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
@@ -317,3 +391,24 @@ public class TPDTO {
     // List of associated EtudiantDTO objects representing students enrolled in the practical session
     private List<EtudiantDTO> etudiants;
 }
+EOF
+)
+
+# Create DTO files
+create_dto_file "AdministrateurDTO.java" "$administrateur_dto"
+create_dto_file "BrancheDTO.java" "$branche_dto"
+create_dto_file "EnseignantDTO.java" "$enseignant_dto"
+create_dto_file "EtudiantDTO.java" "$etudiant_dto"
+create_dto_file "FichierExcelDTO.java" "$fichier_excel_dto"
+create_dto_file "NotificationDTO.java" "$notification_dto"
+create_dto_file "PersonneDTO.java" "$personne_dto"
+create_dto_file "PropositionDeRattrapageDTO.java" "$proposition_de_rattrapage_dto"
+create_dto_file "SalleDTO.java" "$salle_dto"
+create_dto_file "SeanceConflictDTO.java" "$seance_conflict_dto"
+create_dto_file "SeanceDTO.java" "$seance_dto"
+create_dto_file "SignalDTO.java" "$signal_dto"
+create_dto_file "TDDTO.java" "$td_dto"
+create_dto_file "TechnicienDTO.java" "$technicien_dto"
+create_dto_file "TPDTO.java" "$tp_dto"
+
+echo "DTO classes have been created in $dto_dir."
