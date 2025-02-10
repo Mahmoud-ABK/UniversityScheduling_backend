@@ -1,5 +1,6 @@
 package com.scheduling.universityschedule_backend.dto;
 
+import com.scheduling.universityschedule_backend.model.Seance;
 import lombok.Data;
 import java.util.List;
 
@@ -10,4 +11,5 @@ public class SalleDTO {
     private String type;
     private int capacite;
     private List<String> disponibilite;
+    private List<SeanceDTO> seances;
 }

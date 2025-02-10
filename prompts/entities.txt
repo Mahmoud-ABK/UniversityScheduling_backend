@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,14 +18,11 @@ public class Administrateur extends Personne {
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -38,6 +37,10 @@ public class Branche {
     private String specialite;
     private int nbTD;
     private String departement;
+
+    // Inverse side for many-to-many with Seance
+    @ManyToMany(mappedBy = "branches")
+    private List<Seance> seances;
 }
 package com.scheduling.universityschedule_backend.model;
 
@@ -77,9 +80,11 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -92,13 +97,9 @@ public class Etudiant extends Personne {
     @JoinColumn(name = "branche_id")
     private Branche branche;
 
-    @ManyToMany
-    @JoinTable(
-            name = "etudiant_tp",
-            joinColumns = @JoinColumn(name = "etudiant_id"),
-            inverseJoinColumns = @JoinColumn(name = "tp_id")
-    )
-    private List<TP> tpList;
+    @ManyToOne
+    @JoinColumn(name="tp_id")
+    private TP tp;
 }
 package com.scheduling.universityschedule_backend.model;
 
@@ -183,7 +184,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) // Creates a separate table for each subclass
-public abstract class Personne {
+public class Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -227,12 +228,7 @@ public class PropositionDeRattrapage {
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -251,21 +247,20 @@ public class Salle {
     private String type;
     private int capacite;
 
+    @OneToMany(mappedBy = "salle")
+    private List<Seance> seances;
+
     @ElementCollection
     private List<String> disponibilite;
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -276,12 +271,19 @@ public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String jour;
     private String heureDebut;
     private String heureFin;
-    private String type;
+    private String type; // possible values CR-CI-TD-TP
     private String matiere;
+
+    @Nullable
     private String frequence;
+    // Possible values:
+    //  - Empty string for weekly sessions (in which case each list below must have exactly one element)
+    //  - "1/15" for biweekly sessions (lists can have more than one element to assign different groups)
+    //  - A specific session date for catchup sessions
 
     @ManyToOne
     @JoinColumn(name = "salle_id")
@@ -290,6 +292,36 @@ public class Seance {
     @ManyToOne
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
+
+    // Use a many-to-many relationship for groups, with business logic to enforce
+    // one single association for weekly sessions and multiple for biweekly sessions.
+
+    // For Branch: normally one branch; multiple allowed if biweekly.
+    @ManyToMany
+    @JoinTable(
+            name = "seance_branche",
+            joinColumns = @JoinColumn(name = "seance_id"),
+            inverseJoinColumns = @JoinColumn(name = "branche_id")
+    )
+    private List<Branche> branches;
+
+    // For TD: normally one TD; multiple allowed if biweekly.
+    @ManyToMany
+    @JoinTable(
+            name = "seance_td",
+            joinColumns = @JoinColumn(name = "seance_id"),
+            inverseJoinColumns = @JoinColumn(name = "td_id")
+    )
+    private List<TD> tds;
+
+    // For TP: normally one TP; multiple allowed if biweekly.
+    @ManyToMany
+    @JoinTable(
+            name = "seance_tp",
+            joinColumns = @JoinColumn(name = "seance_id"),
+            inverseJoinColumns = @JoinColumn(name = "tp_id")
+    )
+    private List<TP> tps;
 }
 package com.scheduling.universityschedule_backend.model;
 
@@ -318,14 +350,7 @@ public class Signal {
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -340,6 +365,7 @@ public class TD {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int nb;
     private int nbTP;
 
     @ManyToOne
@@ -348,6 +374,10 @@ public class TD {
 
     @OneToMany(mappedBy = "td")
     private List<TP> tpList;
+
+    // Inverse side for many-to-many with Seance
+    @ManyToMany(mappedBy = "tds")
+    private List<Seance> seances;
 }
 package com.scheduling.universityschedule_backend.model;
 
@@ -355,8 +385,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -367,14 +399,7 @@ public class Technicien extends Personne {
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -389,11 +414,16 @@ public class TP {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int nb;
 
     @ManyToOne
     @JoinColumn(name = "td_id")
     private TD td;
 
-    @ManyToMany(mappedBy = "tpList")
+    @OneToMany(mappedBy = "tp")
     private List<Etudiant> etudiants;
+
+    // Inverse side for many-to-many with Seance
+    @ManyToMany(mappedBy = "tps")
+    private List<Seance> seances;
 }
