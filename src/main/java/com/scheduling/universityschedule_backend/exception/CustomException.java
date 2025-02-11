@@ -1,8 +1,11 @@
 package com.scheduling.universityschedule_backend.exception;
 
+import lombok.Data;
+
+@Data
 public class CustomException extends Exception {
     private static final long serialVersionUID = 1L;
-
+    private String type;
     // Constructors
     public CustomException(String message) {
         super(message);

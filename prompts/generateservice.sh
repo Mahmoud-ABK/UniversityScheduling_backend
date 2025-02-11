@@ -1,5 +1,14 @@
-here is the service layer:
+#!/bin/bash
 
+# Define the target directory
+srcprj="$srcprj/service"
+
+# Ensure the target directory exists
+mkdir -p "$srcprj"
+
+# Write each service interface to its respective file
+
+cat > "$srcprj/AdministrateurService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -14,6 +23,9 @@ public interface AdministrateurService {
     PropositionDeRattrapageDTO traiterDemandeRattrapage(Long id, boolean approved);
     List<NotificationDTO> diffuserNotification(NotificationDTO notificationDTO);
 }
+EOF
+
+cat > "$srcprj/BrancheService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -31,6 +43,9 @@ public interface BrancheService {
     BrancheDTO updateBranche(Long id, BrancheDTO brancheDTO);
     void deleteBranche(Long id);
 }
+EOF
+
+cat > "$srcprj/EnseignantService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -46,6 +61,9 @@ public interface EnseignantService {
     SignalDTO soumettreSuggestion(Long id, SignalDTO signalDTO);
     List<SignalDTO> getSignalisations(Long id);
 }
+EOF
+
+cat > "$srcprj/EtudiantService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -59,6 +77,9 @@ public interface EtudiantService {
     List<SeanceDTO> getEmploiDuTempsBranche(Long brancheId);
     List<NotificationDTO> getNotifications(Long id);
 }
+EOF
+
+cat > "$srcprj/FichierExcelService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -70,6 +91,9 @@ import java.util.List;
 public interface FichierExcelService {
     FichierExcelDTO importerFichierExcel(FichierExcelDTO fichierExcelDTO);
 }
+EOF
+
+cat > "$srcprj/NotificationService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -82,6 +106,9 @@ public interface NotificationService {
     List<NotificationDTO> getNotificationsForUser(Long userId);
     void markAsRead(Long notificationId);
 }
+EOF
+
+cat > "$srcprj/PropositionDeRattrapageService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -95,6 +122,9 @@ public interface PropositionDeRattrapageService {
     List<PropositionDeRattrapageDTO> getAllProposals();
     PropositionDeRattrapageDTO approveOrRejectProposal(Long id, boolean approved);
 }
+EOF
+
+cat > "$srcprj/SalleService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -110,6 +140,9 @@ public interface SalleService {
     SalleDTO updateSalle(Long id, SalleDTO salleDTO);
     void deleteSalle(Long id);
 }
+EOF
+
+cat > "$srcprj/SeanceService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -126,6 +159,9 @@ public interface SeanceService {
     void deleteSeance(Long id);
     List<SeanceConflictDTO> detectConflicts(Long seanceId);
 }
+EOF
+
+cat > "$srcprj/SignalService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -138,6 +174,9 @@ public interface SignalService {
     SignalDTO submitSignal(SignalDTO signalDTO);
     List<SignalDTO> getAllSignals();
 }
+EOF
+
+cat > "$srcprj/TDService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -153,6 +192,9 @@ public interface TDService {
     TDDTO updateTD(Long id, TDDTO tdDTO);
     void deleteTD(Long id);
 }
+EOF
+
+cat > "$srcprj/TechnicienService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -168,6 +210,9 @@ public interface TechnicienService {
     TechnicienDTO updateTechnicien(Long id, TechnicienDTO technicienDTO);
     void deleteTechnicien(Long id);
 }
+EOF
+
+cat > "$srcprj/TPService.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
@@ -183,3 +228,6 @@ public interface TPService {
     TPDTO updateTP(Long id, TPDTO tpDTO);
     void deleteTP(Long id);
 }
+EOF
+
+echo "Service interfaces have been successfully created in $srcprj."

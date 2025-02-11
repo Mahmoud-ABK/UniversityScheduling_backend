@@ -1,4 +1,4 @@
-### **Documentation Complète des Endpoints**
+******__### **Documentation Complète des Endpoints**
 
 _Système de Gestion des Emplois du Temps Universitaires_
 
@@ -224,4 +224,4 @@ _Accès exclusif aux administrateurs._
 
 - Tous les endpoints (sauf `/auth/*`) nécessitent un **JWT valide**.
 
-- Les conflits sont automatiquement détectés mais ne bloquent pas la sauvegarde.
+- Les conflits sont automatiquement détectés mais ne bloquent pas la sauvegarde.__******
