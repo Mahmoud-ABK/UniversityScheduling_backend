@@ -18,7 +18,7 @@ public interface UserService {
 
     /**
      * Creates new user.
-     * @param user User to createf
+     * @param user User to create
      * @return Created user
      * @throws CustomException if creation fails
      */

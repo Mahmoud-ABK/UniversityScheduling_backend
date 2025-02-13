@@ -17,4 +17,7 @@ public class CustomLogger {
     public static void logError(String message, Throwable t) {
         logger.error(message, t);
     }
+    public static void logError(String message) {
+        logger.error(message);
+    }
 }

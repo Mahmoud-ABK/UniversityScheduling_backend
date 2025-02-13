@@ -29,4 +29,6 @@ public interface NotificationService {
      * @throws CustomException if retrieval fails
      */
     List<NotificationDTO> getUnreadNotifications() throws CustomException;
+    public void broadcastNotification(NotificationDTO notificationDTO) throws CustomException ;
 }
+

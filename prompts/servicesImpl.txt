@@ -1,13 +1,3 @@
-#!/bin/bash
-# Set the base folder for the implementation files.
-
-implDir="$srcprj/service/impl"
-
-# Create the implementation directory if it does not exist.
-mkdir -p "$implDir"
-
-# AdministrateurServiceImpl.java
-cat > "$implDir/AdministrateurServiceImpl.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.*;
@@ -168,10 +158,6 @@ public class AdministrateurServiceImpl implements AdministrateurService {
         }
     }
 }
-EOF
-
-# BrancheServiceImpl.java
-cat > "$implDir/BrancheServiceImpl.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.BrancheDTO;
@@ -255,10 +241,6 @@ public class BrancheServiceImpl implements BrancheService {
         brancheRepository.deleteById(id);
     }
 }
-EOF
-
-# EnseignantServiceImpl.java
-cat > "$implDir/EnseignantServiceImpl.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.EnseignantDTO;
@@ -365,10 +347,6 @@ public class EnseignantServiceImpl implements EnseignantService {
                 .collect(Collectors.toList());
     }
 }
-EOF
-
-# EtudiantServiceImpl.java
-cat > "$implDir/EtudiantServiceImpl.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.EtudiantDTO;
@@ -439,7 +417,7 @@ public class EtudiantServiceImpl implements EtudiantService {
         List<Seance> filtered = sessions.stream()
                 .filter(seance -> seance.getBranches() != null &&
                         seance.getBranches().stream().anyMatch(branche -> branche.getId().equals(brancheId)))
-                .collect(Collectors.toList());
+                .toList();
         return filtered.stream().map(mapper::toSeanceDTO).collect(Collectors.toList());
     }
 
@@ -448,14 +426,10 @@ public class EtudiantServiceImpl implements EtudiantService {
         List<Notification> notifications = notificationRepository.findAll()
                 .stream()
                 .filter(n -> n.getRecepteur() != null && n.getRecepteur().getId().equals(id))
-                .collect(Collectors.toList());
+                .toList();
         return notifications.stream().map(mapper::toNotificationDTO).collect(Collectors.toList());
     }
 }
-EOF
-
-# ExcelFileServiceImpl.java
-cat > "$implDir/ExcelFileServiceImpl.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.FichierExcelDTO;
@@ -512,10 +486,6 @@ public class ExcelFileServiceImpl implements ExcelFileService {
         }
     }
 }
-EOF
-
-# NotificationServiceImpl.java
-cat > "$implDir/NotificationServiceImpl.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.NotificationDTO;
@@ -591,10 +561,6 @@ public class NotificationServiceImpl implements NotificationService {
         }
     }
 }
-EOF
-
-# SalleServiceImpl.java
-cat > "$implDir/SalleServiceImpl.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.SalleDTO;
@@ -692,10 +658,6 @@ public class SalleServiceImpl implements SalleService {
         }
     }
 }
-EOF
-
-# SeanceServiceImpl.java
-cat > "$implDir/SeanceServiceImpl.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.SeanceConflictDTO;
@@ -834,10 +796,6 @@ public class SeanceServiceImpl implements SeanceService {
         }
     }
 }
-EOF
-
-# TDServiceImpl.java
-cat > "$implDir/TDServiceImpl.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.TDDTO;
@@ -900,10 +858,6 @@ public class TDServiceImpl implements TDService {
         return tps.stream().map(mapper::toTPDTO).collect(Collectors.toList());
     }
 }
-EOF
-
-# TPServiceImpl.java
-cat > "$implDir/TPServiceImpl.java" << 'EOF'
 package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.EtudiantDTO;
@@ -963,6 +917,3 @@ public class TPServiceImpl implements TPService {
                 .collect(Collectors.toList());
     }
 }
-EOF
-
-echo "Service layer files generated successfully in $implDir."
