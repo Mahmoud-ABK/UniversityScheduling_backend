@@ -21,7 +21,7 @@ public class TP {
     @JoinColumn(name = "td_id")
     private TD td;
 
-    @OneToMany(mappedBy = "tp")
+    @OneToMany(mappedBy = "tp",fetch = FetchType.EAGER)
     private List<Etudiant> etudiants;
 
     // Inverse side for many-to-many with Seance

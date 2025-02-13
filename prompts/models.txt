@@ -1,5 +1,3 @@
-Here are the entities : 
-
 package com.scheduling.universityschedule_backend.model;
 
 import jakarta.persistence.Entity;
@@ -41,15 +39,12 @@ public class Branche {
     private String departement;
 
     // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "branches")
+    @ManyToMany(mappedBy = "branches",fetch = FetchType.EAGER)
     private List<Seance> seances;
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -66,10 +61,10 @@ public class Enseignant extends Personne {
     private String codeEnseignant;
     private int heures;
 
-    @OneToMany(mappedBy = "enseignant")
+    @OneToMany(mappedBy = "enseignant",fetch = FetchType.EAGER)
     private List<Seance> seances;
 
-    @OneToMany(mappedBy = "enseignant")
+    @OneToMany(mappedBy = "enseignant" ,fetch = FetchType.EAGER)
     private List<PropositionDeRattrapage> propositionsDeRattrapage;
 }
 package com.scheduling.universityschedule_backend.model;
@@ -186,7 +181,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) // Creates a separate table for each subclass
-public abstract class Personne {
+public class Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -230,12 +225,7 @@ public class PropositionDeRattrapage {
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -253,6 +243,9 @@ public class Salle {
     private String identifiant;
     private String type;
     private int capacite;
+
+    @OneToMany(mappedBy = "salle",fetch = FetchType.EAGER)
+    private List<Seance> seances;
 
     @ElementCollection
     private List<String> disponibilite;
@@ -424,7 +417,7 @@ public class TP {
     @JoinColumn(name = "td_id")
     private TD td;
 
-    @OneToMany(mappedBy = "tp")
+    @OneToMany(mappedBy = "tp",fetch = FetchType.EAGER)
     private List<Etudiant> etudiants;
 
     // Inverse side for many-to-many with Seance

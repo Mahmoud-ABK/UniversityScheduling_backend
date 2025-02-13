@@ -1,0 +1,56 @@
+2025-02-12 00:33:08 [restartedMain] INFO  CustomLogger - ===== Testing FichierExcelService =====
+2025-02-12 00:33:08 [restartedMain] INFO  CustomLogger - Imported FichierExcel: FichierExcelDTO(id=6, fileName=schedule.xlsx, status=imported, errors=null, importDate=2025-02-12T00:33:08.178281717)
+2025-02-12 00:33:08 [restartedMain] INFO  CustomLogger - ===== Testing AdministrateurService =====
+2025-02-12 00:33:28 [restartedMain] INFO  CustomLogger - ===== Testing FichierExcelService =====
+2025-02-12 00:33:28 [restartedMain] INFO  CustomLogger - Imported FichierExcel: FichierExcelDTO(id=7, fileName=schedule.xlsx, status=imported, errors=null, importDate=2025-02-12T00:33:28.869556497)
+2025-02-12 00:33:28 [restartedMain] INFO  CustomLogger - ===== Testing AdministrateurService =====
+2025-02-12 00:34:27 [restartedMain] INFO  CustomLogger - ===== Testing FichierExcelService =====
+2025-02-12 00:34:27 [restartedMain] INFO  CustomLogger - Imported FichierExcel: FichierExcelDTO(id=8, fileName=schedule.xlsx, status=imported, errors=null, importDate=2025-02-12T00:34:27.478639975)
+2025-02-12 00:34:27 [restartedMain] INFO  CustomLogger - ===== Testing AdministrateurService =====
+2025-02-12 00:34:27 [restartedMain] ERROR CustomLogger - Exception during service layer testing
+com.scheduling.universityschedule_backend.exception.CustomException: Failed to generate emploi du temps
+	at com.scheduling.universityschedule_backend.service.impl.AdministrateurServiceImpl.genererEmploiDuTemps(AdministrateurServiceImpl.java:74)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:77)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:62)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.scheduling.universityschedule_backend.model.Enseignant.seances: could not initialize proxy - no Session
+	at org.hibernate.collection.spi.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:635)
+	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:219)
+	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:614)
+	at org.hibernate.collection.spi.AbstractPersistentCollection.read(AbstractPersistentCollection.java:138)
+	at org.hibernate.collection.spi.PersistentBag.iterator(PersistentBag.java:369)
+	at java.base/java.util.Spliterators$IteratorSpliterator.estimateSize(Spliterators.java:1959)
+	at java.base/java.util.Spliterator.getExactSizeIfKnown(Spliterator.java:414)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:508)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at com.scheduling.universityschedule_backend.mapper.EntityMapper.toEnseignantDTO(EntityMapper.java:113)
+	at com.scheduling.universityschedule_backend.mapper.EntityMapper.toSeanceDTO(EntityMapper.java:287)
+	at com.scheduling.universityschedule_backend.service.impl.AdministrateurServiceImpl.genererEmploiDuTemps(AdministrateurServiceImpl.java:70)
+	... 24 common frames omitted
+2025-02-12 00:37:58 [restartedMain] INFO  CustomLogger - ===== Testing FichierExcelService =====
+2025-02-12 00:37:58 [restartedMain] INFO  CustomLogger - Imported FichierExcel: FichierExcelDTO(id=9, fileName=schedule.xlsx, status=imported, errors=null, importDate=2025-02-12T00:37:58.323820581)
+2025-02-12 00:37:58 [restartedMain] INFO  CustomLogger - ===== Testing AdministrateurService =====

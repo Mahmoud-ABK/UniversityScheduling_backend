@@ -13,8 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeanceConflictDTO {
-    private SeanceDTO seance1;  // First conflicting session
-    private SeanceDTO seance2;  // Second conflicting session
+    // ID of the first conflicting session
+    private Long seance1Id;
+
+    // ID of the second conflicting session
+    private Long seance2Id;
 
     // List of conflict types between the two sessions
     private List<String> conflictTypes;

@@ -21,6 +21,6 @@ public class Branche {
     private String departement;
 
     // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "branches")
+    @ManyToMany(mappedBy = "branches",fetch = FetchType.EAGER)
     private List<Seance> seances;
 }

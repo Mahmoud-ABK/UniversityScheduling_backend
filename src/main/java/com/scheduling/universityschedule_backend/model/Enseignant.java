@@ -1,9 +1,6 @@
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,9 +17,9 @@ public class Enseignant extends Personne {
     private String codeEnseignant;
     private int heures;
 
-    @OneToMany(mappedBy = "enseignant")
+    @OneToMany(mappedBy = "enseignant",fetch = FetchType.EAGER)
     private List<Seance> seances;
 
-    @OneToMany(mappedBy = "enseignant")
+    @OneToMany(mappedBy = "enseignant" ,fetch = FetchType.EAGER)
     private List<PropositionDeRattrapage> propositionsDeRattrapage;
 }

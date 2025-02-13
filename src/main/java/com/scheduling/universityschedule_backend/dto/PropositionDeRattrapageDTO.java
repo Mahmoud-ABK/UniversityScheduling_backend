@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
  */
 @Data
 public class PropositionDeRattrapageDTO {
-    private Long id;  // Unique identifier for the proposal
-    private LocalDateTime date;  // Proposed date for the catch-up session
-    private String reason;  // Explanation for the catch-up session
-    private String status;  // Current status of the proposal (e.g., pending, approved, rejected)
+    private Long id;               // Unique identifier for the proposal
+    private LocalDateTime date;    // Proposed date for the catch-up session
+    private String reason;         // Explanation for the catch-up session
+    private String status;         // Current status of the proposal (e.g., pending, approved, rejected)
 
-    // Associated EnseignantDTO object representing the teacher who proposed the catch-up session
-    private EnseignantDTO enseignant;
+    // ID of the associated Enseignant who proposed the catch-up session
+    private Long enseignantId;
 }

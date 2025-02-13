@@ -19,7 +19,7 @@ public class Salle {
     private String type;
     private int capacite;
 
-    @OneToMany(mappedBy = "salle")
+    @OneToMany(mappedBy = "salle",fetch = FetchType.EAGER)
     private List<Seance> seances;
 
     @ElementCollection

@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
  */
 @Data
 public class SignalDTO {
-    private Long id;  // Unique identifier for the signal
-    private String message;  // Details of the issue or suggestion
-    private String severity;  // Importance level
-    private LocalDateTime timestamp;  // Date and time the signal was submitted
+    private Long id;                // Unique identifier for the signal
+    private String message;         // Details of the issue or suggestion
+    private String severity;        // Importance level
+    private LocalDateTime timestamp;// Date and time the signal was submitted
 }

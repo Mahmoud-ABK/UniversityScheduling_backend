@@ -12,9 +12,9 @@ import lombok.EqualsAndHashCode;
 public class EtudiantDTO extends PersonneDTO {
     private String matricule;  // Student ID
 
-    // Associated BrancheDTO object representing the student's program or specialization
-    private BrancheDTO branche;
+    // ID of the associated Branche representing the student's program or specialization
+    private Long brancheId;
 
-    // Associated TPDTO object representing the student's practical session
-    private TPDTO tp;
+    // ID of the associated TP representing the student's practical session
+    private Long tpId;
 }

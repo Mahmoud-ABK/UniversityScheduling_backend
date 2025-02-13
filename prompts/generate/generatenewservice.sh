@@ -1,0 +1,1155 @@
+#!/bin/bash
+#
+# This script generates the updated service implementation files (conforming to the new DTO architecture)
+# under the $srcprj/service/impl directory.
+#
+# Make sure to export the srcprj environment variable:
+#    export srcprj="/path/to/your/project/src/main/java/com/scheduling/universityschedule_backend"
+#
+# Then run:
+#    ./generate_services.sh
+#
+
+# Check that srcprj is defined
+if [ -z "$srcprj" ]; then
+    echo "Error: srcprj environment variable is not set. Please set it to your base package directory."
+    exit 1
+fi
+
+# Create the service implementation directory if it does not exist
+mkdir -p "$srcprj/service/impl"
+
+echo "Generating service implementation files in $srcprj/service/impl ..."
+
+########################################
+# AdministrateurServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/AdministrateurServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.FichierExcelDTO;
+import com.scheduling.universityschedule_backend.dto.NotificationDTO;
+import com.scheduling.universityschedule_backend.dto.PropositionDeRattrapageDTO;
+import com.scheduling.universityschedule_backend.dto.SeanceDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.FichierExcel;
+import com.scheduling.universityschedule_backend.model.Notification;
+import com.scheduling.universityschedule_backend.model.PropositionDeRattrapage;
+import com.scheduling.universityschedule_backend.model.Seance;
+import com.scheduling.universityschedule_backend.repository.FichierExcelRepository;
+import com.scheduling.universityschedule_backend.repository.NotificationRepository;
+import com.scheduling.universityschedule_backend.repository.PropositionDeRattrapageRepository;
+import com.scheduling.universityschedule_backend.repository.SeanceRepository;
+import com.scheduling.universityschedule_backend.service.AdministrateurService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+@Transactional
+public class AdministrateurServiceImpl implements AdministrateurService {
+
+    private final FichierExcelRepository fichierExcelRepository;
+    private final SeanceRepository seanceRepository;
+    private final PropositionDeRattrapageRepository propositionRepo;
+    private final NotificationRepository notificationRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public AdministrateurServiceImpl(FichierExcelRepository fichierExcelRepository,
+                                     SeanceRepository seanceRepository,
+                                     PropositionDeRattrapageRepository propositionRepo,
+                                     NotificationRepository notificationRepository,
+                                     EntityMapper mapper) {
+        this.fichierExcelRepository = fichierExcelRepository;
+        this.seanceRepository = seanceRepository;
+        this.propositionRepo = propositionRepo;
+        this.notificationRepository = notificationRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Imports the schedule (emploi du temps) from an Excel file.
+     */
+    @Override
+    public FichierExcelDTO importEmploiDuTemps(FichierExcelDTO fichierExcelDTO) throws CustomException {
+        try {
+            FichierExcel fe = mapper.toFichierExcel(fichierExcelDTO);
+            fe = fichierExcelRepository.save(fe);
+            return mapper.toFichierExcelDTO(fe);
+        } catch (Exception e) {
+            throw new CustomException("Failed to import emploi du temps", e);
+        }
+    }
+
+    /**
+     * Generates the schedule by retrieving all sessions.
+     */
+    @Override
+    public List<SeanceDTO> genererEmploiDuTemps() throws CustomException {
+        try {
+            List<Seance> seances = seanceRepository.findAll();
+            List<SeanceDTO> seanceDTOList = new ArrayList<>();
+            for (Seance seance : seances) {
+                seanceDTOList.add(mapper.toSeanceDTO(seance));
+            }
+            return seanceDTOList;
+        } catch (Exception e) {
+            throw new CustomException("Failed to generate emploi du temps", e);
+        }
+    }
+
+    /**
+     * Processes a catch-up session proposal (demande de rattrapage) by updating its status.
+     */
+    @Override
+    public PropositionDeRattrapageDTO traiterDemandeRattrapage(Long id, boolean approved) throws CustomException {
+        PropositionDeRattrapage proposal = propositionRepo.findById(id)
+                .orElseThrow(() -> new CustomException("Proposition de rattrapage not found"));
+        proposal.setStatus(approved ? "approved" : "rejected");
+        proposal = propositionRepo.save(proposal);
+        return mapper.toPropositionDeRattrapageDTO(proposal);
+    }
+
+    /**
+     * Diffuses (sends) a notification.
+     */
+    @Override
+    public List<NotificationDTO> diffuserNotification(NotificationDTO notificationDTO) throws CustomException {
+        try {
+            Notification notif = mapper.toNotification(notificationDTO);
+            notif = notificationRepository.save(notif);
+            List<NotificationDTO> list = new ArrayList<>();
+            list.add(mapper.toNotificationDTO(notif));
+            return list;
+        } catch (Exception e) {
+            throw new CustomException("Failed to diffuse notification", e);
+        }
+    }
+}
+EOF
+
+########################################
+# BrancheServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/BrancheServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.BrancheDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.Branche;
+import com.scheduling.universityschedule_backend.repository.BrancheRepository;
+import com.scheduling.universityschedule_backend.service.BrancheService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+@Service
+public class BrancheServiceImpl implements BrancheService {
+
+    private final BrancheRepository brancheRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public BrancheServiceImpl(BrancheRepository brancheRepository, EntityMapper mapper) {
+        this.brancheRepository = brancheRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Retrieves all branches with pagination.
+     */
+    @Override
+    public Page<BrancheDTO> getAllBranches(Pageable pageable) {
+        return brancheRepository.findAll(pageable)
+                .map(mapper::toBrancheDTO);
+    }
+
+    /**
+     * Retrieves a branch by its ID.
+     */
+    @Override
+    public BrancheDTO getBrancheById(Long id) throws CustomException {
+        Branche branche = brancheRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Branche not found"));
+        return mapper.toBrancheDTO(branche);
+    }
+
+    /**
+     * Creates a new branch.
+     */
+    @Override
+    public BrancheDTO createBranche(BrancheDTO brancheDTO) throws CustomException {
+        try {
+            Branche branche = mapper.toBranche(brancheDTO);
+            branche = brancheRepository.save(branche);
+            return mapper.toBrancheDTO(branche);
+        } catch (Exception e) {
+            throw new CustomException("Failed to create branche", e);
+        }
+    }
+
+    /**
+     * Updates an existing branch.
+     */
+    @Override
+    public BrancheDTO updateBranche(Long id, BrancheDTO brancheDTO) throws CustomException {
+        Branche branche = brancheRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Branche not found"));
+        branche.setNiveau(brancheDTO.getNiveau());
+        branche.setSpecialite(brancheDTO.getSpecialite());
+        branche.setNbTD(brancheDTO.getNbTD());
+        branche.setDepartement(brancheDTO.getDepartement());
+        branche = brancheRepository.save(branche);
+        return mapper.toBrancheDTO(branche);
+    }
+
+    /**
+     * Deletes a branch by its ID.
+     */
+    @Override
+    public void deleteBranche(Long id) throws CustomException {
+        if (!brancheRepository.existsById(id)) {
+            throw new CustomException("Branche not found");
+        }
+        brancheRepository.deleteById(id);
+    }
+}
+EOF
+
+########################################
+# EnseignantServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/EnseignantServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.EnseignantDTO;
+import com.scheduling.universityschedule_backend.dto.PropositionDeRattrapageDTO;
+import com.scheduling.universityschedule_backend.dto.SeanceDTO;
+import com.scheduling.universityschedule_backend.dto.SignalDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.Enseignant;
+import com.scheduling.universityschedule_backend.model.PropositionDeRattrapage;
+import com.scheduling.universityschedule_backend.model.Seance;
+import com.scheduling.universityschedule_backend.model.Signal;
+import com.scheduling.universityschedule_backend.repository.EnseignantRepository;
+import com.scheduling.universityschedule_backend.repository.PropositionDeRattrapageRepository;
+import com.scheduling.universityschedule_backend.repository.SeanceRepository;
+import com.scheduling.universityschedule_backend.repository.SignalRepository;
+import com.scheduling.universityschedule_backend.service.EnseignantService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class EnseignantServiceImpl implements EnseignantService {
+
+    private final EnseignantRepository enseignantRepository;
+    private final PropositionDeRattrapageRepository propositionRepo;
+    private final SignalRepository signalRepository;
+    private final SeanceRepository seanceRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public EnseignantServiceImpl(EnseignantRepository enseignantRepository,
+                                 PropositionDeRattrapageRepository propositionRepo,
+                                 SignalRepository signalRepository,
+                                 SeanceRepository seanceRepository,
+                                 EntityMapper mapper) {
+        this.enseignantRepository = enseignantRepository;
+        this.propositionRepo = propositionRepo;
+        this.signalRepository = signalRepository;
+        this.seanceRepository = seanceRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Retrieves the teaching schedule (seances) for a given teacher.
+     */
+    @Override
+    public List<SeanceDTO> getEmploiDuTemps(Long id) throws CustomException {
+        Enseignant enseignant = enseignantRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Enseignant not found"));
+        List<SeanceDTO> seanceDTOList = new ArrayList<>();
+        if (enseignant.getSeances() != null) {
+            for (Seance s : enseignant.getSeances()) {
+                seanceDTOList.add(mapper.toSeanceDTO(s));
+            }
+        }
+        return seanceDTOList;
+    }
+
+    /**
+     * Retrieves the total teaching hours for a teacher.
+     */
+    @Override
+    public int getHeuresEnseignees(Long id) throws CustomException {
+        Enseignant enseignant = enseignantRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Enseignant not found"));
+        return enseignant.getHeures();
+    }
+
+    /**
+     * Submits a catch-up session proposal.
+     */
+    @Override
+    public PropositionDeRattrapageDTO soumettreDemandeRattrapage(Long id, PropositionDeRattrapageDTO propositionDTO) throws CustomException {
+        Enseignant enseignant = enseignantRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Enseignant not found"));
+        PropositionDeRattrapage proposal = mapper.toPropositionDeRattrapage(propositionDTO);
+        proposal.setEnseignant(enseignant);
+        proposal.setStatus("pending");
+        proposal.setDate(LocalDateTime.now());
+        proposal = propositionRepo.save(proposal);
+        return mapper.toPropositionDeRattrapageDTO(proposal);
+    }
+
+    /**
+     * Submits a suggestion (signal).
+     */
+    @Override
+    public SignalDTO soumettreSuggestion(Long id, SignalDTO signalDTO) throws CustomException {
+        // Note: In a full implementation, the teacher id would be used to associate the signal.
+        Signal signal = mapper.toSignal(signalDTO);
+        signal.setTimestamp(LocalDateTime.now());
+        signal = signalRepository.save(signal);
+        return mapper.toSignalDTO(signal);
+    }
+
+    /**
+     * Retrieves signals (suggestions).
+     */
+    @Override
+    public List<SignalDTO> getSignalisations(Long id) throws CustomException {
+        List<Signal> signals = signalRepository.findAll();
+        List<SignalDTO> dtoList = new ArrayList<>();
+        for (Signal signal : signals) {
+            dtoList.add(mapper.toSignalDTO(signal));
+        }
+        return dtoList;
+    }
+}
+EOF
+
+########################################
+# EtudiantServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/EtudiantServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.EtudiantDTO;
+import com.scheduling.universityschedule_backend.dto.NotificationDTO;
+import com.scheduling.universityschedule_backend.dto.SeanceDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.Etudiant;
+import com.scheduling.universityschedule_backend.model.Notification;
+import com.scheduling.universityschedule_backend.model.Seance;
+import com.scheduling.universityschedule_backend.repository.EtudiantRepository;
+import com.scheduling.universityschedule_backend.repository.NotificationRepository;
+import com.scheduling.universityschedule_backend.service.EtudiantService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class EtudiantServiceImpl implements EtudiantService {
+
+    private final EtudiantRepository etudiantRepository;
+    private final NotificationRepository notificationRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public EtudiantServiceImpl(EtudiantRepository etudiantRepository,
+                               NotificationRepository notificationRepository,
+                               EntityMapper mapper) {
+        this.etudiantRepository = etudiantRepository;
+        this.notificationRepository = notificationRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Retrieves the personal schedule based on the student's practical session (TP).
+     */
+    @Override
+    public List<SeanceDTO> getEmploiDuTempsPersonnel(Long id) throws CustomException {
+        Etudiant etudiant = etudiantRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Etudiant not found"));
+        List<SeanceDTO> dtoList = new ArrayList<>();
+        if (etudiant.getTp() != null && etudiant.getTp().getSeances() != null) {
+            etudiant.getTp().getSeances().forEach(seance -> dtoList.add(mapper.toSeanceDTO(seance)));
+        }
+        return dtoList;
+    }
+
+    /**
+     * Retrieves the schedule for a given branch.
+     * (For simplicity, this is not fully implemented.)
+     */
+    @Override
+    public List<SeanceDTO> getEmploiDuTempsBranche(Long brancheId) throws CustomException {
+        // Not implemented – would normally query the branche's seances.
+        return new ArrayList<>();
+    }
+
+    /**
+     * Retrieves notifications for the student.
+     */
+    @Override
+    public List<NotificationDTO> getNotifications(Long id) throws CustomException {
+        List<Notification> notifications = notificationRepository.findAll();
+        List<NotificationDTO> dtoList = new ArrayList<>();
+        // For simplicity, no filtering by recepteur is applied.
+        notifications.forEach(n -> dtoList.add(mapper.toNotificationDTO(n)));
+        return dtoList;
+    }
+}
+EOF
+
+########################################
+# FichierExcelServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/FichierExcelServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.FichierExcelDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.FichierExcel;
+import com.scheduling.universityschedule_backend.repository.FichierExcelRepository;
+import com.scheduling.universityschedule_backend.service.FichierExcelService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class FichierExcelServiceImpl implements FichierExcelService {
+
+    private final FichierExcelRepository fichierExcelRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public FichierExcelServiceImpl(FichierExcelRepository fichierExcelRepository, EntityMapper mapper) {
+        this.fichierExcelRepository = fichierExcelRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Imports an Excel file by saving it and returning the saved DTO.
+     */
+    @Override
+    public FichierExcelDTO importerFichierExcel(FichierExcelDTO fichierExcelDTO) throws CustomException {
+        try {
+            FichierExcel fe = mapper.toFichierExcel(fichierExcelDTO);
+            fe = fichierExcelRepository.save(fe);
+            return mapper.toFichierExcelDTO(fe);
+        } catch (Exception e) {
+            throw new CustomException("Failed to import Excel file", e);
+        }
+    }
+}
+EOF
+
+########################################
+# NotificationServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/NotificationServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.NotificationDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.Notification;
+import com.scheduling.universityschedule_backend.repository.NotificationRepository;
+import com.scheduling.universityschedule_backend.service.NotificationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class NotificationServiceImpl implements NotificationService {
+
+    private final NotificationRepository notificationRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public NotificationServiceImpl(NotificationRepository notificationRepository, EntityMapper mapper) {
+        this.notificationRepository = notificationRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Retrieves all notifications for a given user.
+     */
+    @Override
+    public List<NotificationDTO> getNotificationsForUser(Long userId) throws CustomException {
+        List<Notification> notifications = notificationRepository.findAll();
+        List<NotificationDTO> dtoList = new ArrayList<>();
+        // For simplicity, no filtering by user is applied.
+        notifications.forEach(n -> dtoList.add(mapper.toNotificationDTO(n)));
+        return dtoList;
+    }
+
+    /**
+     * Marks a notification as read.
+     */
+    @Override
+    public void markAsRead(Long notificationId) throws CustomException {
+        Notification notif = notificationRepository.findById(notificationId)
+                .orElseThrow(() -> new CustomException("Notification not found"));
+        notif.setRead(true);
+        notificationRepository.save(notif);
+    }
+}
+EOF
+
+echo "Service implementation files generated successfully in $srcprj/service/impl. PT1"
+
+#!/bin/bash
+#
+# This script generates the updated service implementation files for the second half
+# under the $srcprj/service/impl directory, conforming to the new ID-based DTO architecture.
+#
+# Ensure you have set the srcprj environment variable:
+#    export srcprj="/path/to/your/project/src/main/java/com/scheduling/universityschedule_backend"
+#
+# Then run:
+#    ./generate_services_part2.sh
+#
+
+# Check that srcprj is defined
+if [ -z "$srcprj" ]; then
+    echo "Error: srcprj environment variable is not set. Please set it to your base package directory."
+    exit 1
+fi
+
+# Create the service implementation directory if it does not exist
+mkdir -p "$srcprj/service/impl"
+
+echo "Generating second half service implementation files in $srcprj/service/impl ..."
+
+########################################
+# PropositionDeRattrapageServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/PropositionDeRattrapageServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.PropositionDeRattrapageDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.PropositionDeRattrapage;
+import com.scheduling.universityschedule_backend.repository.PropositionDeRattrapageRepository;
+import com.scheduling.universityschedule_backend.service.PropositionDeRattrapageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class PropositionDeRattrapageServiceImpl implements PropositionDeRattrapageService {
+
+    private final PropositionDeRattrapageRepository propositionRepo;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public PropositionDeRattrapageServiceImpl(PropositionDeRattrapageRepository propositionRepo, EntityMapper mapper) {
+        this.propositionRepo = propositionRepo;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Submits a catch-up session proposal.
+     */
+    @Override
+    public PropositionDeRattrapageDTO submitProposal(PropositionDeRattrapageDTO propositionDTO) throws CustomException {
+        try {
+            PropositionDeRattrapage proposal = mapper.toPropositionDeRattrapage(propositionDTO);
+            proposal.setStatus("pending");
+            proposal = propositionRepo.save(proposal);
+            return mapper.toPropositionDeRattrapageDTO(proposal);
+        } catch (Exception e) {
+            throw new CustomException("Failed to submit proposal", e);
+        }
+    }
+
+    /**
+     * Retrieves all proposals.
+     */
+    @Override
+    public List<PropositionDeRattrapageDTO> getAllProposals() throws CustomException {
+        List<PropositionDeRattrapageDTO> dtoList = new ArrayList<>();
+        propositionRepo.findAll().forEach(prop -> dtoList.add(mapper.toPropositionDeRattrapageDTO(prop)));
+        return dtoList;
+    }
+
+    /**
+     * Approves or rejects a proposal.
+     */
+    @Override
+    public PropositionDeRattrapageDTO approveOrRejectProposal(Long id, boolean approved) throws CustomException {
+        PropositionDeRattrapage proposal = propositionRepo.findById(id)
+                .orElseThrow(() -> new CustomException("Proposal not found"));
+        proposal.setStatus(approved ? "approved" : "rejected");
+        proposal = propositionRepo.save(proposal);
+        return mapper.toPropositionDeRattrapageDTO(proposal);
+    }
+}
+EOF
+
+########################################
+# SalleServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/SalleServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.SalleDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.Salle;
+import com.scheduling.universityschedule_backend.repository.SalleRepository;
+import com.scheduling.universityschedule_backend.service.SalleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class SalleServiceImpl implements SalleService {
+
+    private final SalleRepository salleRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public SalleServiceImpl(SalleRepository salleRepository, EntityMapper mapper) {
+        this.salleRepository = salleRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Retrieves all rooms.
+     */
+    @Override
+    public List<SalleDTO> getAllSalles() throws CustomException {
+        List<Salle> salles = salleRepository.findAll();
+        List<SalleDTO> dtoList = new ArrayList<>();
+        salles.forEach(salle -> dtoList.add(mapper.toSalleDTO(salle)));
+        return dtoList;
+    }
+
+    /**
+     * Retrieves a room by its ID.
+     */
+    @Override
+    public SalleDTO getSalleById(Long id) throws CustomException {
+        Salle salle = salleRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Salle not found"));
+        return mapper.toSalleDTO(salle);
+    }
+
+    /**
+     * Creates a new room.
+     */
+    @Override
+    public SalleDTO createSalle(SalleDTO salleDTO) throws CustomException {
+        try {
+            Salle salle = mapper.toSalle(salleDTO);
+            salle = salleRepository.save(salle);
+            return mapper.toSalleDTO(salle);
+        } catch (Exception e) {
+            throw new CustomException("Failed to create Salle", e);
+        }
+    }
+
+    /**
+     * Updates an existing room.
+     */
+    @Override
+    public SalleDTO updateSalle(Long id, SalleDTO salleDTO) throws CustomException {
+        Salle salle = salleRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Salle not found"));
+        salle.setIdentifiant(salleDTO.getIdentifiant());
+        salle.setType(salleDTO.getType());
+        salle.setCapacite(salleDTO.getCapacite());
+        salle.setDisponibilite(salleDTO.getDisponibilite());
+        salle = salleRepository.save(salle);
+        return mapper.toSalleDTO(salle);
+    }
+
+    /**
+     * Deletes a room by its ID.
+     */
+    @Override
+    public void deleteSalle(Long id) throws CustomException {
+        if (!salleRepository.existsById(id)) {
+            throw new CustomException("Salle not found");
+        }
+        salleRepository.deleteById(id);
+    }
+}
+EOF
+
+########################################
+# SeanceServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/SeanceServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.SeanceConflictDTO;
+import com.scheduling.universityschedule_backend.dto.SeanceDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.Seance;
+import com.scheduling.universityschedule_backend.repository.SeanceRepository;
+import com.scheduling.universityschedule_backend.service.SeanceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class SeanceServiceImpl implements SeanceService {
+
+    private final SeanceRepository seanceRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public SeanceServiceImpl(SeanceRepository seanceRepository, EntityMapper mapper) {
+        this.seanceRepository = seanceRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Retrieves all sessions.
+     */
+    @Override
+    public List<SeanceDTO> getAllSeances() throws CustomException {
+        List<Seance> seances = seanceRepository.findAll();
+        List<SeanceDTO> dtoList = new ArrayList<>();
+        seances.forEach(s -> dtoList.add(mapper.toSeanceDTO(s)));
+        return dtoList;
+    }
+
+    /**
+     * Retrieves a session by its ID.
+     */
+    @Override
+    public SeanceDTO getSeanceById(Long id) throws CustomException {
+        Seance seance = seanceRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Seance not found"));
+        return mapper.toSeanceDTO(seance);
+    }
+
+    /**
+     * Creates a new session.
+     */
+    @Override
+    public SeanceDTO createSeance(SeanceDTO seanceDTO) throws CustomException {
+        try {
+            Seance seance = mapper.toSeance(seanceDTO);
+            seance = seanceRepository.save(seance);
+            return mapper.toSeanceDTO(seance);
+        } catch (Exception e) {
+            throw new CustomException("Failed to create Seance", e);
+        }
+    }
+
+    /**
+     * Updates an existing session.
+     */
+    @Override
+    public SeanceDTO updateSeance(Long id, SeanceDTO seanceDTO) throws CustomException {
+        Seance seance = seanceRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Seance not found"));
+        seance.setJour(seanceDTO.getJour());
+        seance.setHeureDebut(seanceDTO.getHeureDebut());
+        seance.setHeureFin(seanceDTO.getHeureFin());
+        seance.setType(seanceDTO.getType());
+        seance.setMatiere(seanceDTO.getMatiere());
+        seance.setFrequence(seanceDTO.getFrequence());
+        seance = seanceRepository.save(seance);
+        return mapper.toSeanceDTO(seance);
+    }
+
+    /**
+     * Deletes a session by its ID.
+     */
+    @Override
+    public void deleteSeance(Long id) throws CustomException {
+        if (!seanceRepository.existsById(id)) {
+            throw new CustomException("Seance not found");
+        }
+        seanceRepository.deleteById(id);
+    }
+
+    /**
+     * Detects conflicts for a given session. For simplicity, only room conflicts are checked.
+     * The returned SeanceConflictDTO now holds only the IDs of the conflicting sessions.
+     */
+    @Override
+    public List<SeanceConflictDTO> detectConflicts(Long seanceId) throws CustomException {
+        Seance seance = seanceRepository.findById(seanceId)
+                .orElseThrow(() -> new CustomException("Seance not found"));
+        // Retrieve conflicting sessions using a custom repository query.
+        List<Seance> conflictingSeances = seanceRepository.findRoomConflictsForSeance(
+                seance.getId(),
+                seance.getJour(),
+                seance.getSalle() != null ? seance.getSalle().getId() : null,
+                seance.getHeureDebut(),
+                seance.getHeureFin()
+        );
+        List<SeanceConflictDTO> conflictDTOList = new ArrayList<>();
+        for (Seance conflicting : conflictingSeances) {
+            SeanceConflictDTO conflictDTO = new SeanceConflictDTO();
+            // Instead of full DTOs, set only the IDs.
+            conflictDTO.setSeance1Id(seance.getId());
+            conflictDTO.setSeance2Id(conflicting.getId());
+            List<String> conflictTypes = new ArrayList<>();
+            conflictTypes.add("Room Conflict");
+            conflictDTO.setConflictTypes(conflictTypes);
+            conflictDTOList.add(conflictDTO);
+        }
+        return conflictDTOList;
+    }
+}
+EOF
+
+########################################
+# SignalServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/SignalServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.SignalDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.Signal;
+import com.scheduling.universityschedule_backend.repository.SignalRepository;
+import com.scheduling.universityschedule_backend.service.SignalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class SignalServiceImpl implements SignalService {
+
+    private final SignalRepository signalRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public SignalServiceImpl(SignalRepository signalRepository, EntityMapper mapper) {
+        this.signalRepository = signalRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Submits a new signal.
+     */
+    @Override
+    public SignalDTO submitSignal(SignalDTO signalDTO) throws CustomException {
+        try {
+            Signal signal = mapper.toSignal(signalDTO);
+            signal = signalRepository.save(signal);
+            return mapper.toSignalDTO(signal);
+        } catch (Exception e) {
+            throw new CustomException("Failed to submit signal", e);
+        }
+    }
+
+    /**
+     * Retrieves all signals.
+     */
+    @Override
+    public List<SignalDTO> getAllSignals() throws CustomException {
+        List<Signal> signals = signalRepository.findAll();
+        List<SignalDTO> dtoList = new ArrayList<>();
+        signals.forEach(s -> dtoList.add(mapper.toSignalDTO(s)));
+        return dtoList;
+    }
+}
+EOF
+
+########################################
+# TDServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/TDServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.TDDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.TD;
+import com.scheduling.universityschedule_backend.repository.TDRepository;
+import com.scheduling.universityschedule_backend.service.TDService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class TDServiceImpl implements TDService {
+
+    private final TDRepository tdRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public TDServiceImpl(TDRepository tdRepository, EntityMapper mapper) {
+        this.tdRepository = tdRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Retrieves all tutorial sessions (TDs).
+     */
+    @Override
+    public List<TDDTO> getAllTDs() throws CustomException {
+        List<TD> tds = tdRepository.findAll();
+        List<TDDTO> dtoList = new ArrayList<>();
+        tds.forEach(td -> dtoList.add(mapper.toTDDTO(td)));
+        return dtoList;
+    }
+
+    /**
+     * Retrieves a TD by its ID.
+     */
+    @Override
+    public TDDTO getTDById(Long id) throws CustomException {
+        TD td = tdRepository.findById(id)
+                .orElseThrow(() -> new CustomException("TD not found"));
+        return mapper.toTDDTO(td);
+    }
+
+    /**
+     * Creates a new TD.
+     */
+    @Override
+    public TDDTO createTD(TDDTO tdDTO) throws CustomException {
+        try {
+            TD td = mapper.toTD(tdDTO);
+            td = tdRepository.save(td);
+            return mapper.toTDDTO(td);
+        } catch (Exception e) {
+            throw new CustomException("Failed to create TD", e);
+        }
+    }
+
+    /**
+     * Updates an existing TD.
+     */
+    @Override
+    public TDDTO updateTD(Long id, TDDTO tdDTO) throws CustomException {
+        TD td = tdRepository.findById(id)
+                .orElseThrow(() -> new CustomException("TD not found"));
+        td.setNb(tdDTO.getNb());
+        td.setNbTP(tdDTO.getNbTP());
+        td = tdRepository.save(td);
+        return mapper.toTDDTO(td);
+    }
+
+    /**
+     * Deletes a TD by its ID.
+     */
+    @Override
+    public void deleteTD(Long id) throws CustomException {
+        if (!tdRepository.existsById(id)) {
+            throw new CustomException("TD not found");
+        }
+        tdRepository.deleteById(id);
+    }
+}
+EOF
+
+########################################
+# TechnicienServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/TechnicienServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.TechnicienDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.Technicien;
+import com.scheduling.universityschedule_backend.repository.TechnicienRepository;
+import com.scheduling.universityschedule_backend.service.TechnicienService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class TechnicienServiceImpl implements TechnicienService {
+
+    private final TechnicienRepository technicienRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public TechnicienServiceImpl(TechnicienRepository technicienRepository, EntityMapper mapper) {
+        this.technicienRepository = technicienRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Retrieves all technicians.
+     */
+    @Override
+    public List<TechnicienDTO> getAllTechniciens() throws CustomException {
+        List<Technicien> techs = technicienRepository.findAll();
+        List<TechnicienDTO> dtoList = new ArrayList<>();
+        techs.forEach(t -> dtoList.add(mapper.toTechnicienDTO(t)));
+        return dtoList;
+    }
+
+    /**
+     * Retrieves a technician by its ID.
+     */
+    @Override
+    public TechnicienDTO getTechnicienById(Long id) throws CustomException {
+        Technicien tech = technicienRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Technicien not found"));
+        return mapper.toTechnicienDTO(tech);
+    }
+
+    /**
+     * Creates a new technician.
+     */
+    @Override
+    public TechnicienDTO createTechnicien(TechnicienDTO technicienDTO) throws CustomException {
+        try {
+            Technicien tech = mapper.toTechnicien(technicienDTO);
+            tech = technicienRepository.save(tech);
+            return mapper.toTechnicienDTO(tech);
+        } catch (Exception e) {
+            throw new CustomException("Failed to create Technicien", e);
+        }
+    }
+
+    /**
+     * Updates an existing technician.
+     */
+    @Override
+    public TechnicienDTO updateTechnicien(Long id, TechnicienDTO technicienDTO) throws CustomException {
+        Technicien tech = technicienRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Technicien not found"));
+        tech.setCin(technicienDTO.getCin());
+        tech.setNom(technicienDTO.getNom());
+        tech.setPrenom(technicienDTO.getPrenom());
+        tech.setEmail(technicienDTO.getEmail());
+        tech.setTel(technicienDTO.getTel());
+        tech.setAdresse(technicienDTO.getAdresse());
+        tech.setCodeTechnicien(technicienDTO.getCodeTechnicien());
+        tech = technicienRepository.save(tech);
+        return mapper.toTechnicienDTO(tech);
+    }
+
+    /**
+     * Deletes a technician by its ID.
+     */
+    @Override
+    public void deleteTechnicien(Long id) throws CustomException {
+        if (!technicienRepository.existsById(id)) {
+            throw new CustomException("Technicien not found");
+        }
+        technicienRepository.deleteById(id);
+    }
+}
+EOF
+
+########################################
+# TPServiceImpl.java
+########################################
+cat << 'EOF' > "$srcprj/service/impl/TPServiceImpl.java"
+package com.scheduling.universityschedule_backend.service.impl;
+
+import com.scheduling.universityschedule_backend.dto.TPDTO;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
+import com.scheduling.universityschedule_backend.model.TP;
+import com.scheduling.universityschedule_backend.repository.TPRepository;
+import com.scheduling.universityschedule_backend.service.TPService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class TPServiceImpl implements TPService {
+
+    private final TPRepository tpRepository;
+    private final EntityMapper mapper;
+
+    @Autowired
+    public TPServiceImpl(TPRepository tpRepository, EntityMapper mapper) {
+        this.tpRepository = tpRepository;
+        this.mapper = mapper;
+    }
+
+    /**
+     * Retrieves all practical sessions (TPs).
+     */
+    @Override
+    public List<TPDTO> getAllTPs() throws CustomException {
+        List<TP> tps = tpRepository.findAll();
+        List<TPDTO> dtoList = new ArrayList<>();
+        tps.forEach(tp -> dtoList.add(mapper.toTPDTO(tp)));
+        return dtoList;
+    }
+
+    /**
+     * Retrieves a TP by its ID.
+     */
+    @Override
+    public TPDTO getTPById(Long id) throws CustomException {
+        TP tp = tpRepository.findById(id)
+                .orElseThrow(() -> new CustomException("TP not found"));
+        return mapper.toTPDTO(tp);
+    }
+
+    /**
+     * Creates a new TP.
+     */
+    @Override
+    public TPDTO createTP(TPDTO tpDTO) throws CustomException {
+        try {
+            TP tp = mapper.toTP(tpDTO);
+            tp = tpRepository.save(tp);
+            return mapper.toTPDTO(tp);
+        } catch (Exception e) {
+            throw new CustomException("Failed to create TP", e);
+        }
+    }
+
+    /**
+     * Updates an existing TP.
+     */
+    @Override
+    public TPDTO updateTP(Long id, TPDTO tpDTO) throws CustomException {
+        TP tp = tpRepository.findById(id)
+                .orElseThrow(() -> new CustomException("TP not found"));
+        tp.setNb(tpDTO.getNb());
+        tp = tpRepository.save(tp);
+        return mapper.toTPDTO(tp);
+    }
+
+    /**
+     * Deletes a TP by its ID.
+     */
+    @Override
+    public void deleteTP(Long id) throws CustomException {
+        if (!tpRepository.existsById(id)) {
+            throw new CustomException("TP not found");
+        }
+        tpRepository.deleteById(id);
+    }
+}
+EOF
+
+echo "Second half service implementation files generated successfully in $srcprj/service/impl."

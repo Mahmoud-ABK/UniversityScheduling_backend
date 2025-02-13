@@ -13,13 +13,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TDDTO {
-    private Long id;  // Unique identifier for the tutorial session
-    private int nb;  // Number of tutorial sessions
-    private int nbTP;  // Number of practical sessions associated
+    private Long id;         // Unique identifier for the tutorial session
+    private int nb;          // Number of tutorial sessions
+    private int nbTP;        // Number of practical sessions associated
 
-    // Associated BrancheDTO object representing the academic program or specialization
-    private BrancheDTO branche;
+    // ID of the associated Branche representing the academic program or specialization
+    private Long brancheId;
 
-    // List of associated TPDTO objects representing practical sessions
-    private List<TPDTO> tpList;
+    // List of TP IDs representing practical sessions
+    private List<Long> tpIds;
 }

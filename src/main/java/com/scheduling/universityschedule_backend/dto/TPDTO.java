@@ -14,11 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 public class TPDTO {
     private Long id;  // Unique identifier for the practical session
-    private int nb;  // Number of practical sessions
+    private int nb;   // Number of practical sessions
 
-    // Associated TDDTO object representing the tutorial session
-    private TDDTO td;
+    // ID of the associated TD representing the tutorial session
+    private Long tdId;
 
-    // List of associated EtudiantDTO objects representing students enrolled in the practical session
-    private List<EtudiantDTO> etudiants;
+    // List of Etudiant IDs representing students enrolled in the practical session
+    private List<Long> etudiantIds;
 }

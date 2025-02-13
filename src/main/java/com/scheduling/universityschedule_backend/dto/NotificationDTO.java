@@ -9,15 +9,15 @@ import java.time.LocalDateTime;
  */
 @Data
 public class NotificationDTO {
-    private Long id;  // Unique identifier for the notification
-    private String message;  // Content of the notification
-    private LocalDateTime date;  // Date and time the notification was sent
-    private String type;  // Type of notification (e.g., update, alert, reminder)
-    private Boolean read;  // Indicates if the notification has been read
+    private Long id;                // Unique identifier for the notification
+    private String message;         // Content of the notification
+    private LocalDateTime date;     // Date and time the notification was sent
+    private String type;            // Type of notification (e.g., update, alert, reminder)
+    private Boolean read;           // Indicates if the notification has been read
 
-    // Associated PersonneDTO object representing the recipient of the notification
-    private PersonneDTO recepteur;
+    // ID of the recipient (Personne)
+    private Long recepteurId;
 
-    // Associated PersonneDTO object representing the sender of the notification
-    private PersonneDTO expediteur;
+    // ID of the sender (Personne or system)
+    private Long expediteurId;
 }

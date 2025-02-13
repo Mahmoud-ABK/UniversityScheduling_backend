@@ -9,14 +9,14 @@ import java.util.List;
  */
 @Data
 public class SalleDTO {
-    private Long id;  // Unique identifier for the room
+    private Long id;             // Unique identifier for the room
     private String identifiant;  // Room identifier
-    private String type;  // Room type (e.g., lecture hall, lab)
-    private int capacite;  // Capacity of the room
+    private String type;         // Room type (e.g., lecture hall, lab)
+    private int capacite;        // Capacity of the room
 
     // List of available time slots for the room
     private List<String> disponibilite;
 
-    // List of SeanceDTO objects representing sessions scheduled in the room
-    private List<SeanceDTO> seances;
+    // List of Seance IDs representing sessions scheduled in the room
+    private List<Long> seanceIds;
 }

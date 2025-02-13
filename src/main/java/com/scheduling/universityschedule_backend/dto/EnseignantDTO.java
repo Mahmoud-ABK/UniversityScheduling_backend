@@ -12,11 +12,11 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class EnseignantDTO extends PersonneDTO {
     private String codeEnseignant;  // Unique code for the teacher
-    private int heures;  // Total teaching hours
+    private int heures;             // Total teaching hours
 
-    // List of SeanceDTO objects representing sessions taught by the teacher
-    private List<SeanceDTO> seances;
+    // List of Seance IDs representing sessions taught by the teacher
+    private List<Long> seanceIds;
 
-    // List of PropositionDeRattrapageDTO objects representing proposed catch-up sessions
-    private List<PropositionDeRattrapageDTO> propositionsDeRattrapage;
+    // List of PropositionDeRattrapage IDs representing proposed catch-up sessions
+    private List<Long> propositionIds;
 }

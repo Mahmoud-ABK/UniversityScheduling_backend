@@ -1,23 +1,24 @@
-here is the service layer:
-
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for managing Administrator operations
  */
 public interface AdministrateurService {
-    FichierExcelDTO importEmploiDuTemps(FichierExcelDTO fichierExcelDTO);
-    List<SeanceDTO> genererEmploiDuTemps();
-    PropositionDeRattrapageDTO traiterDemandeRattrapage(Long id, boolean approved);
-    List<NotificationDTO> diffuserNotification(NotificationDTO notificationDTO);
+    FichierExcelDTO importEmploiDuTemps(FichierExcelDTO fichierExcelDTO) throws CustomException;
+    List<SeanceDTO> genererEmploiDuTemps() throws CustomException ;
+    PropositionDeRattrapageDTO traiterDemandeRattrapage(Long id, boolean approved) throws CustomException ;
+    List<NotificationDTO> diffuserNotification(NotificationDTO notificationDTO) throws CustomException ;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
-import java.util.List;
+
+import com.scheduling.universityschedule_backend.exception.CustomException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -26,160 +27,182 @@ import org.springframework.data.domain.Pageable;
  */
 public interface BrancheService {
     Page<BrancheDTO> getAllBranches(Pageable pageable);
-    BrancheDTO getBrancheById(Long id);
-    BrancheDTO createBranche(BrancheDTO brancheDTO);
-    BrancheDTO updateBranche(Long id, BrancheDTO brancheDTO);
-    void deleteBranche(Long id);
+    BrancheDTO getBrancheById(Long id) throws CustomException;
+    BrancheDTO createBranche(BrancheDTO brancheDTO) throws CustomException ;
+    BrancheDTO updateBranche(Long id, BrancheDTO brancheDTO) throws CustomException ;
+    void deleteBranche(Long id) throws CustomException ;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for managing teachers
  */
 public interface EnseignantService {
-    List<SeanceDTO> getEmploiDuTemps(Long id);
-    int getHeuresEnseignees(Long id);
-    PropositionDeRattrapageDTO soumettreDemandeRattrapage(Long id, PropositionDeRattrapageDTO propositionDTO);
-    SignalDTO soumettreSuggestion(Long id, SignalDTO signalDTO);
-    List<SignalDTO> getSignalisations(Long id);
+    List<SeanceDTO> getEmploiDuTemps(Long id) throws CustomException;
+    int getHeuresEnseignees(Long id) throws CustomException;
+    PropositionDeRattrapageDTO soumettreDemandeRattrapage(Long id, PropositionDeRattrapageDTO propositionDTO) throws CustomException ;
+    SignalDTO soumettreSuggestion(Long id, SignalDTO signalDTO) throws CustomException ;
+    List<SignalDTO> getSignalisations(Long id) throws CustomException ;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for managing students
  */
 public interface EtudiantService {
-    List<SeanceDTO> getEmploiDuTempsPersonnel(Long id);
-    List<SeanceDTO> getEmploiDuTempsBranche(Long brancheId);
-    List<NotificationDTO> getNotifications(Long id);
+    List<SeanceDTO> getEmploiDuTempsPersonnel(Long id) throws CustomException;
+    List<SeanceDTO> getEmploiDuTempsBranche(Long brancheId) throws CustomException ;
+    List<NotificationDTO> getNotifications(Long id) throws CustomException ;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for managing Excel file imports
  */
 public interface FichierExcelService {
-    FichierExcelDTO importerFichierExcel(FichierExcelDTO fichierExcelDTO);
+    FichierExcelDTO importerFichierExcel(FichierExcelDTO fichierExcelDTO) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for notifications
  */
 public interface NotificationService {
-    List<NotificationDTO> getNotificationsForUser(Long userId);
-    void markAsRead(Long notificationId);
+    List<NotificationDTO> getNotificationsForUser(Long userId) throws CustomException;
+    void markAsRead(Long notificationId) throws CustomException ;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for make-up session proposals
  */
 public interface PropositionDeRattrapageService {
-    PropositionDeRattrapageDTO submitProposal(PropositionDeRattrapageDTO propositionDTO);
-    List<PropositionDeRattrapageDTO> getAllProposals();
-    PropositionDeRattrapageDTO approveOrRejectProposal(Long id, boolean approved);
+    PropositionDeRattrapageDTO submitProposal(PropositionDeRattrapageDTO propositionDTO) throws CustomException;
+    List<PropositionDeRattrapageDTO> getAllProposals() throws CustomException;
+    PropositionDeRattrapageDTO approveOrRejectProposal(Long id, boolean approved) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for managing rooms
  */
 public interface SalleService {
-    List<SalleDTO> getAllSalles();
-    SalleDTO getSalleById(Long id);
-    SalleDTO createSalle(SalleDTO salleDTO);
-    SalleDTO updateSalle(Long id, SalleDTO salleDTO);
-    void deleteSalle(Long id);
+    List<SalleDTO> getAllSalles() throws CustomException;
+    SalleDTO getSalleById(Long id) throws CustomException;
+    SalleDTO createSalle(SalleDTO salleDTO) throws CustomException;
+    SalleDTO updateSalle(Long id, SalleDTO salleDTO) throws CustomException;
+    void deleteSalle(Long id) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for managing class sessions
  */
 public interface SeanceService {
-    List<SeanceDTO> getAllSeances();
-    SeanceDTO getSeanceById(Long id);
-    SeanceDTO createSeance(SeanceDTO seanceDTO);
-    SeanceDTO updateSeance(Long id, SeanceDTO seanceDTO);
-    void deleteSeance(Long id);
-    List<SeanceConflictDTO> detectConflicts(Long seanceId);
+    List<SeanceDTO> getAllSeances() throws CustomException;
+    SeanceDTO getSeanceById(Long id) throws CustomException;
+    SeanceDTO createSeance(SeanceDTO seanceDTO) throws CustomException;
+    SeanceDTO updateSeance(Long id, SeanceDTO seanceDTO) throws CustomException;
+    void deleteSeance(Long id) throws CustomException;
+    List<SeanceConflictDTO> detectConflicts(Long seanceId) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for managing issue reports
  */
 public interface SignalService {
-    SignalDTO submitSignal(SignalDTO signalDTO);
-    List<SignalDTO> getAllSignals();
+    SignalDTO submitSignal(SignalDTO signalDTO) throws CustomException;
+    List<SignalDTO> getAllSignals() throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for managing TD groups
  */
 public interface TDService {
-    List<TDDTO> getAllTDs();
-    TDDTO getTDById(Long id);
-    TDDTO createTD(TDDTO tdDTO);
-    TDDTO updateTD(Long id, TDDTO tdDTO);
-    void deleteTD(Long id);
+    List<TDDTO> getAllTDs() throws CustomException;
+    TDDTO getTDById(Long id) throws CustomException;
+    TDDTO createTD(TDDTO tdDTO) throws CustomException;
+    TDDTO updateTD(Long id, TDDTO tdDTO) throws CustomException;
+    void deleteTD(Long id) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for managing technicians
  */
 public interface TechnicienService {
-    List<TechnicienDTO> getAllTechniciens();
-    TechnicienDTO getTechnicienById(Long id);
-    TechnicienDTO createTechnicien(TechnicienDTO technicienDTO);
-    TechnicienDTO updateTechnicien(Long id, TechnicienDTO technicienDTO);
-    void deleteTechnicien(Long id);
+    List<TechnicienDTO> getAllTechniciens() throws CustomException;
+    TechnicienDTO getTechnicienById(Long id) throws CustomException;
+    TechnicienDTO createTechnicien(TechnicienDTO technicienDTO) throws CustomException;
+    TechnicienDTO updateTechnicien(Long id, TechnicienDTO technicienDTO) throws CustomException;
+    void deleteTechnicien(Long id) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.* ;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+
 import java.util.List;
 
 /**
  * Service interface for managing TP groups
  */
 public interface TPService {
-    List<TPDTO> getAllTPs();
-    TPDTO getTPById(Long id);
-    TPDTO createTP(TPDTO tpDTO);
-    TPDTO updateTP(Long id, TPDTO tpDTO);
-    void deleteTP(Long id);
+    List<TPDTO> getAllTPs() throws CustomException;
+    TPDTO getTPById(Long id) throws CustomException;
+    TPDTO createTP(TPDTO tpDTO) throws CustomException;
+    TPDTO updateTP(Long id, TPDTO tpDTO) throws CustomException;
+    void deleteTP(Long id) throws CustomException;
 }

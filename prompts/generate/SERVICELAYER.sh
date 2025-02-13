@@ -1,0 +1,624 @@
+#!/bin/bash
+# This script generates the service interface files under $srcprj/service
+# Ensure that the environment variable srcprj is set
+if [ -z "$srcprj" ]; then
+    echo "Error: The environment variable 'srcprj' is not set."
+    exit 1
+fi
+
+SERVICE_DIR="$srcprj/service"
+mkdir -p "$SERVICE_DIR"
+
+# Create AuthService.java
+cat > "$SERVICE_DIR/AuthService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface handling authentication and user session management.
+ * Provides functionality for user login, logout, token management, and password operations.
+ */
+public interface AuthService {
+    /**
+     * Authenticates a user and generates a JWT token.
+     * @param email User's email address
+     * @param password User's password
+     * @return JWT token for authenticated session
+     * @throws CustomException if authentication fails
+     */
+    String login(String email, String password) throws CustomException;
+
+    /**
+     * Invalidates the user's current session token.
+     * @param token Current JWT token to invalidate
+     * @throws CustomException if token invalidation fails
+     */
+    void logout(String token) throws CustomException;
+
+    /**
+     * Generates a new JWT token from an expired token.
+     * @param token Expired JWT token
+     * @return New valid JWT token
+     * @throws CustomException if token refresh fails
+     */
+    String refreshToken(String token) throws CustomException;
+
+    /**
+     * Initiates password reset process by sending reset link.
+     * @param email User's email address
+     * @throws CustomException if reset initiation fails
+     */
+    void resetPassword(String email) throws CustomException;
+
+    /**
+     * Updates user's password using reset token.
+     * @param token Password reset token
+     * @param password New password
+     * @throws CustomException if password update fails
+     */
+    void setNewPassword(String token, String password) throws CustomException;
+}
+EOF
+
+# Create AdministrateurService.java
+cat > "$SERVICE_DIR/AdministrateurService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for administrator operations.
+ * Handles schedule management, makeup sessions, and system-wide notifications.
+ */
+public interface AdministrateurService {
+    /**
+     * Retrieves administrator details by ID.
+     * @param id Administrator's unique identifier
+     * @return Administrator DTO
+     * @throws CustomException if administrator not found
+     */
+    AdministrateurDTO findById(Long id) throws CustomException;
+
+    /**
+     * Imports schedule data from Excel file.
+     * @param fichier Excel file DTO containing schedule data
+     * @throws CustomException if import fails
+     */
+    void importExcelSchedule(FichierExcelDTO fichier) throws CustomException;
+
+    /**
+     * Automatically generates schedule based on constraints.
+     * @throws CustomException if generation fails
+     */
+    void generateSchedule() throws CustomException;
+
+    /**
+     * Retrieves all makeup session requests.
+     * @return List of makeup session proposals
+     * @throws CustomException if retrieval fails
+     */
+    List<PropositionDeRattrapageDTO> getAllMakeupSessions() throws CustomException;
+
+    /**
+     * Approves a makeup session request.
+     * @param id Makeup session proposal ID
+     * @throws CustomException if approval fails
+     */
+    void approveMakeupSession(Long id) throws CustomException;
+
+    /**
+     * Rejects a makeup session request.
+     * @param id Makeup session proposal ID
+     * @throws CustomException if rejection fails
+     */
+    void rejectMakeupSession(Long id) throws CustomException;
+
+    /**
+     * Sends notification to all system users.
+     * @param notification Notification to broadcast
+     * @throws CustomException if broadcast fails
+     */
+    void broadcastNotification(NotificationDTO notification) throws CustomException;
+}
+EOF
+
+# Create EnseignantService.java
+cat > "$SERVICE_DIR/EnseignantService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for teacher operations.
+ * Manages teacher schedules, teaching hours, and communication.
+ */
+public interface EnseignantService {
+    /**
+     * Retrieves teacher details by ID.
+     * @param id Teacher's unique identifier
+     * @return Teacher DTO
+     * @throws CustomException if teacher not found
+     */
+    EnseignantDTO findById(Long id) throws CustomException;
+
+    /**
+     * Retrieves teacher's schedule.
+     * @param id Teacher's unique identifier
+     * @return List of scheduled sessions
+     * @throws CustomException if schedule retrieval fails
+     */
+    List<SeanceDTO> getSchedule(Long id) throws CustomException;
+
+    /**
+     * Calculates total teaching hours.
+     * @param id Teacher's unique identifier
+     * @return Total hours taught
+     * @throws CustomException if calculation fails
+     */
+    int getTotalTeachingHours(Long id) throws CustomException;
+
+    /**
+     * Submits makeup session request.
+     * @param id Teacher's unique identifier
+     * @param proposition Makeup session proposal
+     * @return Created makeup session proposal
+     * @throws CustomException if submission fails
+     */
+    PropositionDeRattrapageDTO submitMakeupRequest(Long id, PropositionDeRattrapageDTO proposition) throws CustomException;
+
+    /**
+     * Submits issue or suggestion.
+     * @param id Teacher's unique identifier
+     * @param signal Signal containing issue/suggestion
+     * @return Created signal
+     * @throws CustomException if submission fails
+     */
+    SignalDTO submitSignal(Long id, SignalDTO signal) throws CustomException;
+
+    /**
+     * Retrieves teacher's submitted signals.
+     * @param id Teacher's unique identifier
+     * @return List of submitted signals
+     * @throws CustomException if retrieval fails
+     */
+    List<SignalDTO> getSignals(Long id) throws CustomException;
+}
+EOF
+
+# Create EtudiantService.java
+cat > "$SERVICE_DIR/EtudiantService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for student operations.
+ * Manages student schedules and notifications.
+ */
+public interface EtudiantService {
+    /**
+     * Retrieves student details by ID.
+     * @param id Student's unique identifier
+     * @return Student DTO
+     * @throws CustomException if student not found
+     */
+    EtudiantDTO findById(Long id) throws CustomException;
+
+    /**
+     * Retrieves student's personal schedule.
+     * @param id Student's unique identifier
+     * @return List of scheduled sessions
+     * @throws CustomException if schedule retrieval fails
+     */
+    List<SeanceDTO> getPersonalSchedule(Long id) throws CustomException;
+
+    /**
+     * Retrieves schedule for specific branch.
+     * @param brancheId Branch's unique identifier
+     * @return List of scheduled sessions for branch
+     * @throws CustomException if schedule retrieval fails
+     */
+    List<SeanceDTO> getBranchSchedule(Long brancheId) throws CustomException;
+
+    /**
+     * Retrieves student's notifications.
+     * @param id Student's unique identifier
+     * @return List of notifications
+     * @throws CustomException if retrieval fails
+     */
+    List<NotificationDTO> getNotifications(Long id) throws CustomException;
+}
+EOF
+
+# Create SeanceService.java
+cat > "$SERVICE_DIR/SeanceService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for session management.
+ * Handles CRUD operations and conflict detection for teaching sessions.
+ */
+public interface SeanceService {
+    /**
+     * Retrieves all teaching sessions.
+     * @return List of all sessions
+     * @throws CustomException if retrieval fails
+     */
+    List<SeanceDTO> findAll() throws CustomException;
+
+    /**
+     * Retrieves session by ID.
+     * @param id Session's unique identifier
+     * @return Session DTO
+     * @throws CustomException if session not found
+     */
+    SeanceDTO findById(Long id) throws CustomException;
+
+    /**
+     * Creates new teaching session.
+     * @param seance Session to create
+     * @return Created session
+     * @throws CustomException if creation fails
+     */
+    SeanceDTO create(SeanceDTO seance) throws CustomException;
+
+    /**
+     * Updates existing teaching session.
+     * @param id Session's unique identifier
+     * @param seance Updated session data
+     * @return Updated session
+     * @throws CustomException if update fails
+     */
+    SeanceDTO update(Long id, SeanceDTO seance) throws CustomException;
+
+    /**
+     * Deletes teaching session.
+     * @param id Session's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+    /**
+     * Retrieves all schedule conflicts.
+     * @return List of session conflicts
+     * @throws CustomException if retrieval fails
+     */
+    List<SeanceConflictDTO> getAllConflicts() throws CustomException;
+
+    /**
+     * Retrieves room-specific conflicts.
+     * @return List of room conflicts
+     * @throws CustomException if retrieval fails
+     */
+    List<SeanceConflictDTO> getRoomConflicts() throws CustomException;
+
+    /**
+     * Retrieves conflicts for specific session.
+     * @param seanceId Session's unique identifier
+     * @return List of conflicts for session
+     * @throws CustomException if retrieval fails
+     */
+    List<SeanceConflictDTO> getConflictsForSession(Long seanceId) throws CustomException;
+}
+EOF
+
+# Create SalleService.java
+cat > "$SERVICE_DIR/SalleService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for room management.
+ * Handles CRUD operations and availability checking for rooms.
+ */
+public interface SalleService {
+    /**
+     * Retrieves all rooms.
+     * @return List of all rooms
+     * @throws CustomException if retrieval fails
+     */
+    List<SalleDTO> findAll() throws CustomException;
+
+    /**
+     * Retrieves room by ID.
+     * @param id Room's unique identifier
+     * @return Room DTO
+     * @throws CustomException if room not found
+     */
+    SalleDTO findById(Long id) throws CustomException;
+
+    /**
+     * Creates new room.
+     * @param salle Room to create
+     * @return Created room
+     * @throws CustomException if creation fails
+     */
+    SalleDTO create(SalleDTO salle) throws CustomException;
+
+    /**
+     * Updates existing room.
+     * @param id Room's unique identifier
+     * @param salle Updated room data
+     * @return Updated room
+     * @throws CustomException if update fails
+     */
+    SalleDTO update(Long id, SalleDTO salle) throws CustomException;
+
+    /**
+     * Deletes room.
+     * @param id Room's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+    /**
+     * Finds available rooms for specific time slot.
+     * @param date Desired date
+     * @param startTime Start time
+     * @param endTime End time
+     * @return List of available rooms
+     * @throws CustomException if search fails
+     */
+    List<SalleDTO> getAvailableRooms(String date, String startTime, String endTime) throws CustomException;
+}
+EOF
+
+# Create BrancheService.java
+cat > "$SERVICE_DIR/BrancheService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for branch management.
+ * Handles CRUD operations for academic branches/specializations.
+ */
+public interface BrancheService {
+    /**
+     * Retrieves all branches.
+     * @return List of all branches
+     * @throws CustomException if retrieval fails
+     */
+    List<BrancheDTO> findAll() throws CustomException;
+
+    /**
+     * Retrieves branch by ID.
+     * @param id Branch's unique identifier
+     * @return Branch DTO
+     * @throws CustomException if branch not found
+     */
+    BrancheDTO findById(Long id) throws CustomException;
+
+    /**
+     * Creates new branch.
+     * @param branche Branch to create
+     * @return Created branch
+     * @throws CustomException if creation fails
+     */
+    BrancheDTO create(BrancheDTO branche) throws CustomException;
+
+    /**
+     * Updates existing branch.
+     * @param id Branch's unique identifier
+     * @param branche Updated branch data
+     * @return Updated branch
+     * @throws CustomException if update fails
+     */
+    BrancheDTO update(Long id, BrancheDTO branche) throws CustomException;
+
+    /**
+     * Deletes branch.
+     * @param id Branch's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+}
+EOF
+
+# Create TDService.java
+cat > "$SERVICE_DIR/TDService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for tutorial group management.
+ * Handles operations related to tutorial sessions.
+ */
+public interface TDService {
+    /**
+     * Retrieves all tutorial groups.
+     * @return List of all tutorial groups
+     * @throws CustomException if retrieval fails
+     */
+    List<TDDTO> findAll() throws CustomException;
+
+    /**
+     * Retrieves tutorial group by ID.
+     * @param id Tutorial group's unique identifier
+     * @return Tutorial group DTO
+     * @throws CustomException if group not found
+     */
+    TDDTO findById(Long id) throws CustomException;
+
+    /**
+     * Retrieves practical sessions for tutorial group.
+     * @param tdId Tutorial group's unique identifier
+     * @return List of practical sessions
+     * @throws CustomException if retrieval fails
+     */
+    List<TPDTO> getTPs(Long tdId) throws CustomException;
+}
+EOF
+
+# Create TPService.java
+cat > "$SERVICE_DIR/TPService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for practical session management.
+ * Handles operations related to practical/lab sessions.
+ */
+public interface TPService {
+    /**
+     * Retrieves all practical sessions.
+     * @return List of all practical sessions
+     * @throws CustomException if retrieval fails
+     */
+    List<TPDTO> findAll() throws CustomException;
+
+    /**
+     * Retrieves practical session by ID.
+     * @param id Practical session's unique identifier
+     * @return Practical session DTO
+     * @throws CustomException if session not found
+     */
+    TPDTO findById(Long id) throws CustomException;
+
+    /**
+     * Retrieves students enrolled in practical session.
+     * @param tpId Practical session's unique identifier
+     * @return List of enrolled students
+     * @throws CustomException if retrieval fails
+     */
+    List<EtudiantDTO> getStudents(Long tpId) throws CustomException;
+}
+EOF
+
+# Create NotificationService.java
+cat > "$SERVICE_DIR/NotificationService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for notification management.
+ * Handles system notifications and user alerts.
+ */
+public interface NotificationService {
+    /**
+     * Retrieves all notifications.
+     * @return List of all notifications
+     * @throws CustomException if retrieval fails
+     */
+    List<NotificationDTO> findAll() throws CustomException;
+
+    /**
+     * Marks notification as read.
+     * @param id Notification's unique identifier
+     * @throws CustomException if update fails
+     */
+    void markAsRead(Long id) throws CustomException;
+
+    /**
+     * Retrieves unread notifications.
+     * @return List of unread notifications
+     * @throws CustomException if retrieval fails
+     */
+    List<NotificationDTO> getUnreadNotifications() throws CustomException;
+}
+EOF
+
+# Create UserService.java
+cat > "$SERVICE_DIR/UserService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for user management.
+ * Handles general user operations accessible to technicians.
+ */
+public interface UserService {
+    /**
+     * Retrieves all users.
+     * @return List of all users
+     * @throws CustomException if retrieval fails
+     */
+    List<PersonneDTO> findAll() throws CustomException;
+
+    /**
+     * Creates new user.
+     * @param user User to create
+     * @return Created user
+     * @throws CustomException if creation fails
+     */
+    PersonneDTO create(PersonneDTO user) throws CustomException;
+
+    /**
+     * Updates existing user.
+     * @param id User's unique identifier
+     * @param user Updated user data
+     * @return Updated user
+     * @throws CustomException if update fails
+     */
+    PersonneDTO update(Long id, PersonneDTO user) throws CustomException;
+
+    /**
+     * Resets user's password.
+     * @param id User's unique identifier
+     * @param newPassword New password
+     * @throws CustomException if reset fails
+     */
+    void resetPassword(Long id, String newPassword) throws CustomException;
+}
+EOF
+
+# Create ExcelFileService.java
+cat > "$SERVICE_DIR/ExcelFileService.java" << 'EOF'
+package com.scheduling.universityschedule_backend.service;
+
+import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.exception.CustomException;
+import java.util.List;
+
+/**
+ * Service interface for Excel file management.
+ * Handles upload and tracking of Excel schedule imports.
+ */
+public interface ExcelFileService {
+    /**
+     * Uploads and processes Excel file.
+     * @param file Excel file DTO
+     * @throws CustomException if upload fails
+     */
+    void upload(FichierExcelDTO file) throws CustomException;
+
+    /**
+     * Retrieves import history.
+     * @return List of imported files
+     * @throws CustomException if retrieval fails
+     */
+    List<FichierExcelDTO> getImportHistory() throws CustomException;
+}
+EOF
+
+echo "Service interface files have been generated under $SERVICE_DIR."

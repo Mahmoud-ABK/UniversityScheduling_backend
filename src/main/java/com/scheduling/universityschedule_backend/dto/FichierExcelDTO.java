@@ -10,10 +10,10 @@ import java.util.List;
  */
 @Data
 public class FichierExcelDTO {
-    private Long id;  // Unique identifier for the file
-    private String fileName;  // Name of the Excel file
-    private String status;  // Import status (e.g., successful, failed)
-    
+    private Long id;               // Unique identifier for the file
+    private String fileName;       // Name of the Excel file
+    private String status;         // Import status (e.g., successful, failed)
+
     // List of errors encountered during import
     private List<String> errors;
 

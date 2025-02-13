@@ -13,22 +13,26 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SeanceDTO {
-    private Long id;  // Unique identifier for the session
-    private String jour;  // Day of the session
+    private Long id;            // Unique identifier for the session
+    private String jour;        // Day of the session
     private String heureDebut;  // Start time of the session
-    private String heureFin;  // End time of the session
-    private String type;  // Type of session (e.g., CR, CI, TD, TP)
-    private String matiere;  // Subject matter
-    private String frequence;  // Frequency of the session (e.g., weekly, biweekly, specific date for catch-up)
+    private String heureFin;    // End time of the session
+    private String type;        // Type of session (e.g., CR, CI, TD, TP)
+    private String matiere;     // Subject
+    private String frequence;   // Frequency of the session (e.g., weekly, biweekly, specific date for catch-up)
 
-    // Associated SalleDTO object representing the room assigned to the session
-    private SalleDTO salle;
+    // ID of the Salle assigned to the session
+    private Long salleId;
 
-    // Associated EnseignantDTO object representing the teacher assigned to the session
-    private EnseignantDTO enseignant;
+    // ID of the Enseignant assigned to the session
+    private Long enseignantId;
 
-    // Lists of associated DTOs for branches, tutorials, and practicals
-    private List<BrancheDTO> branches;
-    private List<TDDTO> tds;
-    private List<TPDTO> tps;
+    // List of Branche IDs associated with this session
+    private List<Long> brancheIds;
+
+    // List of TD IDs associated with this session
+    private List<Long> tdIds;
+
+    // List of TP IDs associated with this session
+    private List<Long> tpIds;
 }

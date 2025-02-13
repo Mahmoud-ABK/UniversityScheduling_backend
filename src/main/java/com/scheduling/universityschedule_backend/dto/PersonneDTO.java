@@ -8,11 +8,11 @@ import lombok.Data;
  */
 @Data
 public class PersonneDTO {
-    private Long id;  // Unique identifier for the person
-    private String cin;  // National identification number
-    private String nom;  // Last name
-    private String prenom;  // First name
+    private Long id;       // Unique identifier for the person
+    private String cin;    // National identification number
+    private String nom;    // Last name
+    private String prenom; // First name
     private String email;  // Contact email
-    private String tel;  // Telephone number
-    private String adresse;  // Physical address
+    private String tel;    // Telephone number
+    private String adresse;// Physical address
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Console appender for standard Spring Boot logs -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File appender for custom logger logs -->
+    <appender name="CUSTOM_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/custom_debug.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Configure the root logger to log to the console -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <!-- Set up a dedicated logger for your custom debug logs -->
+    <logger name="CustomLogger" level="DEBUG" additivity="false">
+        <appender-ref ref="CUSTOM_FILE" />
+    </logger>
+
+</configuration>

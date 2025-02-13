@@ -1,3 +1,27 @@
+#!/bin/bash
+#
+# This script generates all the DTO files in the $srcprj/dto directory.
+#
+# Ensure you have set the srcprj environment variable before running this script:
+#   export srcprj="/path/to/your/project/src/main/java/com/scheduling/universityschedule_backend"
+#
+# Then run:
+#   ./generate_dtos.sh
+#
+
+# Check that srcprj is defined
+if [ -z "$srcprj" ]; then
+    echo "Error: srcprj environment variable is not set. Please set it to the base package directory."
+    exit 1
+fi
+
+# Create the dto directory if it does not exist
+mkdir -p "$srcprj/dto"
+
+echo "Generating DTO files in $srcprj/dto ..."
+
+# 1. AdministrateurDTO.java
+cat << 'EOF' > "$srcprj/dto/AdministrateurDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -12,6 +36,10 @@ import lombok.EqualsAndHashCode;
 public class AdministrateurDTO extends PersonneDTO {
     private String codeAdmin;  // Unique code for the administrator
 }
+EOF
+
+# 2. BrancheDTO.java
+cat << 'EOF' > "$srcprj/dto/BrancheDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +64,10 @@ public class BrancheDTO {
     // List of Seance IDs associated with this Branche
     private List<Long> seanceIds;
 }
+EOF
+
+# 3. EnseignantDTO.java
+cat << 'EOF' > "$srcprj/dto/EnseignantDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -58,6 +90,10 @@ public class EnseignantDTO extends PersonneDTO {
     // List of PropositionDeRattrapage IDs representing proposed catch-up sessions
     private List<Long> propositionIds;
 }
+EOF
+
+# 4. EtudiantDTO.java
+cat << 'EOF' > "$srcprj/dto/EtudiantDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -78,6 +114,10 @@ public class EtudiantDTO extends PersonneDTO {
     // ID of the associated TP representing the student's practical session
     private Long tpId;
 }
+EOF
+
+# 5. FichierExcelDTO.java
+cat << 'EOF' > "$srcprj/dto/FichierExcelDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -99,6 +139,10 @@ public class FichierExcelDTO {
 
     private LocalDateTime importDate;  // Date and time of import
 }
+EOF
+
+# 6. NotificationDTO.java
+cat << 'EOF' > "$srcprj/dto/NotificationDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -122,6 +166,10 @@ public class NotificationDTO {
     // ID of the sender (Personne or system)
     private Long expediteurId;
 }
+EOF
+
+# 7. PersonneDTO.java
+cat << 'EOF' > "$srcprj/dto/PersonneDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -140,6 +188,10 @@ public class PersonneDTO {
     private String tel;    // Telephone number
     private String adresse;// Physical address
 }
+EOF
+
+# 8. PropositionDeRattrapageDTO.java
+cat << 'EOF' > "$srcprj/dto/PropositionDeRattrapageDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -159,6 +211,10 @@ public class PropositionDeRattrapageDTO {
     // ID of the associated Enseignant who proposed the catch-up session
     private Long enseignantId;
 }
+EOF
+
+# 9. SalleDTO.java
+cat << 'EOF' > "$srcprj/dto/SalleDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -181,6 +237,10 @@ public class SalleDTO {
     // List of Seance IDs representing sessions scheduled in the room
     private List<Long> seanceIds;
 }
+EOF
+
+# 10. SeanceConflictDTO.java
+cat << 'EOF' > "$srcprj/dto/SeanceConflictDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
@@ -205,6 +265,10 @@ public class SeanceConflictDTO {
     // List of conflict types between the two sessions
     private List<String> conflictTypes;
 }
+EOF
+
+# 11. SeanceDTO.java
+cat << 'EOF' > "$srcprj/dto/SeanceDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
@@ -225,7 +289,7 @@ public class SeanceDTO {
     private String heureDebut;  // Start time of the session
     private String heureFin;    // End time of the session
     private String type;        // Type of session (e.g., CR, CI, TD, TP)
-    private String matiere;     // Subject
+    private String matiere;     // Subject matter
     private String frequence;   // Frequency of the session (e.g., weekly, biweekly, specific date for catch-up)
 
     // ID of the Salle assigned to the session
@@ -243,6 +307,10 @@ public class SeanceDTO {
     // List of TP IDs associated with this session
     private List<Long> tpIds;
 }
+EOF
+
+# 12. SignalDTO.java
+cat << 'EOF' > "$srcprj/dto/SignalDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -259,6 +327,10 @@ public class SignalDTO {
     private String severity;        // Importance level
     private LocalDateTime timestamp;// Date and time the signal was submitted
 }
+EOF
+
+# 13. TDDTO.java
+cat << 'EOF' > "$srcprj/dto/TDDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
@@ -284,6 +356,10 @@ public class TDDTO {
     // List of TP IDs representing practical sessions
     private List<Long> tpIds;
 }
+EOF
+
+# 14. TechnicienDTO.java
+cat << 'EOF' > "$srcprj/dto/TechnicienDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.Data;
@@ -298,6 +374,10 @@ import lombok.EqualsAndHashCode;
 public class TechnicienDTO extends PersonneDTO {
     private String codeTechnicien;  // Unique code for the technician
 }
+EOF
+
+# 15. TPDTO.java
+cat << 'EOF' > "$srcprj/dto/TPDTO.java"
 package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
@@ -322,3 +402,6 @@ public class TPDTO {
     // List of Etudiant IDs representing students enrolled in the practical session
     private List<Long> etudiantIds;
 }
+EOF
+
+echo "DTO files generated successfully in $srcprj/dto."
