@@ -10,6 +10,10 @@ import java.util.List;
  */
 public interface AdministrateurService {
 
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
      * Retrieves administrator details by ID.
      * @param id Administrator's unique identifier
@@ -17,6 +21,42 @@ public interface AdministrateurService {
      * @throws CustomException if administrator not found
      */
     AdministrateurDTO findById(Long id) throws CustomException;
+
+    /**
+     * Retrieves all administrators.
+     * @return List of all administrators
+     * @throws CustomException if retrieval fails
+     */
+    List<AdministrateurDTO> findAll() throws CustomException;
+
+    /**
+     * Creates a new administrator.
+     * @param administrateur Administrator DTO containing the new data
+     * @return Created administrator DTO
+     * @throws CustomException if creation fails
+     */
+    AdministrateurDTO create(AdministrateurDTO administrateur) throws CustomException;
+
+    /**
+     * Updates an existing administrator.
+     * @param id Administrator's unique identifier
+     * @param administrateur Updated administrator data
+     * @return Updated administrator DTO
+     * @throws CustomException if update fails
+     */
+    AdministrateurDTO update(Long id, AdministrateurDTO administrateur) throws CustomException;
+
+    /**
+     * Deletes an administrator by ID.
+     * @param id Administrator's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
 
     /**
      * Imports schedule data from Excel file.
@@ -50,8 +90,7 @@ public interface AdministrateurService {
      * @param id Makeup session proposal ID
      * @throws CustomException if rejection fails
      */
-
-   void rejectMakeupSession(Long id) throws CustomException;
+    void rejectMakeupSession(Long id) throws CustomException;
 
     /**
      * Sends notification to all system users.
@@ -59,4 +98,18 @@ public interface AdministrateurService {
      * @throws CustomException if broadcast fails
      */
     void broadcastNotification(NotificationDTO notification) throws CustomException;
+
+    /**
+     * Retrieves all session conflicts.
+     * @return List of session conflicts
+     * @throws CustomException if retrieval fails
+     */
+    List<SeanceConflictDTO> getAllConflicts() throws CustomException;
+
+    /**
+     * Retrieves all room conflicts.
+     * @return List of room conflicts
+     * @throws CustomException if retrieval fails
+     */
+    List<SeanceConflictDTO> getRoomConflicts() throws CustomException;
 }

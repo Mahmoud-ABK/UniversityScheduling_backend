@@ -9,6 +9,11 @@ import java.util.List;
  * Handles operations related to practical/lab sessions.
  */
 public interface TPService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
      * Retrieves all practical sessions.
      * @return List of all practical sessions
@@ -25,18 +30,39 @@ public interface TPService {
     TPDTO findById(Long id) throws CustomException;
 
     /**
-     * Retrieves students enrolled in practical session.
+     * Creates a new practical session.
+     * @param tp Practical session data to be created
+     * @return Created practical session DTO
+     * @throws CustomException if creation fails
+     */
+    TPDTO create(TPDTO tp) throws CustomException;
+
+    /**
+     * Updates an existing practical session.
+     * @param id Practical session's unique identifier
+     * @param tp Updated practical session data
+     * @return Updated practical session DTO
+     * @throws CustomException if update fails
+     */
+    TPDTO update(Long id, TPDTO tp) throws CustomException;
+
+    /**
+     * Deletes a practical session.
+     * @param id Practical session's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
+
+    /**
+     * Retrieves students enrolled in a practical session.
      * @param tpId Practical session's unique identifier
-     * @return List of enrolled students
+     * @return List of students enrolled in the practical session
      * @throws CustomException if retrieval fails
      */
     List<EtudiantDTO> getStudents(Long tpId) throws CustomException;
-
-    /**
-     *
-     * @param tp
-     * @return the Dto Created
-     * @throws CustomException
-     */
-    TPDTO create(TPDTO tp) throws CustomException;
 }

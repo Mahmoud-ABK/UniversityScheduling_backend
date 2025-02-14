@@ -9,6 +9,11 @@ import java.util.List;
  * Handles operations related to tutorial sessions.
  */
 public interface TDService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
      * Retrieves all tutorial groups.
      * @return List of all tutorial groups
@@ -25,18 +30,39 @@ public interface TDService {
     TDDTO findById(Long id) throws CustomException;
 
     /**
-     * Retrieves practical sessions for tutorial group.
+     * Creates a new tutorial group.
+     * @param td Tutorial group data to be created
+     * @return Created tutorial group DTO
+     * @throws CustomException if creation fails
+     */
+    TDDTO create(TDDTO td) throws CustomException;
+
+    /**
+     * Updates an existing tutorial group.
+     * @param id Tutorial group's unique identifier
+     * @param td Updated tutorial group data
+     * @return Updated tutorial group DTO
+     * @throws CustomException if update fails
+     */
+    TDDTO update(Long id, TDDTO td) throws CustomException;
+
+    /**
+     * Deletes a tutorial group.
+     * @param id Tutorial group's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
+
+    /**
+     * Retrieves practical sessions for a specific tutorial group.
      * @param tdId Tutorial group's unique identifier
-     * @return List of practical sessions
+     * @return List of practical sessions (TP)
      * @throws CustomException if retrieval fails
      */
     List<TPDTO> getTPs(Long tdId) throws CustomException;
-
-    /**
-     *
-     * @param td
-     * @return the created DTO
-     * @throws CustomException
-     */
-    TDDTO create(TDDTO td) throws CustomException;
 }

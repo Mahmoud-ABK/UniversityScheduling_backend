@@ -10,6 +10,10 @@ import java.util.List;
  */
 public interface AdministrateurService {
 
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
      * Retrieves administrator details by ID.
      * @param id Administrator's unique identifier
@@ -17,6 +21,42 @@ public interface AdministrateurService {
      * @throws CustomException if administrator not found
      */
     AdministrateurDTO findById(Long id) throws CustomException;
+
+    /**
+     * Retrieves all administrators.
+     * @return List of all administrators
+     * @throws CustomException if retrieval fails
+     */
+    List<AdministrateurDTO> findAll() throws CustomException;
+
+    /**
+     * Creates a new administrator.
+     * @param administrateur Administrator DTO containing the new data
+     * @return Created administrator DTO
+     * @throws CustomException if creation fails
+     */
+    AdministrateurDTO create(AdministrateurDTO administrateur) throws CustomException;
+
+    /**
+     * Updates an existing administrator.
+     * @param id Administrator's unique identifier
+     * @param administrateur Updated administrator data
+     * @return Updated administrator DTO
+     * @throws CustomException if update fails
+     */
+    AdministrateurDTO update(Long id, AdministrateurDTO administrateur) throws CustomException;
+
+    /**
+     * Deletes an administrator by ID.
+     * @param id Administrator's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
 
     /**
      * Imports schedule data from Excel file.
@@ -50,8 +90,7 @@ public interface AdministrateurService {
      * @param id Makeup session proposal ID
      * @throws CustomException if rejection fails
      */
-
-   void rejectMakeupSession(Long id) throws CustomException;
+    void rejectMakeupSession(Long id) throws CustomException;
 
     /**
      * Sends notification to all system users.
@@ -59,6 +98,20 @@ public interface AdministrateurService {
      * @throws CustomException if broadcast fails
      */
     void broadcastNotification(NotificationDTO notification) throws CustomException;
+
+    /**
+     * Retrieves all session conflicts.
+     * @return List of session conflicts
+     * @throws CustomException if retrieval fails
+     */
+    List<SeanceConflictDTO> getAllConflicts() throws CustomException;
+
+    /**
+     * Retrieves all room conflicts.
+     * @return List of room conflicts
+     * @throws CustomException if retrieval fails
+     */
+    List<SeanceConflictDTO> getRoomConflicts() throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
@@ -67,60 +120,23 @@ import com.scheduling.universityschedule_backend.exception.CustomException;
 import java.util.List;
 
 /**
- * Service interface handling authentication and user session management.
- * Provides functionality for user login, logout, token management, and password operations.
- */
-public interface AuthService {
-    /**
-     * Authenticates a user and generates a JWT token.
-     * @param email User's email address
-     * @param password User's password
-     * @return JWT token for authenticated session
-     * @throws CustomException if authentication fails
-     */
-    String login(String email, String password) throws CustomException;
-
-    /**
-     * Invalidates the user's current session token.
-     * @param token Current JWT token to invalidate
-     * @throws CustomException if token invalidation fails
-     */
-    void logout(String token) throws CustomException;
-
-    /**
-     * Generates a new JWT token from an expired token.
-     * @param token Expired JWT token
-     * @return New valid JWT token
-     * @throws CustomException if token refresh fails
-     */
-    String refreshToken(String token) throws CustomException;
-
-    /**
-     * Initiates password reset process by sending reset link.
-     * @param email User's email address
-     * @throws CustomException if reset initiation fails
-     */
-    void resetPassword(String email) throws CustomException;
-
-    /**
-     * Updates user's password using reset token.
-     * @param token Password reset token
-     * @param password New password
-     * @throws CustomException if password update fails
-     */
-    void setNewPassword(String token, String password) throws CustomException;
-}
-package com.scheduling.universityschedule_backend.service;
-
-import com.scheduling.universityschedule_backend.dto.*;
-import com.scheduling.universityschedule_backend.exception.CustomException;
-import java.util.List;
-
-/**
- * Service interface for branch management.
- * Handles CRUD operations for academic branches/specializations.
+ * Service interface for managing academic branches.
+ * Includes CRUD operations and additional branch-related functionalities.
  */
 public interface BrancheService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
+    /**
+     * Retrieves branch details by ID.
+     * @param id Branch's unique identifier
+     * @return Branch DTO
+     * @throws CustomException if branch not found
+     */
+    BrancheDTO findById(Long id) throws CustomException;
+
     /**
      * Retrieves all branches.
      * @return List of all branches
@@ -129,36 +145,73 @@ public interface BrancheService {
     List<BrancheDTO> findAll() throws CustomException;
 
     /**
-     * Retrieves branch by ID.
-     * @param id Branch's unique identifier
-     * @return Branch DTO
-     * @throws CustomException if branch not found
-     */
-    BrancheDTO findById(Long id) throws CustomException;
-
-    /**
-     * Creates new branch.
-     * @param branche Branch to create
-     * @return Created branch
+     * Creates a new branch.
+     * @param branche Branch DTO containing the new data
+     * @return Created branch DTO
      * @throws CustomException if creation fails
      */
     BrancheDTO create(BrancheDTO branche) throws CustomException;
 
     /**
-     * Updates existing branch.
+     * Updates an existing branch.
      * @param id Branch's unique identifier
      * @param branche Updated branch data
-     * @return Updated branch
+     * @return Updated branch DTO
      * @throws CustomException if update fails
      */
     BrancheDTO update(Long id, BrancheDTO branche) throws CustomException;
 
     /**
-     * Deletes branch.
+     * Deletes a branch by ID.
      * @param id Branch's unique identifier
      * @throws CustomException if deletion fails
      */
     void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
+
+    /**
+     * Assigns a teacher to a branch.
+     * @param branchId Branch's unique identifier
+     * @param teacherDTO Teacher DTO containing the teacher data
+     * @throws CustomException if assignment fails
+     */
+    void assignTeacherToBranch(Long branchId, EnseignantDTO teacherDTO) throws CustomException;
+
+    /**
+     * Removes a teacher from a branch.
+     * @param branchId Branch's unique identifier
+     * @param teacherId Teacher's unique identifier
+     * @throws CustomException if removal fails
+     */
+    void removeTeacherFromBranch(Long branchId, Long teacherId) throws CustomException;
+
+    /**
+     * Assigns a student to a branch.
+     * @param branchId Branch's unique identifier
+     * @param studentDTO Student DTO containing the student data
+     * @throws CustomException if assignment fails
+     */
+    void assignStudentToBranch(Long branchId, EtudiantDTO studentDTO) throws CustomException;
+
+    /**
+     * Removes a student from a branch.
+     * @param branchId Branch's unique identifier
+     * @param studentId Student's unique identifier
+     * @throws CustomException if removal fails
+     */
+    void removeStudentFromBranch(Long branchId, Long studentId) throws CustomException;
+
+    /**
+     * Retrieves all courses associated with a branch.
+     * @param branchId Branch's unique identifier
+     * @return List of courses associated with the branch
+     * @throws CustomException if retrieval fails
+     */
+    List<SeanceDTO> getCoursesByBranch(Long branchId) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
@@ -171,6 +224,11 @@ import java.util.List;
  * Manages teacher schedules, teaching hours, and communication.
  */
 public interface EnseignantService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
      * Retrieves teacher details by ID.
      * @param id Teacher's unique identifier
@@ -178,6 +236,42 @@ public interface EnseignantService {
      * @throws CustomException if teacher not found
      */
     EnseignantDTO findById(Long id) throws CustomException;
+
+    /**
+     * Retrieves all teachers.
+     * @return List of all teachers
+     * @throws CustomException if retrieval fails
+     */
+    List<EnseignantDTO> findAll() throws CustomException;
+
+    /**
+     * Creates a new teacher.
+     * @param enseignant Teacher DTO containing the new data
+     * @return Created teacher DTO
+     * @throws CustomException if creation fails
+     */
+    EnseignantDTO create(EnseignantDTO enseignant) throws CustomException;
+
+    /**
+     * Updates an existing teacher's information.
+     * @param id Teacher's unique identifier
+     * @param enseignant Updated teacher data
+     * @return Updated teacher DTO
+     * @throws CustomException if update fails
+     */
+    EnseignantDTO update(Long id, EnseignantDTO enseignant) throws CustomException;
+
+    /**
+     * Deletes a teacher by ID.
+     * @param id Teacher's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
 
     /**
      * Retrieves teacher's schedule.
@@ -198,23 +292,23 @@ public interface EnseignantService {
     /**
      * Submits makeup session request.
      * @param id Teacher's unique identifier
-     * @param proposition Makeup session proposal
-     * @return Created makeup session proposal
+     * @param proposition Makeup session proposal DTO
+     * @return Created makeup session proposal DTO
      * @throws CustomException if submission fails
      */
     PropositionDeRattrapageDTO submitMakeupRequest(Long id, PropositionDeRattrapageDTO proposition) throws CustomException;
 
     /**
-     * Submits issue or suggestion.
+     * Submits an issue or suggestion from a teacher.
      * @param id Teacher's unique identifier
-     * @param signal Signal containing issue/suggestion
-     * @return Created signal
+     * @param signal Signal DTO containing issue or suggestion
+     * @return Created signal DTO
      * @throws CustomException if submission fails
      */
     SignalDTO submitSignal(Long id, SignalDTO signal) throws CustomException;
 
     /**
-     * Retrieves teacher's submitted signals.
+     * Retrieves all signals submitted by a teacher.
      * @param id Teacher's unique identifier
      * @return List of submitted signals
      * @throws CustomException if retrieval fails
@@ -232,6 +326,11 @@ import java.util.List;
  * Manages student schedules and notifications.
  */
 public interface EtudiantService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
      * Retrieves student details by ID.
      * @param id Student's unique identifier
@@ -239,6 +338,42 @@ public interface EtudiantService {
      * @throws CustomException if student not found
      */
     EtudiantDTO findById(Long id) throws CustomException;
+
+    /**
+     * Retrieves all students.
+     * @return List of all students
+     * @throws CustomException if retrieval fails
+     */
+    List<EtudiantDTO> findAll() throws CustomException;
+
+    /**
+     * Creates a new student.
+     * @param etudiant Student DTO containing the new data
+     * @return Created student DTO
+     * @throws CustomException if creation fails
+     */
+    EtudiantDTO create(EtudiantDTO etudiant) throws CustomException;
+
+    /**
+     * Updates an existing student's information.
+     * @param id Student's unique identifier
+     * @param etudiant Updated student data
+     * @return Updated student DTO
+     * @throws CustomException if update fails
+     */
+    EtudiantDTO update(Long id, EtudiantDTO etudiant) throws CustomException;
+
+    /**
+     * Deletes a student by ID.
+     * @param id Student's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
 
     /**
      * Retrieves student's personal schedule.
@@ -249,7 +384,7 @@ public interface EtudiantService {
     List<SeanceDTO> getPersonalSchedule(Long id) throws CustomException;
 
     /**
-     * Retrieves schedule for specific branch.
+     * Retrieves schedule for a specific branch.
      * @param brancheId Branch's unique identifier
      * @return List of scheduled sessions for branch
      * @throws CustomException if schedule retrieval fails
@@ -275,16 +410,65 @@ import java.util.List;
  * Handles upload and tracking of Excel schedule imports.
  */
 public interface ExcelFileService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
-     * Uploads and processes Excel file.
+     * Retrieves an Excel file by ID.
+     * @param id Excel file's unique identifier
+     * @return Excel file DTO
+     * @throws CustomException if file not found
+     */
+    FichierExcelDTO findById(Long id) throws CustomException;
+
+    /**
+     * Retrieves all Excel files.
+     * @return List of all Excel file imports
+     * @throws CustomException if retrieval fails
+     */
+    List<FichierExcelDTO> findAll() throws CustomException;
+
+    /**
+     * Creates a new Excel file entry in the database.
+     * @param fichierExcel Excel file DTO containing the data to be saved
+     * @return Created Excel file DTO
+     * @throws CustomException if creation fails
+     */
+    FichierExcelDTO create(FichierExcelDTO fichierExcel) throws CustomException;
+
+    /**
+     * Updates an existing Excel file entry.
+     * @param id Excel file's unique identifier
+     * @param fichierExcel Updated Excel file data
+     * @return Updated Excel file DTO
+     * @throws CustomException if update fails
+     */
+    FichierExcelDTO update(Long id, FichierExcelDTO fichierExcel) throws CustomException;
+
+    /**
+     * Deletes an Excel file entry by ID.
+     * @param id Excel file's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
+
+    /**
+     * Uploads and processes an Excel file.
      * @param file Excel file DTO
      * @throws CustomException if upload fails
      */
     void upload(FichierExcelDTO file) throws CustomException;
 
     /**
-     * Retrieves import history.
-     * @return List of imported files
+     * Retrieves the import history of all Excel files.
+     * @return List of imported Excel files
      * @throws CustomException if retrieval fails
      */
     List<FichierExcelDTO> getImportHistory() throws CustomException;
@@ -300,6 +484,19 @@ import java.util.List;
  * Handles system notifications and user alerts.
  */
 public interface NotificationService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
+    /**
+     * Retrieves a notification by ID.
+     * @param id Notification's unique identifier
+     * @return Notification DTO
+     * @throws CustomException if notification not found
+     */
+    NotificationDTO findById(Long id) throws CustomException;
+
     /**
      * Retrieves all notifications.
      * @return List of all notifications
@@ -308,7 +505,36 @@ public interface NotificationService {
     List<NotificationDTO> findAll() throws CustomException;
 
     /**
-     * Marks notification as read.
+     * Creates a new notification.
+     * @param notification Notification DTO containing the data to be saved
+     * @return Created Notification DTO
+     * @throws CustomException if creation fails
+     */
+    NotificationDTO create(NotificationDTO notification) throws CustomException;
+
+    /**
+     * Updates an existing notification.
+     * @param id Notification's unique identifier
+     * @param notification Updated Notification DTO
+     * @return Updated Notification DTO
+     * @throws CustomException if update fails
+     */
+    NotificationDTO update(Long id, NotificationDTO notification) throws CustomException;
+
+    /**
+     * Deletes a notification by ID.
+     * @param id Notification's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
+
+    /**
+     * Marks a notification as read.
      * @param id Notification's unique identifier
      * @throws CustomException if update fails
      */
@@ -320,9 +546,14 @@ public interface NotificationService {
      * @throws CustomException if retrieval fails
      */
     List<NotificationDTO> getUnreadNotifications() throws CustomException;
-    public void broadcastNotification(NotificationDTO notificationDTO) throws CustomException ;
-}
 
+    /**
+     * Broadcasts a notification to all users.
+     * @param notificationDTO Notification data to be broadcasted
+     * @throws CustomException if broadcasting fails
+     */
+    void broadcastNotification(NotificationDTO notificationDTO) throws CustomException;
+}
 package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.*;
@@ -334,6 +565,19 @@ import java.util.List;
  * Handles CRUD operations and availability checking for rooms.
  */
 public interface SalleService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
+    /**
+     * Retrieves a room by its ID.
+     * @param id Room's unique identifier
+     * @return Room DTO
+     * @throws CustomException if room not found
+     */
+    SalleDTO findById(Long id) throws CustomException;
+
     /**
      * Retrieves all rooms.
      * @return List of all rooms
@@ -342,23 +586,15 @@ public interface SalleService {
     List<SalleDTO> findAll() throws CustomException;
 
     /**
-     * Retrieves room by ID.
-     * @param id Room's unique identifier
-     * @return Room DTO
-     * @throws CustomException if room not found
-     */
-    SalleDTO findById(Long id) throws CustomException;
-
-    /**
-     * Creates new room.
-     * @param salle Room to create
+     * Creates a new room.
+     * @param salle Room data to be saved
      * @return Created room
      * @throws CustomException if creation fails
      */
     SalleDTO create(SalleDTO salle) throws CustomException;
 
     /**
-     * Updates existing room.
+     * Updates an existing room.
      * @param id Room's unique identifier
      * @param salle Updated room data
      * @return Updated room
@@ -367,14 +603,19 @@ public interface SalleService {
     SalleDTO update(Long id, SalleDTO salle) throws CustomException;
 
     /**
-     * Deletes room.
+     * Deletes a room.
      * @param id Room's unique identifier
      * @throws CustomException if deletion fails
      */
     void delete(Long id) throws CustomException;
 
+
+    // ============================
+    //          Functionalities
+    // ============================
+
     /**
-     * Finds available rooms for specific time slot.
+     * Finds available rooms for a specific time slot.
      * @param date Desired date
      * @param startTime Start time
      * @param endTime End time
@@ -394,6 +635,11 @@ import java.util.List;
  * Handles CRUD operations and conflict detection for teaching sessions.
  */
 public interface SeanceService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
      * Retrieves all teaching sessions.
      * @return List of all sessions
@@ -410,15 +656,15 @@ public interface SeanceService {
     SeanceDTO findById(Long id) throws CustomException;
 
     /**
-     * Creates new teaching session.
-     * @param seance Session to create
+     * Creates a new teaching session.
+     * @param seance Session data to be created
      * @return Created session
      * @throws CustomException if creation fails
      */
     SeanceDTO create(SeanceDTO seance) throws CustomException;
 
     /**
-     * Updates existing teaching session.
+     * Updates an existing teaching session.
      * @param id Session's unique identifier
      * @param seance Updated session data
      * @return Updated session
@@ -427,14 +673,19 @@ public interface SeanceService {
     SeanceDTO update(Long id, SeanceDTO seance) throws CustomException;
 
     /**
-     * Deletes teaching session.
+     * Deletes a teaching session.
      * @param id Session's unique identifier
      * @throws CustomException if deletion fails
      */
     void delete(Long id) throws CustomException;
 
+
+    // ============================
+    //          Functionalities
+    // ============================
+
     /**
-     * Retrieves all schedule conflicts.
+     * Retrieves all session conflicts.
      * @return List of session conflicts
      * @throws CustomException if retrieval fails
      */
@@ -448,9 +699,9 @@ public interface SeanceService {
     List<SeanceConflictDTO> getRoomConflicts() throws CustomException;
 
     /**
-     * Retrieves conflicts for specific session.
+     * Retrieves conflicts for a specific session.
      * @param seanceId Session's unique identifier
-     * @return List of conflicts for session
+     * @return List of conflicts for the given session
      * @throws CustomException if retrieval fails
      */
     List<SeanceConflictDTO> getConflictsForSession(Long seanceId) throws CustomException;
@@ -466,6 +717,11 @@ import java.util.List;
  * Handles operations related to tutorial sessions.
  */
 public interface TDService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
      * Retrieves all tutorial groups.
      * @return List of all tutorial groups
@@ -482,20 +738,41 @@ public interface TDService {
     TDDTO findById(Long id) throws CustomException;
 
     /**
-     * Retrieves practical sessions for tutorial group.
+     * Creates a new tutorial group.
+     * @param td Tutorial group data to be created
+     * @return Created tutorial group DTO
+     * @throws CustomException if creation fails
+     */
+    TDDTO create(TDDTO td) throws CustomException;
+
+    /**
+     * Updates an existing tutorial group.
+     * @param id Tutorial group's unique identifier
+     * @param td Updated tutorial group data
+     * @return Updated tutorial group DTO
+     * @throws CustomException if update fails
+     */
+    TDDTO update(Long id, TDDTO td) throws CustomException;
+
+    /**
+     * Deletes a tutorial group.
+     * @param id Tutorial group's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
+
+    /**
+     * Retrieves practical sessions for a specific tutorial group.
      * @param tdId Tutorial group's unique identifier
-     * @return List of practical sessions
+     * @return List of practical sessions (TP)
      * @throws CustomException if retrieval fails
      */
     List<TPDTO> getTPs(Long tdId) throws CustomException;
-
-    /**
-     *
-     * @param td
-     * @return the created DTO
-     * @throws CustomException
-     */
-    TDDTO create(TDDTO td) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
@@ -508,6 +785,11 @@ import java.util.List;
  * Handles operations related to practical/lab sessions.
  */
 public interface TPService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
      * Retrieves all practical sessions.
      * @return List of all practical sessions
@@ -524,61 +806,39 @@ public interface TPService {
     TPDTO findById(Long id) throws CustomException;
 
     /**
-     * Retrieves students enrolled in practical session.
+     * Creates a new practical session.
+     * @param tp Practical session data to be created
+     * @return Created practical session DTO
+     * @throws CustomException if creation fails
+     */
+    TPDTO create(TPDTO tp) throws CustomException;
+
+    /**
+     * Updates an existing practical session.
+     * @param id Practical session's unique identifier
+     * @param tp Updated practical session data
+     * @return Updated practical session DTO
+     * @throws CustomException if update fails
+     */
+    TPDTO update(Long id, TPDTO tp) throws CustomException;
+
+    /**
+     * Deletes a practical session.
+     * @param id Practical session's unique identifier
+     * @throws CustomException if deletion fails
+     */
+    void delete(Long id) throws CustomException;
+
+
+    // ============================
+    //          Functionalities
+    // ============================
+
+    /**
+     * Retrieves students enrolled in a practical session.
      * @param tpId Practical session's unique identifier
-     * @return List of enrolled students
+     * @return List of students enrolled in the practical session
      * @throws CustomException if retrieval fails
      */
     List<EtudiantDTO> getStudents(Long tpId) throws CustomException;
-
-    /**
-     *
-     * @param tp
-     * @return the Dto Created
-     * @throws CustomException
-     */
-    TPDTO create(TPDTO tp) throws CustomException;
-}
-package com.scheduling.universityschedule_backend.service;
-
-import com.scheduling.universityschedule_backend.dto.*;
-import com.scheduling.universityschedule_backend.exception.CustomException;
-import java.util.List;
-
-/**
- * Service interface for user management.
- * Handles general user operations accessible to technicians.
- */
-public interface UserService {
-    /**
-     * Retrieves all users.
-     * @return List of all users
-     * @throws CustomException if retrieval fails
-     */
-    List<PersonneDTO> findAll() throws CustomException;
-
-    /**
-     * Creates new user.
-     * @param user User to create
-     * @return Created user
-     * @throws CustomException if creation fails
-     */
-    PersonneDTO create(PersonneDTO user) throws CustomException;
-
-    /**
-     * Updates existing user.
-     * @param id User's unique identifier
-     * @param user Updated user data
-     * @return Updated user
-     * @throws CustomException if update fails
-     */
-    PersonneDTO update(Long id, PersonneDTO user) throws CustomException;
-
-    /**
-     * Resets user's password.
-     * @param id User's unique identifier
-     * @param newPassword New password
-     * @throws CustomException if reset fails
-     */
-    void resetPassword(Long id, String newPassword) throws CustomException;
 }

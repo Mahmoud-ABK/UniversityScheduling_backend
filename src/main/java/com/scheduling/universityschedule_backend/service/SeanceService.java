@@ -9,6 +9,11 @@ import java.util.List;
  * Handles CRUD operations and conflict detection for teaching sessions.
  */
 public interface SeanceService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
     /**
      * Retrieves all teaching sessions.
      * @return List of all sessions
@@ -25,15 +30,15 @@ public interface SeanceService {
     SeanceDTO findById(Long id) throws CustomException;
 
     /**
-     * Creates new teaching session.
-     * @param seance Session to create
+     * Creates a new teaching session.
+     * @param seance Session data to be created
      * @return Created session
      * @throws CustomException if creation fails
      */
     SeanceDTO create(SeanceDTO seance) throws CustomException;
 
     /**
-     * Updates existing teaching session.
+     * Updates an existing teaching session.
      * @param id Session's unique identifier
      * @param seance Updated session data
      * @return Updated session
@@ -42,14 +47,19 @@ public interface SeanceService {
     SeanceDTO update(Long id, SeanceDTO seance) throws CustomException;
 
     /**
-     * Deletes teaching session.
+     * Deletes a teaching session.
      * @param id Session's unique identifier
      * @throws CustomException if deletion fails
      */
     void delete(Long id) throws CustomException;
 
+
+    // ============================
+    //          Functionalities
+    // ============================
+
     /**
-     * Retrieves all schedule conflicts.
+     * Retrieves all session conflicts.
      * @return List of session conflicts
      * @throws CustomException if retrieval fails
      */
@@ -63,9 +73,9 @@ public interface SeanceService {
     List<SeanceConflictDTO> getRoomConflicts() throws CustomException;
 
     /**
-     * Retrieves conflicts for specific session.
+     * Retrieves conflicts for a specific session.
      * @param seanceId Session's unique identifier
-     * @return List of conflicts for session
+     * @return List of conflicts for the given session
      * @throws CustomException if retrieval fails
      */
     List<SeanceConflictDTO> getConflictsForSession(Long seanceId) throws CustomException;

@@ -9,6 +9,19 @@ import java.util.List;
  * Handles CRUD operations and availability checking for rooms.
  */
 public interface SalleService {
+
+    // ============================
+    //          CRUD Operations
+    // ============================
+
+    /**
+     * Retrieves a room by its ID.
+     * @param id Room's unique identifier
+     * @return Room DTO
+     * @throws CustomException if room not found
+     */
+    SalleDTO findById(Long id) throws CustomException;
+
     /**
      * Retrieves all rooms.
      * @return List of all rooms
@@ -17,23 +30,15 @@ public interface SalleService {
     List<SalleDTO> findAll() throws CustomException;
 
     /**
-     * Retrieves room by ID.
-     * @param id Room's unique identifier
-     * @return Room DTO
-     * @throws CustomException if room not found
-     */
-    SalleDTO findById(Long id) throws CustomException;
-
-    /**
-     * Creates new room.
-     * @param salle Room to create
+     * Creates a new room.
+     * @param salle Room data to be saved
      * @return Created room
      * @throws CustomException if creation fails
      */
     SalleDTO create(SalleDTO salle) throws CustomException;
 
     /**
-     * Updates existing room.
+     * Updates an existing room.
      * @param id Room's unique identifier
      * @param salle Updated room data
      * @return Updated room
@@ -42,14 +47,19 @@ public interface SalleService {
     SalleDTO update(Long id, SalleDTO salle) throws CustomException;
 
     /**
-     * Deletes room.
+     * Deletes a room.
      * @param id Room's unique identifier
      * @throws CustomException if deletion fails
      */
     void delete(Long id) throws CustomException;
 
+
+    // ============================
+    //          Functionalities
+    // ============================
+
     /**
-     * Finds available rooms for specific time slot.
+     * Finds available rooms for a specific time slot.
      * @param date Desired date
      * @param startTime Start time
      * @param endTime End time
