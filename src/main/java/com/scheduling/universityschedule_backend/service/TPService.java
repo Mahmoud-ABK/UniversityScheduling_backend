@@ -31,4 +31,12 @@ public interface TPService {
      * @throws CustomException if retrieval fails
      */
     List<EtudiantDTO> getStudents(Long tpId) throws CustomException;
+
+    /**
+     *
+     * @param tp
+     * @return the Dto Created
+     * @throws CustomException
+     */
+    TPDTO create(TPDTO tp) throws CustomException;
 }

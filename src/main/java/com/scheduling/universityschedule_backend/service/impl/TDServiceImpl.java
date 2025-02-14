@@ -59,4 +59,10 @@ public class TDServiceImpl implements TDService {
         List<TP> tps = td.getTpList();
         return tps.stream().map(mapper::toTPDTO).collect(Collectors.toList());
     }
+    @Override
+    public TDDTO create(TDDTO dtotd) throws CustomException {
+        TD td=this.mapper.toTD(dtotd);
+
+
+    }
 }

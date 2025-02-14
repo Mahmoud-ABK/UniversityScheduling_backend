@@ -9,6 +9,7 @@ import java.util.List;
  * Handles schedule management, makeup sessions, and system-wide notifications.
  */
 public interface AdministrateurService {
+
     /**
      * Retrieves administrator details by ID.
      * @param id Administrator's unique identifier
@@ -49,7 +50,8 @@ public interface AdministrateurService {
      * @param id Makeup session proposal ID
      * @throws CustomException if rejection fails
      */
-    void rejectMakeupSession(Long id) throws CustomException;
+
+   void rejectMakeupSession(Long id) throws CustomException;
 
     /**
      * Sends notification to all system users.
@@ -486,6 +488,14 @@ public interface TDService {
      * @throws CustomException if retrieval fails
      */
     List<TPDTO> getTPs(Long tdId) throws CustomException;
+
+    /**
+     *
+     * @param td
+     * @return the created DTO
+     * @throws CustomException
+     */
+    TDDTO create(TDDTO td) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
@@ -520,6 +530,14 @@ public interface TPService {
      * @throws CustomException if retrieval fails
      */
     List<EtudiantDTO> getStudents(Long tpId) throws CustomException;
+
+    /**
+     *
+     * @param tp
+     * @return the Dto Created
+     * @throws CustomException
+     */
+    TPDTO create(TPDTO tp) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 

@@ -2,16 +2,7 @@ package com.scheduling.universityschedule_backend;
 
 import com.scheduling.universityschedule_backend.dto.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
-import com.scheduling.universityschedule_backend.service.AdministrateurService;
-import com.scheduling.universityschedule_backend.service.BrancheService;
-import com.scheduling.universityschedule_backend.service.EnseignantService;
-import com.scheduling.universityschedule_backend.service.EtudiantService;
-import com.scheduling.universityschedule_backend.service.ExcelFileService;
-import com.scheduling.universityschedule_backend.service.NotificationService;
-import com.scheduling.universityschedule_backend.service.SalleService;
-import com.scheduling.universityschedule_backend.service.SeanceService;
-import com.scheduling.universityschedule_backend.service.TDService;
-import com.scheduling.universityschedule_backend.service.TPService;
+import com.scheduling.universityschedule_backend.service.*;
 import com.scheduling.universityschedule_backend.util.CustomLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,14 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 @SpringBootApplication
 public class UniversityScheduleBackendApplication implements CommandLineRunner {
 
-	// Autowire the service layer beans
 	@Autowired
 	private AdministrateurService administrateurService;
 
@@ -64,29 +53,30 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-populateDatabase();
-			}
+		populateDatabase(3, 3, 7, 2, 2);
+	}
+
 	/**
 	 * Populates the database with random data.
 	 * Each call to this function will generate new random entities.
 	 *
 	 * @param numBranches        Number of branches to create
-	 * @param numTeachers        Number of teachers to create
-	 * @param numStudents        Number of students to create
 	 * @param numRooms           Number of rooms to create
 	 * @param numSessions        Number of teaching sessions to create
 	 * @param numMakeupRequests  Number of makeup session requests to create
 	 * @param numNotifications   Number of notifications to broadcast
 	 */
-	public void populateDatabase(int numBranches, int numTeachers, int numStudents,
-								 int numRooms, int numSessions, int numMakeupRequests, int numNotifications) {
+	public void populateDatabase(int numBranches, int numRooms, int numSessions,
+								 int numMakeupRequests, int numNotifications) {
 		Random random = new Random();
 
-		// Lists to store created entities for associations.
+		// Lists to store created branches and rooms for later associations.
 		List<BrancheDTO> branchList = new ArrayList<>();
-		List<EnseignantDTO> teacherList = new ArrayList<>();
-		List<PersonneDTO> studentList = new ArrayList<>();
 		List<SalleDTO> roomList = new ArrayList<>();
+		List<EnseignantDTO> teacherList = new ArrayList<>();
+		List<EtudiantDTO> studentList = new ArrayList<>();
+		List<TDDTO> tdList = new ArrayList<>();
+		List<TPDTO> tpList = new ArrayList<>();
 
 		try {
 			// --- Create Random Branches ---
@@ -100,44 +90,6 @@ populateDatabase();
 				BrancheDTO createdBranche = brancheService.create(branche);
 				branchList.add(createdBranche);
 				CustomLogger.logInfo("Created Branche: " + createdBranche);
-			}
-
-			// --- Create Random Teachers using UserService ---
-			CustomLogger.logInfo("Populating " + numTeachers + " teachers...");
-			for (int i = 0; i < numTeachers; i++) {
-				PersonneDTO teacher = new PersonneDTO();
-				teacher.setNom("Teacher" + (i + 1));
-				teacher.setPrenom("LastName" + (i + 1));
-				teacher.setEmail("teacher" + i + "@university.com");
-				teacher.setTel("+216900000" + i);
-				teacher.setAdresse("City-" + (random.nextInt(10) + 1));
-				// Create teacher via UserService; assume it returns an EnseignantDTO
-				PersonneDTO createdTeacher = userService.create(teacher);
-				// Cast to EnseignantDTO (in a real app, ensure that the user is flagged as a teacher)
-				teacherList.add((EnseignantDTO) createdTeacher);
-				CustomLogger.logInfo("Created Teacher: " + createdTeacher);
-			}
-
-			// --- Create Random Students using UserService ---
-			CustomLogger.logInfo("Populating " + numStudents + " students...");
-			for (int i = 0; i < numStudents; i++) {
-				PersonneDTO student = new PersonneDTO();
-				student.setNom("Student" + (i + 1));
-				student.setPrenom("LastName" + (i + 1));
-				student.setEmail("student" + i + "@university.com");
-				student.setTel("+216800000" + i);
-				student.setAdresse("Dormitory-" + (i + 1));
-				// Assign a random branch to student if available
-				if (!branchList.isEmpty()) {
-					// (Assuming EtudiantDTO has a field 'branche' of type BrancheDTO)
-					// Here we simply add the branch info into the generic user.
-					// In a full implementation, you'd convert to an EtudiantDTO.
-					// For testing purposes, we use PersonneDTO.
-					// You might need to adjust this if you have a dedicated method.
-				}
-				PersonneDTO createdStudent = userService.create(student);
-				studentList.add(createdStudent);
-				CustomLogger.logInfo("Created Student: " + createdStudent);
 			}
 
 			// --- Create Random Rooms ---
@@ -156,6 +108,97 @@ populateDatabase();
 				CustomLogger.logInfo("Created Room: " + createdSalle);
 			}
 
+			// --- Create Random Teachers ---
+			CustomLogger.logInfo("Populating random teachers...");
+			for (int i = 0; i < 5; i++) {
+				EnseignantDTO enseignant = new EnseignantDTO();
+				enseignant.setCodeEnseignant("TeacherCode-" + (random.nextInt(1000) + 1));
+				enseignant.setHeures(random.nextInt(20) + 10);
+
+				PersonneDTO personne = new PersonneDTO();
+				personne.setCin("CIN-" + (random.nextInt(1000) + 1));
+				personne.setNom("LastName-" + (random.nextInt(100) + 1));
+				personne.setPrenom("FirstName-" + (random.nextInt(100) + 1));
+				personne.setEmail("email" + (random.nextInt(1000) + 1) + "@example.com");
+				personne.setTel("000-000-" + (random.nextInt(10000) + 1));
+				personne.setAdresse("Address-" + (random.nextInt(100) + 1));
+
+				enseignant.setId(personne.getId());
+				enseignant.setCin(personne.getCin());
+				enseignant.setNom(personne.getNom());
+				enseignant.setPrenom(personne.getPrenom());
+				enseignant.setEmail(personne.getEmail());
+				enseignant.setTel(personne.getTel());
+				enseignant.setAdresse(personne.getAdresse());
+
+				teacherList.add(enseignant);
+				CustomLogger.logInfo("Created Teacher: " + enseignant);
+			}
+
+			// --- Create Random Students ---
+			CustomLogger.logInfo("Populating random students...");
+			for (int i = 0; i < 10; i++) {
+				EtudiantDTO etudiant = new EtudiantDTO();
+				etudiant.setMatricule("StudentID-" + (random.nextInt(1000) + 1));
+
+				PersonneDTO personne = new PersonneDTO();
+				personne.setCin("CIN-" + (random.nextInt(1000) + 1));
+				personne.setNom("LastName-" + (random.nextInt(100) + 1));
+				personne.setPrenom("FirstName-" + (random.nextInt(100) + 1));
+				personne.setEmail("email" + (random.nextInt(1000) + 1) + "@example.com");
+				personne.setTel("000-000-" + (random.nextInt(10000) + 1));
+				personne.setAdresse("Address-" + (random.nextInt(100) + 1));
+
+				etudiant.setId(personne.getId());
+				etudiant.setCin(personne.getCin());
+				etudiant.setNom(personne.getNom());
+				etudiant.setPrenom(personne.getPrenom());
+				etudiant.setEmail(personne.getEmail());
+				etudiant.setTel(personne.getTel());
+				etudiant.setAdresse(personne.getAdresse());
+
+				etudiant.setBrancheId(branchList.get(random.nextInt(branchList.size())).getId());
+				etudiant.setTpId(null); // Will be set later
+
+				studentList.add(etudiant);
+				CustomLogger.logInfo("Created Student: " + etudiant);
+			}
+
+			// --- Create Random TDs and TPs ---
+			CustomLogger.logInfo("Populating random TDs and TPs...");
+			for (BrancheDTO branche : branchList) {
+				TDDTO td = new TDDTO();
+				td.setNb(random.nextInt(10) + 1);
+				td.setNbTP(random.nextInt(5) + 1);
+				td.setBrancheId(branche.getId());
+
+				List<Long> tpIds = new ArrayList<>();
+				for (int i = 0; i < td.getNbTP(); i++) {
+					TPDTO tp = new TPDTO();
+					tp.setNb(random.nextInt(10) + 1);
+					tp.setTdId(td.getId());
+
+					List<Long> studentIds = new ArrayList<>();
+					for (EtudiantDTO student : studentList) {
+						if (student.getBrancheId().equals(branche.getId())) {
+							studentIds.add(student.getId());
+							student.setTpId(tp.getId());
+						}
+					}
+					tp.setEtudiantIds(studentIds);
+
+					TPDTO createdTP = tpService.create(tp);
+					tpIds.add(createdTP.getId());
+					tpList.add(createdTP);
+					CustomLogger.logInfo("Created TP: " + createdTP);
+				}
+
+				td.setTpIds(tpIds);
+				TDDTO createdTD = tdService.create(td);
+				tdList.add(createdTD);
+				CustomLogger.logInfo("Created TD: " + createdTD);
+			}
+
 			// --- Create Random Sessions ---
 			CustomLogger.logInfo("Populating " + numSessions + " sessions...");
 			String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
@@ -164,19 +207,39 @@ populateDatabase();
 			for (int i = 0; i < numSessions; i++) {
 				SeanceDTO seance = new SeanceDTO();
 				seance.setJour(days[random.nextInt(days.length)]);
-				int startHour = 8 + random.nextInt(5); // start between 8 and 12
+				int startHour = 8 + random.nextInt(5); // between 8 and 12
 				seance.setHeureDebut(String.format("%02d:00", startHour));
-				seance.setHeureFin(String.format("%02d:00", startHour + 1 + random.nextInt(2))); // duration 1 to 2 hours
+				seance.setHeureFin(String.format("%02d:00", startHour + 1 + random.nextInt(2))); // duration 1-2 hours
 				seance.setType(sessionTypes[random.nextInt(sessionTypes.length)]);
 				seance.setMatiere(subjects[random.nextInt(subjects.length)]);
 				seance.setFrequence(random.nextBoolean() ? "weekly" : "biweekly");
-				// Assign a random room and teacher if available
+
 				if (!roomList.isEmpty()) {
-					seance.setSalle(roomList.get(random.nextInt(roomList.size())));
+					seance.setSalleId(roomList.get(random.nextInt(roomList.size())).getId());
 				}
+
 				if (!teacherList.isEmpty()) {
-					seance.setEnseignant(teacherList.get(random.nextInt(teacherList.size())));
+					seance.setEnseignantId(teacherList.get(random.nextInt(teacherList.size())).getId());
 				}
+
+				if (!branchList.isEmpty()) {
+					List<Long> brancheIds = new ArrayList<>();
+					brancheIds.add(branchList.get(random.nextInt(branchList.size())).getId());
+					seance.setBrancheIds(brancheIds);
+				}
+
+				if (!tdList.isEmpty()) {
+					List<Long> tdIds = new ArrayList<>();
+					tdIds.add(tdList.get(random.nextInt(tdList.size())).getId());
+					seance.setTdIds(tdIds);
+				}
+
+				if (!tpList.isEmpty()) {
+					List<Long> tpIds = new ArrayList<>();
+					tpIds.add(tpList.get(random.nextInt(tpList.size())).getId());
+					seance.setTpIds(tpIds);
+				}
+
 				SeanceDTO createdSeance = seanceService.create(seance);
 				CustomLogger.logInfo("Created Session: " + createdSeance);
 			}
@@ -188,13 +251,13 @@ populateDatabase();
 				makeupRequest.setDate(LocalDateTime.now().plusDays(random.nextInt(10)));
 				makeupRequest.setReason("Makeup for " + subjects[random.nextInt(subjects.length)]);
 				makeupRequest.setStatus("Pending");
-				// Pick a random teacher to submit the request
+
 				if (!teacherList.isEmpty()) {
-					// Using enseignantService.submitMakeupRequest to create a makeup session
-					PropositionDeRattrapageDTO createdRequest = enseignantService.submitMakeupRequest(
-							Long.valueOf(teacherList.get(random.nextInt(teacherList.size())).getId()), makeupRequest);
-					CustomLogger.logInfo("Created Makeup Request: " + createdRequest);
+					makeupRequest.setEnseignantId(teacherList.get(random.nextInt(teacherList.size())).getId());
 				}
+
+				PropositionDeRattrapageDTO createdRequest = enseignantService.submitMakeupRequest(makeupRequest.getEnseignantId(), makeupRequest);
+				CustomLogger.logInfo("Created Makeup Request: " + createdRequest);
 			}
 
 			// --- Simulate an Excel File Upload ---
@@ -203,8 +266,6 @@ populateDatabase();
 			fichierExcel.setFileName("random_schedule_" + random.nextInt(1000) + ".xlsx");
 			fichierExcel.setStatus("imported");
 			fichierExcel.setImportDate(LocalDateTime.now());
-			// Note: Using AdministrateurService.importExcelSchedule is defined in the interface,
-			// but here we use ExcelFileService.upload as our method.
 			fichierExcelService.upload(fichierExcel);
 			CustomLogger.logInfo("Uploaded Excel file: " + fichierExcel);
 
@@ -221,12 +282,9 @@ populateDatabase();
 			}
 
 		} catch (CustomException ce) {
-			// Clear exception handling: log the error and rethrow if necessary.
-			CustomLogger.logError("-=======================ERROR=======");
-			CustomLogger.logError("Error while populating database: \n " + ce.getMessage(), ce);
+			CustomLogger.logError("Error while populating database: " + ce.getMessage(), ce);
 		} catch (Exception e) {
 			CustomLogger.logError("Unexpected error while populating database", e);
 		}
 	}
-
 }

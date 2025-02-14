@@ -9,6 +9,7 @@ import java.util.List;
  * Handles schedule management, makeup sessions, and system-wide notifications.
  */
 public interface AdministrateurService {
+
     /**
      * Retrieves administrator details by ID.
      * @param id Administrator's unique identifier
@@ -49,7 +50,8 @@ public interface AdministrateurService {
      * @param id Makeup session proposal ID
      * @throws CustomException if rejection fails
      */
-    void rejectMakeupSession(Long id) throws CustomException;
+
+   void rejectMakeupSession(Long id) throws CustomException;
 
     /**
      * Sends notification to all system users.

@@ -206,6 +206,7 @@ this file is in markdown format
         - Adjust sessions and resolve conflicts.
         - Accept or reject proposals for catch-up sessions.
         - Send notifications to relevant users.
+        - manage teachers
     - **Cannot**:
         - Manage user accounts or access levels.
 - **Techniciens (Technicians)**:

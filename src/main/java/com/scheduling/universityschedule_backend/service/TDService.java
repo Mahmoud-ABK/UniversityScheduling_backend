@@ -31,4 +31,12 @@ public interface TDService {
      * @throws CustomException if retrieval fails
      */
     List<TPDTO> getTPs(Long tdId) throws CustomException;
+
+    /**
+     *
+     * @param td
+     * @return the created DTO
+     * @throws CustomException
+     */
+    TDDTO create(TDDTO td) throws CustomException;
 }
