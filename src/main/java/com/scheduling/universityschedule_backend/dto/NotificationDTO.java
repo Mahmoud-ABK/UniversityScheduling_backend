@@ -13,7 +13,7 @@ public class NotificationDTO {
     private String message;         // Content of the notification
     private LocalDateTime date;     // Date and time the notification was sent
     private String type;            // Type of notification (e.g., update, alert, reminder)
-    private Boolean read;           // Indicates if the notification has been read
+    private Boolean isread;           // Indicates if the notification has been read
 
     // ID of the recipient (Personne)
     private Long recepteurId;

@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "notifications")
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +23,7 @@ public class Notification {
     private String message;
     private LocalDateTime date;
     private String type;
-    private Boolean read;
+    private Boolean isread;
 
     @ManyToOne
     @JoinColumn(name = "recepteur_id")
@@ -35,6 +34,6 @@ public class Notification {
     private Personne expediteur;
 
     public boolean isRead() {
-        return read;
+        return isread;
     }
 }

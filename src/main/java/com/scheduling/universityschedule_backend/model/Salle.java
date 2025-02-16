@@ -19,7 +19,7 @@ public class Salle {
     private String type;
     private int capacite;
 
-    @OneToMany(mappedBy = "salle",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "salle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Seance> seances;
 
     @ElementCollection

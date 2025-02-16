@@ -1,0 +1,16 @@
+2025-02-16 21:29:15 [restartedMain] INFO  CustomLogger - =============================Populating Database====================
+2025-02-16 21:29:15 [restartedMain] INFO  CustomLogger - Administrateur count: 2
+2025-02-16 21:29:15 [restartedMain] INFO  CustomLogger - Enseignant count: 59
+2025-02-16 21:29:15 [restartedMain] INFO  CustomLogger - Technicien count: 2
+2025-02-16 21:29:15 [restartedMain] INFO  CustomLogger - Branche count: 3
+2025-02-16 21:29:15 [restartedMain] INFO  CustomLogger - Salle count: 5
+2025-02-16 21:29:15 [restartedMain] INFO  CustomLogger - TD count: 8
+2025-02-16 21:29:15 [restartedMain] INFO  CustomLogger - TP count: 4
+2025-02-16 21:29:15 [restartedMain] INFO  CustomLogger - Etudiant count: 177
+2025-02-16 21:29:16 [restartedMain] INFO  CustomLogger - Seance count: 177
+2025-02-16 21:29:16 [restartedMain] INFO  CustomLogger - Signal count: 19
+2025-02-16 21:29:16 [restartedMain] INFO  CustomLogger - PropositionDeRattrapage count: 19
+2025-02-16 21:29:16 [restartedMain] INFO  CustomLogger - Notification count: 29
+2025-02-16 21:29:16 [restartedMain] INFO  CustomLogger - FichierExcel count: 11
+2025-02-16 21:29:16 [restartedMain] INFO  CustomLogger - Database populated with random sample data based on sampleSize = 59
+2025-02-16 21:29:16 [restartedMain] INFO  CustomLogger - ========================Finished populating database===========

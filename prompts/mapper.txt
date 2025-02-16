@@ -117,11 +117,76 @@ public abstract class EntityMapper {
     public abstract Seance toSeance(SeanceDTO dto);
 
     // ------------------ SeanceConflict ------------------
-    public SeanceConflictDTO toSeanceConflictDTO(Seance seance1, Seance seance2, List<String> conflictTypes) throws CustomException {
-        if (seance1 == null || seance2 == null || conflictTypes == null) {
-            throw new CustomException("Conflict data is incomplete. Both sessions and conflict types are required.");
-        }
-        return new SeanceConflictDTO(seance1.getId(), seance2.getId(), conflictTypes);
+    // ------------------ Conflict Mappings ------------------
+
+    /**
+     * Maps a List<Object[]> from findConflictingSeancePairs to a List<SeanceConflictDTO>.
+     */
+    public List<SeanceConflictDTO> toSeanceConflictDTOList(List<Object[]> conflictPairs) {
+        return conflictPairs.stream()
+                .map(this::toSeanceConflictDTO)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Maps a single Object[] from findConflictingSeancePairs to a SeanceConflictDTO.
+     */
+    public SeanceConflictDTO toSeanceConflictDTO(Object[] conflictPair) {
+        Seance seance1 = (Seance) conflictPair[0];
+        Seance seance2 = (Seance) conflictPair[1];
+        String conflictTypes = (String) conflictPair[2];
+
+        return new SeanceConflictDTO(
+                seance1.getId(),
+                seance2.getId(),
+                List.of(conflictTypes.split("; "))
+        );
+    }
+
+    /**
+     * Maps a List<Object[]> from findConflictingByRooms to a List<SeanceRoomConflictDTO>.
+     */
+    public List<SeanceRoomConflictDTO> toSeanceRoomConflictDTOList(List<Object[]> roomConflicts) {
+        return roomConflicts.stream()
+                .map(this::toSeanceRoomConflictDTO)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Maps a single Object[] from findConflictingByRooms to a SeanceRoomConflictDTO.
+     */
+    public SeanceRoomConflictDTO toSeanceRoomConflictDTO(Object[] roomConflict) {
+        Seance seance1 = (Seance) roomConflict[0];
+        Seance seance2 = (Seance) roomConflict[1];
+        String conflictType = (String) roomConflict[2];
+
+        return new SeanceRoomConflictDTO(
+                seance1.getId(),
+                seance2.getId(),
+                conflictType
+        );
+    }
+
+    /**
+     * Maps a List<Object[]> from findRoomConflictsForSeance to a List<SingleSeanceConflictDTO>.
+     */
+    public List<SingleSeanceConflictDTO> toSingleSeanceConflictDTOList(List<Object[]> conflictsForSeance) {
+        return conflictsForSeance.stream()
+                .map(this::toSingleSeanceConflictDTO)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Maps a single Object[] from findRoomConflictsForSeance to a SingleSeanceConflictDTO.
+     */
+    public SingleSeanceConflictDTO toSingleSeanceConflictDTO(Object[] conflictForSeance) {
+        Seance seance = (Seance) conflictForSeance[0];
+        String conflictTypes = (String) conflictForSeance[1];
+
+        return new SingleSeanceConflictDTO(
+                seance.getId(),
+                List.of(conflictTypes.split("; "))
+        );
     }
 
     // ------------------ Signal ------------------

@@ -77,12 +77,12 @@ public abstract class EntityMapper {
     // ------------------ Notification ------------------
     @Mapping(target = "recepteurId", source = "recepteur.id")
     @Mapping(target = "expediteurId", source = "expediteur.id")
-    @Mapping(target = "read", source = "read")
+    @Mapping(target = "isread", source = "isread")
     public abstract NotificationDTO toNotificationDTO(Notification notification);
 
     @Mapping(target = "recepteur", source = "recepteurId", qualifiedByName = "idToPersonne")
     @Mapping(target = "expediteur", source = "expediteurId", qualifiedByName = "idToPersonne")
-    @Mapping(target = "read", source = "read")
+    @Mapping(target = "isread", source = "isread")
     public abstract Notification toNotification(NotificationDTO dto);
 
     // ------------------ PropositionDeRattrapage ------------------

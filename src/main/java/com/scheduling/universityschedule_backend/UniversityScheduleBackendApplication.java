@@ -25,10 +25,8 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 	public void run(String... args) {
 		try {
 			// Populate the database with sample data
-			databasePopulator.populateDatabase();
+			databasePopulator.populateDatabase(59);
 
-			// Test the EntityMapper methods
-			entityMapperTester.testEntityMapper();
 
 		} catch (CustomException e) {
 			CustomLogger.logError("Error during testing: " + e.getMessage());
