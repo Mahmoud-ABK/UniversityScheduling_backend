@@ -57,6 +57,8 @@ public class EnseignantDTO extends PersonneDTO {
 
     // List of PropositionDeRattrapage IDs representing proposed catch-up sessions
     private List<Long> propositionIds;
+
+    private List<Long> signalIds;
 }
 package com.scheduling.universityschedule_backend.dto;
 
@@ -186,26 +188,17 @@ package com.scheduling.universityschedule_backend.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
 
-/**
- * Data Transfer Object for Seance conflicts.
- * Represents conflicts between two SeanceDTO objects.
- */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class SeanceConflictDTO {
-    // ID of the first conflicting session
-    private Long seance1Id;
-
-    // ID of the second conflicting session
-    private Long seance2Id;
-
-    // List of conflict types between the two sessions
-    private List<String> conflictTypes;
-}
-package com.scheduling.universityschedule_backend.dto;
+    private Long seance1Id;          // ID of the first conflicting session
+    private Long seance2Id;          // ID of the second conflicting session
+    private List<String> conflictTypes; // List of conflict types
+}package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -245,6 +238,20 @@ public class SeanceDTO {
 }
 package com.scheduling.universityschedule_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class SeanceRoomConflictDTO {
+    private Long seance1Id;          // ID of the first conflicting session
+    private Long seance2Id;          // ID of the second conflicting session
+    private String conflictType;     // Type of conflict (e.g., "Room Conflict")
+}package com.scheduling.universityschedule_backend.dto;
+
+import com.scheduling.universityschedule_backend.model.Enseignant;
 import lombok.Data;
 import java.time.LocalDateTime;
 
@@ -258,8 +265,24 @@ public class SignalDTO {
     private String message;         // Details of the issue or suggestion
     private String severity;        // Importance level
     private LocalDateTime timestamp;// Date and time the signal was submitted
+
+    private String enseignantId;
 }
 package com.scheduling.universityschedule_backend.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class SingleSeanceConflictDTO {
+    private Long seanceId;          // ID of the session
+    private List<String> conflictTypes; // List of conflict types
+}package com.scheduling.universityschedule_backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -283,6 +306,8 @@ public class TDDTO {
 
     // List of TP IDs representing practical sessions
     private List<Long> tpIds;
+
+    private List<Long> seanceIds;
 }
 package com.scheduling.universityschedule_backend.dto;
 
@@ -321,4 +346,7 @@ public class TPDTO {
 
     // List of Etudiant IDs representing students enrolled in the practical session
     private List<Long> etudiantIds;
+    // List of Seances IDs representing Seances per TP
+    private List<Long> seanceIds;
+
 }

@@ -22,10 +22,10 @@ public class TD {
     @JoinColumn(name = "branche_id")
     private Branche branche;
 
-    @OneToMany(mappedBy = "td")
+    @OneToMany(mappedBy = "td",fetch = FetchType.EAGER)
     private List<TP> tpList;
 
     // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "tds")
+    @ManyToMany(mappedBy = "tds",fetch = FetchType.EAGER)
     private List<Seance> seances;
 }

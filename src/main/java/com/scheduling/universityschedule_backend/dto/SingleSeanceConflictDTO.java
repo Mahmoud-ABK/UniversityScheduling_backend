@@ -9,8 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeanceConflictDTO {
-    private Long seance1Id;          // ID of the first conflicting session
-    private Long seance2Id;          // ID of the second conflicting session
+public class SingleSeanceConflictDTO {
+    private Long seanceId;          // ID of the session
     private List<String> conflictTypes; // List of conflict types
 }

@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeanceConflictDTO {
+public class SeanceRoomConflictDTO {
     private Long seance1Id;          // ID of the first conflicting session
     private Long seance2Id;          // ID of the second conflicting session
-    private List<String> conflictTypes; // List of conflict types
+    private String conflictType;     // Type of conflict (e.g., "Room Conflict")
 }

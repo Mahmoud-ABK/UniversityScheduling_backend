@@ -111,5 +111,5 @@ public interface AdministrateurService {
      * @return List of room conflicts
      * @throws CustomException if retrieval fails
      */
-    List<SeanceConflictDTO> getRoomConflicts() throws CustomException;
+    List<SeanceRoomConflictDTO> getRoomConflicts() throws CustomException;
 }

@@ -21,4 +21,7 @@ public class TPDTO {
 
     // List of Etudiant IDs representing students enrolled in the practical session
     private List<Long> etudiantIds;
+    // List of Seances IDs representing Seances per TP
+    private List<Long> seanceIds;
+
 }

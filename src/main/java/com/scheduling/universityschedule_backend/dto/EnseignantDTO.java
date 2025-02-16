@@ -19,4 +19,6 @@ public class EnseignantDTO extends PersonneDTO {
 
     // List of PropositionDeRattrapage IDs representing proposed catch-up sessions
     private List<Long> propositionIds;
+
+    private List<Long> signalIds;
 }

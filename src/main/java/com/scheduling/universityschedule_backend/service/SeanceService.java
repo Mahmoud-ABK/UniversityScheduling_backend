@@ -65,12 +65,13 @@ public interface SeanceService {
      */
     List<SeanceConflictDTO> getAllConflicts() throws CustomException;
 
+
     /**
-     * Retrieves room-specific conflicts.
+     * Retrieves all room conflicts.
      * @return List of room conflicts
      * @throws CustomException if retrieval fails
      */
-    List<SeanceConflictDTO> getRoomConflicts() throws CustomException;
+    List<SeanceRoomConflictDTO> getRoomConflicts() throws CustomException;
 
     /**
      * Retrieves conflicts for a specific session.
@@ -78,5 +79,5 @@ public interface SeanceService {
      * @return List of conflicts for the given session
      * @throws CustomException if retrieval fails
      */
-    List<SeanceConflictDTO> getConflictsForSession(Long seanceId) throws CustomException;
+    List<SingleSeanceConflictDTO> getConflictsForSession(Long seanceId) throws CustomException;
 }

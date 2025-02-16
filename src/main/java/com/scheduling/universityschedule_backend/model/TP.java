@@ -25,6 +25,6 @@ public class TP {
     private List<Etudiant> etudiants;
 
     // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "tps")
+    @ManyToMany(mappedBy = "tps",fetch = FetchType.EAGER)
     private List<Seance> seances;
 }

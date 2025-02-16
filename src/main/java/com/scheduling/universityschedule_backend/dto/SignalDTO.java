@@ -1,5 +1,6 @@
 package com.scheduling.universityschedule_backend.dto;
 
+import com.scheduling.universityschedule_backend.model.Enseignant;
 import lombok.Data;
 import java.time.LocalDateTime;
 
@@ -13,4 +14,6 @@ public class SignalDTO {
     private String message;         // Details of the issue or suggestion
     private String severity;        // Importance level
     private LocalDateTime timestamp;// Date and time the signal was submitted
+
+    private String enseignantId;
 }

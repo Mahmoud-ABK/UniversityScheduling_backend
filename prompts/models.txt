@@ -66,6 +66,9 @@ public class Enseignant extends Personne {
 
     @OneToMany(mappedBy = "enseignant" ,fetch = FetchType.EAGER)
     private List<PropositionDeRattrapage> propositionsDeRattrapage;
+
+    @OneToMany(mappedBy = "enseignant" ,fetch = FetchType.EAGER)
+    private  List<Signal> signals;
 }
 package com.scheduling.universityschedule_backend.model;
 
@@ -322,11 +325,7 @@ public class Seance {
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -344,6 +343,9 @@ public class Signal {
     private String message;
     private String severity;
     private LocalDateTime timestamp;
+    @ManyToOne
+    @JoinColumn(name = "enseignant_id")
+    private Enseignant enseignant;
 }
 package com.scheduling.universityschedule_backend.model;
 
@@ -369,11 +371,11 @@ public class TD {
     @JoinColumn(name = "branche_id")
     private Branche branche;
 
-    @OneToMany(mappedBy = "td")
+    @OneToMany(mappedBy = "td",fetch = FetchType.EAGER)
     private List<TP> tpList;
 
     // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "tds")
+    @ManyToMany(mappedBy = "tds",fetch = FetchType.EAGER)
     private List<Seance> seances;
 }
 package com.scheduling.universityschedule_backend.model;
@@ -421,6 +423,6 @@ public class TP {
     private List<Etudiant> etudiants;
 
     // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "tps")
+    @ManyToMany(mappedBy = "tps",fetch = FetchType.EAGER)
     private List<Seance> seances;
 }

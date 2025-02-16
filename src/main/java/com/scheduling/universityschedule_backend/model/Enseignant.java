@@ -22,4 +22,7 @@ public class Enseignant extends Personne {
 
     @OneToMany(mappedBy = "enseignant" ,fetch = FetchType.EAGER)
     private List<PropositionDeRattrapage> propositionsDeRattrapage;
+
+    @OneToMany(mappedBy = "enseignant" ,fetch = FetchType.EAGER)
+    private  List<Signal> signals;
 }

@@ -22,4 +22,6 @@ public class TDDTO {
 
     // List of TP IDs representing practical sessions
     private List<Long> tpIds;
+
+    private List<Long> seanceIds;
 }
