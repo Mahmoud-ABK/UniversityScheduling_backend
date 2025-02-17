@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.util.List;
 
+@Entity
+@Table(name = "tds")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "tds")
+@ToString(exclude = {"tpList", "seances"})
 public class TD {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,14 +20,13 @@ public class TD {
     private int nb;
     private int nbTP;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branche_id")
     private Branche branche;
 
-    @OneToMany(mappedBy = "td",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "td", fetch = FetchType.LAZY)
     private List<TP> tpList;
 
-    // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "tds",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tds", fetch = FetchType.LAZY)
     private List<Seance> seances;
 }

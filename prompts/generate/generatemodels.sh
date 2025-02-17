@@ -1,0 +1,497 @@
+#!/bin/bash
+
+# Set the base directory where your models should be generated.
+# Change this variable as needed.
+srcprj="$srcprj/model"
+
+# Create the directory if it doesn't exist
+mkdir -p "$srcprj"
+
+echo "Generating Administrateur.java..."
+cat > "$srcprj/Administrateur.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "administrateurs")
+@ToString(callSuper = true)
+public class Administrateur extends Personne {
+    private String codeAdmin;
+}
+EOF
+
+echo "Generating Branche.java..."
+cat > "$srcprj/Branche.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.util.List;
+
+@Entity
+@Table(name = "branches")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@NamedEntityGraph(
+    name = "Branche.withSeances",
+    attributeNodes = @NamedAttributeNode("seances")
+)
+@ToString(exclude = {"seances"})
+public class Branche {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String niveau;
+    private String specialite;
+    private int nbTD;
+    private String departement;
+
+    @ManyToMany(mappedBy = "branches", fetch = FetchType.LAZY)
+    private List<Seance> seances;
+}
+EOF
+
+echo "Generating Enseignant.java..."
+cat > "$srcprj/Enseignant.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.util.List;
+
+@Entity
+@Table(name = "enseignants")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"seances", "propositionsDeRattrapage", "signals"})
+public class Enseignant extends Personne {
+    private String codeEnseignant;
+    private int heures;
+
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    private List<Seance> seances;
+
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    private List<PropositionDeRattrapage> propositionsDeRattrapage;
+
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    private List<Signal> signals;
+}
+EOF
+
+echo "Generating Etudiant.java..."
+cat > "$srcprj/Etudiant.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Entity
+@Table(name = "etudiants")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"branche", "tp"})
+public class Etudiant extends Personne {
+    private String matricule;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branche_id")
+    private Branche branche;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="tp_id")
+    private TP tp;
+}
+EOF
+
+echo "Generating FichierExcel.java..."
+cat > "$srcprj/FichierExcel.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+@Table(name = "fichiers_excel")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class FichierExcel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String fileName;
+    private String status;
+
+    @ElementCollection
+    private List<String> errors;
+
+    private LocalDateTime importDate;
+}
+EOF
+
+echo "Generating Notification.java..."
+cat > "$srcprj/Notification.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "notifications")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"recepteur", "expediteur"})
+public class Notification {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String message;
+    private LocalDateTime date;
+    private String type;
+    private Boolean isread;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recepteur_id")
+    private Personne recepteur;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "expediteur_id")
+    private Personne expediteur;
+
+    public boolean isRead() {
+        return isread;
+    }
+}
+EOF
+
+echo "Generating Personne.java..."
+cat > "$srcprj/Personne.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class Personne {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String cin;
+    private String nom;
+    private String prenom;
+    private String email;
+    private String tel;
+    private String adresse;
+}
+EOF
+
+echo "Generating PropositionDeRattrapage.java..."
+cat > "$srcprj/PropositionDeRattrapage.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "propositions_de_rattrapage")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"enseignant"})
+public class PropositionDeRattrapage {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private LocalDateTime date;
+    private String reason;
+    private String status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "enseignant_id")
+    private Enseignant enseignant;
+}
+EOF
+
+echo "Generating Salle.java..."
+cat > "$srcprj/Salle.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.util.List;
+
+@Entity
+@Table(name = "salles")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@NamedEntityGraph(
+    name = "Salle.withSeances",
+    attributeNodes = @NamedAttributeNode("seances")
+)
+@ToString(exclude = {"seances"})
+public class Salle {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String identifiant;
+    private String type;
+    private int capacite;
+
+    @OneToMany(mappedBy = "salle", fetch = FetchType.LAZY)
+    private List<Seance> seances;
+
+    @ElementCollection
+    private List<String> disponibilite;
+
+    @Override
+    public String toString() {
+        return "Salle{id=" + id +
+                ", identifiant='" + identifiant + '\'' +
+                ", type='" + type + '\'' +
+                ", capacite=" + capacite +
+                ", seancesCount=" + (seances != null ? seances.size() : "N/A") +
+                ", disponibilite=" + disponibilite +
+                '}';
+    }
+}
+EOF
+
+echo "Generating Seance.java..."
+cat > "$srcprj/Seance.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.util.List;
+
+@Entity
+@Table(name = "seances")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"branches", "tds", "tps", "salle", "enseignant"})
+public class Seance {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String jour;
+    private String heureDebut;
+    private String heureFin;
+    private String type;
+    private String matiere;
+
+    @Nullable
+    private String frequence;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "salle_id")
+    private Salle salle;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "enseignant_id")
+    private Enseignant enseignant;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "seance_branche",
+        joinColumns = @JoinColumn(name = "seance_id"),
+        inverseJoinColumns = @JoinColumn(name = "branche_id")
+    )
+    private List<Branche> branches;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "seance_td",
+        joinColumns = @JoinColumn(name = "seance_id"),
+        inverseJoinColumns = @JoinColumn(name = "td_id")
+    )
+    private List<TD> tds;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "seance_tp",
+        joinColumns = @JoinColumn(name = "seance_id"),
+        inverseJoinColumns = @JoinColumn(name = "tp_id")
+    )
+    private List<TP> tps;
+
+    @Override
+    public String toString() {
+        return "Seance{id=" + id +
+                ", jour='" + jour + '\'' +
+                ", heureDebut='" + heureDebut + '\'' +
+                ", heureFin='" + heureFin + '\'' +
+                ", type='" + type + '\'' +
+                ", matiere='" + matiere + '\'' +
+                ", frequence='" + frequence + '\'' +
+                ", salleId=" + (salle != null ? salle.getId() : "N/A") +
+                ", enseignantId=" + (enseignant != null ? enseignant.getId() : "N/A") +
+                ", branchesCount=" + (branches != null ? branches.size() : "N/A") +
+                ", tdsCount=" + (tds != null ? tds.size() : "N/A") +
+                ", tpsCount=" + (tps != null ? tps.size() : "N/A") +
+                '}';
+    }
+}
+EOF
+
+echo "Generating Signal.java..."
+cat > "$srcprj/Signal.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "signals")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"enseignant"})
+public class Signal {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String message;
+    private String severity;
+    private LocalDateTime timestamp;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "enseignant_id")
+    private Enseignant enseignant;
+}
+EOF
+
+echo "Generating TD.java..."
+cat > "$srcprj/TD.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.util.List;
+
+@Entity
+@Table(name = "tds")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"tpList", "seances"})
+public class TD {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private int nb;
+    private int nbTP;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branche_id")
+    private Branche branche;
+
+    @OneToMany(mappedBy = "td", fetch = FetchType.LAZY)
+    private List<TP> tpList;
+
+    @ManyToMany(mappedBy = "tds", fetch = FetchType.LAZY)
+    private List<Seance> seances;
+}
+EOF
+
+echo "Generating TP.java..."
+cat > "$srcprj/TP.java" << 'EOF'
+package com.scheduling.universityschedule_backend.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.util.List;
+
+@Entity
+@Table(name = "tps")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"etudiants", "seances"})
+public class TP {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private int nb;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "td_id")
+    private TD td;
+
+    @OneToMany(mappedBy = "tp", fetch = FetchType.LAZY)
+    private List<Etudiant> etudiants;
+
+    @ManyToMany(mappedBy = "tps", fetch = FetchType.LAZY)
+    private List<Seance> seances;
+}
+EOF
+
+echo "Model files have been generated in: $srcprj"

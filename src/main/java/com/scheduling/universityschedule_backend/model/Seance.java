@@ -5,13 +5,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.util.List;
 
+@Entity
+@Table(name = "seances")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "seances")
+@ToString(exclude = {"branches", "tds", "tps", "salle", "enseignant"})
 public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,51 +22,58 @@ public class Seance {
     private String jour;
     private String heureDebut;
     private String heureFin;
-    private String type; // possible values CR-CI-TD-TP
+    private String type;
     private String matiere;
 
     @Nullable
     private String frequence;
-    // Possible values:
-    //  - Empty string for weekly sessions (in which case each list below must have exactly one element)
-    //  - "1/15" for biweekly sessions (lists can have more than one element to assign different groups)
-    //  - A specific session date for catchup sessions
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "salle_id")
     private Salle salle;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
 
-    // Use a many-to-many relationship for groups, with business logic to enforce
-    // one single association for weekly sessions and multiple for biweekly sessions.
-
-    // For Branch: normally one branch; multiple allowed if biweekly.
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "seance_branche",
-            joinColumns = @JoinColumn(name = "seance_id"),
-            inverseJoinColumns = @JoinColumn(name = "branche_id")
+        name = "seance_branche",
+        joinColumns = @JoinColumn(name = "seance_id"),
+        inverseJoinColumns = @JoinColumn(name = "branche_id")
     )
     private List<Branche> branches;
 
-    // For TD: normally one TD; multiple allowed if biweekly.
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "seance_td",
-            joinColumns = @JoinColumn(name = "seance_id"),
-            inverseJoinColumns = @JoinColumn(name = "td_id")
+        name = "seance_td",
+        joinColumns = @JoinColumn(name = "seance_id"),
+        inverseJoinColumns = @JoinColumn(name = "td_id")
     )
     private List<TD> tds;
 
-    // For TP: normally one TP; multiple allowed if biweekly.
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "seance_tp",
-            joinColumns = @JoinColumn(name = "seance_id"),
-            inverseJoinColumns = @JoinColumn(name = "tp_id")
+        name = "seance_tp",
+        joinColumns = @JoinColumn(name = "seance_id"),
+        inverseJoinColumns = @JoinColumn(name = "tp_id")
     )
     private List<TP> tps;
+
+    @Override
+    public String toString() {
+        return "Seance{id=" + id +
+                ", jour='" + jour + '\'' +
+                ", heureDebut='" + heureDebut + '\'' +
+                ", heureFin='" + heureFin + '\'' +
+                ", type='" + type + '\'' +
+                ", matiere='" + matiere + '\'' +
+                ", frequence='" + frequence + '\'' +
+                ", salleId=" + (salle != null ? salle.getId() : "N/A") +
+                ", enseignantId=" + (enseignant != null ? enseignant.getId() : "N/A") +
+                ", branchesCount=" + (branches != null ? branches.size() : "N/A") +
+                ", tdsCount=" + (tds != null ? tds.size() : "N/A") +
+                ", tpsCount=" + (tps != null ? tps.size() : "N/A") +
+                '}';
+    }
 }

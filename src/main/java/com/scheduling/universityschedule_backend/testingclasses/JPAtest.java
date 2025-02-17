@@ -5,8 +5,8 @@ import com.scheduling.universityschedule_backend.model.*;
 import com.scheduling.universityschedule_backend.repository.*;
 import com.scheduling.universityschedule_backend.util.CustomLogger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-public class DatabasePopulator {
+public class JPAtest {
     private static final List<String> NOMS = Arrays.asList(
             "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller",
             "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White"
@@ -46,7 +46,6 @@ public class DatabasePopulator {
 
     /**
      * Populates the database with random data. The sampleSize parameter determines the data density:
-     *
      * - Administrateur: sampleSize mod 3
      * - Enseignant: sampleSize
      * - Technicien: sampleSize mod 3
@@ -392,4 +391,162 @@ public class DatabasePopulator {
 
         return specialties.get(RANDOM.nextInt(specialties.size()));
     }
+
+
+    /**
+     * Tests retrieving a handful of records from different repositories.
+     */
+    @Transactional
+    public void testRetrieveEntities() {
+        CustomLogger.logInfo("=============================Retrieving Sample Data====================");
+
+        List<Enseignant> enseignants = enseignantRepository.findAll().stream().limit(5).toList();
+        List<Etudiant> etudiants = etudiantRepository.findAll().stream().limit(5).toList();
+        List<Seance> seances = seanceRepository.findAll().stream().limit(5).toList();
+
+        CustomLogger.logInfo("Retrieved " + enseignants.size() + " enseignants.");
+        CustomLogger.logInfo("Retrieved " + etudiants.size() + " etudiants.");
+        CustomLogger.logInfo("Retrieved " + seances.size() + " seances.");
+    }
+
+    /**
+     * Tests retrieving and modifying a sample of records.
+     */
+    @Transactional
+    public void testRetrieveAndModify() {
+        CustomLogger.logInfo("=============================Modifying Sample Data====================");
+
+        enseignantRepository.findAll().stream().limit(3).forEach(enseignant -> {
+            enseignant.setHeures(enseignant.getHeures() + 5);
+            enseignantRepository.save(enseignant);
+            CustomLogger.logInfo("Updated hours for enseignant: " + enseignant.getEmail());
+        });
+
+        etudiantRepository.findAll().stream().limit(3).forEach(etudiant -> {
+            etudiant.setAdresse("Updated Address");
+            etudiantRepository.save(etudiant);
+            CustomLogger.logInfo("Updated address for etudiant: " + etudiant.getEmail());
+        });
+    }
+
+    /**
+     * Tests retrieving and deleting a sample of records.
+     */
+    @Transactional
+    public void testRetrieveAndDelete() {
+        CustomLogger.logInfo("=============================Deleting Sample Data====================");
+
+        List<Notification> notifications = notificationRepository.findAll().stream().limit(2).toList();
+        notificationRepository.deleteAll(notifications);
+        CustomLogger.logInfo("Deleted " + notifications.size() + " notifications.");
+
+        List<Signal> signals = signalRepository.findAll().stream().limit(2).toList();
+        signalRepository.deleteAll(signals);
+        CustomLogger.logInfo("Deleted " + signals.size() + " signals.");
+    }
+    /**
+     * Tests list fetching for all entities with list associations.
+     * For each entity type, this method retrieves one sample (if available)
+     * and logs the sizes and/or content of their associated lists.
+     */
+    @Transactional
+    public void testListFetch() {
+        CustomLogger.logInfo("================== Testing List Fetching for All Entities ==================");
+
+        // 1. Test Enseignant: lists of Seances, Propositions, and Signals
+        List<Enseignant> enseignants = enseignantRepository.findAll();
+        if (!enseignants.isEmpty()) {
+            Enseignant ens = enseignants.getFirst();
+            int seancesCount = (ens.getSeances() != null) ? ens.getSeances().size() : 0;
+            int propCount = (ens.getPropositionsDeRattrapage() != null) ? ens.getPropositionsDeRattrapage().size() : 0;
+            int signalsCount = (ens.getSignals() != null) ? ens.getSignals().size() : 0;
+            CustomLogger.logInfo("Enseignant: " + ens);
+            CustomLogger.logInfo("  Seances count: " + seancesCount);
+            CustomLogger.logInfo("  Propositions count: " + propCount);
+            CustomLogger.logInfo("  Signals count: " + signalsCount);
+        } else {
+            CustomLogger.logInfo("No Enseignants available for list fetching.");
+        }
+
+        // 2. Test Branche: list of Seances (inverse side)
+        List<Branche> branches = brancheRepository.findAll();
+        if (!branches.isEmpty()) {
+            Branche branche = branches.getFirst();
+            int seancesCount = (branche.getSeances() != null) ? branche.getSeances().size() : 0;
+            CustomLogger.logInfo("Branche: " + branche);
+            CustomLogger.logInfo("  Seances count: " + seancesCount);
+        } else {
+            CustomLogger.logInfo("No Branches available for list fetching.");
+        }
+
+        // 3. Test Seance: lists of Branches, TDs, and TPs
+        List<Seance> seances = seanceRepository.findAll();
+        if (!seances.isEmpty()) {
+            Seance seance = seances.getFirst();
+            int branchCount = (seance.getBranches() != null) ? seance.getBranches().size() : 0;
+            int tdCount = (seance.getTds() != null) ? seance.getTds().size() : 0;
+            int tpCount = (seance.getTps() != null) ? seance.getTps().size() : 0;
+            CustomLogger.logInfo("Seance: " + seance);
+            CustomLogger.logInfo("  Branches count: " + branchCount);
+            CustomLogger.logInfo("  TDs count: " + tdCount);
+            CustomLogger.logInfo("  TPs count: " + tpCount);
+        } else {
+            CustomLogger.logInfo("No Seances available for list fetching.");
+        }
+
+        // 4. Test Salle: list of Seances (inverse side) and disponibilite list
+        List<Salle> salles = salleRepository.findAll();
+        if (!salles.isEmpty()) {
+            Salle salle = salles.getFirst();
+            int seancesCount = (salle.getSeances() != null) ? salle.getSeances().size() : 0;
+            List<String> dispo = salle.getDisponibilite();
+            CustomLogger.logInfo("Salle: " + salle);
+            CustomLogger.logInfo("  Seances count: " + seancesCount);
+            CustomLogger.logInfo("  Disponibilite: " + (dispo != null ? dispo : "None"));
+        } else {
+            CustomLogger.logInfo("No Salles available for list fetching.");
+        }
+
+        // 5. Test TD: list of TP (tpList) and list of Seances (inverse side)
+        List<TD> tds = tdRepository.findAll();
+        if (!tds.isEmpty()) {
+            TD td = tds.getFirst();
+            int tpListCount = (td.getTpList() != null) ? td.getTpList().size() : 0;
+            int seancesCount = (td.getSeances() != null) ? td.getSeances().size() : 0;
+            CustomLogger.logInfo("TD: " + td);
+            CustomLogger.logInfo("  TP list count: " + tpListCount);
+            CustomLogger.logInfo("  Seances count: " + seancesCount);
+        } else {
+            CustomLogger.logInfo("No TDs available for list fetching.");
+        }
+
+        // 6. Test TP: list of Etudiants and list of Seances (inverse side)
+        List<TP> tps = tpRepository.findAll();
+        if (!tps.isEmpty()) {
+            TP tp = tps.getFirst();
+            // Ensure to check if etudiants and seances lists are not null
+            int etudiantsCount = (tp.getEtudiants() != null) ? tp.getEtudiants().size() : 0;
+            int seancesCount = (tp.getSeances() != null) ? tp.getSeances().size() : 0;
+            CustomLogger.logInfo("TP: " + tp);
+            CustomLogger.logInfo("  Etudiants count: " + etudiantsCount);
+            CustomLogger.logInfo("  Seances count: " + seancesCount);
+        } else {
+            CustomLogger.logInfo("No TPs available for list fetching.");
+        }
+
+        // 7. Test FichierExcel: list of errors
+        List<FichierExcel> fichiers = fichierExcelRepository.findAll();
+        if (!fichiers.isEmpty()) {
+            FichierExcel fichier = fichiers.getFirst();
+            List<String> errors = fichier.getErrors();
+            CustomLogger.logInfo("FichierExcel: " + fichier);
+            CustomLogger.logInfo("  Errors: " + (errors != null ? errors : "None"));
+        } else {
+            CustomLogger.logInfo("No FichierExcel records available for list fetching.");
+        }
+
+        CustomLogger.logInfo("================== Finished List Fetching Test ==================");
+    }
+
+
 }

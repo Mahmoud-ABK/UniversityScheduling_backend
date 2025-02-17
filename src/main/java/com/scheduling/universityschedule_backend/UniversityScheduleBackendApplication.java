@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class UniversityScheduleBackendApplication implements CommandLineRunner {
 
 	@Autowired
-	private DatabasePopulator databasePopulator;
+	private JPAtest jpatester;
 
 	@Autowired
 	private EntityMapperTester entityMapperTester;
@@ -25,11 +25,13 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 	public void run(String... args) {
 		try {
 			// Populate the database with sample data
-			databasePopulator.populateDatabase(59);
+			jpatester.testRetrieveAndDelete();
 
 
-		} catch (CustomException e) {
+
+		} catch (Exception e) {
 			CustomLogger.logError("Error during testing: " + e.getMessage());
+			CustomLogger.logError("==================== FINISHED WITH ERROR ======================");
 		}
 	}
 }

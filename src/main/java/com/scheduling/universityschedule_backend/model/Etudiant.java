@@ -1,31 +1,27 @@
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import java.util.List;
+import lombok.ToString;
 
-@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "etudiants")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "etudiants")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"branche", "tp"})
 public class Etudiant extends Personne {
     private String matricule;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branche_id")
     private Branche branche;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="tp_id")
     private TP tp;
 }

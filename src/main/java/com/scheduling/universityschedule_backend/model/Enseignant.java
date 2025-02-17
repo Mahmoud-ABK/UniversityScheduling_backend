@@ -5,24 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "enseignants")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "enseignants")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"seances", "propositionsDeRattrapage", "signals"})
 public class Enseignant extends Personne {
     private String codeEnseignant;
     private int heures;
 
-    @OneToMany(mappedBy = "enseignant",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
     private List<Seance> seances;
 
-    @OneToMany(mappedBy = "enseignant" ,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
     private List<PropositionDeRattrapage> propositionsDeRattrapage;
 
-    @OneToMany(mappedBy = "enseignant" ,fetch = FetchType.EAGER)
-    private  List<Signal> signals;
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    private List<Signal> signals;
 }

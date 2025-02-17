@@ -4,27 +4,28 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.util.List;
 
+@Entity
+@Table(name = "tps")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "tps")
+@ToString(exclude = {"etudiants", "seances"})
 public class TP {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int nb;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "td_id")
     private TD td;
 
-    @OneToMany(mappedBy = "tp",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tp", fetch = FetchType.LAZY)
     private List<Etudiant> etudiants;
 
-    // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "tps",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tps", fetch = FetchType.LAZY)
     private List<Seance> seances;
 }

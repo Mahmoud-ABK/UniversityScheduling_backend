@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED) // Creates a separate table for each subclass
+@ToString
 public class Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
