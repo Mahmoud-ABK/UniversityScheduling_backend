@@ -152,7 +152,12 @@ public interface BrancheService {
      */
     List<SeanceDTO> getSchedule(Long branchId) throws CustomException;
 
-
+    /**
+     * @param id id of the branche
+     * @return List of all students enrolled in this branch
+     * @throws CustomException if failed
+     */
+    List<EtudiantDTO> getEtudiants(Long id) throws CustomException;
 }
 package com.scheduling.universityschedule_backend.service;
 
@@ -647,6 +652,10 @@ public interface SalleService {
      * @throws CustomException if search fails
      */
     List<SalleDTO> getAvailableRooms(String date, String day,String startTime, String endTime) throws CustomException;
+
+
+
+
 }
 package com.scheduling.universityschedule_backend.service;
 
@@ -730,6 +739,8 @@ public interface SeanceService {
      * @throws CustomException if retrieval fails
      */
     List<SingleSeanceConflictDTO> getConflictsForSession(Long seanceId) throws CustomException;
+
+
 }
 package com.scheduling.universityschedule_backend.service;
 
@@ -804,6 +815,13 @@ public interface TDService {
      * @throws CustomException if generation fails
      */
     void generateSchedule(Long id) throws CustomException;
+
+    /**
+     * @param id id of the td
+     * @return List of all students enrolled in this TD
+     * @throws CustomException if failed
+     */
+    List<EtudiantDTO> getEtudiants(Long id) throws CustomException;
 
 }
 package com.scheduling.universityschedule_backend.service;
@@ -880,5 +898,13 @@ public interface TPService {
      * @throws CustomException if generation fails
      */
     void generateSchedule(Long id) throws CustomException;
+
+    /**
+     * @param id id of the tp
+     * @return List of all students enrolled in this TP
+     * @throws CustomException if failed
+     */
+    List<EtudiantDTO> getEtudiants(Long id) throws CustomException;
+
 
 }
