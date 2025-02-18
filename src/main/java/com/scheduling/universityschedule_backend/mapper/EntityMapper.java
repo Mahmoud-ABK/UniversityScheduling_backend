@@ -373,32 +373,70 @@ public abstract class EntityMapper {
         }
         return etudiants;
     }
-    // ------------------ Update Methods ------------------
-    // These methods update an existing entity with data from its DTO
+    // ------------------ Update From DTO Methods ------------------
 
-    public abstract void updateAdministrateurFromDTO(AdministrateurDTO dto, @MappingTarget Administrateur entity);
+    // ------------------ Administrateur ------------------
+    @Mapping(target = "codeAdmin", source = "codeAdmin")
+    public abstract void updateFromDto(AdministrateurDTO dto, @MappingTarget Administrateur admin);
 
-    public abstract void updateEnseignantFromDTO(EnseignantDTO dto, @MappingTarget Enseignant entity);
+    // ------------------ Enseignant ------------------
+    @Mapping(target = "seanceIds", source = "seances", qualifiedByName = "mapSeancesToIds")
+    @Mapping(target = "propositionIds", source = "propositionsDeRattrapage", qualifiedByName = "mapPropositionsToIds")
+    @Mapping(target = "signalIds", source = "signals", qualifiedByName = "mapSignalsToIds")
+    public abstract void updateFromDto(EnseignantDTO dto, @MappingTarget Enseignant enseignant);
 
-    public abstract void updateEtudiantFromDTO(EtudiantDTO dto, @MappingTarget Etudiant entity);
+    // ------------------ Etudiant ------------------
+    @Mapping(target = "brancheId", source = "branche.id")
+    @Mapping(target = "tpId", source = "tp.id")
+    public abstract void updateFromDto(EtudiantDTO dto, @MappingTarget Etudiant etudiant);
 
-    public abstract void updateBrancheFromDTO(BrancheDTO dto, @MappingTarget Branche entity);
+    // ------------------ Branche ------------------
+    @Mapping(target = "seanceIds", source = "seances", qualifiedByName = "mapSeancesToIds")
+    public abstract void updateFromDto(BrancheDTO dto, @MappingTarget Branche branche);
 
-    public abstract void updateFichierExcelFromDTO(FichierExcelDTO dto, @MappingTarget FichierExcel entity);
+    // ------------------ FichierExcel ------------------
+    public abstract void updateFromDto(FichierExcelDTO dto, @MappingTarget FichierExcel fichier);
 
-    public abstract void updateNotificationFromDTO(NotificationDTO dto, @MappingTarget Notification entity);
+    // ------------------ Notification ------------------
+    @Mapping(target = "recepteurId", source = "recepteur.id")
+    @Mapping(target = "expediteurId", source = "expediteur.id")
+    @Mapping(target = "isread", source = "isread")
+    public abstract void updateFromDto(NotificationDTO dto, @MappingTarget Notification notification);
 
-    public abstract void updatePropositionDeRattrapageFromDTO(PropositionDeRattrapageDTO dto, @MappingTarget PropositionDeRattrapage entity);
+    // ------------------ PropositionDeRattrapage ------------------
+    @Mapping(target = "enseignantId", source = "enseignant.id")
+    public abstract void updateFromDto(PropositionDeRattrapageDTO dto, @MappingTarget PropositionDeRattrapage proposition);
 
-    public abstract void updateSalleFromDTO(SalleDTO dto, @MappingTarget Salle entity);
+    // ------------------ Salle ------------------
+    @Mapping(target = "seanceIds", source = "seances", qualifiedByName = "mapSeancesToIds")
+    public abstract void updateFromDto(SalleDTO dto, @MappingTarget Salle salle);
 
-    public abstract void updateSeanceFromDTO(SeanceDTO dto, @MappingTarget Seance entity);
+    // ------------------ Seance ------------------
+    @Mapping(target = "salleId", source = "salle.id")
+    @Mapping(target = "enseignantId", source = "enseignant.id")
+    @Mapping(target = "brancheIds", source = "branches", qualifiedByName = "mapBrancheListToIds")
+    @Mapping(target = "tdIds", source = "tds", qualifiedByName = "mapTDListToIds")
+    @Mapping(target = "tpIds", source = "tps", qualifiedByName = "mapTPListToIds")
+    @Mapping(target = "frequence", source = "frequence")
+    public abstract void updateFromDto(SeanceDTO dto, @MappingTarget Seance seance);
 
-    public abstract void updateSignalFromDTO(SignalDTO dto, @MappingTarget Signal entity);
+    // ------------------ Signal ------------------
+    @Mapping(target = "enseignantId", source = "enseignant.id")
+    public abstract void updateFromDto(SignalDTO dto, @MappingTarget Signal signal);
 
-    public abstract void updateTDDTOFromDTO(TDDTO dto, @MappingTarget TD entity);
+    // ------------------ TD ------------------
+    @Mapping(target = "brancheId", source = "branche.id")
+    @Mapping(target = "tpIds", source = "tpList", qualifiedByName = "mapTPListToIds")
+    @Mapping(target = "seanceIds", source = "seances", qualifiedByName = "mapSeancesToIds")
+    public abstract void updateFromDto(TDDTO dto, @MappingTarget TD td);
 
-    public abstract void updateTechnicienFromDTO(TechnicienDTO dto, @MappingTarget Technicien entity);
+    // ------------------ Technicien ------------------
+    @Mapping(target = "codeTechnicien", source = "codeTechnicien")
+    public abstract void updateFromDto(TechnicienDTO dto, @MappingTarget Technicien technicien);
 
-    public abstract void updateTPFromDTO(TPDTO dto, @MappingTarget TP entity);
+    // ------------------ TP ------------------
+    @Mapping(target = "tdId", source = "td.id")
+    @Mapping(target = "etudiantIds", source = "etudiants", qualifiedByName = "mapEtudiantsToIds")
+    @Mapping(target = "seanceIds", source = "seances", qualifiedByName = "mapSeancesToIds")
+    public abstract void updateFromDto(TPDTO dto, @MappingTarget TP tp);
 }

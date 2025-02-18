@@ -16,6 +16,6 @@ fi
 for x in "$@"; do
   # Execute the cat command to overwrite the content for each parameter
   # shellcheck disable=SC2154
-  cat $srcprj/$x/*  > $ing1/projet-web-mobile/UniversitySchedule_backend/prompts/$x.txt
+  cat $srcprj/$x/*  > $ing1/projet-web-mobile/UniversitySchedule_backend/prompts/forChat/$x.txt
   echo "Content from $x/* has been written to propmts/forChat/$x.txt"
 done
