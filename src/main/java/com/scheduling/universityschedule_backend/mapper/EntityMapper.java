@@ -373,4 +373,32 @@ public abstract class EntityMapper {
         }
         return etudiants;
     }
+    // ------------------ Update Methods ------------------
+    // These methods update an existing entity with data from its DTO
+
+    public abstract void updateAdministrateurFromDTO(AdministrateurDTO dto, @MappingTarget Administrateur entity);
+
+    public abstract void updateEnseignantFromDTO(EnseignantDTO dto, @MappingTarget Enseignant entity);
+
+    public abstract void updateEtudiantFromDTO(EtudiantDTO dto, @MappingTarget Etudiant entity);
+
+    public abstract void updateBrancheFromDTO(BrancheDTO dto, @MappingTarget Branche entity);
+
+    public abstract void updateFichierExcelFromDTO(FichierExcelDTO dto, @MappingTarget FichierExcel entity);
+
+    public abstract void updateNotificationFromDTO(NotificationDTO dto, @MappingTarget Notification entity);
+
+    public abstract void updatePropositionDeRattrapageFromDTO(PropositionDeRattrapageDTO dto, @MappingTarget PropositionDeRattrapage entity);
+
+    public abstract void updateSalleFromDTO(SalleDTO dto, @MappingTarget Salle entity);
+
+    public abstract void updateSeanceFromDTO(SeanceDTO dto, @MappingTarget Seance entity);
+
+    public abstract void updateSignalFromDTO(SignalDTO dto, @MappingTarget Signal entity);
+
+    public abstract void updateTDDTOFromDTO(TDDTO dto, @MappingTarget TD entity);
+
+    public abstract void updateTechnicienFromDTO(TechnicienDTO dto, @MappingTarget Technicien entity);
+
+    public abstract void updateTPFromDTO(TPDTO dto, @MappingTarget TP entity);
 }
