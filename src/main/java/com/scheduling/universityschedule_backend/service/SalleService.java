@@ -68,4 +68,8 @@ public interface SalleService {
      * @throws CustomException if search fails
      */
     List<SalleDTO> getAvailableRooms(String date, String day,String startTime, String endTime) throws CustomException;
+
+
+
+
 }

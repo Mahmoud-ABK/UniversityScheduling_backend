@@ -80,4 +80,6 @@ public interface SeanceService {
      * @throws CustomException if retrieval fails
      */
     List<SingleSeanceConflictDTO> getConflictsForSession(Long seanceId) throws CustomException;
+
+
 }

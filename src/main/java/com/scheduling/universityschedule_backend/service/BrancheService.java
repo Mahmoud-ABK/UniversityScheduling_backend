@@ -67,5 +67,10 @@ public interface BrancheService {
      */
     List<SeanceDTO> getSchedule(Long branchId) throws CustomException;
 
-
+    /**
+     * @param id id of the branche
+     * @return List of all students enrolled in this branch
+     * @throws CustomException if failed
+     */
+    List<EtudiantDTO> getEtudiants(Long id) throws CustomException;
 }

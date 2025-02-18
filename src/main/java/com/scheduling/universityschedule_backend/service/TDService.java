@@ -72,4 +72,11 @@ public interface TDService {
      */
     void generateSchedule(Long id) throws CustomException;
 
+    /**
+     * @param id id of the td
+     * @return List of all students enrolled in this TD
+     * @throws CustomException if failed
+     */
+    List<EtudiantDTO> getEtudiants(Long id) throws CustomException;
+
 }
