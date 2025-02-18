@@ -245,6 +245,9 @@ public interface TDRepository extends JpaRepository<TD, Long> {
 
     @Query("SELECT e FROM Etudiant e WHERE e.tp.td.id = :tdId")
     List<Etudiant> findAllEtudiantsByTdId(@Param("tdId") Long tdId);
+
+      @Query("SELECT td FROM TD td WHERE td.branche.id = :brancheId")
+        List<TD> getAllTDbyBrancheId(@Param("brancheId") Long brancheId);
 }
 }
 package com.scheduling.universityschedule_backend.repository;
