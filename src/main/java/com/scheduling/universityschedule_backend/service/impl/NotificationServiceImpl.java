@@ -80,8 +80,8 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void broadcastNotification(NotificationDTO notificationDTO) throws CustomException {
-        notificationDTO.setRecepteurId(null); // Broadcast to all users
-        create(notificationDTO);
+        // Implement logic to send notification to all users (Teachers + Students not admins and Technicians)
+        throw new UnsupportedOperationException("Method not implemented yet");
     }
 
     @Override
