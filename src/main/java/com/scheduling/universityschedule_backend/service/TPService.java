@@ -65,4 +65,12 @@ public interface TPService {
      * @throws CustomException if retrieval fails
      */
     List<EtudiantDTO> getStudents(Long tpId) throws CustomException;
+
+    /**
+     * id is TP id
+     * generarte the schedule for that TP ( including its TD and Branch sessions
+     * @throws CustomException if generation fails
+     */
+    void generateSchedule(Long id) throws CustomException;
+
 }

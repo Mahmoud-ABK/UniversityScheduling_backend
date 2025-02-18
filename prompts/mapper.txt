@@ -6,11 +6,14 @@ import com.scheduling.universityschedule_backend.repository.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.mapstruct.*;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
+@Transactional
 public abstract class EntityMapper {
 
     @Autowired
@@ -77,12 +80,12 @@ public abstract class EntityMapper {
     // ------------------ Notification ------------------
     @Mapping(target = "recepteurId", source = "recepteur.id")
     @Mapping(target = "expediteurId", source = "expediteur.id")
-    @Mapping(target = "read", source = "read")
+    @Mapping(target = "isread", source = "isread")
     public abstract NotificationDTO toNotificationDTO(Notification notification);
 
     @Mapping(target = "recepteur", source = "recepteurId", qualifiedByName = "idToPersonne")
     @Mapping(target = "expediteur", source = "expediteurId", qualifiedByName = "idToPersonne")
-    @Mapping(target = "read", source = "read")
+    @Mapping(target = "isread", source = "isread")
     public abstract Notification toNotification(NotificationDTO dto);
 
     // ------------------ PropositionDeRattrapage ------------------

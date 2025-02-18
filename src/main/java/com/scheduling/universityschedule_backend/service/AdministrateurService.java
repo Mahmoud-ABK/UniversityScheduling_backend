@@ -58,18 +58,7 @@ public interface AdministrateurService {
     //          Functionalities
     // ============================
 
-    /**
-     * Imports schedule data from Excel file.
-     * @param fichier Excel file DTO containing schedule data
-     * @throws CustomException if import fails
-     */
-    void importExcelSchedule(FichierExcelDTO fichier) throws CustomException;
 
-    /**
-     * Automatically generates schedule based on constraints.
-     * @throws CustomException if generation fails
-     */
-    void generateSchedule() throws CustomException;
 
     /**
      * Retrieves all makeup session requests.
@@ -92,24 +81,5 @@ public interface AdministrateurService {
      */
     void rejectMakeupSession(Long id) throws CustomException;
 
-    /**
-     * Sends notification to all system users.
-     * @param notification Notification to broadcast
-     * @throws CustomException if broadcast fails
-     */
-    void broadcastNotification(NotificationDTO notification) throws CustomException;
 
-    /**
-     * Retrieves all session conflicts.
-     * @return List of session conflicts
-     * @throws CustomException if retrieval fails
-     */
-    List<SeanceConflictDTO> getAllConflicts() throws CustomException;
-
-    /**
-     * Retrieves all room conflicts.
-     * @return List of room conflicts
-     * @throws CustomException if retrieval fails
-     */
-    List<SeanceRoomConflictDTO> getRoomConflicts() throws CustomException;
 }

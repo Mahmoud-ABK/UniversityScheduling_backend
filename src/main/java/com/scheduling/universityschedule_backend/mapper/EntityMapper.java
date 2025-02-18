@@ -6,11 +6,14 @@ import com.scheduling.universityschedule_backend.repository.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.mapstruct.*;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
+@Transactional
 public abstract class EntityMapper {
 
     @Autowired

@@ -65,4 +65,11 @@ public interface TDService {
      * @throws CustomException if retrieval fails
      */
     List<TPDTO> getTPs(Long tdId) throws CustomException;
+    /**
+     * id is TD id
+     * generarte the schedule for that Td( including its Branch sessions )
+     * @throws CustomException if generation fails
+     */
+    void generateSchedule(Long id) throws CustomException;
+
 }

@@ -62,9 +62,10 @@ public interface SalleService {
      * Finds available rooms for a specific time slot.
      * @param date Desired date
      * @param startTime Start time
+     * @param day day
      * @param endTime End time
      * @return List of available rooms
      * @throws CustomException if search fails
      */
-    List<SalleDTO> getAvailableRooms(String date, String startTime, String endTime) throws CustomException;
+    List<SalleDTO> getAvailableRooms(String date, String day,String startTime, String endTime) throws CustomException;
 }

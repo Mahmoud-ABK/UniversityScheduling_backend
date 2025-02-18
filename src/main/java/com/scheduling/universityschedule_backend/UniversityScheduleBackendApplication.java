@@ -24,8 +24,7 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		try {
-			// Populate the database with sample data
-			jpatester.testRetrieveAndDelete();
+			entityMapperTester.testEntityMapper();
 
 
 

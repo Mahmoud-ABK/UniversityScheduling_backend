@@ -10,10 +10,12 @@ import com.scheduling.universityschedule_backend.repository.*;
 import com.scheduling.universityschedule_backend.util.CustomLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class EntityMapperTester {
 
     @Autowired
@@ -42,7 +44,9 @@ public class EntityMapperTester {
     private FichierExcelRepository fichierExcelRepository;
 
     public void testEntityMapper() throws CustomException {
-        // Fetch entities from the database
+        CustomLogger.logInfo("=================== Testing Entity Mapper (Both Ways) ====================");
+
+        // Fetch entities from the database (assuming each repository returns a non-empty list)
         Personne personne = personneRepository.findAll().getFirst();
         Enseignant enseignant = enseignantRepository.findAll().getFirst();
         Branche branche = brancheRepository.findAll().getFirst();
@@ -55,99 +59,99 @@ public class EntityMapperTester {
         Notification notification = notificationRepository.findAll().getFirst();
         FichierExcel fichierExcel = fichierExcelRepository.findAll().getFirst();
 
-        // Test Personne mapping
+        // --- Mapping: Entity -> DTO ---
         PersonneDTO personneDTO = entityMapper.toPersonneDTO(personne);
-        CustomLogger.logInfo("PersonneDTO: " + personneDTO);
+        CustomLogger.logInfo("Entity -> DTO | PersonneDTO: " + personneDTO);
 
-        // Test Enseignant mapping
         EnseignantDTO enseignantDTO = entityMapper.toEnseignantDTO(enseignant);
-        CustomLogger.logInfo("EnseignantDTO: " + enseignantDTO);
+        CustomLogger.logInfo("Entity -> DTO | EnseignantDTO: " + enseignantDTO);
 
-        // Test Branche mapping
+
         BrancheDTO brancheDTO = entityMapper.toBrancheDTO(branche);
-        CustomLogger.logInfo("BrancheDTO: " + brancheDTO);
+        CustomLogger.logInfo("Entity -> DTO | BrancheDTO: " + brancheDTO);
 
-        // Test Salle mapping
         SalleDTO salleDTO = entityMapper.toSalleDTO(salle);
-        CustomLogger.logInfo("SalleDTO: " + salleDTO);
+        CustomLogger.logInfo("Entity -> DTO | SalleDTO: " + salleDTO);
 
-        // Test Seance mapping
         SeanceDTO seanceDTO = entityMapper.toSeanceDTO(seance);
-        CustomLogger.logInfo("SeanceDTO: " + seanceDTO);
+        CustomLogger.logInfo("Entity -> DTO | SeanceDTO: " + seanceDTO);
 
-        // Test TD mapping
         TDDTO tdDTO = entityMapper.toTDDTO(td);
-        CustomLogger.logInfo("TDDTO: " + tdDTO);
+        CustomLogger.logInfo("Entity -> DTO | TDDTO: " + tdDTO);
 
-        // Test TP mapping
         TPDTO tpDTO = entityMapper.toTPDTO(tp);
-        CustomLogger.logInfo("TPDTO: " + tpDTO);
+        CustomLogger.logInfo("Entity -> DTO | TPDTO: " + tpDTO);
 
-        // Test Signal mapping
         SignalDTO signalDTO = entityMapper.toSignalDTO(signal);
-        CustomLogger.logInfo("SignalDTO: " + signalDTO);
+        CustomLogger.logInfo("Entity -> DTO | SignalDTO: " + signalDTO);
 
-        // Test PropositionDeRattrapage mapping
         PropositionDeRattrapageDTO propositionDTO = entityMapper.toPropositionDeRattrapageDTO(proposition);
-        CustomLogger.logInfo("PropositionDeRattrapageDTO: " + propositionDTO);
+        CustomLogger.logInfo("Entity -> DTO | PropositionDeRattrapageDTO: " + propositionDTO);
 
-        // Test Notification mapping
         NotificationDTO notificationDTO = entityMapper.toNotificationDTO(notification);
-        CustomLogger.logInfo("NotificationDTO: " + notificationDTO);
+        CustomLogger.logInfo("Entity -> DTO | NotificationDTO: " + notificationDTO);
 
-        // Test FichierExcel mapping
         FichierExcelDTO fichierExcelDTO = entityMapper.toFichierExcelDTO(fichierExcel);
-        CustomLogger.logInfo("FichierExcelDTO: " + fichierExcelDTO);
+        CustomLogger.logInfo("Entity -> DTO | FichierExcelDTO: " + fichierExcelDTO);
 
-        // Test reverse mappings
+        CustomLogger.logInfo("Mapping from DTO to Entity");
+        // --- Mapping: DTO -> Entity ---
         Personne mappedPersonne = entityMapper.toPersonne(personneDTO);
-        CustomLogger.logInfo("Mapped Personne: " + mappedPersonne);
+        CustomLogger.logInfo("DTO -> Entity | Mapped Personne: " + mappedPersonne);
 
         Enseignant mappedEnseignant = entityMapper.toEnseignant(enseignantDTO);
-        CustomLogger.logInfo("Mapped Enseignant: " + mappedEnseignant);
-
+        CustomLogger.logInfo("DTO -> Entity | Mapped Enseignant: " + mappedEnseignant);
+    mappedEnseignant.getSeances().forEach(seance1 -> CustomLogger.logInfo("examining datafetching " + seance1 + "\n"));
         Branche mappedBranche = entityMapper.toBranche(brancheDTO);
-        CustomLogger.logInfo("Mapped Branche: " + mappedBranche);
+        CustomLogger.logInfo("DTO -> Entity | Mapped Branche: " + mappedBranche);
 
         Salle mappedSalle = entityMapper.toSalle(salleDTO);
-        CustomLogger.logInfo("Mapped Salle: " + mappedSalle);
+        CustomLogger.logInfo("DTO -> Entity | Mapped Salle: " + mappedSalle);
 
         Seance mappedSeance = entityMapper.toSeance(seanceDTO);
-        CustomLogger.logInfo("Mapped Seance: " + mappedSeance);
+        CustomLogger.logInfo("DTO -> Entity | Mapped Seance: " + mappedSeance);
 
         TD mappedTD = entityMapper.toTD(tdDTO);
-        CustomLogger.logInfo("Mapped TD: " + mappedTD);
+        CustomLogger.logInfo("DTO -> Entity | Mapped TD: " + mappedTD);
 
         TP mappedTP = entityMapper.toTP(tpDTO);
-        CustomLogger.logInfo("Mapped TP: " + mappedTP);
+        CustomLogger.logInfo("DTO -> Entity | Mapped TP: " + mappedTP);
 
         Signal mappedSignal = entityMapper.toSignal(signalDTO);
-        CustomLogger.logInfo("Mapped Signal: " + mappedSignal);
+        CustomLogger.logInfo("DTO -> Entity | Mapped Signal: " + mappedSignal);
 
         PropositionDeRattrapage mappedProposition = entityMapper.toPropositionDeRattrapage(propositionDTO);
-        CustomLogger.logInfo("Mapped PropositionDeRattrapage: " + mappedProposition);
+        CustomLogger.logInfo("DTO -> Entity | Mapped PropositionDeRattrapage: " + mappedProposition);
 
         Notification mappedNotification = entityMapper.toNotification(notificationDTO);
-        CustomLogger.logInfo("Mapped Notification: " + mappedNotification);
+        CustomLogger.logInfo("DTO -> Entity | Mapped Notification: " + mappedNotification);
 
         FichierExcel mappedFichierExcel = entityMapper.toFichierExcel(fichierExcelDTO);
-        CustomLogger.logInfo("Mapped FichierExcel: " + mappedFichierExcel);
+        CustomLogger.logInfo("DTO -> Entity | Mapped FichierExcel: " + mappedFichierExcel);
+
+        CustomLogger.logInfo("=================== Finished Entity Mapping Test ===================");
     }
+
     public void testConflictMappings() throws CustomException {
+        CustomLogger.logInfo("=========== testing conflict mapping ==================");
         // Fetch conflicting seance pairs
         List<Object[]> conflictPairs = seanceRepository.findConflictingSeancePairs();
         List<SeanceConflictDTO> seanceConflictDTOs = entityMapper.toSeanceConflictDTOList(conflictPairs);
-        CustomLogger.logInfo("SeanceConflictDTOs: " + seanceConflictDTOs);
+        CustomLogger.logInfo("SeanceConflictDTOs: ------------------" );
+        seanceConflictDTOs.forEach(seanceConflictDTO -> {CustomLogger.logInfo( seanceConflictDTO + "\n" );} );
 
         // Fetch room conflicts
         List<Object[]> roomConflicts = seanceRepository.findConflictingByRooms();
         List<SeanceRoomConflictDTO> seanceRoomConflictDTOs = entityMapper.toSeanceRoomConflictDTOList(roomConflicts);
-        CustomLogger.logInfo("SeanceRoomConflictDTOs: " + seanceRoomConflictDTOs);
+        CustomLogger.logInfo("SeanceRoomConflictDTOs: --------------------" );
+        seanceRoomConflictDTOs.forEach(seanceRoomConflictDTO -> {CustomLogger.logInfo( seanceRoomConflictDTO + "\n" );} );
 
         // Fetch conflicts for a specific seance
         Long seanceId = seanceRepository.findAll().getFirst().getId();
         List<Object[]> conflictsForSeance = seanceRepository.findRoomConflictsForSeance(seanceId);
         List<SingleSeanceConflictDTO> singleSeanceConflictDTOs = entityMapper.toSingleSeanceConflictDTOList(conflictsForSeance);
-        CustomLogger.logInfo("SingleSeanceConflictDTOs: " + singleSeanceConflictDTOs);
+        CustomLogger.logInfo("SingleSeanceConflictDTOs: ------------" );
+        singleSeanceConflictDTOs.forEach(seanceConflictDTO -> {CustomLogger.logInfo( seanceConflictDTO + "\n" );} );
+        CustomLogger.logInfo("===================FINISHED ---------------------------------");
     }
 }

@@ -74,8 +74,66 @@ public interface NotificationService {
 
     /**
      * Broadcasts a notification to all users.
-     * @param notificationDTO Notification data to be broadcasted
+     * @param notificationDTO Notification data to be broadcasted usually recepteur is empty
      * @throws CustomException if broadcasting fails
      */
     void broadcastNotification(NotificationDTO notificationDTO) throws CustomException;
+
+    /**
+     * Notify all teachers teacher
+     * @param notificationDTO notification info
+     * @throws CustomException if fails
+     */
+    void sendNotificationToTeachers(NotificationDTO notificationDTO) throws CustomException;
+
+
+    /**
+     * @param notificationDTO content
+     * @throws CustomException if fails
+     */
+    void sendNotificationToStudents(NotificationDTO notificationDTO) throws CustomException;
+
+    /**
+     * @param notificationDTO content
+     * @param brancheDTOS branches
+     * @throws CustomException if fails
+     */
+    void sendNotificationToBranches(NotificationDTO notificationDTO,List<BrancheDTO> brancheDTOS) throws CustomException;
+
+    /**
+     * @param notificationDTO content
+     * @param brancheDTOS branches
+     * @throws CustomException if fails
+     */
+    void sendNotificationToBranche(NotificationDTO notificationDTO,BrancheDTO brancheDTOS) throws CustomException;
+
+    /**
+     * @param notificationDTO content
+     * @param tddtos destination
+     * @throws CustomException if fails
+     */
+    void sendNotificationToTDs(NotificationDTO notificationDTO,List<TDDTO> tddtos) throws CustomException;
+
+    /**
+     * @param notificationDTO content
+     * @param tddto destination
+     * @throws CustomException if fails
+     */
+    void sendNotificationToTD(NotificationDTO notificationDTO,TDDTO tddto) throws CustomException;
+
+    /**
+     * @param notificationDTO content
+     * @param tpdtos destination
+     * @throws CustomException if fails
+     */
+    void sendNotificationToTPs(NotificationDTO notificationDTO,List<TPDTO> tpdtos) throws CustomException;
+
+    /**
+     * @param notificationDTO content
+     * @param tpdto destination
+     * @throws CustomException if fails
+     */
+    void sendNotificationToTP(NotificationDTO notificationDTO,TPDTO tpdto) throws CustomException;
+
+
 }

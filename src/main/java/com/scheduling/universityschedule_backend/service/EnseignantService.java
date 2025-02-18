@@ -68,11 +68,16 @@ public interface EnseignantService {
 
     /**
      * Calculates total teaching hours.
-     * @param id Teacher's unique identifier
-     * @return Total hours taught
+     * @param teacherid Teacher's unique identifier
+     * @param startdate the startdate of counting
+     * @param enddate the enddate of counting
+     * weekly sessions are counted once in a week
+     * 1/15 session counts half per week
+     * makeup session that have a date in frequency counts only once
+     * @return Total hours taught between start and end date
      * @throws CustomException if calculation fails
      */
-    int getTotalTeachingHours(Long id) throws CustomException;
+    int getTotalTeachingHours(Long teacherid,String startdate,String enddate) throws CustomException;
 
     /**
      * Submits makeup session request.
@@ -99,4 +104,22 @@ public interface EnseignantService {
      * @throws CustomException if retrieval fails
      */
     List<SignalDTO> getSignals(Long id) throws CustomException;
+
+    /**
+     * get all subjects taught for a teacher
+     * @param id teacher id
+     * @return all subject taught
+     * @Exception return a CustomException
+     */
+    List<String> getSubjects(Long id) throws CustomException;
+
+    /**
+     * get all studentGroupsTaught Later to be mapped in
+     * @param id teacher id
+     * @return all studentgroups
+     * @Exception return a CustomException
+     */
+    List<TPDTO> getStudentGroups(Long id) throws CustomException;
+
+
 }

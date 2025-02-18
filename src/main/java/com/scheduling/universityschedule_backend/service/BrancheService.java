@@ -58,43 +58,14 @@ public interface BrancheService {
     //          Functionalities
     // ============================
 
-    /**
-     * Assigns a teacher to a branch.
-     * @param branchId Branch's unique identifier
-     * @param teacherDTO Teacher DTO containing the teacher data
-     * @throws CustomException if assignment fails
-     */
-    void assignTeacherToBranch(Long branchId, EnseignantDTO teacherDTO) throws CustomException;
 
     /**
-     * Removes a teacher from a branch.
-     * @param branchId Branch's unique identifier
-     * @param teacherId Teacher's unique identifier
-     * @throws CustomException if removal fails
-     */
-    void removeTeacherFromBranch(Long branchId, Long teacherId) throws CustomException;
-
-    /**
-     * Assigns a student to a branch.
-     * @param branchId Branch's unique identifier
-     * @param studentDTO Student DTO containing the student data
-     * @throws CustomException if assignment fails
-     */
-    void assignStudentToBranch(Long branchId, EtudiantDTO studentDTO) throws CustomException;
-
-    /**
-     * Removes a student from a branch.
-     * @param branchId Branch's unique identifier
-     * @param studentId Student's unique identifier
-     * @throws CustomException if removal fails
-     */
-    void removeStudentFromBranch(Long branchId, Long studentId) throws CustomException;
-
-    /**
-     * Retrieves all courses associated with a branch.
+     * Retrieves all seances associated with a branch.
      * @param branchId Branch's unique identifier
      * @return List of courses associated with the branch
      * @throws CustomException if retrieval fails
      */
-    List<SeanceDTO> getCoursesByBranch(Long branchId) throws CustomException;
+    List<SeanceDTO> getSchedule(Long branchId) throws CustomException;
+
+
 }

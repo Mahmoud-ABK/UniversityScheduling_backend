@@ -60,10 +60,11 @@ public interface ExcelFileService {
 
     /**
      * Uploads and processes an Excel file.
-     * @param file Excel file DTO
+     * @param file Excel file data
+     * @param seanceDTOS the list of seance dtos to add to database
      * @throws CustomException if upload fails
      */
-    void upload(FichierExcelDTO file) throws CustomException;
+    void upload(FichierExcelDTO file , List<SeanceDTO> seanceDTOS) throws CustomException;
 
     /**
      * Retrieves the import history of all Excel files.

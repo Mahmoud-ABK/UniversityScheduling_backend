@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "administrateurs")
+@ToString(callSuper = true)
 public class Administrateur extends Personne {
     private String codeAdmin;
 }
@@ -22,13 +24,19 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.util.List;
 
+@Entity
+@Table(name = "branches")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "branches")
+@NamedEntityGraph(
+    name = "Branche.withSeances",
+    attributeNodes = @NamedAttributeNode("seances")
+)
+@ToString(exclude = {"seances"})
 public class Branche {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,8 +46,7 @@ public class Branche {
     private int nbTD;
     private String departement;
 
-    // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "branches",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "branches", fetch = FetchType.LAZY)
     private List<Seance> seances;
 }
 package com.scheduling.universityschedule_backend.model;
@@ -49,77 +56,70 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "enseignants")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "enseignants")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"seances", "propositionsDeRattrapage", "signals"})
 public class Enseignant extends Personne {
     private String codeEnseignant;
     private int heures;
 
-    @OneToMany(mappedBy = "enseignant",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
     private List<Seance> seances;
 
-    @OneToMany(mappedBy = "enseignant" ,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
     private List<PropositionDeRattrapage> propositionsDeRattrapage;
 
-    @OneToMany(mappedBy = "enseignant" ,fetch = FetchType.EAGER)
-    private  List<Signal> signals;
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    private List<Signal> signals;
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import java.util.List;
+import lombok.ToString;
 
-@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "etudiants")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "etudiants")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"branche", "tp"})
 public class Etudiant extends Personne {
     private String matricule;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branche_id")
     private Branche branche;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="tp_id")
     private TP tp;
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Entity
+@Table(name = "fichiers_excel")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "fichiers_excel")
 public class FichierExcel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -134,23 +134,19 @@ public class FichierExcel {
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "notification")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "notifications")
+@ToString(exclude = {"recepteur", "expediteur"})
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -158,18 +154,18 @@ public class Notification {
     private String message;
     private LocalDateTime date;
     private String type;
-    private Boolean read;
+    private Boolean isread;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recepteur_id")
     private Personne recepteur;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "expediteur_id")
     private Personne expediteur;
 
     public boolean isRead() {
-        return read;
+        return isread;
     }
 }
 package com.scheduling.universityschedule_backend.model;
@@ -178,12 +174,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED) // Creates a separate table for each subclass
+@ToString
 public class Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -197,23 +195,19 @@ public class Personne {
 }
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "propositions_de_rattrapage")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "propositions_de_rattrapage")
+@ToString(exclude = {"enseignant"})
 public class PropositionDeRattrapage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -222,7 +216,7 @@ public class PropositionDeRattrapage {
     private String reason;
     private String status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
 }
@@ -232,13 +226,19 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.util.List;
 
+@Entity
+@Table(name = "salles")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "salles")
+@NamedEntityGraph(
+    name = "Salle.withSeances",
+    attributeNodes = @NamedAttributeNode("seances")
+)
+@ToString(exclude = {"seances"})
 public class Salle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -247,11 +247,22 @@ public class Salle {
     private String type;
     private int capacite;
 
-    @OneToMany(mappedBy = "salle",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "salle", fetch = FetchType.LAZY)
     private List<Seance> seances;
 
     @ElementCollection
     private List<String> disponibilite;
+
+    @Override
+    public String toString() {
+        return "Salle{id=" + id +
+                ", identifiant='" + identifiant + '\'' +
+                ", type='" + type + '\'' +
+                ", capacite=" + capacite +
+                ", seancesCount=" + (seances != null ? seances.size() : "N/A") +
+                ", disponibilite=" + disponibilite +
+                '}';
+    }
 }
 package com.scheduling.universityschedule_backend.model;
 
@@ -260,13 +271,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.util.List;
 
+@Entity
+@Table(name = "seances")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "seances")
+@ToString(exclude = {"branches", "tds", "tps", "salle", "enseignant"})
 public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -275,53 +288,60 @@ public class Seance {
     private String jour;
     private String heureDebut;
     private String heureFin;
-    private String type; // possible values CR-CI-TD-TP
+    private String type;
     private String matiere;
 
     @Nullable
     private String frequence;
-    // Possible values:
-    //  - Empty string for weekly sessions (in which case each list below must have exactly one element)
-    //  - "1/15" for biweekly sessions (lists can have more than one element to assign different groups)
-    //  - A specific session date for catchup sessions
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "salle_id")
     private Salle salle;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
 
-    // Use a many-to-many relationship for groups, with business logic to enforce
-    // one single association for weekly sessions and multiple for biweekly sessions.
-
-    // For Branch: normally one branch; multiple allowed if biweekly.
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "seance_branche",
-            joinColumns = @JoinColumn(name = "seance_id"),
-            inverseJoinColumns = @JoinColumn(name = "branche_id")
+        name = "seance_branche",
+        joinColumns = @JoinColumn(name = "seance_id"),
+        inverseJoinColumns = @JoinColumn(name = "branche_id")
     )
     private List<Branche> branches;
 
-    // For TD: normally one TD; multiple allowed if biweekly.
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "seance_td",
-            joinColumns = @JoinColumn(name = "seance_id"),
-            inverseJoinColumns = @JoinColumn(name = "td_id")
+        name = "seance_td",
+        joinColumns = @JoinColumn(name = "seance_id"),
+        inverseJoinColumns = @JoinColumn(name = "td_id")
     )
     private List<TD> tds;
 
-    // For TP: normally one TP; multiple allowed if biweekly.
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "seance_tp",
-            joinColumns = @JoinColumn(name = "seance_id"),
-            inverseJoinColumns = @JoinColumn(name = "tp_id")
+        name = "seance_tp",
+        joinColumns = @JoinColumn(name = "seance_id"),
+        inverseJoinColumns = @JoinColumn(name = "tp_id")
     )
     private List<TP> tps;
+
+    @Override
+    public String toString() {
+        return "Seance{id=" + id +
+                ", jour='" + jour + '\'' +
+                ", heureDebut='" + heureDebut + '\'' +
+                ", heureFin='" + heureFin + '\'' +
+                ", type='" + type + '\'' +
+                ", matiere='" + matiere + '\'' +
+                ", frequence='" + frequence + '\'' +
+                ", salleId=" + (salle != null ? salle.getId() : "N/A") +
+                ", enseignantId=" + (enseignant != null ? enseignant.getId() : "N/A") +
+                ", branchesCount=" + (branches != null ? branches.size() : "N/A") +
+                ", tdsCount=" + (tds != null ? tds.size() : "N/A") +
+                ", tpsCount=" + (tps != null ? tps.size() : "N/A") +
+                '}';
+    }
 }
 package com.scheduling.universityschedule_backend.model;
 
@@ -329,13 +349,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "signals")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "signals")
+@ToString(exclude = {"enseignant"})
 public class Signal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -343,7 +365,8 @@ public class Signal {
     private String message;
     private String severity;
     private LocalDateTime timestamp;
-    @ManyToOne
+    
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
 }
@@ -353,13 +376,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.util.List;
 
+@Entity
+@Table(name = "tds")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "tds")
+@ToString(exclude = {"tpList", "seances"})
 public class TD {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -367,15 +392,14 @@ public class TD {
     private int nb;
     private int nbTP;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branche_id")
     private Branche branche;
 
-    @OneToMany(mappedBy = "td",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "td", fetch = FetchType.LAZY)
     private List<TP> tpList;
 
-    // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "tds",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tds", fetch = FetchType.LAZY)
     private List<Seance> seances;
 }
 package com.scheduling.universityschedule_backend.model;
@@ -402,27 +426,28 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import java.util.List;
 
+@Entity
+@Table(name = "tps")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "tps")
+@ToString(exclude = {"etudiants", "seances"})
 public class TP {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int nb;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "td_id")
     private TD td;
 
-    @OneToMany(mappedBy = "tp",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tp", fetch = FetchType.LAZY)
     private List<Etudiant> etudiants;
 
-    // Inverse side for many-to-many with Seance
-    @ManyToMany(mappedBy = "tps",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tps", fetch = FetchType.LAZY)
     private List<Seance> seances;
 }
