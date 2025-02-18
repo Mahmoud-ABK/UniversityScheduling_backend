@@ -55,7 +55,8 @@ public class AdministrateurServiceImpl implements AdministrateurService {
     public AdministrateurDTO update(Long id, AdministrateurDTO administrateurDTO) throws CustomException {
         Administrateur existingAdministrateur = administrateurRepository.findById(id)
                 .orElseThrow(() -> new CustomException("Administrator not found with ID: " + id));
-        Administrateur updatedAdministrateur = administrateurRepository.save(entityMapper.toAdministrateur(administrateurDTO));
+        entityMapper.updateFromDto(administrateurDTO, existingAdministrateur);
+        Administrateur updatedAdministrateur = administrateurRepository.save(existingAdministrateur);
         return entityMapper.toAdministrateurDTO(updatedAdministrateur);
     }
 

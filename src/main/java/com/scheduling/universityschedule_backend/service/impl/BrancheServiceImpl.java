@@ -57,7 +57,8 @@ public class BrancheServiceImpl implements BrancheService {
     public BrancheDTO update(Long id, BrancheDTO brancheDTO) throws CustomException {
         Branche existingBranche = brancheRepository.findById(id)
                 .orElseThrow(() -> new CustomException("Branch not found with ID: " + id));
-        Branche updatedBranche = brancheRepository.save(entityMapper.toBranche(brancheDTO));
+        entityMapper.updateFromDto(brancheDTO, existingBranche);
+        Branche updatedBranche = brancheRepository.save(existingBranche);
         return entityMapper.toBrancheDTO(updatedBranche);
     }
 
