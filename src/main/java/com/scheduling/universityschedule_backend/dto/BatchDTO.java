@@ -24,4 +24,5 @@ public class BatchDTO {
     private String message;
     private boolean success;
     private String entityType;
+    
 }
