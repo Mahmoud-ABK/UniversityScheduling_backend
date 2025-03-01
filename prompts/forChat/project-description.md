@@ -160,6 +160,7 @@ this file is in markdown format
 - **Privileges**:
     - **Managed by** the **Administrateur**.
     - **Assigned to** **Étudiants**.
+    - a super group of students
 - **Purpose**:
     - Organize students and sessions by academic program.
     - Assist in scheduling appropriate courses and sessions.
@@ -167,23 +168,20 @@ this file is in markdown format
 - **Description**: class group associated with a `Branche`.
 - **Attributes**:
     - `NbTP`: Number of practical sessions associated.
-- **Privileges**:
-    - **Scheduled by** the **Administrateur**.
-    - **Participated in** by **Étudiants**.
 - **Purpose**:
-    - Provide supplemental instruction in smaller group settings.
-    - Link to practical sessions (`TP`).
+    - a group of students ( class)
+    - Link (`TP`).
+    - - **Managed by** the **Administrateur**.
 ### **14. TP (sub class group )**
 - **Description**: Represents sub class group .
-- **Privileges**:
-    - **Scheduled by** the **Administrateur**.
-    - **Attended by** **Étudiants**.
+
 - **Purpose**:
-    - Offer practical experience complementing theoretical lessons.
-    - Allow for application of concepts in a controlled environment.
+    - a sub group of students 
+    - **Managed by** the **Administrateur**.
 #### Rule 
-a branch is composed of set of TDs 
-each TD is composed of a set of TPs 
+a branch is composed of set of TDs ( classes ) 
+each TD is composed of a set of TPs ( subclasses)
+a student can only belong to one TP and one TD and one Branch at a time
 ### **Summary of Access and Privileges**
 - **Étudiants (Students)**:
     - **Can**:
