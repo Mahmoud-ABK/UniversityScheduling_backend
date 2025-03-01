@@ -1,5 +1,6 @@
 package com.scheduling.universityschedule_backend.service.impl;
 
+import com.scheduling.universityschedule_backend.dto.SeanceDTO;
 import com.scheduling.universityschedule_backend.dto.TPDTO;
 import com.scheduling.universityschedule_backend.dto.EtudiantDTO;
 import com.scheduling.universityschedule_backend.exception.CustomException;
@@ -73,10 +74,19 @@ public class TPServiceImpl implements TPService {
     }
 
     @Override
-    public void generateSchedule(Long id) throws CustomException {
+    public List<SeanceDTO> generateSchedule(Long id) throws CustomException {
         // Implement the logic to generate the schedule for the given practical session
-        throw new UnsupportedOperationException("Method not implemented yet");
+
+        // Step 1: Retrieve the TP (Practical Session) entity from the repository
+        TP tp = tpRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Practical session not found with ID: " + id));
+
+        // Step 2: Convert the list of Seance entities (associated with TP) to SeanceDTOs
+        return tp.getSeances().stream()
+                .map(entityMapper::toSeanceDTO)  // Map each Seance entity to a SeanceDTO
+                .collect(Collectors.toList());  // Collect the results into a List of SeanceDTOs
     }
+
 
     @Override
     public List<EtudiantDTO> getEtudiants(Long id) throws CustomException {

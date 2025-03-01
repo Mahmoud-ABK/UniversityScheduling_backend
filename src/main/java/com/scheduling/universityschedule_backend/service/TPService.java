@@ -69,9 +69,11 @@ public interface TPService {
     /**
      * id is TP id
      * generarte the schedule for that TP ( including its TD and Branch sessions
+     *
+     * @return
      * @throws CustomException if generation fails
      */
-    void generateSchedule(Long id) throws CustomException;
+    List<SeanceDTO> generateSchedule(Long id) throws CustomException;
 
     /**
      * @param id id of the tp

@@ -68,9 +68,11 @@ public interface TDService {
     /**
      * id is TD id
      * generarte the schedule for that Td( including its Branch sessions )
+     *
+     * @return
      * @throws CustomException if generation fails
      */
-    void generateSchedule(Long id) throws CustomException;
+    List<SeanceDTO> generateSchedule(Long id) throws CustomException;
 
     /**
      * @param id id of the td

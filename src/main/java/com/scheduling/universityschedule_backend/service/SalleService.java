@@ -59,7 +59,7 @@ public interface SalleService {
     // ============================
 
     /**
-     * Finds available rooms for a specific time slot.
+     * Finds available rooms for a specific time slot. if the date not specified it check for
      * @param date Desired date
      * @param startTime Start time
      * @param day day
