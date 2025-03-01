@@ -163,8 +163,8 @@ this file is in markdown format
 - **Purpose**:
     - Organize students and sessions by academic program.
     - Assist in scheduling appropriate courses and sessions.
-### **13. TD (Tutorial Session)**
-- **Description**: Represents group tutorial sessions associated with a `Branche`.
+### **13. TD (class group)**
+- **Description**: class group associated with a `Branche`.
 - **Attributes**:
     - `NbTP`: Number of practical sessions associated.
 - **Privileges**:
@@ -173,14 +173,17 @@ this file is in markdown format
 - **Purpose**:
     - Provide supplemental instruction in smaller group settings.
     - Link to practical sessions (`TP`).
-### **14. TP (Practical Session)**
-- **Description**: Represents hands-on practical or lab sessions.
+### **14. TP (sub class group )**
+- **Description**: Represents sub class group .
 - **Privileges**:
     - **Scheduled by** the **Administrateur**.
     - **Attended by** **Étudiants**.
 - **Purpose**:
     - Offer practical experience complementing theoretical lessons.
     - Allow for application of concepts in a controlled environment.
+#### Rule 
+a branch is composed of set of TDs 
+each TD is composed of a set of TPs 
 ### **Summary of Access and Privileges**
 - **Étudiants (Students)**:
     - **Can**:
