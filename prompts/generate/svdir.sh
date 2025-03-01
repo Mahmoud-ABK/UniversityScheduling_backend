@@ -1,28 +1,29 @@
 #!/bin/bash
 
-# Check if the environment variable is set
+# Check if the necessary environment variables are set
 if [ -z "$srcprj" ]; then
-  echo "The environment variable srcprj is not set."
+  echo "Error: The environment variable 'srcprj' is not set."
   exit 1
 fi
 
-# Check if at least one parameter is provided
-if [ "$#" -lt 1 ]; then
-  echo "Usage: $0 <parameter1> <parameter2> ... <parameterN>"
+if [ -z "$ing1" ]; then
+  echo "Error: The environment variable 'ing1' is not set."
   exit 1
 fi
 
-# Loop through each parameter
-for x in "$@"; do
-  if [ "$x" == "repo" ]; then
-    # Create the output file path for repositories
-    output_file=$ing1/projet-web-mobile/UniversitySchedule_backend/prompts/forChat/jparepo.txt
+# Define the destination directory and create it if it doesn't exist
+dest="$ing1/projet-web-mobile/UniversitySchedule_backend/prompts/forChat"
+mkdir -p "$dest"
 
-    # Write the note and code to the output file
-    cat <<EOL > $output_file
-**Note**: all of these repositories extend JPARepository
-**Note**: a JPARepository has by default these basic CRUD functions:
-\`\`\`java
+#########################
+# Special Case: repository
+#########################
+if [ -d "$srcprj/repository" ]; then
+  output_file="$dest/jparepo.txt"
+  cat <<'EOL' > "$output_file"
+**Note**: All of these repositories extend JPARepository
+**Note**: A JPARepository has by default these basic CRUD functions:
+
 // Save operations
 <S extends T> S save(S entity);
 <S extends T> List<S> saveAll(Iterable<S> entities);
@@ -35,8 +36,6 @@ Optional<T> findById(ID id);
 List<T> findAll();
 List<T> findAll(Sort sort);
 List<T> findAllById(Iterable<ID> ids);
-Page<T> findAll(Pageable pageable);
-List<T> findAll(Sort sort);
 Page<T> findAll(Pageable pageable);
 T getById(ID id);
 boolean existsById(ID id);
@@ -55,31 +54,53 @@ void deleteAllByIdInBatch(Iterable<ID> ids);
 // Example and query methods
 <S extends T> long count(Example<S> example);
 <S extends T> boolean exists(Example<S> example);
-\`\`\`
+
 Here are JPA repositories:
 EOL
 
-    # Append the contents from the repository directory
-    cat "$srcprj/repository/"* >> "$output_file"
+  # Append all files in the repository directory
+  cat "$srcprj/repository/"* >> "$output_file"
+  echo "Content from repository/* has been written to $output_file"
+fi
 
-    echo "Content from repository/* has been written to prompts/forChat/jparepo.txt"
+#########################
+# Special Case: service/impl
+#########################
+if [ -d "$srcprj/service/impl" ]; then
+  output_file="$dest/impl.txt"
+  cat "$srcprj/service/impl/"* > "$output_file"
+  echo "Content from service/impl/* has been written to $output_file"
+fi
 
- elif [ "$x" == "impl" ]; then
-    # Create the output file path for implementations
-    output_file=$ing1/projet-web-mobile/UniversitySchedule_backend/prompts/forChat/impl.txt
+#########################################
+# Process all other top-level directories
+#########################################
+for d in "$srcprj"/*/; do
+  dir_name=$(basename "$d")
 
-    # Concatenate the content from service/impl to the output file
-    cat $srcprj/service/impl/* > $output_file
-
-    echo "Content from service/impl/* has been written to prompts/forChat/impl.txt"
-
-
-  else
-    # Create the output file path for other parameters
-    output_file="$ing1/projet-web-mobile/UniversitySchedule_backend/prompts/forChat/$x.txt"
-
-    # Concatenate the content for other parameters
-    cat $srcprj/$x/* > $output_file
-    echo "Content from $x/* has been written to prompts/forChat/$x.txt"
+  # Skip directories that were already handled specially
+  if [ "$dir_name" = "repository" ]; then
+    continue
   fi
+
+  # For the service directory, process only files outside the impl subfolder
+  if [ "$dir_name" = "service" ]; then
+    output_file="$dest/service.txt"
+    # Clear (or create) the output file
+    > "$output_file"
+    for file in "$srcprj/service/"*; do
+      # Skip the impl subdirectory (which was handled above)
+      if [ -d "$file" ]; then
+        continue
+      fi
+      cat "$file" >> "$output_file"
+    done
+    echo "Content from service (excluding impl) has been written to $output_file"
+    continue
+  fi
+
+  # Process any other directory normally
+  output_file="$dest/${dir_name}.txt"
+  cat "$d"* > "$output_file"
+  echo "Content from ${dir_name}/* has been written to $output_file"
 done
