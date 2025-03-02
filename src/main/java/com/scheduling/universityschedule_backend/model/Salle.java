@@ -8,7 +8,10 @@ import lombok.ToString;
 import java.util.List;
 
 @Entity
-@Table(name = "salles")
+@Table(name = "salles", indexes = {
+        @Index(name = "idx_salle_identifiant", columnList = "identifiant"),
+        @Index(name = "idx_salle_type", columnList = "type"),
+        @Index(name = "idx_salle_capacite", columnList = "capacite")})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,7 +31,7 @@ public class Salle {
     @OneToMany(mappedBy = "salle", fetch = FetchType.LAZY)
     private List<Seance> seances;
 
-    // Removed disponibilite field
+
 
     @Override
     public String toString() {

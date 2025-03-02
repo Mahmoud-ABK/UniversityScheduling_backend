@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -384,6 +385,10 @@ public abstract class EntityMapper {
     public List<Long> mapSignalsToIds(List<Signal> signals) {
         return signals == null ? Collections.emptyList() : signals.stream().map(Signal::getId).collect(Collectors.toList());
     }
+    @Named("mapSallesToIds")
+    public List<Long> mapSallesToIds(List<Salle> salles) {
+        return salles == null ? Collections.emptyList() : salles.stream().map(Salle::getId).collect(Collectors.toList());
+    }
 
     // ------------------ Helper Methods for ID -> Entity Conversions ------------------
     @Named("idToBranche")
@@ -429,6 +434,15 @@ public abstract class EntityMapper {
     }
 
     // ------------------ Helper Methods for Mapping List of IDs to Entities ------------------
+    @Named("mapIdListToSalleList")
+    public List<Salle> mapIdListToSalleList(List<Long> ids) throws CustomException {
+        if (ids == null) return null;
+        List<Salle> salles = salleRepository.findAllById(ids);
+        if (ids.size() != salles.size()){
+            throw new CustomException("OOne or more Salles not found in the provided ID list.");
+        }
+        return salles;
+    }
     @Named("mapIdListToSeanceList")
     public List<Seance> mapIdListToSeanceList(List<Long> ids) throws CustomException {
         if (ids == null || ids.isEmpty()) return Collections.emptyList();

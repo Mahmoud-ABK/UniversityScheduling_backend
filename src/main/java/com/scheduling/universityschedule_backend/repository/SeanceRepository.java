@@ -6,6 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -171,4 +175,150 @@ public interface SeanceRepository extends JpaRepository<Seance, Long> {
     List<Object[]> findRoomConflictsForSeance(@Param("seanceId") Long seanceId,
                                               @Param("biweekly") FrequenceType biweekly,
                                               @Param("catchup") FrequenceType catchup);
+    @Query("""
+    SELECT s.id,
+           TRIM(TRAILING '; ' FROM CONCAT(
+               CASE WHEN (:salleId IS NOT NULL AND s.salle.id = :salleId) 
+                    THEN 'Room Conflict; ' ELSE '' END,
+               CASE WHEN (:enseignantId IS NOT NULL AND s.enseignant.id = :enseignantId)
+                    THEN 'Teacher Conflict; ' ELSE '' END,
+               CASE WHEN EXISTS (
+                    SELECT 1 FROM Tp tp
+                    WHERE 
+                      (tp MEMBER OF s.tps
+                        OR EXISTS (SELECT 1 FROM s.tds t WHERE t = tp.td)
+                        OR EXISTS (
+                              SELECT 1 FROM s.branches b 
+                              WHERE b = tp.td.branch 
+                                AND NOT EXISTS (
+                                      SELECT 1 FROM s.tds t2 WHERE t2.branch = b
+                                )
+                          )
+                      )
+                      AND (
+                           (:incomingTpIds IS NULL OR tp.id IN :incomingTpIds)
+                        OR (:incomingTdIds IS NULL OR tp.td.id IN :incomingTdIds)
+                        OR (
+                           (:incomingBranchIds IS NULL OR tp.td.branch.id IN :incomingBranchIds)
+                           AND NOT EXISTS (
+                                SELECT 1 FROM Td td 
+                                WHERE (:incomingTdIds IS NULL OR td.id IN :incomingTdIds)
+                                  AND td.branch = tp.td.branch
+                           )
+                        )
+                      )
+                ) THEN 'Student Group Conflict; ' ELSE '' END,
+               CASE WHEN (s.frequence = :biweekly AND :frequence = :biweekly)
+                    THEN 'Bi-Weekly Conflict; ' ELSE '' END,
+               CASE WHEN ((s.frequence = :catchup AND :frequence = :biweekly)
+                          OR (s.frequence = :biweekly AND :frequence = :catchup))
+                    THEN 'Catch-Up Exception; ' ELSE '' END
+           )) AS conflictTypes
+    FROM Seance s
+    WHERE s.jour = :jour
+      AND s.heureDebut < :heureFin
+      AND s.heureFin > :heureDebut
+      AND (
+            (:salleId IS NULL OR s.salle.id = :salleId)
+         OR (:enseignantId IS NULL OR s.enseignant.id = :enseignantId)
+         OR EXISTS (
+              SELECT 1 FROM Tp tp
+              WHERE 
+                (tp MEMBER OF s.tps
+                  OR EXISTS (SELECT 1 FROM s.tds t WHERE t = tp.td)
+                  OR EXISTS (
+                        SELECT 1 FROM s.branches b 
+                        WHERE b = tp.td.branch 
+                          AND NOT EXISTS (SELECT 1 FROM s.tds t2 WHERE t2.branch = b)
+                     )
+                )
+                AND (
+                     (:incomingTpIds IS NULL OR tp.id IN :incomingTpIds)
+                  OR (:incomingTdIds IS NULL OR tp.td.id IN :incomingTdIds)
+                  OR (
+                      (:incomingBranchIds IS NULL OR tp.td.branch.id IN :incomingBranchIds)
+                      AND NOT EXISTS (
+                           SELECT 1 FROM Td td 
+                           WHERE (:incomingTdIds IS NULL OR td.id IN :incomingTdIds)
+                             AND td.branch = tp.td.branch
+                      )
+                  )
+                )
+         )
+      )
+      AND NOT (
+          (s.frequence = :biweekly AND :frequence = :biweekly)
+          AND EXISTS (
+              SELECT 1 FROM Tp tp
+              WHERE 
+                (tp MEMBER OF s.tps
+                  OR EXISTS (SELECT 1 FROM s.tds t WHERE t = tp.td)
+                  OR EXISTS (
+                        SELECT 1 FROM s.branches b 
+                        WHERE b = tp.td.branch 
+                          AND NOT EXISTS (SELECT 1 FROM s.tds t2 WHERE t2.branch = b)
+                     )
+                )
+                AND (
+                     (:incomingTpIds IS NULL OR tp.id IN :incomingTpIds)
+                  OR (:incomingTdIds IS NULL OR tp.td.id IN :incomingTdIds)
+                  OR (
+                      (:incomingBranchIds IS NULL OR tp.td.branch.id IN :incomingBranchIds)
+                      AND NOT EXISTS (
+                           SELECT 1 FROM Td td 
+                           WHERE (:incomingTdIds IS NULL OR td.id IN :incomingTdIds)
+                             AND td.branch = tp.td.branch
+                      )
+                  )
+                )
+          )
+      )
+      AND NOT (
+          s.frequence = :catchup AND :frequence = :catchup 
+          AND s.date != :date
+      )
+      AND NOT (
+          ((s.frequence = :catchup AND :frequence = :biweekly)
+            OR (s.frequence = :biweekly AND :frequence = :catchup))
+          AND EXISTS (
+              SELECT 1 FROM Tp tp
+              WHERE 
+                (tp MEMBER OF s.tps
+                  OR EXISTS (SELECT 1 FROM s.tds t WHERE t = tp.td)
+                  OR EXISTS (
+                        SELECT 1 FROM s.branches b 
+                        WHERE b = tp.td.branch 
+                          AND NOT EXISTS (SELECT 1 FROM s.tds t2 WHERE t2.branch = b)
+                     )
+                )
+                AND (
+                     (:incomingTpIds IS NULL OR tp.id IN :incomingTpIds)
+                  OR (:incomingTdIds IS NULL OR tp.td.id IN :incomingTdIds)
+                  OR (
+                      (:incomingBranchIds IS NULL OR tp.td.branch.id IN :incomingBranchIds)
+                      AND NOT EXISTS (
+                           SELECT 1 FROM Td td 
+                           WHERE (:incomingTdIds IS NULL OR td.id IN :incomingTdIds)
+                             AND td.branch = tp.td.branch
+                      )
+                  )
+                )
+          )
+      )
+""")
+    List<Object[]> findConflictsForSeance(
+            @Param("salleId") Long salleId,
+            @Param("enseignantId") Long enseignantId,
+            @Param("incomingTpIds") List<Long> incomingTpIds,
+            @Param("incomingTdIds") List<Long> incomingTdIds,
+            @Param("incomingBranchIds") List<Long> incomingBranchIds,
+            @Param("jour") DayOfWeek jour,
+            @Param("heureDebut") LocalTime heureDebut,
+            @Param("heureFin") LocalTime heureFin,
+            @Param("frequence") FrequenceType frequence,
+            @Param("date") LocalDate date,
+            @Param("biweekly") FrequenceType biweekly,
+            @Param("catchup") FrequenceType catchup
+    );
+
 }

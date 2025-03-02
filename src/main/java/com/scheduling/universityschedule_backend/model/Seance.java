@@ -11,7 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "seances")
+@Table(name = "seances", indexes = {
+        @Index(name = "idx_seance_jour", columnList = "jour"),
+        @Index(name = "idx_seance_time_range", columnList = "heureDebut,heureFin"),
+        @Index(name = "idx_seance_enseignant", columnList = "enseignant_id"),
+        @Index(name = "idx_seance_salle", columnList = "salle_id"),
+        @Index(name = "idx_seance_frequence", columnList = "frequence"),
+        @Index(name = "idx_seance_date", columnList = "date")
+})
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Seance {
 
