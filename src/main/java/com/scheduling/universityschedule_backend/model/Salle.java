@@ -28,8 +28,7 @@ public class Salle {
     @OneToMany(mappedBy = "salle", fetch = FetchType.LAZY)
     private List<Seance> seances;
 
-    @ElementCollection
-    private List<String> disponibilite;
+    // Removed disponibilite field
 
     @Override
     public String toString() {
@@ -38,7 +37,6 @@ public class Salle {
                 ", type='" + type + '\'' +
                 ", capacite=" + capacite +
                 ", seancesCount=" + (seances != null ? seances.size() : "N/A") +
-                ", disponibilite=" + disponibilite +
                 '}';
     }
 }

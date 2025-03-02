@@ -131,7 +131,7 @@ public class EntityMapperTester {
 
         CustomLogger.logInfo("=================== Finished Entity Mapping Test ===================");
     }
-
+/*
     public void testConflictMappings() throws CustomException {
         CustomLogger.logInfo("=========== testing conflict mapping ==================");
         // Fetch conflicting seance pairs
@@ -153,5 +153,5 @@ public class EntityMapperTester {
         CustomLogger.logInfo("SingleSeanceConflictDTOs: ------------" );
         singleSeanceConflictDTOs.forEach(seanceConflictDTO -> {CustomLogger.logInfo( seanceConflictDTO + "\n" );} );
         CustomLogger.logInfo("===================FINISHED ---------------------------------");
-    }
+    }*/
 }

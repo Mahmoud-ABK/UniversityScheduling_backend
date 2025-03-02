@@ -1,79 +1,69 @@
 package com.scheduling.universityschedule_backend.model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.lang.Nullable;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "seances")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString(exclude = {"branches", "tds", "tps", "salle", "enseignant"})
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Seance {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String jour;
-    private String heureDebut;
-    private String heureFin;
-    private String type;
+    private String name;
     private String matiere;
 
-    @Nullable
-    private String frequence;
+    @Enumerated(EnumType.STRING)
+    private DayOfWeek jour;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private LocalTime heureDebut;
+    private LocalTime heureFin;
+
+    @Enumerated(EnumType.STRING)
+    private FrequenceType frequence = FrequenceType.WEEKLY;
+
+    // New field for makeup sessions
+    @Nullable
+    private LocalDate date;
+
+    @ManyToOne
     @JoinColumn(name = "salle_id")
     private Salle salle;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
-        name = "seance_branche",
-        joinColumns = @JoinColumn(name = "seance_id"),
-        inverseJoinColumns = @JoinColumn(name = "branche_id")
+            name = "seance_branche",
+            joinColumns = @JoinColumn(name = "seance_id"),
+            inverseJoinColumns = @JoinColumn(name = "branche_id")
     )
-    private List<Branche> branches;
+    private List<Branche> branches = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
-        name = "seance_td",
-        joinColumns = @JoinColumn(name = "seance_id"),
-        inverseJoinColumns = @JoinColumn(name = "td_id")
+            name = "seance_td",
+            joinColumns = @JoinColumn(name = "seance_id"),
+            inverseJoinColumns = @JoinColumn(name = "td_id")
     )
-    private List<TD> tds;
+    private List<TD> tds = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
-        name = "seance_tp",
-        joinColumns = @JoinColumn(name = "seance_id"),
-        inverseJoinColumns = @JoinColumn(name = "tp_id")
+            name = "seance_tp",
+            joinColumns = @JoinColumn(name = "seance_id"),
+            inverseJoinColumns = @JoinColumn(name = "tp_id")
     )
-    private List<TP> tps;
-
-    @Override
-    public String toString() {
-        return "Seance{id=" + id +
-                ", jour='" + jour + '\'' +
-                ", heureDebut='" + heureDebut + '\'' +
-                ", heureFin='" + heureFin + '\'' +
-                ", type='" + type + '\'' +
-                ", matiere='" + matiere + '\'' +
-                ", frequence='" + frequence + '\'' +
-                ", salleId=" + (salle != null ? salle.getId() : "N/A") +
-                ", enseignantId=" + (enseignant != null ? enseignant.getId() : "N/A") +
-                ", branchesCount=" + (branches != null ? branches.size() : "N/A") +
-                ", tdsCount=" + (tds != null ? tds.size() : "N/A") +
-                ", tpsCount=" + (tps != null ? tps.size() : "N/A") +
-                '}';
-    }
+    private List<TP> tps = new ArrayList<>();
 }

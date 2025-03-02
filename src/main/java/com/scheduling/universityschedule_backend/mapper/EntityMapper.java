@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.mapstruct.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +41,103 @@ public abstract class EntityMapper {
     protected PropositionDeRattrapageRepository propositionDeRattrapageRepository;
     @Autowired
     protected SignalRepository signalRepository;
+
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    @Named("stringToDayOfWeek")
+    protected DayOfWeek stringToDayOfWeek(String day) {
+        if (day == null || day.isEmpty()) {
+            return null;
+        }
+
+        try {
+            return DayOfWeek.valueOf(day.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            // Handle French day names or other formats
+            return switch (day.toLowerCase()) {
+                case "lundi" -> DayOfWeek.MONDAY;
+                case "mardi" -> DayOfWeek.TUESDAY;
+                case "mercredi" -> DayOfWeek.WEDNESDAY;
+                case "jeudi" -> DayOfWeek.THURSDAY;
+                case "vendredi" -> DayOfWeek.FRIDAY;
+                case "samedi" -> DayOfWeek.SATURDAY;
+                case "dimanche" -> DayOfWeek.SUNDAY;
+                default -> null;
+            };
+        }
+    }
+
+    // DayOfWeek to String
+    @Named("dayOfWeekToString")
+    protected String dayOfWeekToString(DayOfWeek day) {
+        if (day == null) {
+            return null;
+        }
+        return day.toString();
+    }
+
+    // String to LocalTime
+    @Named("stringToLocalTime")
+    protected LocalTime stringToLocalTime(String time) {
+        if (time == null || time.isEmpty()) {
+            return null;
+        }
+
+        try {
+            return LocalTime.parse(time, TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    // LocalTime to String
+    @Named("localTimeToString")
+    protected String localTimeToString(LocalTime time) {
+        if (time == null) {
+            return null;
+        }
+        return time.format(TIME_FORMATTER);
+    }
+
+    // String to FrequenceType
+    @Named("stringToFrequenceType")
+    protected FrequenceType stringToFrequenceType(String frequence) {
+        return FrequenceType.fromString(frequence);
+    }
+
+    // FrequenceType to String
+    @Named("frequenceTypeToString")
+    protected String frequenceTypeToString(FrequenceType frequence) {
+        if (frequence == null) {
+            return null;
+        }
+        return frequence.toString();
+    }
+
+    // String to LocalDate
+    @Named("stringToLocalDate")
+    protected LocalDate stringToLocalDate(String date) {
+        if (date == null || date.isEmpty()) {
+            return null;
+        }
+
+        try {
+            return LocalDate.parse(date, DATE_FORMATTER);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    // LocalDate to String
+    @Named("localDateToString")
+    protected String localDateToString(LocalDate date) {
+        if (date == null) {
+            return null;
+        }
+        return date.format(DATE_FORMATTER);
+    }
+
 
     // ------------------ Base Personne Mappings ------------------
     public abstract PersonneDTO toPersonneDTO(Personne personne);
@@ -103,21 +205,43 @@ public abstract class EntityMapper {
     public abstract Salle toSalle(SalleDTO dto);
 
     // ------------------ Seance ------------------
-    @Mapping(target = "salleId", source = "salle.id")
-    @Mapping(target = "enseignantId", source = "enseignant.id")
-    @Mapping(target = "brancheIds", source = "branches", qualifiedByName = "mapBrancheListToIds")
-    @Mapping(target = "tdIds", source = "tds", qualifiedByName = "mapTDListToIds")
-    @Mapping(target = "tpIds", source = "tps", qualifiedByName = "mapTPListToIds")
-    @Mapping(target = "frequence", source = "frequence")
-    public abstract SeanceDTO toSeanceDTO(Seance seance);
-
+    @Mapping(target = "jour", source = "jour", qualifiedByName = "stringToDayOfWeek")
+    @Mapping(target = "heureDebut", source = "heureDebut", qualifiedByName = "stringToLocalTime")
+    @Mapping(target = "heureFin", source = "heureFin", qualifiedByName = "stringToLocalTime")
+    @Mapping(target = "frequence", source = "frequence", qualifiedByName = "stringToFrequenceType")
+    @Mapping(target = "date", source = "date", qualifiedByName = "stringToLocalDate")
     @Mapping(target = "salle", source = "salleId", qualifiedByName = "idToSalle")
     @Mapping(target = "enseignant", source = "enseignantId", qualifiedByName = "idToEnseignant")
     @Mapping(target = "branches", source = "brancheIds", qualifiedByName = "mapIdListToBrancheList")
     @Mapping(target = "tds", source = "tdIds", qualifiedByName = "mapIdListToTDList")
     @Mapping(target = "tps", source = "tpIds", qualifiedByName = "mapIdListToTPList")
-    @Mapping(target = "frequence", source = "frequence")
     public abstract Seance toSeance(SeanceDTO dto);
+
+    @Mapping(target = "salleId", source = "salle.id")
+    @Mapping(target = "enseignantId", source = "enseignant.id")
+    @Mapping(target = "brancheIds", source = "branches", qualifiedByName = "mapBrancheListToIds")
+    @Mapping(target = "tdIds", source = "tds", qualifiedByName = "mapTDListToIds")
+    @Mapping(target = "tpIds", source = "tps", qualifiedByName = "mapTPListToIds")
+    @Mapping(target = "jour", source = "jour", qualifiedByName = "dayOfWeekToString")
+    @Mapping(target = "heureDebut", source = "heureDebut", qualifiedByName = "localTimeToString")
+    @Mapping(target = "heureFin", source = "heureFin", qualifiedByName = "localTimeToString")
+    @Mapping(target = "frequence", source = "frequence", qualifiedByName = "frequenceTypeToString")
+    @Mapping(target = "date", source = "date", qualifiedByName = "localDateToString")
+    public abstract SeanceDTO toSeanceDTO(Seance seance);
+
+    // Update update method as well
+    @Mapping(target = "jour", source = "jour", qualifiedByName = "stringToDayOfWeek")
+    @Mapping(target = "heureDebut", source = "heureDebut", qualifiedByName = "stringToLocalTime")
+    @Mapping(target = "heureFin", source = "heureFin", qualifiedByName = "stringToLocalTime")
+    @Mapping(target = "frequence", source = "frequence", qualifiedByName = "stringToFrequenceType")
+    @Mapping(target = "date", source = "date", qualifiedByName = "stringToLocalDate")
+    @Mapping(target = "salle", source = "salleId", qualifiedByName = "idToSalle")
+    @Mapping(target = "enseignant", source = "enseignantId", qualifiedByName = "idToEnseignant")
+    @Mapping(target = "branches", source = "brancheIds", qualifiedByName = "mapIdListToBrancheList")
+    @Mapping(target = "tds", source = "tdIds", qualifiedByName = "mapIdListToTDList")
+    @Mapping(target = "tps", source = "tpIds", qualifiedByName = "mapIdListToTPList")
+    public abstract void updateFromDto(SeanceDTO dto, @MappingTarget Seance seance);
+
 
     // ------------------ SeanceConflict ------------------
     // ------------------ Conflict Mappings ------------------
@@ -411,14 +535,6 @@ public abstract class EntityMapper {
     @Mapping(target = "seanceIds", source = "seances", qualifiedByName = "mapSeancesToIds")
     public abstract void updateFromDto(SalleDTO dto, @MappingTarget Salle salle);
 
-    // ------------------ Seance ------------------
-    @Mapping(target = "salleId", source = "salle.id")
-    @Mapping(target = "enseignantId", source = "enseignant.id")
-    @Mapping(target = "brancheIds", source = "branches", qualifiedByName = "mapBrancheListToIds")
-    @Mapping(target = "tdIds", source = "tds", qualifiedByName = "mapTDListToIds")
-    @Mapping(target = "tpIds", source = "tps", qualifiedByName = "mapTPListToIds")
-    @Mapping(target = "frequence", source = "frequence")
-    public abstract void updateFromDto(SeanceDTO dto, @MappingTarget Seance seance);
 
     // ------------------ Signal ------------------
     @Mapping(target = "enseignantId", source = "enseignant.id")
