@@ -19,7 +19,8 @@ public class SeanceDTO {
     private String heureFin;    // End time of the session
     private String type;        // Type of session (e.g., CR, CI, TD, TP)
     private String matiere;     // Subject
-    private String frequence;   // Frequency of the session (e.g., weekly, biweekly, specific date for catch-up)
+    private String frequence; // Frequency of the session (e.g., weekly, biweekly, specific date for catch-up)
+    private String date ;
 
     // ID of the Salle assigned to the session
     private Long salleId;

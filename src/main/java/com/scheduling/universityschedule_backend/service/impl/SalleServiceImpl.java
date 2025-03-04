@@ -73,71 +73,71 @@ public class SalleServiceImpl implements SalleService {
 
     @Override
     public List<SalleDTO> getAvailableRooms(String date, String day, String startTime, String endTime) throws CustomException {
-        try {
-            // 1. Get all rooms
-            List<Salle> allRooms = salleRepository.findAll();
-
-            // 2. Parse input times with formatters
-            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-            LocalTime requestedStartTime = LocalTime.parse(startTime, timeFormatter);
-            LocalTime requestedEndTime = LocalTime.parse(endTime, timeFormatter);
-            LocalDate requestedDate = LocalDate.parse(date, dateFormatter);
-
-            // 3. Get all sessions that might conflict with the requested time slot
-            List<Seance> conflictingSeances = seanceRepository.findAll().stream()
-                    .filter(seance -> {
-                        // Filter by day of week
-                        if (seance.getJour() != null && seance.getJour().equalsIgnoreCase(day)) {
-                            try {
-                                // Parse seance times
-                                LocalTime seanceStartTime = LocalTime.parse(seance.getHeureDebut(), timeFormatter);
-                                LocalTime seanceEndTime = LocalTime.parse(seance.getHeureFin(), timeFormatter);
-
-                                // Check if times overlap
-                                boolean timesOverlap = isTimeOverlapping(requestedStartTime, requestedEndTime, seanceStartTime, seanceEndTime);
-
-                                if (!timesOverlap) {
-                                    return false; // No time overlap, no conflict
-                                }
-
-                                // Check frequency
-                                String frequency = seance.getFrequence();
-                                if (frequency == null || frequency.isEmpty() || frequency.equals("1/15")) {
-                                    // Weekly or default frequency - always conflicts on the same day
-                                    return true;
-                                } else {
-                                    // For specific dates, check if it's the requested date
-                                    // Attempting to parse frequency as a date - will throw exception if not valid
-                                    LocalDate sessionDate = LocalDate.parse(frequency, dateFormatter);
-                                    return requestedDate.equals(sessionDate);
-                                }
-                            } catch (DateTimeParseException e) {
-                                // Let the upper function handle this
-                                throw new RuntimeException("Error parsing date/time in seance ID: " +
-                                        seance.getId() + ": " + e.getMessage(), e);
-                            }
-                        }
-                        return false;
-                    })
-                    .toList();
-
-            // 4. Extract IDs of rooms that are occupied during the requested time slot
-            Set<Long> occupiedRoomIds = conflictingSeances.stream()
-                    .filter(seance -> seance.getSalle() != null)
-                    .map(seance -> seance.getSalle().getId())
-                    .collect(Collectors.toSet());
-
-            // 5. Filter out occupied rooms and get available ones
-            List<Salle> availableRooms = allRooms.stream()
-                    .filter(room -> !occupiedRoomIds.contains(room.getId()))
-                    .toList();
-
-            // 6. Convert to DTOs and return
-            return availableRooms.stream()
-                    .map(entityMapper::toSalleDTO)
-                    .collect(Collectors.toList());
+       try {
+//            // 1. Get all rooms
+//            List<Salle> allRooms = salleRepository.findAll();
+//
+//            // 2. Parse input times with formatters
+//            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+//            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//
+//            LocalTime requestedStartTime = LocalTime.parse(startTime, timeFormatter);
+//            LocalTime requestedEndTime = LocalTime.parse(endTime, timeFormatter);
+//            LocalDate requestedDate = LocalDate.parse(date, dateFormatter);
+//
+//            // 3. Get all sessions that might conflict with the requested time slot
+//            List<Seance> conflictingSeances = seanceRepository.findAll().stream()
+//                    .filter(seance -> {
+//                        // Filter by day of week
+//                        if (seance.getJour() != null && seance.getJour().equalsIgnoreCase(day)) {
+//                            try {
+//                                // Parse seance times
+//                                LocalTime seanceStartTime = LocalTime.parse(seance.getHeureDebut(), timeFormatter);
+//                                LocalTime seanceEndTime = LocalTime.parse(seance.getHeureFin(), timeFormatter);
+//
+//                                // Check if times overlap
+//                                boolean timesOverlap = isTimeOverlapping(requestedStartTime, requestedEndTime, seanceStartTime, seanceEndTime);
+//
+//                                if (!timesOverlap) {
+//                                    return false; // No time overlap, no conflict
+//                                }
+//
+//                                // Check frequency
+//                                String frequency = seance.getFrequence();
+//                                if (frequency == null || frequency.isEmpty() || frequency.equals("1/15")) {
+//                                    // Weekly or default frequency - always conflicts on the same day
+//                                    return true;
+//                                } else {
+//                                    // For specific dates, check if it's the requested date
+//                                    // Attempting to parse frequency as a date - will throw exception if not valid
+//                                    LocalDate sessionDate = LocalDate.parse(frequency, dateFormatter);
+//                                    return requestedDate.equals(sessionDate);
+//                                }
+//                            } catch (DateTimeParseException e) {
+//                                // Let the upper function handle this
+//                                throw new RuntimeException("Error parsing date/time in seance ID: " +
+//                                        seance.getId() + ": " + e.getMessage(), e);
+//                            }
+//                        }
+//                        return false;
+//                    })
+//                    .toList();
+//
+//            // 4. Extract IDs of rooms that are occupied during the requested time slot
+//            Set<Long> occupiedRoomIds = conflictingSeances.stream()
+//                    .filter(seance -> seance.getSalle() != null)
+//                    .map(seance -> seance.getSalle().getId())
+//                    .collect(Collectors.toSet());
+//
+//            // 5. Filter out occupied rooms and get available ones
+//            List<Salle> availableRooms = allRooms.stream()
+//                    .filter(room -> !occupiedRoomIds.contains(room.getId()))
+//                    .toList();
+//
+//            // 6. Convert to DTOs and return
+//            return availableRooms.stream()
+//                    .map(entityMapper::toSalleDTO)
+//                    .collect(Collectors.toList());
         } catch (DateTimeParseException e) {
             // Convert to custom exception with clear message and rethrow
             throw new CustomException("Invalid date/time format: " + e.getMessage(), e);
@@ -147,6 +147,7 @@ public class SalleServiceImpl implements SalleService {
         } catch (Exception e) {
             throw new CustomException("Failed to find available rooms: " + e.getMessage(), e);
         }
+        return List.of();
     }
 
     /**

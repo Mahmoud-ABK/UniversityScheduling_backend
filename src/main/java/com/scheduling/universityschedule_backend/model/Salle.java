@@ -19,7 +19,6 @@ import java.util.List;
     name = "Salle.withSeances",
     attributeNodes = @NamedAttributeNode("seances")
 )
-@ToString(exclude = {"seances"})
 public class Salle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

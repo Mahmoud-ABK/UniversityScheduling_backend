@@ -105,7 +105,7 @@ public class SeanceServiceImpl implements SeanceService {
     @Override
     public List<SingleSeanceConflictDTO> getConflictsForSession(Long seanceId) throws CustomException {
         try {
-            List<Object[]> conflicts = seanceRepository.findRoomConflictsForSeance(seanceId,FrequenceType.BIWEEKLY,FrequenceType.CATCHUP);
+            List<Object[]> conflicts = seanceRepository.findRoomConflictsForSeanceById(seanceId,FrequenceType.BIWEEKLY,FrequenceType.CATCHUP);
             return entityMapper.toSingleSeanceConflictDTOList(conflicts);
         } catch (Exception e) {
             throw new CustomException("Failed to retrieve conflicts for session", e);

@@ -16,8 +16,6 @@ public class SalleDTO {
     private String type;         // Room type (e.g., lecture hall, lab)
     private int capacite;        // Capacity of the room
 
-    // List of available time slots for the room
-    private List<String> disponibilite;
 
     // List of Seance IDs representing sessions scheduled in the room
     private List<Long> seanceIds;

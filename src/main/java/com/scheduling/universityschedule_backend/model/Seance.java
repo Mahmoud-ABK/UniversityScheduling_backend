@@ -50,7 +50,7 @@ public class Seance {
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "seance_branche",
             joinColumns = @JoinColumn(name = "seance_id"),
@@ -58,7 +58,7 @@ public class Seance {
     )
     private List<Branche> branches = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "seance_td",
             joinColumns = @JoinColumn(name = "seance_id"),
@@ -66,7 +66,7 @@ public class Seance {
     )
     private List<TD> tds = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "seance_tp",
             joinColumns = @JoinColumn(name = "seance_id"),
