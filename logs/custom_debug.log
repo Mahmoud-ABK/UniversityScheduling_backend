@@ -1,27 +1,551 @@
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger - ==================== STARTING FULL JPA TEST SUITE ======================
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger - ----- Date/Time Type Tests -----
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger - ================ Testing Date and Time Operations ================
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger - Created test session: Test Date/Time Session
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger - Retrieved session details:
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger -   Day: WEDNESDAY
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger -   Start time: 14:30
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger -   End time: 16:00
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger -   Frequency: 1/15
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger -   Date (should be null): null
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger - Saved session: []
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger - ================ Finished Date and Time Operations Test ================
-2025-03-04 03:47:10 [restartedMain] INFO  CustomLogger - ==================== FULL JPA TEST SUITE COMPLETED ======================
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger - ==================== STARTING FULL JPA TEST SUITE ======================
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger - ----- Date/Time Type Tests -----
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger - ================ Testing Date and Time Operations ================
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger - Created test session: Test Date/Time Session
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger - Retrieved session details:
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger -   Day: WEDNESDAY
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger -   Start time: 14:30
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger -   End time: 16:00
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger -   Frequency: 1/15
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger -   Date (should be null): null
-2025-03-04 03:48:29 [restartedMain] ERROR CustomLogger - Error testing date and time operations: null
-2025-03-04 03:48:29 [restartedMain] INFO  CustomLogger - ================ Finished Date and Time Operations Test ================
-2025-03-04 03:48:29 [restartedMain] ERROR CustomLogger - Error during testing: Transaction silently rolled back because it has been marked as rollback-only
-2025-03-04 03:48:29 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - ==================== STARTING FULL JPA TEST SUITE ======================
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - =============================Populating Database====================
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - Administrateur count: 2
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - Enseignant count: 20
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - Technicien count: 2
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - Branche count: 1
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - Salle count: 2
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - TD count: 3
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - TP count: 4
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - Etudiant count: 60
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - Seance count: 40
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - Signal count: 6
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - PropositionDeRattrapage count: 6
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - Notification count: 10
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - FichierExcel count: 4
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - Database populated with sampleSize = 20
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - ========================Finished populating database===========
+2025-03-04 22:29:17 [restartedMain] INFO  CustomLogger - ==================== FULL JPA TEST SUITE COMPLETED ======================
+2025-03-04 22:30:36 [restartedMain] INFO  CustomLogger - ==================== STARTING FULL JPA TEST SUITE ======================
+2025-03-04 22:30:36 [restartedMain] INFO  CustomLogger - =============================Populating Database====================
+2025-03-04 22:30:36 [restartedMain] INFO  CustomLogger - Administrateur count: 2
+2025-03-04 22:30:36 [restartedMain] INFO  CustomLogger - Enseignant count: 20
+2025-03-04 22:30:36 [restartedMain] INFO  CustomLogger - Technicien count: 2
+2025-03-04 22:30:36 [restartedMain] INFO  CustomLogger - Branche count: 1
+2025-03-04 22:30:36 [restartedMain] INFO  CustomLogger - Salle count: 2
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - TD count: 3
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - TP count: 5
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - Etudiant count: 60
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - Seance count: 40
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - Signal count: 6
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - PropositionDeRattrapage count: 6
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - Notification count: 10
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - FichierExcel count: 4
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - Database populated with sampleSize = 20
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - ========================Finished populating database===========
+2025-03-04 22:30:37 [restartedMain] INFO  CustomLogger - ==================== FULL JPA TEST SUITE COMPLETED ======================
+2025-03-04 22:31:41 [restartedMain] INFO  CustomLogger - ==================== STARTING FULL JPA TEST SUITE ======================
+2025-03-04 22:31:41 [restartedMain] INFO  CustomLogger - =============================Retrieving Sample Data====================
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Enseignant: Jackson Susan | Hours: 29
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Enseignant: Taylor Susan | Hours: 20
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Enseignant: Williams Barbara | Hours: 19
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Enseignant: Jackson Susan | Hours: 29
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Enseignant: Johnson Jennifer | Hours: 31
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Etudiant: MAT0 | Branch: GL
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Etudiant: MAT1 | Branch: GL
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Etudiant: MAT2 | Branch: GL
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Etudiant: MAT3 | Branch: GL
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Etudiant: MAT4 | Branch: GL
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Seance: Matiere 0 | FRIDAY 09:40
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Seance: Matiere 1 | FRIDAY 08:05
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Seance: Matiere 2 | WEDNESDAY 15:45
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Seance: Matiere 3 | FRIDAY 12:35
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Seance: Matiere 4 | WEDNESDAY 11:30
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Retrieved 5 enseignants.
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Retrieved 5 etudiants.
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - Retrieved 5 seances.
+2025-03-04 22:31:42 [restartedMain] INFO  CustomLogger - ==================== FULL JPA TEST SUITE COMPLETED ======================
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ==================== STARTING FULL JPA TEST SUITE ======================
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ============================= Retrieving Entity Samples =====================
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ----- Administrateurs (2) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Code: ADM0 | Name: White Elizabeth | Email: admin0@example.com | CIN: 710116936
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Code: ADM1 | Name: Brown John | Email: admin1@example.com | CIN: 249723116
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- Enseignants (3) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Code: ENS0 | Hours: 29 | Tel: 5084919359 | Seances: 3
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Code: ENS1 | Hours: 20 | Tel: 4205965154 | Seances: 0
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Code: ENS2 | Hours: 19 | Tel: 9220128708 | Seances: 5
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- Techniciens (2) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Code: TECH0 | Address: Tech Address 0 | Email: tech0@example.com
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Code: TECH1 | Address: Tech Address 1 | Email: tech1@example.com
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- Etudiants (3) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Matricule: MAT0 | Branch: GL | TP Group: 3
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Matricule: MAT1 | Branch: GL | TP Group: 4
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Matricule: MAT2 | Branch: GL | TP Group: 2
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- Branches (2) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Level: MP1 | Specialty: GL | TDs: 3 | Department: informatique
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Level: MR2 | Specialty: I3 | TDs: 2 | Department: informatique
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- Salles (3) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: SAL0 | Type: Lecture Hall | Capacity: 161 | Seances: 20
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: SAL1 | Type: Lecture Hall | Capacity: 98 | Seances: 20
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: SAL0 | Type: Lecture Hall | Capacity: 186 | Seances: 18
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- Seances (3) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Subject: Matiere 0 | Day: FRIDAY | Time: 09:40-11:16 | Type: 1/15
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Subject: Matiere 1 | Day: FRIDAY | Time: 08:05-10:44 | Type: weekly
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - Subject: Matiere 2 | Day: WEDNESDAY | Time: 15:45-18:30 | Type: 1/15
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- TDs (2) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 1 | Group: 3 | TPs: 3 | Branch: MP1
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 2 | Group: 5 | TPs: 1 | Branch: MP1
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- TPs (2) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 1 | Group: 2 | TD: 3 | Students: 12
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 2 | Group: 1 | TD: 1 | Students: 18
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- Signals (2) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 1 | Severity: High | Date: 2025-03-05T08:18:17.550048 | Teacher: ENS3
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 2 | Severity: High | Date: 2025-03-05T03:35:17.550080 | Teacher: ENS4
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- Propositions (2) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 1 | Date: 2025-03-08T22:29:17.562272 | Status: Pending | Teacher: ENS9
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 2 | Date: 2025-03-07T22:29:17.562336 | Status: Pending | Teacher: ENS5
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- Notifications (3) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 1 | Type: Update | Read: false | Sender: 710116936 | Receiver: Jones
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 2 | Type: Update | Read: false | Sender: 249723116 | Receiver: Taylor
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 3 | Type: Update | Read: false | Sender: 710116936 | Receiver: Brown
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - 
+----- Fichiers (2) -----
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 1 | File: schedule_0.xlsx | Status: Imported | Errors: No errors
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ID: 2 | File: schedule_1.xlsx | Status: Imported | Errors: No errors
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ============================= Retrieval Complete =====================
+2025-03-04 23:05:38 [restartedMain] INFO  CustomLogger - ==================== FULL JPA TEST SUITE COMPLETED ======================
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ==================== STARTING FULL JPA TEST SUITE ======================
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ==================== Modifying Sample Entities ====================
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - 
+----- Original Enseignant -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Code: ENS0
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Hours: 29
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Email: enseignant0@example.com
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ----- Modified Enseignant -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - New hours: 34
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - 
+----- Original Enseignant -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Code: ENS1
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Hours: 20
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Email: enseignant1@example.com
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ----- Modified Enseignant -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - New hours: 25
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - 
+----- Original Etudiant -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Matricule: MAT0
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Address: Student Address 0
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ----- Modified Etudiant -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - New address: Updated Address 7
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - 
+----- Original Etudiant -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Matricule: MAT1
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Address: Student Address 1
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ----- Modified Etudiant -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - New address: Updated Address 7
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - 
+----- Original Seance -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Matiere: Matiere 0
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Time: 09:40-11:16
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Salle: SAL1
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ----- Modified Seance -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - New time: 10:10-11:46
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - 
+----- Original Seance -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Matiere: Matiere 1
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Time: 08:05-10:44
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Salle: SAL1
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ----- Modified Seance -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - New time: 08:35-11:14
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - 
+----- Original Salle -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ID: SAL0
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Type: Lecture Hall
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Capacity: 161
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ----- Modified Salle -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - New type: Modified Type
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - New capacity: 171
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - 
+----- Original Salle -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ID: SAL1
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Type: Lecture Hall
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - Capacity: 98
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ----- Modified Salle -----
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - New type: Modified Type
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - New capacity: 108
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ==================== Modification Complete ====================
+2025-03-04 23:07:05 [restartedMain] INFO  CustomLogger - ==================== FULL JPA TEST SUITE COMPLETED ======================
+2025-03-04 23:08:41 [restartedMain] INFO  CustomLogger - ==================== STARTING FULL JPA TEST SUITE ======================
+2025-03-04 23:08:41 [restartedMain] INFO  CustomLogger - =============================Deleting Sample Data====================
+2025-03-04 23:08:41 [restartedMain] INFO  CustomLogger - Deleted 2 notifications
+2025-03-04 23:08:41 [restartedMain] INFO  CustomLogger - Deleted 2 signals
+2025-03-04 23:08:41 [restartedMain] INFO  CustomLogger - Deleted 1 fichiers
+2025-03-04 23:08:41 [restartedMain] INFO  CustomLogger - ==================== FULL JPA TEST SUITE COMPLETED ======================
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - ==================== STARTING FULL JPA TEST SUITE ======================
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - ==================== Testing List Fetching ====================
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- Enseignant ENS0 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Seances (3):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 10 | 15:25-18:07
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 12 | 16:30-19:17
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 29 | 12:55-15:20
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Propositions (0):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Signals (0):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- Enseignant ENS1 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Seances (0):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Propositions (0):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Signals (0):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- Branche GL -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Seances (40):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 0 | 10:10-11:46
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 1 | 08:35-11:14
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 2 | 15:45-18:30
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- Branche I3 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Seances (40):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 0 | 13:30-15:25
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 1 | 13:00-15:02
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 2 | 14:45-17:14
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- Seance Matiere 0 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Branches (1):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - MP1 GL
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - TDs (1):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - TD3 | GL
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - TPs (1):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - TP2 | 5
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- Seance Matiere 1 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Branches (1):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - MP1 GL
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - TDs (1):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - TD3 | GL
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - TPs (1):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - TP1 | 5
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- Salle SAL0 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Seances (20):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 3 | 12:35-15:13
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 5 | 10:35-13:23
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 8 | 16:50-19:26
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- Salle SAL1 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Seances (20):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 0 | 10:10-11:46
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 1 | 08:35-11:14
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 2 | 15:45-18:30
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- TD 3 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - TPs (1):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - TP1 | Students: 18
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Seances (13):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 0 | 10:10-11:46
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 1 | 08:35-11:14
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 4 | 11:30-14:10
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- TD 5 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - TPs (1):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - TP1 | Students: 14
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Seances (14):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 3 | 12:35-15:13
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 5 | 10:35-13:23
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 8 | 16:50-19:26
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- TP 2 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Etudiants (12):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - MAT3 | Brown Richard
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - MAT5 | Taylor Susan
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - MAT11 | Anderson William
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Seances (11):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 0 | 10:10-11:46
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 2 | 15:45-18:30
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 13 | 13:40-15:31
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- TP 1 -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Etudiants (18):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - MAT2 | Williams Michael
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - MAT17 | Miller Robert
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - MAT19 | Williams David
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Seances (10):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 4 | 11:30-14:10
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 14 | 12:50-14:37
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - Matiere 15 | 14:25-16:37
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- Fichier schedule_1.xlsx -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Errors (1):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - No errors
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - 
+----- Fichier schedule_2.xlsx -----
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - Errors (1):
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - - No errors
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - ==================== List Fetching Complete ====================
+2025-03-04 23:09:14 [restartedMain] INFO  CustomLogger - ==================== FULL JPA TEST SUITE COMPLETED ======================
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - ==================== STARTING FULL JPA TEST SUITE ======================
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - ==================== Testing List Fetching ====================
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- Enseignant ENS0 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Seances (3):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 10 | 15:25-18:07
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 12 | 16:30-19:17
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 29 | 12:55-15:20
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Propositions (0):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Signals (0):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- Enseignant ENS1 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Seances (0):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Propositions (0):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Signals (0):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- Branche GL -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Seances (40):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - FRIDAY- Matiere 0 | 10:10-11:46
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - FRIDAY- Matiere 1 | 08:35-11:14
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - WEDNESDAY- Matiere 2 | 15:45-18:30
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- Branche I3 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Seances (40):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - FRIDAY- Matiere 0 | 13:30-15:25
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - MONDAY- Matiere 1 | 13:00-15:02
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - WEDNESDAY- Matiere 2 | 14:45-17:14
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- Seance Matiere 0 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Branches (1):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - MP1 GL
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - TDs (1):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - TD3 | GL
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - TPs (1):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - TP2 | 5
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- Seance Matiere 1 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Branches (1):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - MP1 GL
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - TDs (1):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - TD3 | GL
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - TPs (1):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - TP1 | 5
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- Salle SAL0 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Seances (20):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 3 | 12:35-15:13
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 5 | 10:35-13:23
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 8 | 16:50-19:26
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- Salle SAL1 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Seances (20):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 0 | 10:10-11:46
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 1 | 08:35-11:14
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 2 | 15:45-18:30
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- TD 3 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - TPs (1):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - TP1 | Students: 18
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Seances (13):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 0 | 10:10-11:46
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 1 | 08:35-11:14
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 4 | 11:30-14:10
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- TD 5 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - TPs (1):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - TP1 | Students: 14
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Seances (14):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 3 | 12:35-15:13
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 5 | 10:35-13:23
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 8 | 16:50-19:26
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- TP 2 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Etudiants (12):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - MAT3 | Brown Richard
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - MAT5 | Taylor Susan
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - MAT11 | Anderson William
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Seances (11):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 0 | 10:10-11:46
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 2 | 15:45-18:30
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 13 | 13:40-15:31
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- TP 1 -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Etudiants (18):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - MAT2 | Williams Michael
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - MAT17 | Miller Robert
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - MAT19 | Williams David
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Seances (10):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 4 | 11:30-14:10
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 14 | 12:50-14:37
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - Matiere 15 | 14:25-16:37
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- Fichier schedule_1.xlsx -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Errors (1):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - No errors
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - 
+----- Fichier schedule_2.xlsx -----
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - Errors (1):
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - - No errors
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - ==================== List Fetching Complete ====================
+2025-03-04 23:13:22 [restartedMain] INFO  CustomLogger - ==================== FULL JPA TEST SUITE COMPLETED ======================
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - ==================== entity mapper test======================
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - =================== Testing Entity Mapper (Both Ways) ====================
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | PersonneDTO: PersonneDTO(id=1, cin=710116936, nom=White, prenom=Elizabeth, email=admin0@example.com, tel=4817651836, adresse=Admin Address 0)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | EnseignantDTO: EnseignantDTO(codeEnseignant=ENS0, heures=34, seanceIds=[11, 13, 30], propositionIds=[], signalIds=[])
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | BrancheDTO: BrancheDTO(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique, seanceIds=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40])
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | SalleDTO: SalleDTO(id=1, identifiant=SAL0, type=Modified Type, capacite=171, seanceIds=[4, 6, 9, 12, 15, 16, 18, 19, 20, 21, 23, 28, 31, 33, 34, 35, 37, 38, 39, 40])
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | SeanceDTO: SeanceDTO(id=1, jour=FRIDAY, heureDebut=10:10, heureFin=11:46, type=null, matiere=Matiere 0, frequence=1/15, date=2025-03-04, salleId=2, enseignantId=9, brancheIds=[1], tdIds=[1], tpIds=[1])
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | TDDTO: TDDTO(id=1, nb=3, nbTP=3, brancheId=1, tpIds=[2], seanceIds=[1, 2, 5, 10, 12, 14, 15, 16, 18, 31, 36, 38, 39])
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | TPDTO: TPDTO(id=1, nb=2, tdId=3, etudiantIds=[28, 30, 36, 37, 38, 43, 46, 58, 61, 63, 64, 65], seanceIds=[1, 3, 14, 19, 22, 23, 27, 31, 32, 33, 38])
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | SignalDTO: SignalDTO(id=3, message=Signal Issue 2, severity=High, timestamp=2025-03-05T01:11:17.550085, enseignantId=10)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | PropositionDeRattrapageDTO: PropositionDeRattrapageDTO(id=1, date=2025-03-08T22:29:17.562272, reason=Rattrapage for session 0, status=Pending, enseignantId=12)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | NotificationDTO: NotificationDTO(id=3, message=Notification 2, date=2025-03-05T13:00:17.570112, type=Update, isread=false, recepteurId=16, expediteurId=1)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Entity -> DTO | FichierExcelDTO: FichierExcelDTO(id=2, fileName=schedule_1.xlsx, status=Imported, errors=[No errors], importDate=2025-03-04T22:29:17.580837)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - Mapping from DTO to Entity
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Personne: Personne(id=1, cin=710116936, nom=White, prenom=Elizabeth, email=admin0@example.com, tel=4817651836, adresse=Admin Address 0)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Enseignant: Enseignant(codeEnseignant=ENS0, heures=34)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@1ad7105c
+
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@2449de56
+
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@583509e
+
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Branche: Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Salle: Salle{id=1, identifiant='SAL0', type='Modified Type', capacite=171, seancesCount=20}
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Seance: com.scheduling.universityschedule_backend.model.Seance@16dc55fc
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped TD: TD(id=1, nb=3, nbTP=3, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique))
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped TP: TP(id=1, nb=2, td=TD(id=3, nb=5, nbTP=2, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)))
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Signal: Signal(id=3, message=Signal Issue 2, severity=High, timestamp=2025-03-05T01:11:17.550085)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped PropositionDeRattrapage: PropositionDeRattrapage(id=1, date=2025-03-08T22:29:17.562272, reason=Rattrapage for session 0, status=Pending)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Notification: Notification(id=3, message=Notification 2, date=2025-03-05T13:00:17.570112, type=Update, isread=false)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped FichierExcel: FichierExcel(id=2, fileName=schedule_1.xlsx, status=Imported, errors=[No errors], importDate=2025-03-04T22:29:17.580837)
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - =================== Finished Entity Mapping Test ===================
+2025-03-04 23:16:48 [restartedMain] INFO  CustomLogger - ==================== entity mapper test end ======================
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - ==================== entity mapper test======================
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - =================== Testing Entity Mapper (Both Ways) ====================
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | PersonneDTO: PersonneDTO(id=1, cin=710116936, nom=White, prenom=Elizabeth, email=admin0@example.com, tel=4817651836, adresse=Admin Address 0)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | EnseignantDTO: EnseignantDTO(codeEnseignant=ENS0, heures=34, seanceIds=[11, 13, 30], propositionIds=[], signalIds=[])
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | BrancheDTO: BrancheDTO(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique, seanceIds=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40])
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | SalleDTO: SalleDTO(id=1, identifiant=SAL0, type=Modified Type, capacite=171, seanceIds=[4, 6, 9, 12, 15, 16, 18, 19, 20, 21, 23, 28, 31, 33, 34, 35, 37, 38, 39, 40])
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | SeanceDTO: SeanceDTO(id=1, jour=FRIDAY, heureDebut=10:10, heureFin=11:46, type=null, matiere=Matiere 0, frequence=1/15, date=2025-03-04, salleId=2, enseignantId=9, brancheIds=[1], tdIds=[1], tpIds=[1])
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | TDDTO: TDDTO(id=1, nb=3, nbTP=3, brancheId=1, tpIds=[2], seanceIds=[1, 2, 5, 10, 12, 14, 15, 16, 18, 31, 36, 38, 39])
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | TPDTO: TPDTO(id=1, nb=2, tdId=3, etudiantIds=[28, 30, 36, 37, 38, 43, 46, 58, 61, 63, 64, 65], seanceIds=[1, 3, 14, 19, 22, 23, 27, 31, 32, 33, 38])
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | SignalDTO: SignalDTO(id=3, message=Signal Issue 2, severity=High, timestamp=2025-03-05T01:11:17.550085, enseignantId=10)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | PropositionDeRattrapageDTO: PropositionDeRattrapageDTO(id=1, date=2025-03-08T22:29:17.562272, reason=Rattrapage for session 0, status=Pending, enseignantId=12)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | NotificationDTO: NotificationDTO(id=3, message=Notification 2, date=2025-03-05T13:00:17.570112, type=Update, isread=false, recepteurId=16, expediteurId=1)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Entity -> DTO | FichierExcelDTO: FichierExcelDTO(id=2, fileName=schedule_1.xlsx, status=Imported, errors=[No errors], importDate=2025-03-04T22:29:17.580837)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - Mapping from DTO to Entity========================================================
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Personne: Personne(id=1, cin=710116936, nom=White, prenom=Elizabeth, email=admin0@example.com, tel=4817651836, adresse=Admin Address 0)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Enseignant: Enseignant(codeEnseignant=ENS0, heures=34)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@73002bce
+
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@1c47b774
+
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@6cd2991b
+
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Branche: Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Salle: Salle{id=1, identifiant='SAL0', type='Modified Type', capacite=171, seancesCount=20}
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Seance: com.scheduling.universityschedule_backend.model.Seance@26511672
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped TD: TD(id=1, nb=3, nbTP=3, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique))
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped TP: TP(id=1, nb=2, td=TD(id=3, nb=5, nbTP=2, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)))
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Signal: Signal(id=3, message=Signal Issue 2, severity=High, timestamp=2025-03-05T01:11:17.550085)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped PropositionDeRattrapage: PropositionDeRattrapage(id=1, date=2025-03-08T22:29:17.562272, reason=Rattrapage for session 0, status=Pending)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Notification: Notification(id=3, message=Notification 2, date=2025-03-05T13:00:17.570112, type=Update, isread=false)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped FichierExcel: FichierExcel(id=2, fileName=schedule_1.xlsx, status=Imported, errors=[No errors], importDate=2025-03-04T22:29:17.580837)
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - =================== Finished Entity Mapping Test ===================
+2025-03-04 23:18:56 [restartedMain] INFO  CustomLogger - ==================== entity mapper test end ======================
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - ==================== entity mapper test======================
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - =================== Testing Entity Mapper (Both Ways) ====================
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | PersonneDTO: PersonneDTO(id=1, cin=710116936, nom=White, prenom=Elizabeth, email=admin0@example.com, tel=4817651836, adresse=Admin Address 0)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | EnseignantDTO: EnseignantDTO(codeEnseignant=ENS0, heures=34, seanceIds=[11, 13, 30], propositionIds=[], signalIds=[])
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | BrancheDTO: BrancheDTO(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique, seanceIds=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40])
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | SalleDTO: SalleDTO(id=1, identifiant=SAL0, type=Modified Type, capacite=171, seanceIds=[4, 6, 9, 12, 15, 16, 18, 19, 20, 21, 23, 28, 31, 33, 34, 35, 37, 38, 39, 40])
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | SeanceDTO: SeanceDTO(id=1, jour=FRIDAY, heureDebut=10:10, heureFin=11:46, type=null, matiere=Matiere 0, frequence=1/15, date=2025-03-04, salleId=2, enseignantId=9, brancheIds=[1], tdIds=[1], tpIds=[1])
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | TDDTO: TDDTO(id=1, nb=3, nbTP=3, brancheId=1, tpIds=[2], seanceIds=[1, 2, 5, 10, 12, 14, 15, 16, 18, 31, 36, 38, 39])
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | TPDTO: TPDTO(id=1, nb=2, tdId=3, etudiantIds=[28, 30, 36, 37, 38, 43, 46, 58, 61, 63, 64, 65], seanceIds=[1, 3, 14, 19, 22, 23, 27, 31, 32, 33, 38])
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | SignalDTO: SignalDTO(id=3, message=Signal Issue 2, severity=High, timestamp=2025-03-05T01:11:17.550085, enseignantId=10)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | PropositionDeRattrapageDTO: PropositionDeRattrapageDTO(id=1, date=2025-03-08T22:29:17.562272, reason=Rattrapage for session 0, status=Pending, enseignantId=12)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | NotificationDTO: NotificationDTO(id=3, message=Notification 2, date=2025-03-05T13:00:17.570112, type=Update, isread=false, recepteurId=16, expediteurId=1)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Entity -> DTO | FichierExcelDTO: FichierExcelDTO(id=2, fileName=schedule_1.xlsx, status=Imported, errors=[No errors], importDate=2025-03-04T22:29:17.580837)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - Mapping from DTO to Entity========================================================
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Personne: Personne(id=1, cin=710116936, nom=White, prenom=Elizabeth, email=admin0@example.com, tel=4817651836, adresse=Admin Address 0)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Enseignant: Enseignant(codeEnseignant=ENS0, heures=34)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@1b04b507
+
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@5f1765c0
+
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@6f1868c
+
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Branche: Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Salle: Salle{id=1, identifiant='SAL0', type='Modified Type', capacite=171, seancesCount=20}
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Seance: com.scheduling.universityschedule_backend.model.Seance@5e45c0f1
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped TD: TD(id=1, nb=3, nbTP=3, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique))
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped TP: TP(id=1, nb=2, td=TD(id=3, nb=5, nbTP=2, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)))
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Signal: Signal(id=3, message=Signal Issue 2, severity=High, timestamp=2025-03-05T01:11:17.550085)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped PropositionDeRattrapage: PropositionDeRattrapage(id=1, date=2025-03-08T22:29:17.562272, reason=Rattrapage for session 0, status=Pending)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Notification: Notification(id=3, message=Notification 2, date=2025-03-05T13:00:17.570112, type=Update, isread=false)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped FichierExcel: FichierExcel(id=2, fileName=schedule_1.xlsx, status=Imported, errors=[No errors], importDate=2025-03-04T22:29:17.580837)
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - =================== Finished Entity Mapping Test ===================
+2025-03-04 23:20:14 [restartedMain] INFO  CustomLogger - ==================== entity mapper test end ======================
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - ==================== entity mapper test======================
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - =================== Testing Entity Mapper (Both Ways) ====================
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | PersonneDTO: PersonneDTO(id=1, cin=710116936, nom=White, prenom=Elizabeth, email=admin0@example.com, tel=4817651836, adresse=Admin Address 0)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | EnseignantDTO: EnseignantDTO(codeEnseignant=ENS0, heures=34, seanceIds=[11, 13, 30], propositionIds=[], signalIds=[])
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | BrancheDTO: BrancheDTO(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique, seanceIds=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40])
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | SalleDTO: SalleDTO(id=1, identifiant=SAL0, type=Modified Type, capacite=171, seanceIds=[4, 6, 9, 12, 15, 16, 18, 19, 20, 21, 23, 28, 31, 33, 34, 35, 37, 38, 39, 40])
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | SeanceDTO: SeanceDTO(id=1, jour=FRIDAY, heureDebut=10:10, heureFin=11:46, type=null, matiere=Matiere 0, frequence=1/15, date=2025-03-04, salleId=2, enseignantId=9, brancheIds=[1], tdIds=[1], tpIds=[1])
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | TDDTO: TDDTO(id=1, nb=3, nbTP=3, brancheId=1, tpIds=[2], seanceIds=[1, 2, 5, 10, 12, 14, 15, 16, 18, 31, 36, 38, 39])
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | TPDTO: TPDTO(id=1, nb=2, tdId=3, etudiantIds=[28, 30, 36, 37, 38, 43, 46, 58, 61, 63, 64, 65], seanceIds=[1, 3, 14, 19, 22, 23, 27, 31, 32, 33, 38])
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | SignalDTO: SignalDTO(id=3, message=Signal Issue 2, severity=High, timestamp=2025-03-05T01:11:17.550085, enseignantId=10)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | PropositionDeRattrapageDTO: PropositionDeRattrapageDTO(id=1, date=2025-03-08T22:29:17.562272, reason=Rattrapage for session 0, status=Pending, enseignantId=12)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | NotificationDTO: NotificationDTO(id=3, message=Notification 2, date=2025-03-05T13:00:17.570112, type=Update, isread=false, recepteurId=16, expediteurId=1)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | FichierExcelDTO: FichierExcelDTO(id=2, fileName=schedule_1.xlsx, status=Imported, errors=[No errors], importDate=2025-03-04T22:29:17.580837)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - Mapping from DTO to Entity========================================================
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Personne: Personne(id=1, cin=710116936, nom=White, prenom=Elizabeth, email=admin0@example.com, tel=4817651836, adresse=Admin Address 0)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Enseignant: Enseignant(codeEnseignant=ENS0, heures=34)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@7b1e0f2
+
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@35347aa5
+
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - examining datafetching com.scheduling.universityschedule_backend.model.Seance@4038d52b
+
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Branche: Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Salle: Salle{id=1, identifiant='SAL0', type='Modified Type', capacite=171, seancesCount=20}
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Seance: com.scheduling.universityschedule_backend.model.Seance@2e0a0f52
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped TD: TD(id=1, nb=3, nbTP=3, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique))
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped TP: TP(id=1, nb=2, td=TD(id=3, nb=5, nbTP=2, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)))
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Signal: Signal(id=3, message=Signal Issue 2, severity=High, timestamp=2025-03-05T01:11:17.550085)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped PropositionDeRattrapage: PropositionDeRattrapage(id=1, date=2025-03-08T22:29:17.562272, reason=Rattrapage for session 0, status=Pending)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Notification: Notification(id=3, message=Notification 2, date=2025-03-05T13:00:17.570112, type=Update, isread=false)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped FichierExcel: FichierExcel(id=2, fileName=schedule_1.xlsx, status=Imported, errors=[No errors], importDate=2025-03-04T22:29:17.580837)
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - =================== Finished Entity Mapping Test ===================
+2025-03-04 23:20:17 [restartedMain] INFO  CustomLogger - ==================== entity mapper test end ======================
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - ==================== entity mapper test======================
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - =================== Testing Entity Mapper (Both Ways) ====================
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | PersonneDTO: PersonneDTO(id=1, cin=710116936, nom=White, prenom=Elizabeth, email=admin0@example.com, tel=4817651836, adresse=Admin Address 0)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | EnseignantDTO: EnseignantDTO(codeEnseignant=ENS0, heures=34, seanceIds=[11, 13, 30], propositionIds=[], signalIds=[])
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | BrancheDTO: BrancheDTO(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique, seanceIds=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40])
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | SalleDTO: SalleDTO(id=1, identifiant=SAL0, type=Modified Type, capacite=171, seanceIds=[4, 6, 9, 12, 15, 16, 18, 19, 20, 21, 23, 28, 31, 33, 34, 35, 37, 38, 39, 40])
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | SeanceDTO: SeanceDTO(id=1, jour=FRIDAY, heureDebut=10:10, heureFin=11:46, type=null, matiere=Matiere 0, frequence=1/15, date=2025-03-04, salleId=2, enseignantId=9, brancheIds=[1], tdIds=[1], tpIds=[1])
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | TDDTO: TDDTO(id=1, nb=3, nbTP=3, brancheId=1, tpIds=[2], seanceIds=[1, 2, 5, 10, 12, 14, 15, 16, 18, 31, 36, 38, 39])
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | TPDTO: TPDTO(id=1, nb=2, tdId=3, etudiantIds=[28, 30, 36, 37, 38, 43, 46, 58, 61, 63, 64, 65], seanceIds=[1, 3, 14, 19, 22, 23, 27, 31, 32, 33, 38])
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | SignalDTO: SignalDTO(id=3, message=Signal Issue 2, severity=High, timestamp=2025-03-05T01:11:17.550085, enseignantId=10)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | PropositionDeRattrapageDTO: PropositionDeRattrapageDTO(id=1, date=2025-03-08T22:29:17.562272, reason=Rattrapage for session 0, status=Pending, enseignantId=12)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | NotificationDTO: NotificationDTO(id=3, message=Notification 2, date=2025-03-05T13:00:17.570112, type=Update, isread=false, recepteurId=16, expediteurId=1)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Entity -> DTO | FichierExcelDTO: FichierExcelDTO(id=2, fileName=schedule_1.xlsx, status=Imported, errors=[No errors], importDate=2025-03-04T22:29:17.580837)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - Mapping from DTO to Entity========================================================
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Personne: Personne(id=1, cin=710116936, nom=White, prenom=Elizabeth, email=admin0@example.com, tel=4817651836, adresse=Admin Address 0)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Enseignant: Enseignant(codeEnseignant=ENS0, heures=34)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - examining datafetching Seance(id=11, name=Seance 10, matiere=Matiere 10, jour=TUESDAY, heureDebut=15:25, heureFin=18:07, frequence=weekly, date=2025-03-14, salle=Salle{id=2, identifiant='SAL1', type='Modified Type', capacite=108, seancesCount=20}, enseignant=Enseignant(codeEnseignant=ENS0, heures=34), branches=[Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)], tds=[TD(id=3, nb=5, nbTP=2, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique))], tps=[TP(id=4, nb=1, td=TD(id=2, nb=5, nbTP=1, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)))])
+
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - examining datafetching Seance(id=13, name=Seance 12, matiere=Matiere 12, jour=FRIDAY, heureDebut=16:30, heureFin=19:17, frequence=catch-up, date=2025-03-16, salle=Salle{id=2, identifiant='SAL1', type='Modified Type', capacite=108, seancesCount=20}, enseignant=Enseignant(codeEnseignant=ENS0, heures=34), branches=[Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)], tds=[TD(id=3, nb=5, nbTP=2, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique))], tps=[TP(id=4, nb=1, td=TD(id=2, nb=5, nbTP=1, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)))])
+
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - examining datafetching Seance(id=30, name=Seance 29, matiere=Matiere 29, jour=THURSDAY, heureDebut=12:55, heureFin=15:20, frequence=weekly, date=null, salle=Salle{id=2, identifiant='SAL1', type='Modified Type', capacite=108, seancesCount=20}, enseignant=Enseignant(codeEnseignant=ENS0, heures=34), branches=[Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)], tds=[TD(id=2, nb=5, nbTP=1, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique))], tps=[TP(id=2, nb=1, td=TD(id=1, nb=3, nbTP=3, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)))])
+
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Branche: Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Salle: Salle{id=1, identifiant='SAL0', type='Modified Type', capacite=171, seancesCount=20}
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Seance: Seance(id=1, name=null, matiere=Matiere 0, jour=FRIDAY, heureDebut=10:10, heureFin=11:46, frequence=1/15, date=2025-03-04, salle=Salle{id=2, identifiant='SAL1', type='Modified Type', capacite=108, seancesCount=20}, enseignant=Enseignant(codeEnseignant=ENS6, heures=40), branches=[Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)], tds=[TD(id=1, nb=3, nbTP=3, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique))], tps=[TP(id=1, nb=2, td=TD(id=3, nb=5, nbTP=2, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)))])
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped TD: TD(id=1, nb=3, nbTP=3, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique))
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped TP: TP(id=1, nb=2, td=TD(id=3, nb=5, nbTP=2, branche=Branche(id=1, niveau=MP1, specialite=GL, nbTD=3, departement=informatique)))
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Signal: Signal(id=3, message=Signal Issue 2, severity=High, timestamp=2025-03-05T01:11:17.550085)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped PropositionDeRattrapage: PropositionDeRattrapage(id=1, date=2025-03-08T22:29:17.562272, reason=Rattrapage for session 0, status=Pending)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped Notification: Notification(id=3, message=Notification 2, date=2025-03-05T13:00:17.570112, type=Update, isread=false)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - DTO -> Entity | Mapped FichierExcel: FichierExcel(id=2, fileName=schedule_1.xlsx, status=Imported, errors=[No errors], importDate=2025-03-04T22:29:17.580837)
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - =================== Finished Entity Mapping Test ===================
+2025-03-04 23:22:17 [restartedMain] INFO  CustomLogger - ==================== entity mapper test end ======================

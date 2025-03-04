@@ -20,6 +20,7 @@ import java.util.List;
         @Index(name = "idx_seance_date", columnList = "date")
 })
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@ToString
 public class Seance {
 
     @Id

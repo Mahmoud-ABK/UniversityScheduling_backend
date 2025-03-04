@@ -207,8 +207,6 @@ public class SalleDTO {
     private String type;         // Room type (e.g., lecture hall, lab)
     private int capacite;        // Capacity of the room
 
-    // List of available time slots for the room
-    private List<String> disponibilite;
 
     // List of Seance IDs representing sessions scheduled in the room
     private List<Long> seanceIds;
@@ -249,7 +247,8 @@ public class SeanceDTO {
     private String heureFin;    // End time of the session
     private String type;        // Type of session (e.g., CR, CI, TD, TP)
     private String matiere;     // Subject
-    private String frequence;   // Frequency of the session (e.g., weekly, biweekly, specific date for catch-up)
+    private String frequence; // Frequency of the session (e.g., weekly, biweekly, specific date for catch-up)
+    private String date ;
 
     // ID of the Salle assigned to the session
     private Long salleId;

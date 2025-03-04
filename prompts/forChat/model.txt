@@ -301,7 +301,6 @@ import java.util.List;
     name = "Salle.withSeances",
     attributeNodes = @NamedAttributeNode("seances")
 )
-@ToString(exclude = {"seances"})
 public class Salle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -347,6 +346,7 @@ import java.util.List;
         @Index(name = "idx_seance_date", columnList = "date")
 })
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@ToString
 public class Seance {
 
     @Id
@@ -377,7 +377,7 @@ public class Seance {
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "seance_branche",
             joinColumns = @JoinColumn(name = "seance_id"),
@@ -385,7 +385,7 @@ public class Seance {
     )
     private List<Branche> branches = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "seance_td",
             joinColumns = @JoinColumn(name = "seance_id"),
@@ -393,7 +393,7 @@ public class Seance {
     )
     private List<TD> tds = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "seance_tp",
             joinColumns = @JoinColumn(name = "seance_id"),

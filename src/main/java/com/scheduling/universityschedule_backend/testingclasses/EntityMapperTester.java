@@ -94,14 +94,14 @@ public class EntityMapperTester {
         FichierExcelDTO fichierExcelDTO = entityMapper.toFichierExcelDTO(fichierExcel);
         CustomLogger.logInfo("Entity -> DTO | FichierExcelDTO: " + fichierExcelDTO);
 
-        CustomLogger.logInfo("Mapping from DTO to Entity");
+        CustomLogger.logInfo("Mapping from DTO to Entity========================================================");
         // --- Mapping: DTO -> Entity ---
         Personne mappedPersonne = entityMapper.toPersonne(personneDTO);
         CustomLogger.logInfo("DTO -> Entity | Mapped Personne: " + mappedPersonne);
 
         Enseignant mappedEnseignant = entityMapper.toEnseignant(enseignantDTO);
         CustomLogger.logInfo("DTO -> Entity | Mapped Enseignant: " + mappedEnseignant);
-    mappedEnseignant.getSeances().forEach(seance1 -> CustomLogger.logInfo("examining datafetching " + seance1 + "\n"));
+        mappedEnseignant.getSeances().forEach(seance1 -> CustomLogger.logInfo("examining datafetching " + seance1 + "\n"));
         Branche mappedBranche = entityMapper.toBranche(brancheDTO);
         CustomLogger.logInfo("DTO -> Entity | Mapped Branche: " + mappedBranche);
 
@@ -131,27 +131,27 @@ public class EntityMapperTester {
 
         CustomLogger.logInfo("=================== Finished Entity Mapping Test ===================");
     }
-/*
+
     public void testConflictMappings() throws CustomException {
         CustomLogger.logInfo("=========== testing conflict mapping ==================");
         // Fetch conflicting seance pairs
-        List<Object[]> conflictPairs = seanceRepository.findConflictingSeancePairs();
+        List<Object[]> conflictPairs = seanceRepository.findConflictingSeancePairs(FrequenceType.BIWEEKLY,FrequenceType.CATCHUP);
         List<SeanceConflictDTO> seanceConflictDTOs = entityMapper.toSeanceConflictDTOList(conflictPairs);
         CustomLogger.logInfo("SeanceConflictDTOs: ------------------" );
         seanceConflictDTOs.forEach(seanceConflictDTO -> {CustomLogger.logInfo( seanceConflictDTO + "\n" );} );
 
         // Fetch room conflicts
-        List<Object[]> roomConflicts = seanceRepository.findConflictingByRooms();
+        List<Object[]> roomConflicts = seanceRepository.findConflictingByRooms(FrequenceType.BIWEEKLY,FrequenceType.CATCHUP);
         List<SeanceRoomConflictDTO> seanceRoomConflictDTOs = entityMapper.toSeanceRoomConflictDTOList(roomConflicts);
         CustomLogger.logInfo("SeanceRoomConflictDTOs: --------------------" );
         seanceRoomConflictDTOs.forEach(seanceRoomConflictDTO -> {CustomLogger.logInfo( seanceRoomConflictDTO + "\n" );} );
 
         // Fetch conflicts for a specific seance
         Long seanceId = seanceRepository.findAll().getFirst().getId();
-        List<Object[]> conflictsForSeance = seanceRepository.findRoomConflictsForSeance(seanceId);
+        List<Object[]> conflictsForSeance = seanceRepository.findRoomConflictsForSeanceById(seanceId,FrequenceType.BIWEEKLY,FrequenceType.CATCHUP);
         List<SingleSeanceConflictDTO> singleSeanceConflictDTOs = entityMapper.toSingleSeanceConflictDTOList(conflictsForSeance);
         CustomLogger.logInfo("SingleSeanceConflictDTOs: ------------" );
         singleSeanceConflictDTOs.forEach(seanceConflictDTO -> {CustomLogger.logInfo( seanceConflictDTO + "\n" );} );
         CustomLogger.logInfo("===================FINISHED ---------------------------------");
-    }*/
+    }
 }
