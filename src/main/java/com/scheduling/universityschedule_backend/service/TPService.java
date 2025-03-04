@@ -67,18 +67,18 @@ public interface TPService {
     List<EtudiantDTO> getStudents(Long tpId) throws CustomException;
 
     /**
-     * id is TP id
-     * generarte the schedule for that TP ( including its TD and Branch sessions
-     *
-     * @return
-     * @throws CustomException if generation fails
+     * Generates a complete schedule for a practical group (TP), including its TD and branch sessions.
+     * @param id Practical group's (TP) unique identifier
+     * @return List of sessions (Seances) in the generated schedule
+     * @throws CustomException if generation fails or TP doesn't exist
      */
     List<SeanceDTO> generateSchedule(Long id) throws CustomException;
 
     /**
-     * @param id id of the tp
-     * @return List of all students enrolled in this TP
-     * @throws CustomException if failed
+     * Retrieves all students enrolled in a specific practical group (TP).
+     * @param id Practical group's (TP) unique identifier
+     * @return List of students enrolled in this practical group
+     * @throws CustomException if retrieval fails or TP doesn't exist
      */
     List<EtudiantDTO> getEtudiants(Long id) throws CustomException;
 

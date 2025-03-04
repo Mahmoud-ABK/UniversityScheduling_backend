@@ -153,9 +153,10 @@ public interface BrancheService {
     List<SeanceDTO> getSchedule(Long branchId) throws CustomException;
 
     /**
-     * @param id id of the branche
-     * @return List of all students enrolled in this branch
-     * @throws CustomException if failed
+     * Retrieves all students enrolled in a specific branch.
+     * @param id Branch's unique identifier
+     * @return List of students enrolled in this branch
+     * @throws CustomException if retrieval fails or branch doesn't exist
      */
     List<EtudiantDTO> getEtudiants(Long id) throws CustomException;
 }
@@ -163,6 +164,8 @@ package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
+
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -228,17 +231,16 @@ public interface EnseignantService {
     List<SeanceDTO> getSchedule(Long id) throws CustomException;
 
     /**
-     * Calculates total teaching hours.
-     * @param teacherid Teacher's unique identifier
-     * @param startdate the startdate of counting
-     * @param enddate the enddate of counting
-     * weekly sessions are counted once in a week
-     * 1/15 session counts half per week
-     * makeup session that have a date in frequency counts only once
+     * Calculates total teaching hours for a teacher within a specific date range.
+     * @param teacherId Teacher's unique identifier
+     * @param startDate Start date for calculation (format: YYYY-MM-DD)
+     * @param endDate End date for calculation (format: YYYY-MM-DD)
      * @return Total hours taught between start and end date
-     * @throws CustomException if calculation fails
+     * @throws CustomException if calculation fails or dates are invalid
+     * @apiNote Weekly sessions are counted once per week, bi-weekly (1/15) sessions
+     *          count as half per week, and makeup sessions with specific dates count only once.
      */
-    int getTotalTeachingHours(Long teacherid,String startdate,String enddate) throws CustomException;
+    int getTotalTeachingHours(Long teacherid, LocalDate startdate, LocalDate enddate) throws CustomException;
 
     /**
      * Submits makeup session request.
@@ -267,18 +269,18 @@ public interface EnseignantService {
     List<SignalDTO> getSignals(Long id) throws CustomException;
 
     /**
-     * get all subjects taught for a teacher
-     * @param id teacher id
-     * @return all subject taught
-     * @Exception return a CustomException
+     * Retrieves all subjects taught by a specific teacher.
+     * @param id Teacher's unique identifier
+     * @return List of subject names taught by the teacher
+     * @throws CustomException if retrieval fails or teacher doesn't exist
      */
     List<String> getSubjects(Long id) throws CustomException;
 
     /**
-     * get all studentGroupsTaught Later to be mapped in
-     * @param id teacher id
-     * @return all studentgroups
-     * @Exception return a CustomException
+     * Retrieves all practical groups (TPs) taught by a specific teacher.
+     * @param id Teacher's unique identifier
+     * @return List of practical groups (TPs) taught by the teacher
+     * @throws CustomException if retrieval fails or teacher doesn't exist
      */
     List<TPDTO> getStudentGroups(Long id) throws CustomException;
 
@@ -525,58 +527,65 @@ public interface NotificationService {
     void broadcastNotification(NotificationDTO notificationDTO) throws CustomException;
 
     /**
-     * Notify all teachers teacher
-     * @param notificationDTO notification info
-     * @throws CustomException if fails
+     * Sends a notification to all teachers in the system.
+     * @param notificationDTO Notification content and metadata
+     * @throws CustomException if sending fails or notification is invalid
      */
     void sendNotificationToTeachers(NotificationDTO notificationDTO) throws CustomException;
 
 
     /**
-     * @param notificationDTO content
-     * @throws CustomException if fails
+     * Sends a notification to all students in the system.
+     * @param notificationDTO Notification content and metadata
+     * @throws CustomException if sending fails or notification is invalid
      */
     void sendNotificationToStudents(NotificationDTO notificationDTO) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param brancheDTOS branches
-     * @throws CustomException if fails
+     * Sends a notification to students in multiple branches.
+     * @param notificationDTO Notification content and metadata
+     * @param brancheDTOS List of branches whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToBranches(NotificationDTO notificationDTO,List<BrancheDTO> brancheDTOS) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param brancheDTOS branches
-     * @throws CustomException if fails
+     * Sends a notification to all students in a specific branch.
+     * @param notificationDTO Notification content and metadata
+     * @param brancheDTOS Branch whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToBranche(NotificationDTO notificationDTO,BrancheDTO brancheDTOS) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param tddtos destination
-     * @throws CustomException if fails
+     * Sends a notification to students in multiple tutorial groups (TDs).
+     * @param notificationDTO Notification content and metadata
+     * @param tddtos List of tutorial groups whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToTDs(NotificationDTO notificationDTO,List<TDDTO> tddtos) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param tddto destination
-     * @throws CustomException if fails
+     * Sends a notification to all students in a specific tutorial group (TD).
+     * @param notificationDTO Notification content and metadata
+     * @param tddto Tutorial group whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToTD(NotificationDTO notificationDTO,TDDTO tddto) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param tpdtos destination
-     * @throws CustomException if fails
+     * Sends a notification to students in multiple practical groups (TPs).
+     * @param notificationDTO Notification content and metadata
+     * @param tpdtos List of practical groups whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToTPs(NotificationDTO notificationDTO,List<TPDTO> tpdtos) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param tpdto destination
-     * @throws CustomException if fails
+     * Sends a notification to all students in a specific practical group (TP).
+     * @param notificationDTO Notification content and metadata
+     * @param tpdto Practical group whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToTP(NotificationDTO notificationDTO,TPDTO tpdto) throws CustomException;
 
@@ -586,6 +595,10 @@ package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -643,16 +656,16 @@ public interface SalleService {
     // ============================
 
     /**
-     * Finds available rooms for a specific time slot. if the date not specified it check for
-     * @param date Desired date
-     * @param startTime Start time
-     * @param day day
-     * @param endTime End time
-     * @return List of available rooms
-     * @throws CustomException if search fails
+     * Finds available rooms for a specific time slot.
+     * @param date Desired date in format YYYY-MM-DD (can be null for recurring slots)
+     * @param day Day of week (e.g., "MONDAY" or "lundi")
+     * @param startTime Start time in format HH:mm
+     * @param endTime End time in format HH:mm
+     * @return List of available rooms during the specified time slot
+     * @throws CustomException if search fails, time format is invalid, or parameters are inconsistent
+     * @apiNote If date is not specified, the method will check for regular weekly availability
      */
-    List<SalleDTO> getAvailableRooms(String date, String day,String startTime, String endTime) throws CustomException;
-
+    List<SalleDTO> getAvailableRooms(LocalDate date, DayOfWeek day, LocalTime startTime, LocalTime endTime) throws CustomException;
 
 
 
@@ -810,18 +823,18 @@ public interface TDService {
      */
     List<TPDTO> getTPs(Long tdId) throws CustomException;
     /**
-     * id is TD id
-     * generarte the schedule for that Td( including its Branch sessions )
-     *
-     * @return
-     * @throws CustomException if generation fails
+     * Generates a complete schedule for a tutorial group (TD), including its branch sessions.
+     * @param id Tutorial group's (TD) unique identifier
+     * @return List of sessions (Seances) in the generated schedule
+     * @throws CustomException if generation fails or TD doesn't exist
      */
     List<SeanceDTO> generateSchedule(Long id) throws CustomException;
 
     /**
-     * @param id id of the td
-     * @return List of all students enrolled in this TD
-     * @throws CustomException if failed
+     * Retrieves all students enrolled in a specific tutorial group (TD).
+     * @param id Tutorial group's (TD) unique identifier
+     * @return List of students enrolled in this tutorial group
+     * @throws CustomException if retrieval fails or TD doesn't exist
      */
     List<EtudiantDTO> getEtudiants(Long id) throws CustomException;
 
@@ -895,18 +908,18 @@ public interface TPService {
     List<EtudiantDTO> getStudents(Long tpId) throws CustomException;
 
     /**
-     * id is TP id
-     * generarte the schedule for that TP ( including its TD and Branch sessions
-     *
-     * @return
-     * @throws CustomException if generation fails
+     * Generates a complete schedule for a practical group (TP), including its TD and branch sessions.
+     * @param id Practical group's (TP) unique identifier
+     * @return List of sessions (Seances) in the generated schedule
+     * @throws CustomException if generation fails or TP doesn't exist
      */
     List<SeanceDTO> generateSchedule(Long id) throws CustomException;
 
     /**
-     * @param id id of the tp
-     * @return List of all students enrolled in this TP
-     * @throws CustomException if failed
+     * Retrieves all students enrolled in a specific practical group (TP).
+     * @param id Practical group's (TP) unique identifier
+     * @return List of students enrolled in this practical group
+     * @throws CustomException if retrieval fails or TP doesn't exist
      */
     List<EtudiantDTO> getEtudiants(Long id) throws CustomException;
 

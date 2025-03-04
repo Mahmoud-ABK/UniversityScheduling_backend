@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,7 +81,7 @@ public class EnseignantServiceImpl implements EnseignantService {
     }
 
     @Override
-    public int getTotalTeachingHours(Long teacherId, String startDate, String endDate) throws CustomException {
+    public int getTotalTeachingHours(Long teacherId, LocalDate startDate, LocalDate endDate) throws CustomException {
         // Implement the logic to calculate total teaching hours
         throw new UnsupportedOperationException("Method not implemented yet");
     }

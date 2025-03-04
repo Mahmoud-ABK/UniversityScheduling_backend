@@ -2,6 +2,10 @@ package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -59,16 +63,16 @@ public interface SalleService {
     // ============================
 
     /**
-     * Finds available rooms for a specific time slot. if the date not specified it check for
-     * @param date Desired date
-     * @param startTime Start time
-     * @param day day
-     * @param endTime End time
-     * @return List of available rooms
-     * @throws CustomException if search fails
+     * Finds available rooms for a specific time slot.
+     * @param date Desired date in format YYYY-MM-DD (can be null for recurring slots)
+     * @param day Day of week (e.g., "MONDAY" or "lundi")
+     * @param startTime Start time in format HH:mm
+     * @param endTime End time in format HH:mm
+     * @return List of available rooms during the specified time slot
+     * @throws CustomException if search fails, time format is invalid, or parameters are inconsistent
+     * @apiNote If date is not specified, the method will check for regular weekly availability
      */
-    List<SalleDTO> getAvailableRooms(String date, String day,String startTime, String endTime) throws CustomException;
-
+    List<SalleDTO> getAvailableRooms(LocalDate date, DayOfWeek day, LocalTime startTime, LocalTime endTime) throws CustomException;
 
 
 

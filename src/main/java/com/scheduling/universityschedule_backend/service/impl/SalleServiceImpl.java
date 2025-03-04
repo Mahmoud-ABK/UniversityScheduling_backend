@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -72,7 +73,7 @@ public class SalleServiceImpl implements SalleService {
     }
 
     @Override
-    public List<SalleDTO> getAvailableRooms(String date, String day, String startTime, String endTime) throws CustomException {
+    public List<SalleDTO> getAvailableRooms(LocalDate date, DayOfWeek day, LocalTime startTime, LocalTime endTime) throws CustomException {
        try {
 //            // 1. Get all rooms
 //            List<Salle> allRooms = salleRepository.findAll();

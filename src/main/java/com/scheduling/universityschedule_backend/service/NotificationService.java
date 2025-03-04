@@ -80,58 +80,65 @@ public interface NotificationService {
     void broadcastNotification(NotificationDTO notificationDTO) throws CustomException;
 
     /**
-     * Notify all teachers teacher
-     * @param notificationDTO notification info
-     * @throws CustomException if fails
+     * Sends a notification to all teachers in the system.
+     * @param notificationDTO Notification content and metadata
+     * @throws CustomException if sending fails or notification is invalid
      */
     void sendNotificationToTeachers(NotificationDTO notificationDTO) throws CustomException;
 
 
     /**
-     * @param notificationDTO content
-     * @throws CustomException if fails
+     * Sends a notification to all students in the system.
+     * @param notificationDTO Notification content and metadata
+     * @throws CustomException if sending fails or notification is invalid
      */
     void sendNotificationToStudents(NotificationDTO notificationDTO) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param brancheDTOS branches
-     * @throws CustomException if fails
+     * Sends a notification to students in multiple branches.
+     * @param notificationDTO Notification content and metadata
+     * @param brancheDTOS List of branches whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToBranches(NotificationDTO notificationDTO,List<BrancheDTO> brancheDTOS) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param brancheDTOS branches
-     * @throws CustomException if fails
+     * Sends a notification to all students in a specific branch.
+     * @param notificationDTO Notification content and metadata
+     * @param brancheDTOS Branch whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToBranche(NotificationDTO notificationDTO,BrancheDTO brancheDTOS) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param tddtos destination
-     * @throws CustomException if fails
+     * Sends a notification to students in multiple tutorial groups (TDs).
+     * @param notificationDTO Notification content and metadata
+     * @param tddtos List of tutorial groups whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToTDs(NotificationDTO notificationDTO,List<TDDTO> tddtos) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param tddto destination
-     * @throws CustomException if fails
+     * Sends a notification to all students in a specific tutorial group (TD).
+     * @param notificationDTO Notification content and metadata
+     * @param tddto Tutorial group whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToTD(NotificationDTO notificationDTO,TDDTO tddto) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param tpdtos destination
-     * @throws CustomException if fails
+     * Sends a notification to students in multiple practical groups (TPs).
+     * @param notificationDTO Notification content and metadata
+     * @param tpdtos List of practical groups whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToTPs(NotificationDTO notificationDTO,List<TPDTO> tpdtos) throws CustomException;
 
     /**
-     * @param notificationDTO content
-     * @param tpdto destination
-     * @throws CustomException if fails
+     * Sends a notification to all students in a specific practical group (TP).
+     * @param notificationDTO Notification content and metadata
+     * @param tpdto Practical group whose students should receive the notification
+     * @throws CustomException if sending fails or any input is invalid
      */
     void sendNotificationToTP(NotificationDTO notificationDTO,TPDTO tpdto) throws CustomException;
 

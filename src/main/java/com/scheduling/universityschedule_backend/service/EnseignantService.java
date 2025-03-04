@@ -2,6 +2,8 @@ package com.scheduling.universityschedule_backend.service;
 
 import com.scheduling.universityschedule_backend.dto.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
+
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -67,17 +69,16 @@ public interface EnseignantService {
     List<SeanceDTO> getSchedule(Long id) throws CustomException;
 
     /**
-     * Calculates total teaching hours.
-     * @param teacherid Teacher's unique identifier
-     * @param startdate the startdate of counting
-     * @param enddate the enddate of counting
-     * weekly sessions are counted once in a week
-     * 1/15 session counts half per week
-     * makeup session that have a date in frequency counts only once
+     * Calculates total teaching hours for a teacher within a specific date range.
+     * @param teacherId Teacher's unique identifier
+     * @param startDate Start date for calculation (format: YYYY-MM-DD)
+     * @param endDate End date for calculation (format: YYYY-MM-DD)
      * @return Total hours taught between start and end date
-     * @throws CustomException if calculation fails
+     * @throws CustomException if calculation fails or dates are invalid
+     * @apiNote Weekly sessions are counted once per week, bi-weekly (1/15) sessions
+     *          count as half per week, and makeup sessions with specific dates count only once.
      */
-    int getTotalTeachingHours(Long teacherid,String startdate,String enddate) throws CustomException;
+    int getTotalTeachingHours(Long teacherid, LocalDate startdate, LocalDate enddate) throws CustomException;
 
     /**
      * Submits makeup session request.
@@ -106,18 +107,18 @@ public interface EnseignantService {
     List<SignalDTO> getSignals(Long id) throws CustomException;
 
     /**
-     * get all subjects taught for a teacher
-     * @param id teacher id
-     * @return all subject taught
-     * @Exception return a CustomException
+     * Retrieves all subjects taught by a specific teacher.
+     * @param id Teacher's unique identifier
+     * @return List of subject names taught by the teacher
+     * @throws CustomException if retrieval fails or teacher doesn't exist
      */
     List<String> getSubjects(Long id) throws CustomException;
 
     /**
-     * get all studentGroupsTaught Later to be mapped in
-     * @param id teacher id
-     * @return all studentgroups
-     * @Exception return a CustomException
+     * Retrieves all practical groups (TPs) taught by a specific teacher.
+     * @param id Teacher's unique identifier
+     * @return List of practical groups (TPs) taught by the teacher
+     * @throws CustomException if retrieval fails or teacher doesn't exist
      */
     List<TPDTO> getStudentGroups(Long id) throws CustomException;
 
