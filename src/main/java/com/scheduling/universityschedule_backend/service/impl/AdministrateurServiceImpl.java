@@ -187,7 +187,7 @@ public class AdministrateurServiceImpl implements AdministrateurService {
             throw new CustomException("Failed to retrieve makeup session proposals", e);
         }
     }
-
+    // still needs refinement
     @Override
     public void approveMakeupSession(Long id) throws CustomException {
         try {

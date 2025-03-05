@@ -187,7 +187,7 @@ public class AdministrateurServiceImpl implements AdministrateurService {
             throw new CustomException("Failed to retrieve makeup session proposals", e);
         }
     }
-
+    // still needs refinement
     @Override
     public void approveMakeupSession(Long id) throws CustomException {
         try {
@@ -491,17 +491,16 @@ import com.scheduling.universityschedule_backend.dto.SignalDTO;
 import com.scheduling.universityschedule_backend.dto.TPDTO;
 import com.scheduling.universityschedule_backend.exception.CustomException;
 import com.scheduling.universityschedule_backend.mapper.EntityMapper;
-import com.scheduling.universityschedule_backend.model.Enseignant;
+import com.scheduling.universityschedule_backend.model.*;
 import com.scheduling.universityschedule_backend.repository.EnseignantRepository;
+import com.scheduling.universityschedule_backend.repository.PropositionDeRattrapageRepository;
 import com.scheduling.universityschedule_backend.repository.SeanceRepository;
 import com.scheduling.universityschedule_backend.service.EnseignantService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.time.*;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -515,16 +514,18 @@ public class EnseignantServiceImpl implements EnseignantService {
     private final EnseignantRepository enseignantRepository;
     private final SeanceRepository seanceRepository;
     private final EntityMapper entityMapper;
+    private final PropositionDeRattrapageRepository propositionDeRattrapageRepository;
 
     /**
      * Constructor injection for dependencies
      */
     public EnseignantServiceImpl(EnseignantRepository enseignantRepository,
                                  SeanceRepository seanceRepository,
-                                 EntityMapper entityMapper) {
+                                 EntityMapper entityMapper,PropositionDeRattrapageRepository propositionDeRattrapageRepository) {
         this.enseignantRepository = enseignantRepository;
         this.seanceRepository = seanceRepository;
         this.entityMapper = entityMapper;
+        this.propositionDeRattrapageRepository = propositionDeRattrapageRepository;
     }
 
     @Override
@@ -672,23 +673,250 @@ public class EnseignantServiceImpl implements EnseignantService {
             throw new CustomException("Failed to retrieve schedule for teacher with ID: " + id, e);
         }
     }
-
+    /**
+     * Calculates total teaching hours for a teacher within a specific date range.
+     * Weekly sessions count once per week, bi-weekly sessions count as half per week,
+     * and makeup sessions with specific dates count only once if within range.
+     *
+     * @param teacherid Teacher's unique identifier
+     * @param startdate Start date for calculation
+     * @param enddate End date for calculation
+     * @return Total hours taught between start and end date
+     * @throws CustomException if calculation fails or dates are invalid
+     */
     @Override
-    public int getTotalTeachingHours(Long teacherId, LocalDate startDate, LocalDate endDate) throws CustomException {
-        // For now, we're leaving this unimplemented
-        throw new CustomException("Method not implemented yet: getTotalTeachingHours");
+    public int getTotalTeachingHours(Long teacherid, LocalDate startdate, LocalDate enddate) throws CustomException {
+        try {
+            // Validate inputs
+            if (teacherid == null || startdate == null || enddate == null) {
+                throw new CustomException("Teacher ID and date range cannot be null");
+            }
+
+            if (startdate.isAfter(enddate)) {
+                throw new CustomException("Start date must be before or equal to end date");
+            }
+
+            // Find teacher
+            Enseignant enseignant = enseignantRepository.findById(teacherid)
+                    .orElseThrow(() -> new CustomException("Teacher not found with ID: " + teacherid));
+
+            // Get all sessions for the teacher
+            List<Seance> sessions = enseignant.getSeances();
+            if (sessions == null || sessions.isEmpty()) {
+                return 0;
+            }
+
+            int totalHours = 0;
+
+            // Process each session
+            for (Seance seance : sessions) {
+                if (seance == null || seance.getFrequence() == null) {
+                    continue;
+                }
+
+                // Calculate session duration
+                int sessionHours = getSessionHours(seance);
+                if (sessionHours <= 0) continue;
+
+                // Add hours based on session type
+                switch (seance.getFrequence()) {
+                    case WEEKLY:
+                        totalHours += getWeeklyHours(seance, sessionHours, startdate, enddate);
+                        break;
+
+                    case BIWEEKLY:
+                        totalHours += getBiweeklyHours(seance, sessionHours, startdate, enddate);
+                        break;
+
+                    case CATCHUP:
+                        totalHours += getCatchupHours(seance, sessionHours, startdate, enddate);
+                        break;
+                }
+            }
+
+            return totalHours;
+
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to calculate teaching hours: " + e.getMessage(), e);
+        }
     }
 
+    /**
+     * Calculates session duration in hours
+     */
+    private int getSessionHours(Seance seance) {
+        try {
+            LocalTime start = seance.getHeureDebut();
+            LocalTime end = seance.getHeureFin();
+            return (int) Math.ceil(Duration.between(start, end).toMinutes() / 60.0);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Calculates hours for weekly sessions
+     */
+    private int getWeeklyHours(Seance seance, int hours, LocalDate start, LocalDate end) {
+        try {
+            if (seance.getJour() == null) return 0;
+
+            // Get total weeks when this session occurs
+            DayOfWeek day = seance.getJour();
+            long weeks = getWeeksWithDay(day, start, end);
+
+            return (int) (weeks * hours);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Calculates hours for bi-weekly sessions
+     */
+    private int getBiweeklyHours(Seance seance, int hours, LocalDate start, LocalDate end) {
+        int weeklyHours = getWeeklyHours(seance, hours, start, end);
+        return (int) Math.ceil(weeklyHours / 2.0);
+    }
+
+    /**
+     * Calculates hours for makeup sessions
+     */
+    private int getCatchupHours(Seance seance, int hours, LocalDate start, LocalDate end) {
+        try {
+            if (seance.getDate() == null ) return 0;
+
+            LocalDate sessionDate = seance.getDate();
+            return (sessionDate.compareTo(start) >= 0 && sessionDate.compareTo(end) <= 0) ? hours : 0;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Counts how many times a specific day of week occurs between two dates
+     */
+    private long getWeeksWithDay(DayOfWeek day, LocalDate start, LocalDate end) {
+        // Adjust start date to first occurrence of the day
+        LocalDate current = start;
+        while (current.getDayOfWeek() != day) {
+            current = current.plusDays(1);
+            if (current.isAfter(end)) return 0;
+        }
+
+        // Count occurrences
+        long count = 0;
+        while (!current.isAfter(end)) {
+            count++;
+            current = current.plusWeeks(1);
+        }
+
+        return count;
+    }
+    /**
+     * Submits makeup session request.
+     * @param id Teacher's unique identifier
+     * @param proposition Makeup session proposal DTO
+     * @return Created makeup session proposal DTO
+     * @throws CustomException if submission fails
+     */
     @Override
     public PropositionDeRattrapageDTO submitMakeupRequest(Long id, PropositionDeRattrapageDTO proposition) throws CustomException {
-        // For now, we're leaving this unimplemented
-        throw new CustomException("Method not implemented yet: submitMakeupRequest");
+        try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("Teacher ID cannot be null");
+            }
+
+            if (proposition == null) {
+                throw new CustomException("Makeup session proposal cannot be null");
+            }
+
+            // Find teacher
+            Enseignant enseignant = enseignantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
+
+            // Convert DTO to entity
+            PropositionDeRattrapage propositionEntity = entityMapper.toPropositionDeRattrapage(proposition);
+
+            // Set submission date if not provided
+            if (propositionEntity.getDate() == null) {
+                propositionEntity.setDate(LocalDateTime.now());
+            }
+
+            // Set initial status if not provided
+            if (propositionEntity.getStatus() == null || propositionEntity.getStatus().isEmpty()) {
+                propositionEntity.setStatus("pending");
+            }
+
+            // Associate proposal with teacher
+            propositionEntity.setEnseignant(enseignant);
+
+
+            // Save the proposition entity
+            propositionDeRattrapageRepository.save(propositionEntity);
+
+            // Convert back to DTO
+            return entityMapper.toPropositionDeRattrapageDTO(propositionEntity);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to submit makeup session request for teacher with ID: " + id, e);
+        }
     }
 
+    /**
+     * Submits an issue or suggestion from a teacher.
+     * @param id Teacher's unique identifier
+     * @param signal Signal DTO containing issue or suggestion
+     * @return Created signal DTO
+     * @throws CustomException if submission fails
+     */
     @Override
     public SignalDTO submitSignal(Long id, SignalDTO signal) throws CustomException {
-        // For now, we're leaving this unimplemented
-        throw new CustomException("Method not implemented yet: submitSignal");
+        try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("Teacher ID cannot be null");
+            }
+
+            if (signal == null) {
+                throw new CustomException("Signal data cannot be null");
+            }
+
+            // Find teacher
+            Enseignant enseignant = enseignantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
+
+            // Convert DTO to entity
+            Signal signalEntity = entityMapper.toSignal(signal);
+
+            // Set submission date if not provided
+            if (signalEntity.getTimestamp() == null) {
+                signalEntity.setTimestamp(LocalDateTime.now());
+            }
+
+            // Associate signal with teacher
+            signalEntity.setEnseignant(enseignant);
+
+            // Add signal to teacher's signals collection (if using bidirectional relationship)
+            if (enseignant.getSignals() == null) {
+                enseignant.setSignals(new ArrayList<>());
+            }
+            enseignant.getSignals().add(signalEntity);
+
+            // Save teacher to persist the relationship
+            enseignantRepository.save(enseignant);
+
+            // Convert back to DTO
+            return entityMapper.toSignalDTO(signalEntity);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to submit signal for teacher with ID: " + id, e);
+        }
     }
 
     @Override
@@ -720,16 +948,86 @@ public class EnseignantServiceImpl implements EnseignantService {
         }
     }
 
+    // EnseignantServiceImpl.java
+    /**
+     * Retrieves all subjects taught by a specific teacher.
+     * @param id Teacher's unique identifier
+     * @return List of subject names taught by the teacher
+     * @throws CustomException if retrieval fails or teacher doesn't exist
+     */
     @Override
     public List<String> getSubjects(Long id) throws CustomException {
-        // For now, we're leaving this unimplemented
-        throw new CustomException("Method not implemented yet: getSubjects");
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Teacher ID cannot be null");
+            }
+
+            // Find teacher
+            Enseignant enseignant = enseignantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
+
+            // Get unique subjects from teacher's sessions
+            if (enseignant.getSeances() == null) {
+                return Collections.emptyList();
+            }
+
+            return enseignant.getSeances().stream()
+                    .filter(Objects::nonNull)
+                    .map(Seance::getMatiere)  // Get subject field from each session
+                    .filter(Objects::nonNull)
+                    .filter(matiere -> !matiere.trim().isEmpty())
+                    .distinct()  // Remove duplicates
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve subjects for teacher with ID: " + id, e);
+        }
     }
 
+    /**
+     * Retrieves all practical groups (TPs) taught by a specific teacher.
+     * @param id Teacher's unique identifier
+     * @return List of practical groups (TPs) taught by the teacher
+     * @throws CustomException if retrieval fails or teacher doesn't exist
+     */
     @Override
     public List<TPDTO> getStudentGroups(Long id) throws CustomException {
-        // For now, we're leaving this unimplemented
-        throw new CustomException("Method not implemented yet: getStudentGroups");
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Teacher ID cannot be null");
+            }
+
+            // Find teacher
+            Enseignant enseignant = enseignantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
+
+            // Get sessions taught by this teacher
+            List<Seance> teacherSeances = enseignant.getSeances();
+            if (teacherSeances == null || teacherSeances.isEmpty()) {
+                return Collections.emptyList();
+            }
+
+            // Extract unique TPs from sessions
+            Set<TP> uniqueTPs = new HashSet<>();
+            for (Seance seance : teacherSeances) {
+                if (seance.getTps() != null) {
+                    uniqueTPs.addAll(seance.getTps());
+                }
+            }
+
+            // Convert to DTOs
+            return uniqueTPs.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toTPDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve student groups for teacher with ID: " + id, e);
+        }
     }
 }package com.scheduling.universityschedule_backend.service.impl;
 
@@ -739,6 +1037,8 @@ import com.scheduling.universityschedule_backend.dto.SeanceDTO;
 import com.scheduling.universityschedule_backend.exception.CustomException;
 import com.scheduling.universityschedule_backend.mapper.EntityMapper;
 import com.scheduling.universityschedule_backend.model.Etudiant;
+import com.scheduling.universityschedule_backend.model.Seance;
+import com.scheduling.universityschedule_backend.model.TD;
 import com.scheduling.universityschedule_backend.repository.EtudiantRepository;
 import com.scheduling.universityschedule_backend.repository.NotificationRepository;
 import com.scheduling.universityschedule_backend.service.EtudiantService;
@@ -925,15 +1225,93 @@ public class EtudiantServiceImpl implements EtudiantService {
         }
     }
 
+    // EtudiantServiceImpl.java
+    /**
+     * Retrieves schedule for a student's tutorial group (TD).
+     * @param id Student's unique identifier
+     * @return List of scheduled sessions for TD
+     * @throws CustomException if schedule retrieval fails
+     */
     @Override
     public List<SeanceDTO> getTDSchedule(Long id) throws CustomException {
-        // This method is unimplemented for now
-        throw new CustomException("Method not implemented yet: getBranchSchedule");
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Student ID cannot be null");
+            }
+
+            // Find student
+            Etudiant etudiant = etudiantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Student not found with ID: " + id));
+
+            // Get student's TP
+            if (etudiant.getTp() == null) {
+                throw new CustomException("Student with ID: " + id + " is not assigned to any practical group (TP)");
+            }
+
+            // Get student's TD through TP
+            TD td = etudiant.getTp().getTd();
+            if (td == null) {
+                throw new CustomException("Student's practical group is not associated with any tutorial group (TD)");
+            }
+
+            // Get TD sessions
+            List<Seance> tdSessions = td.getSeances();
+            if (tdSessions == null) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return tdSessions.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toSeanceDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve TD schedule for student with ID: " + id, e);
+        }
     }
+    // EtudiantServiceImpl.java
+    /**
+     * Retrieves schedule for a specific branch.
+     * @param id Student's unique identifier
+     * @return List of scheduled sessions for branch
+     * @throws CustomException if schedule retrieval fails
+     */
     @Override
     public List<SeanceDTO> getBranchSchedule(Long id) throws CustomException {
-        // This method is unimplemented for now
-        throw new CustomException("Method not implemented yet: getBranchSchedule");
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Student ID cannot be null");
+            }
+
+            // Find student
+            Etudiant etudiant = etudiantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Student not found with ID: " + id));
+
+            // Get student's branch
+            if (etudiant.getBranche() == null) {
+                throw new CustomException("Student with ID: " + id + " is not assigned to any branch");
+            }
+
+            // Get branch sessions
+            List<Seance> branchSessions = etudiant.getBranche().getSeances();
+            if (branchSessions == null) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return branchSessions.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toSeanceDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve branch schedule for student with ID: " + id, e);
+        }
     }
 
     @Override

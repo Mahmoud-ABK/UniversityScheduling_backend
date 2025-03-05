@@ -232,9 +232,9 @@ public interface EnseignantService {
 
     /**
      * Calculates total teaching hours for a teacher within a specific date range.
-     * @param teacherId Teacher's unique identifier
-     * @param startDate Start date for calculation (format: YYYY-MM-DD)
-     * @param endDate End date for calculation (format: YYYY-MM-DD)
+     * @param teacherid Teacher's unique identifier
+     * @param startdate Start date for calculation (format: YYYY-MM-DD)
+     * @param enddate End date for calculation (format: YYYY-MM-DD)
      * @return Total hours taught between start and end date
      * @throws CustomException if calculation fails or dates are invalid
      * @apiNote Weekly sessions are counted once per week, bi-weekly (1/15) sessions

@@ -6,6 +6,8 @@ import com.scheduling.universityschedule_backend.dto.SeanceDTO;
 import com.scheduling.universityschedule_backend.exception.CustomException;
 import com.scheduling.universityschedule_backend.mapper.EntityMapper;
 import com.scheduling.universityschedule_backend.model.Etudiant;
+import com.scheduling.universityschedule_backend.model.Seance;
+import com.scheduling.universityschedule_backend.model.TD;
 import com.scheduling.universityschedule_backend.repository.EtudiantRepository;
 import com.scheduling.universityschedule_backend.repository.NotificationRepository;
 import com.scheduling.universityschedule_backend.service.EtudiantService;
@@ -192,15 +194,93 @@ public class EtudiantServiceImpl implements EtudiantService {
         }
     }
 
+    // EtudiantServiceImpl.java
+    /**
+     * Retrieves schedule for a student's tutorial group (TD).
+     * @param id Student's unique identifier
+     * @return List of scheduled sessions for TD
+     * @throws CustomException if schedule retrieval fails
+     */
     @Override
     public List<SeanceDTO> getTDSchedule(Long id) throws CustomException {
-        // This method is unimplemented for now
-        throw new CustomException("Method not implemented yet: getBranchSchedule");
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Student ID cannot be null");
+            }
+
+            // Find student
+            Etudiant etudiant = etudiantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Student not found with ID: " + id));
+
+            // Get student's TP
+            if (etudiant.getTp() == null) {
+                throw new CustomException("Student with ID: " + id + " is not assigned to any practical group (TP)");
+            }
+
+            // Get student's TD through TP
+            TD td = etudiant.getTp().getTd();
+            if (td == null) {
+                throw new CustomException("Student's practical group is not associated with any tutorial group (TD)");
+            }
+
+            // Get TD sessions
+            List<Seance> tdSessions = td.getSeances();
+            if (tdSessions == null) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return tdSessions.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toSeanceDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve TD schedule for student with ID: " + id, e);
+        }
     }
+    // EtudiantServiceImpl.java
+    /**
+     * Retrieves schedule for a specific branch.
+     * @param id Student's unique identifier
+     * @return List of scheduled sessions for branch
+     * @throws CustomException if schedule retrieval fails
+     */
     @Override
     public List<SeanceDTO> getBranchSchedule(Long id) throws CustomException {
-        // This method is unimplemented for now
-        throw new CustomException("Method not implemented yet: getBranchSchedule");
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Student ID cannot be null");
+            }
+
+            // Find student
+            Etudiant etudiant = etudiantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Student not found with ID: " + id));
+
+            // Get student's branch
+            if (etudiant.getBranche() == null) {
+                throw new CustomException("Student with ID: " + id + " is not assigned to any branch");
+            }
+
+            // Get branch sessions
+            List<Seance> branchSessions = etudiant.getBranche().getSeances();
+            if (branchSessions == null) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return branchSessions.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toSeanceDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve branch schedule for student with ID: " + id, e);
+        }
     }
 
     @Override
