@@ -9,6 +9,7 @@ import com.scheduling.universityschedule_backend.model.PropositionDeRattrapage;
 import com.scheduling.universityschedule_backend.repository.AdministrateurRepository;
 import com.scheduling.universityschedule_backend.repository.PropositionDeRattrapageRepository;
 import com.scheduling.universityschedule_backend.service.AdministrateurService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,7 @@ public class AdministrateurServiceImpl implements AdministrateurService {
     private final AdministrateurRepository administrateurRepository;
     private final PropositionDeRattrapageRepository propositionDeRattrapageRepository;
     private final EntityMapper entityMapper;
+
 
     /**
      * Constructor injection for dependencies
@@ -213,6 +215,7 @@ public class AdministrateurServiceImpl implements AdministrateurService {
 
             // Update status to approved
             proposition.setStatus(STATUS_APPROVED);
+
 
             // Save updated entity
             propositionDeRattrapageRepository.save(proposition);
