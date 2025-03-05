@@ -81,5 +81,12 @@ public interface SeanceService {
      */
     List<SingleSeanceConflictDTO> getConflictsForSession(Long seanceId) throws CustomException;
 
+    /**
+     * Retrieves conflicts for a specific session.
+     * @param seanceDto a mock sessionDto ( without id) just to transfer query params
+     * @return List of conflicts for the given session
+     * @throws CustomException if retrieval fails
+     */
+    List<SingleSeanceConflictDTO> getConflictsForSession(SeanceDTO seanceDto) throws CustomException;
 
 }

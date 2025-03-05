@@ -68,12 +68,18 @@ public interface EtudiantService {
 
     /**
      * Retrieves schedule for a specific branch.
-     * @param brancheId Branch's unique identifier
+     * @param id Student's unique identifier
      * @return List of scheduled sessions for branch
      * @throws CustomException if schedule retrieval fails
      */
-    List<SeanceDTO> getBranchSchedule(Long brancheId) throws CustomException;
-
+    List<SeanceDTO> getBranchSchedule(Long id) throws CustomException;
+    /**
+     * Retrieves schedule for a specific branch.
+     * @param id Student's unique identifier
+     * @return List of scheduled sessions for branch
+     * @throws CustomException if schedule retrieval fails
+     */
+    public List<SeanceDTO> getTDSchedule(Long id) throws CustomException;
     /**
      * Retrieves student's notifications.
      * @param id Student's unique identifier

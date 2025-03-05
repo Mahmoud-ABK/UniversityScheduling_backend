@@ -9,90 +9,255 @@ import com.scheduling.universityschedule_backend.model.PropositionDeRattrapage;
 import com.scheduling.universityschedule_backend.repository.AdministrateurRepository;
 import com.scheduling.universityschedule_backend.repository.PropositionDeRattrapageRepository;
 import com.scheduling.universityschedule_backend.service.AdministrateurService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for administrator operations.
+ * Handles schedule management, makeup sessions, and system-wide notifications.
+ */
 @Service
 @Transactional
 public class AdministrateurServiceImpl implements AdministrateurService {
 
-    @Autowired
-    private AdministrateurRepository administrateurRepository;
+    /**
+     * Status constants for makeup session proposals
+     */
+    private static final String STATUS_APPROVED = "approved";
+    private static final String STATUS_REJECTED = "rejected";
 
-    @Autowired
-    private PropositionDeRattrapageRepository propositionDeRattrapageRepository;
+    private final AdministrateurRepository administrateurRepository;
+    private final PropositionDeRattrapageRepository propositionDeRattrapageRepository;
+    private final EntityMapper entityMapper;
 
-    @Autowired
-    private EntityMapper entityMapper;
+    /**
+     * Constructor injection for dependencies
+     */
+    public AdministrateurServiceImpl(AdministrateurRepository administrateurRepository,
+                                     PropositionDeRattrapageRepository propositionDeRattrapageRepository,
+                                     EntityMapper entityMapper) {
+        this.administrateurRepository = administrateurRepository;
+        this.propositionDeRattrapageRepository = propositionDeRattrapageRepository;
+        this.entityMapper = entityMapper;
+    }
 
     @Override
     public AdministrateurDTO findById(Long id) throws CustomException {
-        Administrateur administrateur = administrateurRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Administrator not found with ID: " + id));
-        return entityMapper.toAdministrateurDTO(administrateur);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Administrator ID cannot be null");
+            }
+
+            // Retrieve administrator
+            Administrateur administrateur = administrateurRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Administrator not found with ID: " + id));
+
+            // Convert to DTO
+            return entityMapper.toAdministrateurDTO(administrateur);
+        } catch (CustomException e) {
+            throw e; // Rethrow custom exceptions as-is
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve administrator with ID: " + id, e);
+        }
     }
 
     @Override
     public List<AdministrateurDTO> findAll() throws CustomException {
-        List<Administrateur> administrateurs = administrateurRepository.findAll();
-        return administrateurs.stream()
-                .map(entityMapper::toAdministrateurDTO)
-                .collect(Collectors.toList());
+        try {
+            // Retrieve all administrators
+            List<Administrateur> administrateurs = administrateurRepository.findAll();
+
+            // Handle empty list case
+            if (administrateurs.isEmpty()) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return administrateurs.stream()
+                    .map(entityMapper::toAdministrateurDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve all administrators", e);
+        }
     }
 
     @Override
     public AdministrateurDTO create(AdministrateurDTO administrateurDTO) throws CustomException {
-        Administrateur administrateur = entityMapper.toAdministrateur(administrateurDTO);
-        Administrateur savedAdministrateur = administrateurRepository.save(administrateur);
-        return entityMapper.toAdministrateurDTO(savedAdministrateur);
+        try {
+            // Validate input
+            if (administrateurDTO == null) {
+                throw new CustomException("Administrator data cannot be null");
+            }
+
+            // Check for duplicate ID if provided
+            if (administrateurDTO.getId() != null && administrateurRepository.existsById(administrateurDTO.getId())) {
+                throw new CustomException("Administrator with ID " + administrateurDTO.getId() + " already exists");
+            }
+
+            // Convert to entity
+            Administrateur administrateur = entityMapper.toAdministrateur(administrateurDTO);
+
+            // Save entity
+            Administrateur savedAdministrateur = administrateurRepository.save(administrateur);
+
+            // Convert back to DTO
+            return entityMapper.toAdministrateurDTO(savedAdministrateur);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to create administrator", e);
+        }
     }
 
     @Override
     public AdministrateurDTO update(Long id, AdministrateurDTO administrateurDTO) throws CustomException {
-        Administrateur existingAdministrateur = administrateurRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Administrator not found with ID: " + id));
-        entityMapper.updateFromDto(administrateurDTO, existingAdministrateur);
-        Administrateur updatedAdministrateur = administrateurRepository.save(existingAdministrateur);
-        return entityMapper.toAdministrateurDTO(updatedAdministrateur);
+        try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("Administrator ID cannot be null");
+            }
+
+            if (administrateurDTO == null) {
+                throw new CustomException("Administrator data cannot be null");
+            }
+
+            // Find existing administrator
+            Administrateur existingAdministrateur = administrateurRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Administrator not found with ID: " + id));
+
+            // Update entity with DTO data
+            entityMapper.updateFromDto(administrateurDTO, existingAdministrateur);
+
+            // Save updated entity
+            Administrateur updatedAdministrateur = administrateurRepository.save(existingAdministrateur);
+
+            // Convert back to DTO
+            return entityMapper.toAdministrateurDTO(updatedAdministrateur);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to update administrator with ID: " + id, e);
+        }
     }
 
     @Override
     public void delete(Long id) throws CustomException {
-        if (!administrateurRepository.existsById(id)) {
-            throw new CustomException("Administrator not found with ID: " + id);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Administrator ID cannot be null");
+            }
+
+            // Check if administrator exists
+            if (!administrateurRepository.existsById(id)) {
+                throw new CustomException("Administrator not found with ID: " + id);
+            }
+
+            // Delete administrator
+            administrateurRepository.deleteById(id);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to delete administrator with ID: " + id, e);
         }
-        administrateurRepository.deleteById(id);
     }
 
     @Override
     public List<PropositionDeRattrapageDTO> getAllMakeupSessions() throws CustomException {
-        List<PropositionDeRattrapage> propositions = propositionDeRattrapageRepository.findAll();
-        return propositions.stream()
-                .map(entityMapper::toPropositionDeRattrapageDTO)
-                .collect(Collectors.toList());
+        try {
+            // Retrieve all makeup session proposals
+            List<PropositionDeRattrapage> propositions = propositionDeRattrapageRepository.findAll();
+
+            // Handle empty list case
+            if (propositions.isEmpty()) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return propositions.stream()
+                    .map(entityMapper::toPropositionDeRattrapageDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve makeup session proposals", e);
+        }
     }
 
     @Override
     public void approveMakeupSession(Long id) throws CustomException {
-        PropositionDeRattrapage proposition = propositionDeRattrapageRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Makeup session proposal not found with ID: " + id));
-        proposition.setStatus("approved");
-        propositionDeRattrapageRepository.save(proposition);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Makeup session proposal ID cannot be null");
+            }
+
+            // Find existing makeup session proposal
+            PropositionDeRattrapage proposition = propositionDeRattrapageRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Makeup session proposal not found with ID: " + id));
+
+            // Validate current status
+            String currentStatus = proposition.getStatus();
+            if (STATUS_APPROVED.equals(currentStatus)) {
+                // Already approved, no need to update
+                return;
+            }
+
+            if (STATUS_REJECTED.equals(currentStatus)) {
+                throw new CustomException("Cannot approve: makeup session proposal already rejected");
+            }
+
+            // Update status to approved
+            proposition.setStatus(STATUS_APPROVED);
+
+            // Save updated entity
+            propositionDeRattrapageRepository.save(proposition);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to approve makeup session proposal with ID: " + id, e);
+        }
     }
 
     @Override
     public void rejectMakeupSession(Long id) throws CustomException {
-        PropositionDeRattrapage proposition = propositionDeRattrapageRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Makeup session proposal not found with ID: " + id));
-        proposition.setStatus("rejected");
-        propositionDeRattrapageRepository.save(proposition);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Makeup session proposal ID cannot be null");
+            }
+
+            // Find existing makeup session proposal
+            PropositionDeRattrapage proposition = propositionDeRattrapageRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Makeup session proposal not found with ID: " + id));
+
+            // Validate current status
+            String currentStatus = proposition.getStatus();
+            if (STATUS_REJECTED.equals(currentStatus)) {
+                // Already rejected, no need to update
+                return;
+            }
+
+            if (STATUS_APPROVED.equals(currentStatus)) {
+                throw new CustomException("Cannot reject: makeup session proposal already approved");
+            }
+
+            // Update status to rejected
+            proposition.setStatus(STATUS_REJECTED);
+
+            // Save updated entity
+            propositionDeRattrapageRepository.save(proposition);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to reject makeup session proposal with ID: " + id, e);
+        }
     }
-}
-package com.scheduling.universityschedule_backend.service.impl;
+}package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.BrancheDTO;
 import com.scheduling.universityschedule_backend.dto.EtudiantDTO;
@@ -105,81 +270,217 @@ import com.scheduling.universityschedule_backend.model.Seance;
 import com.scheduling.universityschedule_backend.repository.BrancheRepository;
 import com.scheduling.universityschedule_backend.repository.TDRepository;
 import com.scheduling.universityschedule_backend.service.BrancheService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for branch management.
+ * Handles CRUD operations and branch-related functionalities.
+ */
 @Service
 @Transactional
 public class BrancheServiceImpl implements BrancheService {
 
-    @Autowired
-    private BrancheRepository brancheRepository;
+    private final BrancheRepository brancheRepository;
+    private final TDRepository tdRepository;
+    private final EntityMapper entityMapper;
 
-    @Autowired
-    private TDRepository tdRepository;
-
-    @Autowired
-    private EntityMapper entityMapper;
+    /**
+     * Constructor injection for dependencies
+     */
+    public BrancheServiceImpl(BrancheRepository brancheRepository,
+                              TDRepository tdRepository,
+                              EntityMapper entityMapper) {
+        this.brancheRepository = brancheRepository;
+        this.tdRepository = tdRepository;
+        this.entityMapper = entityMapper;
+    }
 
     @Override
     public BrancheDTO findById(Long id) throws CustomException {
-        Branche branche = brancheRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Branch not found with ID: " + id));
-        return entityMapper.toBrancheDTO(branche);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Branch ID cannot be null");
+            }
+
+            // Retrieve branch
+            Branche branche = brancheRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Branch not found with ID: " + id));
+
+            // Convert to DTO
+            return entityMapper.toBrancheDTO(branche);
+        } catch (CustomException e) {
+            throw e; // Rethrow custom exceptions as-is
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve branch with ID: " + id, e);
+        }
     }
 
     @Override
     public List<BrancheDTO> findAll() throws CustomException {
-        List<Branche> branches = brancheRepository.findAll();
-        return branches.stream()
-                .map(entityMapper::toBrancheDTO)
-                .collect(Collectors.toList());
+        try {
+            // Retrieve all branches
+            List<Branche> branches = brancheRepository.findAll();
+
+            // Convert to DTOs (no need to check if list is null - JPA returns empty list)
+            return branches.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toBrancheDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve all branches", e);
+        }
     }
 
     @Override
     public BrancheDTO create(BrancheDTO brancheDTO) throws CustomException {
-        Branche branche = entityMapper.toBranche(brancheDTO);
-        Branche savedBranche = brancheRepository.save(branche);
-        return entityMapper.toBrancheDTO(savedBranche);
+        try {
+            // Validate input
+            if (brancheDTO == null) {
+                throw new CustomException("Branch data cannot be null");
+            }
+
+            // Check for duplicate ID if provided
+            if (brancheDTO.getId() != null && brancheRepository.existsById(brancheDTO.getId())) {
+                throw new CustomException("Branch with ID " + brancheDTO.getId() + " already exists");
+            }
+
+            // Convert to entity
+            Branche branche = entityMapper.toBranche(brancheDTO);
+
+            // Save entity
+            Branche savedBranche = brancheRepository.save(branche);
+
+            // Convert back to DTO
+            return entityMapper.toBrancheDTO(savedBranche);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to create branch", e);
+        }
     }
 
     @Override
     public BrancheDTO update(Long id, BrancheDTO brancheDTO) throws CustomException {
-        Branche existingBranche = brancheRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Branch not found with ID: " + id));
-        entityMapper.updateFromDto(brancheDTO, existingBranche);
-        Branche updatedBranche = brancheRepository.save(existingBranche);
-        return entityMapper.toBrancheDTO(updatedBranche);
+        try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("Branch ID cannot be null");
+            }
+
+            if (brancheDTO == null) {
+                throw new CustomException("Branch data cannot be null");
+            }
+
+            // Find existing branch
+            Branche existingBranche = brancheRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Branch not found with ID: " + id));
+
+            // Update entity with DTO data
+            entityMapper.updateFromDto(brancheDTO, existingBranche);
+
+            // Save updated entity
+            Branche updatedBranche = brancheRepository.save(existingBranche);
+
+            // Convert back to DTO
+            return entityMapper.toBrancheDTO(updatedBranche);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to update branch with ID: " + id, e);
+        }
     }
 
     @Override
     public void delete(Long id) throws CustomException {
-        if (!brancheRepository.existsById(id)) {
-            throw new CustomException("Branch not found with ID: " + id);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Branch ID cannot be null");
+            }
+
+            // Check if branch exists
+            if (!brancheRepository.existsById(id)) {
+                throw new CustomException("Branch not found with ID: " + id);
+            }
+
+            // Delete branch
+            brancheRepository.deleteById(id);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to delete branch with ID: " + id, e);
         }
-        brancheRepository.deleteById(id);
     }
 
     @Override
     public List<SeanceDTO> getSchedule(Long branchId) throws CustomException {
-        Branche branche = brancheRepository.findById(branchId)
-                .orElseThrow(() -> new CustomException("Branch not found with ID: " + branchId));
-        List<Seance> seances = branche.getSeances();
-        return seances.stream()
-                .map(entityMapper::toSeanceDTO)
-                .collect(Collectors.toList());
+        try {
+            // Validate input
+            if (branchId == null) {
+                throw new CustomException("Branch ID cannot be null");
+            }
+
+            // Find branch
+            Branche branche = brancheRepository.findById(branchId)
+                    .orElseThrow(() -> new CustomException("Branch not found with ID: " + branchId));
+
+            // Get sessions from branch - handle null case properly
+            List<Seance> seances = branche.getSeances();
+            if (seances == null) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return seances.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toSeanceDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve schedule for branch with ID: " + branchId, e);
+        }
     }
 
     @Override
     public List<EtudiantDTO> getEtudiants(Long id) throws CustomException {
-        List<Etudiant> etudiants = tdRepository.findAllEtudiantsByBrancheId(id);
-        return etudiants.stream()
-                .map(entityMapper::toEtudiantDTO)
-                .collect(Collectors.toList());
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Branch ID cannot be null");
+            }
+
+            // Check if branch exists
+            if (!brancheRepository.existsById(id)) {
+                throw new CustomException("Branch not found with ID: " + id);
+            }
+
+            // Get students using TD repository
+            List<Etudiant> etudiants = tdRepository.findAllEtudiantsByBrancheId(id);
+
+            // JPA repositories typically return empty lists rather than null,
+            // but we'll be defensive just in case
+            if (etudiants == null) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return etudiants.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toEtudiantDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve students for branch with ID: " + id, e);
+        }
     }
 }package com.scheduling.universityschedule_backend.service.impl;
 
@@ -194,116 +495,241 @@ import com.scheduling.universityschedule_backend.model.Enseignant;
 import com.scheduling.universityschedule_backend.repository.EnseignantRepository;
 import com.scheduling.universityschedule_backend.repository.SeanceRepository;
 import com.scheduling.universityschedule_backend.service.EnseignantService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for teacher operations.
+ * Manages teacher schedules, teaching hours, and communication.
+ */
 @Service
 @Transactional
 public class EnseignantServiceImpl implements EnseignantService {
 
-    @Autowired
-    private EnseignantRepository enseignantRepository;
+    private final EnseignantRepository enseignantRepository;
+    private final SeanceRepository seanceRepository;
+    private final EntityMapper entityMapper;
 
-    @Autowired
-    private SeanceRepository seanceRepository;
-
-    @Autowired
-    private EntityMapper entityMapper;
+    /**
+     * Constructor injection for dependencies
+     */
+    public EnseignantServiceImpl(EnseignantRepository enseignantRepository,
+                                 SeanceRepository seanceRepository,
+                                 EntityMapper entityMapper) {
+        this.enseignantRepository = enseignantRepository;
+        this.seanceRepository = seanceRepository;
+        this.entityMapper = entityMapper;
+    }
 
     @Override
     public EnseignantDTO findById(Long id) throws CustomException {
-        Enseignant enseignant = enseignantRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
-        return entityMapper.toEnseignantDTO(enseignant);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Teacher ID cannot be null");
+            }
+
+            // Retrieve teacher
+            Enseignant enseignant = enseignantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
+
+            // Convert to DTO
+            return entityMapper.toEnseignantDTO(enseignant);
+        } catch (CustomException e) {
+            throw e; // Rethrow custom exceptions as-is
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve teacher with ID: " + id, e);
+        }
     }
 
     @Override
     public List<EnseignantDTO> findAll() throws CustomException {
-        List<Enseignant> enseignants = enseignantRepository.findAll();
-        return enseignants.stream()
-                .map(entityMapper::toEnseignantDTO)
-                .collect(Collectors.toList());
+        try {
+            // Retrieve all teachers
+            List<Enseignant> enseignants = enseignantRepository.findAll();
+
+            // Convert to DTOs
+            return enseignants.stream()
+                    .map(entityMapper::toEnseignantDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve all teachers", e);
+        }
     }
 
     @Override
     public EnseignantDTO create(EnseignantDTO enseignantDTO) throws CustomException {
-        Enseignant enseignant = entityMapper.toEnseignant(enseignantDTO);
-        Enseignant savedEnseignant = enseignantRepository.save(enseignant);
-        return entityMapper.toEnseignantDTO(savedEnseignant);
+        try {
+            // Validate input
+            if (enseignantDTO == null) {
+                throw new CustomException("Teacher data cannot be null");
+            }
+
+            // Check for duplicate ID if provided
+            if (enseignantDTO.getId() != null && enseignantRepository.existsById(enseignantDTO.getId())) {
+                throw new CustomException("Teacher with ID " + enseignantDTO.getId() + " already exists");
+            }
+
+            // Convert to entity
+            Enseignant enseignant = entityMapper.toEnseignant(enseignantDTO);
+
+            // Save entity
+            Enseignant savedEnseignant = enseignantRepository.save(enseignant);
+
+            // Convert back to DTO
+            return entityMapper.toEnseignantDTO(savedEnseignant);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to create teacher", e);
+        }
     }
 
     @Override
     public EnseignantDTO update(Long id, EnseignantDTO enseignantDTO) throws CustomException {
-        Enseignant existingEnseignant = enseignantRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
-        entityMapper.updateFromDto(enseignantDTO, existingEnseignant);
-        Enseignant updatedEnseignant = enseignantRepository.save(existingEnseignant);
-        return entityMapper.toEnseignantDTO(updatedEnseignant);
+        try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("Teacher ID cannot be null");
+            }
+
+            if (enseignantDTO == null) {
+                throw new CustomException("Teacher data cannot be null");
+            }
+
+            // Find existing teacher
+            Enseignant existingEnseignant = enseignantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
+
+            // Update entity with DTO data
+            entityMapper.updateFromDto(enseignantDTO, existingEnseignant);
+
+            // Save updated entity
+            Enseignant updatedEnseignant = enseignantRepository.save(existingEnseignant);
+
+            // Convert back to DTO
+            return entityMapper.toEnseignantDTO(updatedEnseignant);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to update teacher with ID: " + id, e);
+        }
     }
 
     @Override
     public void delete(Long id) throws CustomException {
-        if (!enseignantRepository.existsById(id)) {
-            throw new CustomException("Teacher not found with ID: " + id);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Teacher ID cannot be null");
+            }
+
+            // Check if teacher exists
+            if (!enseignantRepository.existsById(id)) {
+                throw new CustomException("Teacher not found with ID: " + id);
+            }
+
+            // Delete teacher
+            enseignantRepository.deleteById(id);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to delete teacher with ID: " + id, e);
         }
-        enseignantRepository.deleteById(id);
     }
 
     @Override
     public List<SeanceDTO> getSchedule(Long id) throws CustomException {
-        Enseignant enseignant = enseignantRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
-        return enseignant.getSeances().stream()
-                .map(entityMapper::toSeanceDTO)
-                .collect(Collectors.toList());
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Teacher ID cannot be null");
+            }
+
+            // Find teacher
+            Enseignant enseignant = enseignantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
+
+            // Get sessions from teacher - using safe access pattern for collections
+            if (enseignant.getSeances() == null) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return enseignant.getSeances().stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toSeanceDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve schedule for teacher with ID: " + id, e);
+        }
     }
 
     @Override
     public int getTotalTeachingHours(Long teacherId, LocalDate startDate, LocalDate endDate) throws CustomException {
-        // Implement the logic to calculate total teaching hours
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // For now, we're leaving this unimplemented
+        throw new CustomException("Method not implemented yet: getTotalTeachingHours");
     }
 
     @Override
     public PropositionDeRattrapageDTO submitMakeupRequest(Long id, PropositionDeRattrapageDTO proposition) throws CustomException {
-        Enseignant enseignant = enseignantRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
-        // Implement the logic to submit a makeup session request
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // For now, we're leaving this unimplemented
+        throw new CustomException("Method not implemented yet: submitMakeupRequest");
     }
 
     @Override
     public SignalDTO submitSignal(Long id, SignalDTO signal) throws CustomException {
-        Enseignant enseignant = enseignantRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
-        // Implement the logic to submit a signal
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // For now, we're leaving this unimplemented
+        throw new CustomException("Method not implemented yet: submitSignal");
     }
 
     @Override
     public List<SignalDTO> getSignals(Long id) throws CustomException {
-        Enseignant enseignant = enseignantRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
-        return enseignant.getSignals().stream()
-                .map(entityMapper::toSignalDTO)
-                .collect(Collectors.toList());
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Teacher ID cannot be null");
+            }
+
+            // Find teacher
+            Enseignant enseignant = enseignantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
+
+            // Get signals from teacher - using safe access pattern for collections
+            if (enseignant.getSignals() == null) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return enseignant.getSignals().stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toSignalDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve signals for teacher with ID: " + id, e);
+        }
     }
 
     @Override
     public List<String> getSubjects(Long id) throws CustomException {
-        // Implement the logic to get all subjects taught by the teacher
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // For now, we're leaving this unimplemented
+        throw new CustomException("Method not implemented yet: getSubjects");
     }
 
     @Override
     public List<TPDTO> getStudentGroups(Long id) throws CustomException {
-        // Implement the logic to get all student groups taught by the teacher
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // For now, we're leaving this unimplemented
+        throw new CustomException("Method not implemented yet: getStudentGroups");
     }
 }package com.scheduling.universityschedule_backend.service.impl;
 
@@ -316,88 +742,224 @@ import com.scheduling.universityschedule_backend.model.Etudiant;
 import com.scheduling.universityschedule_backend.repository.EtudiantRepository;
 import com.scheduling.universityschedule_backend.repository.NotificationRepository;
 import com.scheduling.universityschedule_backend.service.EtudiantService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for student operations.
+ * Handles CRUD operations and student-related functionalities.
+ */
 @Service
 @Transactional
 public class EtudiantServiceImpl implements EtudiantService {
 
-    @Autowired
-    private EtudiantRepository etudiantRepository;
+    private final EtudiantRepository etudiantRepository;
+    private final NotificationRepository notificationRepository;
+    private final EntityMapper entityMapper;
 
-    @Autowired
-    private NotificationRepository notificationRepository;
-
-    @Autowired
-    private EntityMapper entityMapper;
+    /**
+     * Constructor injection for dependencies
+     */
+    public EtudiantServiceImpl(EtudiantRepository etudiantRepository,
+                               NotificationRepository notificationRepository,
+                               EntityMapper entityMapper) {
+        this.etudiantRepository = etudiantRepository;
+        this.notificationRepository = notificationRepository;
+        this.entityMapper = entityMapper;
+    }
 
     @Override
     public EtudiantDTO findById(Long id) throws CustomException {
-        Etudiant etudiant = etudiantRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Student not found with ID: " + id));
-        return entityMapper.toEtudiantDTO(etudiant);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Student ID cannot be null");
+            }
+
+            // Retrieve student
+            Etudiant etudiant = etudiantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Student not found with ID: " + id));
+
+            // Convert to DTO
+            return entityMapper.toEtudiantDTO(etudiant);
+        } catch (CustomException e) {
+            throw e; // Rethrow custom exceptions as-is
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve student with ID: " + id, e);
+        }
     }
 
     @Override
     public List<EtudiantDTO> findAll() throws CustomException {
-        List<Etudiant> etudiants = etudiantRepository.findAll();
-        return etudiants.stream()
-                .map(entityMapper::toEtudiantDTO)
-                .collect(Collectors.toList());
+        try {
+            // Retrieve all students
+            List<Etudiant> etudiants = etudiantRepository.findAll();
+
+            // Convert to DTOs (JPA repositories typically return empty lists rather than null)
+            return etudiants.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toEtudiantDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve all students", e);
+        }
     }
 
     @Override
     public EtudiantDTO create(EtudiantDTO etudiantDTO) throws CustomException {
-        Etudiant etudiant = entityMapper.toEtudiant(etudiantDTO);
-        Etudiant savedEtudiant = etudiantRepository.save(etudiant);
-        return entityMapper.toEtudiantDTO(savedEtudiant);
+        try {
+            // Validate input
+            if (etudiantDTO == null) {
+                throw new CustomException("Student data cannot be null");
+            }
+
+            // Check for duplicate ID if provided
+            if (etudiantDTO.getId() != null && etudiantRepository.existsById(etudiantDTO.getId())) {
+                throw new CustomException("Student with ID " + etudiantDTO.getId() + " already exists");
+            }
+
+            // Convert to entity
+            Etudiant etudiant = entityMapper.toEtudiant(etudiantDTO);
+
+            // Save entity
+            Etudiant savedEtudiant = etudiantRepository.save(etudiant);
+
+            // Convert back to DTO
+            return entityMapper.toEtudiantDTO(savedEtudiant);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to create student", e);
+        }
     }
 
     @Override
     public EtudiantDTO update(Long id, EtudiantDTO etudiantDTO) throws CustomException {
-        Etudiant existingEtudiant = etudiantRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Student not found with ID: " + id));
-        entityMapper.updateFromDto(etudiantDTO, existingEtudiant);
-        Etudiant updatedEtudiant = etudiantRepository.save(existingEtudiant);
-        return entityMapper.toEtudiantDTO(updatedEtudiant);
+        try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("Student ID cannot be null");
+            }
+
+            if (etudiantDTO == null) {
+                throw new CustomException("Student data cannot be null");
+            }
+
+            // Find existing student
+            Etudiant existingEtudiant = etudiantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Student not found with ID: " + id));
+
+            // Update entity with DTO data
+            entityMapper.updateFromDto(etudiantDTO, existingEtudiant);
+
+            // Save updated entity
+            Etudiant updatedEtudiant = etudiantRepository.save(existingEtudiant);
+
+            // Convert back to DTO
+            return entityMapper.toEtudiantDTO(updatedEtudiant);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to update student with ID: " + id, e);
+        }
     }
 
     @Override
     public void delete(Long id) throws CustomException {
-        if (!etudiantRepository.existsById(id)) {
-            throw new CustomException("Student not found with ID: " + id);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Student ID cannot be null");
+            }
+
+            // Check if student exists
+            if (!etudiantRepository.existsById(id)) {
+                throw new CustomException("Student not found with ID: " + id);
+            }
+
+            // Delete student
+            etudiantRepository.deleteById(id);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to delete student with ID: " + id, e);
         }
-        etudiantRepository.deleteById(id);
     }
 
     @Override
     public List<SeanceDTO> getPersonalSchedule(Long id) throws CustomException {
-        Etudiant etudiant = etudiantRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Student not found with ID: " + id));
-        return etudiant.getTp().getSeances().stream()
-                .map(entityMapper::toSeanceDTO)
-                .collect(Collectors.toList());
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Student ID cannot be null");
+            }
+
+            // Find student
+            Etudiant etudiant = etudiantRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Student not found with ID: " + id));
+
+            // Check if student is assigned to a practical group
+            if (etudiant.getTp() == null) {
+                throw new CustomException("Student with ID: " + id + " is not assigned to any practical group (TP)");
+            }
+
+            // Get sessions from TP
+            if (etudiant.getTp().getSeances() == null) {
+                return Collections.emptyList();
+            }
+
+            // Convert to DTOs
+            return etudiant.getTp().getSeances().stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toSeanceDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve personal schedule for student with ID: " + id, e);
+        }
     }
 
     @Override
-    public List<SeanceDTO> getBranchSchedule(Long brancheId) throws CustomException {
-        // Implement the logic to retrieve the schedule for the specified branch
-        throw new UnsupportedOperationException("Method not implemented yet");
+    public List<SeanceDTO> getTDSchedule(Long id) throws CustomException {
+        // This method is unimplemented for now
+        throw new CustomException("Method not implemented yet: getBranchSchedule");
+    }
+    @Override
+    public List<SeanceDTO> getBranchSchedule(Long id) throws CustomException {
+        // This method is unimplemented for now
+        throw new CustomException("Method not implemented yet: getBranchSchedule");
     }
 
     @Override
     public List<NotificationDTO> getNotifications(Long id) throws CustomException {
-        if (!etudiantRepository.existsById(id)) {
-            throw new CustomException("Student not found with ID: " + id);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Student ID cannot be null");
+            }
+
+            // Check if student exists
+            if (!etudiantRepository.existsById(id)) {
+                throw new CustomException("Student not found with ID: " + id);
+            }
+
+            // Get notifications for student
+
+            return notificationRepository.findAllByPersonneId(id).stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toNotificationDTO)
+                    .collect(Collectors.toList());
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve notifications for student with ID: " + id, e);
         }
-        return notificationRepository.findAllByPersonneId(id).stream()
-                .map(entityMapper::toNotificationDTO)
-                .collect(Collectors.toList());
     }
 }package com.scheduling.universityschedule_backend.service.impl;
 
@@ -410,39 +972,75 @@ import com.scheduling.universityschedule_backend.model.Seance;
 import com.scheduling.universityschedule_backend.repository.FichierExcelRepository;
 import com.scheduling.universityschedule_backend.repository.SeanceRepository;
 import com.scheduling.universityschedule_backend.service.ExcelFileService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for Excel file operations.
+ * Handles file uploads, processing, and history tracking.
+ */
 @Service
 @Transactional
 public class ExcelFileServiceImpl implements ExcelFileService {
 
-    @Autowired
-    private FichierExcelRepository fichierExcelRepository;
+    /**
+     * File status constants
+     */
+    private static final String STATUS_PROCESSING = "Processing";
+    private static final String STATUS_COMPLETED = "Completed";
+    private static final String STATUS_FAILED = "Failed";
 
-    @Autowired
-    private SeanceRepository seanceRepository;
+    private final FichierExcelRepository fichierExcelRepository;
+    private final SeanceRepository seanceRepository;
+    private final EntityMapper entityMapper;
 
-    @Autowired
-    private EntityMapper entityMapper;
+    /**
+     * Constructor injection for dependencies
+     */
+    public ExcelFileServiceImpl(FichierExcelRepository fichierExcelRepository,
+                                SeanceRepository seanceRepository,
+                                EntityMapper entityMapper) {
+        this.fichierExcelRepository = fichierExcelRepository;
+        this.seanceRepository = seanceRepository;
+        this.entityMapper = entityMapper;
+    }
 
     @Override
     public FichierExcelDTO findById(Long id) throws CustomException {
-        FichierExcel fichierExcel = fichierExcelRepository.findById(id)
-                .orElseThrow(() -> new CustomException("File not found with ID: " + id));
-        return entityMapper.toFichierExcelDTO(fichierExcel);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("File ID cannot be null");
+            }
+
+            // Retrieve file
+            FichierExcel fichierExcel = fichierExcelRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("File not found with ID: " + id));
+
+            // Convert to DTO
+            return entityMapper.toFichierExcelDTO(fichierExcel);
+        } catch (CustomException e) {
+            throw e; // Rethrow custom exceptions as-is
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve file with ID: " + id, e);
+        }
     }
 
     @Override
     public List<FichierExcelDTO> findAll() throws CustomException {
         try {
+            // Retrieve all files
             List<FichierExcel> fichiersExcel = fichierExcelRepository.findAll();
+
+            // Convert to DTOs (JPA repositories typically return empty lists rather than null)
             return fichiersExcel.stream()
+                    .filter(Objects::nonNull)
                     .map(entityMapper::toFichierExcelDTO)
                     .collect(Collectors.toList());
         } catch (Exception e) {
@@ -453,9 +1051,26 @@ public class ExcelFileServiceImpl implements ExcelFileService {
     @Override
     public FichierExcelDTO create(FichierExcelDTO fichierExcelDTO) throws CustomException {
         try {
+            // Validate input
+            if (fichierExcelDTO == null) {
+                throw new CustomException("File data cannot be null");
+            }
+
+            // Check for duplicate ID if provided
+            if (fichierExcelDTO.getId() != null && fichierExcelRepository.existsById(fichierExcelDTO.getId())) {
+                throw new CustomException("File with ID " + fichierExcelDTO.getId() + " already exists");
+            }
+
+            // Convert to entity
             FichierExcel fichierExcel = entityMapper.toFichierExcel(fichierExcelDTO);
+
+            // Save entity
             FichierExcel savedFichierExcel = fichierExcelRepository.save(fichierExcel);
+
+            // Convert back to DTO
             return entityMapper.toFichierExcelDTO(savedFichierExcel);
+        } catch (CustomException e) {
+            throw e;
         } catch (Exception e) {
             throw new CustomException("Failed to create file", e);
         }
@@ -463,58 +1078,121 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 
     @Override
     public FichierExcelDTO update(Long id, FichierExcelDTO fichierExcelDTO) throws CustomException {
-        FichierExcel existingFichierExcel = fichierExcelRepository.findById(id)
-                .orElseThrow(() -> new CustomException("File not found with ID: " + id));
-        entityMapper.updateFromDto(fichierExcelDTO, existingFichierExcel);
         try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("File ID cannot be null");
+            }
+
+            if (fichierExcelDTO == null) {
+                throw new CustomException("File data cannot be null");
+            }
+
+            // Find existing file
+            FichierExcel existingFichierExcel = fichierExcelRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("File not found with ID: " + id));
+
+            // Update entity with DTO data
+            entityMapper.updateFromDto(fichierExcelDTO, existingFichierExcel);
+
+            // Save updated entity
             FichierExcel updatedFichierExcel = fichierExcelRepository.save(existingFichierExcel);
+
+            // Convert back to DTO
             return entityMapper.toFichierExcelDTO(updatedFichierExcel);
+        } catch (CustomException e) {
+            throw e;
         } catch (Exception e) {
-            throw new CustomException("Failed to update file", e);
+            throw new CustomException("Failed to update file with ID: " + id, e);
         }
     }
 
     @Override
     public void delete(Long id) throws CustomException {
-        if (!fichierExcelRepository.existsById(id)) {
-            throw new CustomException("File not found with ID: " + id);
-        }
         try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("File ID cannot be null");
+            }
+
+            // Check if file exists
+            if (!fichierExcelRepository.existsById(id)) {
+                throw new CustomException("File not found with ID: " + id);
+            }
+
+            // Delete file
             fichierExcelRepository.deleteById(id);
+        } catch (CustomException e) {
+            throw e;
         } catch (Exception e) {
-            throw new CustomException("Failed to delete file", e);
+            throw new CustomException("Failed to delete file with ID: " + id, e);
         }
     }
 
     @Override
     public void upload(FichierExcelDTO file, List<SeanceDTO> seanceDTOS) throws CustomException {
+        FichierExcel fichierExcel = null;
+
         try {
-            FichierExcel fichierExcel = entityMapper.toFichierExcel(file);
+            // Validate inputs
+            if (file == null) {
+                throw new CustomException("File data cannot be null");
+            }
+
+            if (seanceDTOS == null) {
+                throw new CustomException("Sessions data cannot be null");
+            }
+
+            // Convert file to entity
+            fichierExcel = entityMapper.toFichierExcel(file);
+
+            // Set import date and initial status
             fichierExcel.setImportDate(LocalDateTime.now());
-            fichierExcel.setStatus("Processing");
+            fichierExcel.setStatus(STATUS_PROCESSING);
+
+            // Save file with initial status
             fichierExcelRepository.save(fichierExcel);
 
+            // Convert and save sessions
             List<Seance> seances = seanceDTOS.stream()
+                    .filter(Objects::nonNull)
                     .map(entityMapper::toSeance)
                     .collect(Collectors.toList());
+
             seanceRepository.saveAll(seances);
 
-            fichierExcel.setStatus("Completed");
+            // Update file status to completed
+            fichierExcel.setStatus(STATUS_COMPLETED);
             fichierExcelRepository.save(fichierExcel);
         } catch (Exception e) {
-            throw new CustomException("Failed to upload and process file", e);
+            // Update file status to failed if an error occurs
+            if (fichierExcel != null) {
+                try {
+                    fichierExcel.setStatus(STATUS_FAILED);
+                    fichierExcelRepository.save(fichierExcel);
+                } catch (Exception saveException) {
+                    // Log this exception but don't throw it, we want to throw the original exception
+                    System.err.println("Failed to update file status to FAILED: " + saveException.getMessage());
+                }
+            }
+
+            // Throw the original exception
+            if (e instanceof CustomException) {
+                throw (CustomException) e;
+            } else {
+                throw new CustomException("Failed to upload and process file", e);
+            }
         }
     }
 
     @Override
     public List<FichierExcelDTO> getImportHistory() throws CustomException {
         try {
-            List<FichierExcel> fichiersExcel = fichierExcelRepository.findAll();
-            return fichiersExcel.stream()
-                    .map(entityMapper::toFichierExcelDTO)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new CustomException("Failed to retrieve import history", e);
+            // Reuse findAll method since they do the same thing
+            return findAll();
+        } catch (CustomException e) {
+            // Just change the error message to be more specific to this operation
+            throw new CustomException("Failed to retrieve import history", e.getCause());
         }
     }
 }package com.scheduling.universityschedule_backend.service.impl;
@@ -525,330 +1203,590 @@ import com.scheduling.universityschedule_backend.mapper.EntityMapper;
 import com.scheduling.universityschedule_backend.model.Notification;
 import com.scheduling.universityschedule_backend.repository.NotificationRepository;
 import com.scheduling.universityschedule_backend.service.NotificationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for notification operations.
+ * Handles notification creation, updates, and various distribution methods.
+ */
 @Service
 @Transactional
 public class NotificationServiceImpl implements NotificationService {
 
-    @Autowired
-    private NotificationRepository notificationRepository;
+    private final NotificationRepository notificationRepository;
+    private final EntityMapper entityMapper;
 
-    @Autowired
-    private EntityMapper entityMapper;
+    /**
+     * Constructor injection for dependencies
+     */
+    public NotificationServiceImpl(NotificationRepository notificationRepository,
+                                   EntityMapper entityMapper) {
+        this.notificationRepository = notificationRepository;
+        this.entityMapper = entityMapper;
+    }
 
     @Override
     public NotificationDTO findById(Long id) throws CustomException {
-        Notification notification = notificationRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Notification not found with ID: " + id));
-        return entityMapper.toNotificationDTO(notification);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Notification ID cannot be null");
+            }
+
+            // Retrieve notification
+            Notification notification = notificationRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Notification not found with ID: " + id));
+
+            // Convert to DTO
+            return entityMapper.toNotificationDTO(notification);
+        } catch (CustomException e) {
+            throw e; // Rethrow custom exceptions as-is
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve notification with ID: " + id, e);
+        }
     }
 
     @Override
     public List<NotificationDTO> findAll() throws CustomException {
-        List<Notification> notifications = notificationRepository.findAll();
-        return notifications.stream()
-                .map(entityMapper::toNotificationDTO)
-                .collect(Collectors.toList());
+        try {
+            // Retrieve all notifications
+            List<Notification> notifications = notificationRepository.findAll();
+
+            // Convert to DTOs (JPA repositories typically return empty lists rather than null)
+            return notifications.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toNotificationDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve all notifications", e);
+        }
     }
 
     @Override
     public NotificationDTO create(NotificationDTO notificationDTO) throws CustomException {
-        Notification notification = entityMapper.toNotification(notificationDTO);
-        Notification savedNotification = notificationRepository.save(notification);
-        return entityMapper.toNotificationDTO(savedNotification);
+        try {
+            // Validate input
+            if (notificationDTO == null) {
+                throw new CustomException("Notification data cannot be null");
+            }
+
+            // Check for duplicate ID if provided
+            if (notificationDTO.getId() != null && notificationRepository.existsById(notificationDTO.getId())) {
+                throw new CustomException("Notification with ID " + notificationDTO.getId() + " already exists");
+            }
+
+            // Convert to entity
+            Notification notification = entityMapper.toNotification(notificationDTO);
+
+            // Save entity
+            Notification savedNotification = notificationRepository.save(notification);
+
+            // Convert back to DTO
+            return entityMapper.toNotificationDTO(savedNotification);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to create notification", e);
+        }
     }
 
     @Override
     public NotificationDTO update(Long id, NotificationDTO notificationDTO) throws CustomException {
-        Notification existingNotification = notificationRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Notification not found with ID: " + id));
-        entityMapper.updateFromDto(notificationDTO, existingNotification);
-        Notification updatedNotification = notificationRepository.save(existingNotification);
-        return entityMapper.toNotificationDTO(updatedNotification);
+        try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("Notification ID cannot be null");
+            }
+
+            if (notificationDTO == null) {
+                throw new CustomException("Notification data cannot be null");
+            }
+
+            // Find existing notification
+            Notification existingNotification = notificationRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Notification not found with ID: " + id));
+
+            // Update entity with DTO data
+            entityMapper.updateFromDto(notificationDTO, existingNotification);
+
+            // Save updated entity
+            Notification updatedNotification = notificationRepository.save(existingNotification);
+
+            // Convert back to DTO
+            return entityMapper.toNotificationDTO(updatedNotification);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to update notification with ID: " + id, e);
+        }
     }
 
     @Override
     public void delete(Long id) throws CustomException {
-        if (!notificationRepository.existsById(id)) {
-            throw new CustomException("Notification not found with ID: " + id);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Notification ID cannot be null");
+            }
+
+            // Check if notification exists
+            if (!notificationRepository.existsById(id)) {
+                throw new CustomException("Notification not found with ID: " + id);
+            }
+
+            // Delete notification
+            notificationRepository.deleteById(id);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to delete notification with ID: " + id, e);
         }
-        notificationRepository.deleteById(id);
     }
 
     @Override
     public void markAsRead(Long id) throws CustomException {
-        Notification notification = notificationRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Notification not found with ID: " + id));
-        notification.setIsread(true);
-        notificationRepository.save(notification);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Notification ID cannot be null");
+            }
+
+            // Find notification
+            Notification notification = notificationRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Notification not found with ID: " + id));
+
+            // Check if already read (skip update if already marked as read)
+            if (Boolean.TRUE.equals(notification.getIsread())) {
+                return; // Already read, no need to update
+            }
+
+            // Mark as read
+            notification.setIsread(true);
+
+            // Save updated notification
+            notificationRepository.save(notification);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to mark notification as read: " + id, e);
+        }
     }
 
     @Override
     public List<NotificationDTO> getUnreadNotifications() throws CustomException {
-        List<Notification> unreadNotifications = notificationRepository.findByIsreadFalse();
-        return unreadNotifications.stream()
-                .map(entityMapper::toNotificationDTO)
-                .collect(Collectors.toList());
+        try {
+            // Retrieve unread notifications
+            List<Notification> unreadNotifications = notificationRepository.findByIsreadFalse();
+
+            // Convert to DTOs (JPA repositories typically return empty lists rather than null)
+            return unreadNotifications.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toNotificationDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve unread notifications", e);
+        }
     }
 
     @Override
     public void broadcastNotification(NotificationDTO notificationDTO) throws CustomException {
-        // Implement logic to send notification to all users (Teachers + Students not admins and Technicians)
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // Validate input
+        if (notificationDTO == null) {
+            throw new CustomException("Notification data cannot be null");
+        }
+
+        // For now, this method is unimplemented
+        throw new CustomException("Method not implemented yet: broadcastNotification");
     }
 
     @Override
     public void sendNotificationToTeachers(NotificationDTO notificationDTO) throws CustomException {
-        // Implement logic to send notification to all teachers
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // Validate input
+        if (notificationDTO == null) {
+            throw new CustomException("Notification data cannot be null");
+        }
+
+        // For now, this method is unimplemented
+        throw new CustomException("Method not implemented yet: sendNotificationToTeachers");
     }
 
     @Override
     public void sendNotificationToStudents(NotificationDTO notificationDTO) throws CustomException {
-        // Implement logic to send notification to all students
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // Validate input
+        if (notificationDTO == null) {
+            throw new CustomException("Notification data cannot be null");
+        }
+
+        // For now, this method is unimplemented
+        throw new CustomException("Method not implemented yet: sendNotificationToStudents");
     }
 
     @Override
     public void sendNotificationToBranches(NotificationDTO notificationDTO, List<BrancheDTO> brancheDTOS) throws CustomException {
-        // Implement logic to send notification to all branches
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // Validate inputs
+        if (notificationDTO == null) {
+            throw new CustomException("Notification data cannot be null");
+        }
+
+        if (brancheDTOS == null || brancheDTOS.isEmpty()) {
+            throw new CustomException("Branch list cannot be null or empty");
+        }
+
+        // For now, this method is unimplemented
+        throw new CustomException("Method not implemented yet: sendNotificationToBranches");
     }
 
     @Override
     public void sendNotificationToBranche(NotificationDTO notificationDTO, BrancheDTO brancheDTO) throws CustomException {
-        // Implement logic to send notification to a specific branch
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // Validate inputs
+        if (notificationDTO == null) {
+            throw new CustomException("Notification data cannot be null");
+        }
+
+        if (brancheDTO == null) {
+            throw new CustomException("Branch data cannot be null");
+        }
+
+        // For now, this method is unimplemented
+        throw new CustomException("Method not implemented yet: sendNotificationToBranche");
     }
 
     @Override
     public void sendNotificationToTDs(NotificationDTO notificationDTO, List<TDDTO> tddtos) throws CustomException {
-        // Implement logic to send notification to tutorial groups
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // Validate inputs
+        if (notificationDTO == null) {
+            throw new CustomException("Notification data cannot be null");
+        }
+
+        if (tddtos == null || tddtos.isEmpty()) {
+            throw new CustomException("Tutorial groups list cannot be null or empty");
+        }
+
+        // For now, this method is unimplemented
+        throw new CustomException("Method not implemented yet: sendNotificationToTDs");
     }
 
     @Override
     public void sendNotificationToTD(NotificationDTO notificationDTO, TDDTO tddto) throws CustomException {
-        // Implement logic to send notification to a specific tutorial group
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // Validate inputs
+        if (notificationDTO == null) {
+            throw new CustomException("Notification data cannot be null");
+        }
+
+        if (tddto == null) {
+            throw new CustomException("Tutorial group data cannot be null");
+        }
+
+        // For now, this method is unimplemented
+        throw new CustomException("Method not implemented yet: sendNotificationToTD");
     }
 
     @Override
     public void sendNotificationToTPs(NotificationDTO notificationDTO, List<TPDTO> tpdtos) throws CustomException {
-        // Implement logic to send notification to practical sessions
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // Validate inputs
+        if (notificationDTO == null) {
+            throw new CustomException("Notification data cannot be null");
+        }
+
+        if (tpdtos == null || tpdtos.isEmpty()) {
+            throw new CustomException("Practical groups list cannot be null or empty");
+        }
+
+        // For now, this method is unimplemented
+        throw new CustomException("Method not implemented yet: sendNotificationToTPs");
     }
 
     @Override
     public void sendNotificationToTP(NotificationDTO notificationDTO, TPDTO tpdto) throws CustomException {
-        // Implement logic to send notification to a specific practical session
-        throw new UnsupportedOperationException("Method not implemented yet");
+        // Validate inputs
+        if (notificationDTO == null) {
+            throw new CustomException("Notification data cannot be null");
+        }
+
+        if (tpdto == null) {
+            throw new CustomException("Practical group data cannot be null");
+        }
+
+        // For now, this method is unimplemented
+        throw new CustomException("Method not implemented yet: sendNotificationToTP");
     }
 }package com.scheduling.universityschedule_backend.service.impl;
 
 import com.scheduling.universityschedule_backend.dto.SalleDTO;
 import com.scheduling.universityschedule_backend.exception.CustomException;
 import com.scheduling.universityschedule_backend.mapper.EntityMapper;
-import com.scheduling.universityschedule_backend.model.*;
+import com.scheduling.universityschedule_backend.model.Salle;
 import com.scheduling.universityschedule_backend.repository.SalleRepository;
-import com.scheduling.universityschedule_backend.repository.SeanceRepository;
 import com.scheduling.universityschedule_backend.service.SalleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for room management.
+ * Handles room creation, updates, and availability checking.
+ */
 @Service
 @Transactional
 public class SalleServiceImpl implements SalleService {
 
-    @Autowired
-    private SalleRepository salleRepository;
-    @Autowired
-    private SeanceRepository seanceRepository;
+    private final SalleRepository salleRepository;
+    private final EntityMapper entityMapper;
 
-    @Autowired
-    private EntityMapper entityMapper;
+    /**
+     * Constructor injection for dependencies
+     */
+    public SalleServiceImpl(SalleRepository salleRepository,
+                            EntityMapper entityMapper) {
+        this.salleRepository = salleRepository;
+        this.entityMapper = entityMapper;
+    }
 
     @Override
     public SalleDTO findById(Long id) throws CustomException {
-        Salle salle = salleRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Room not found with ID: " + id));
-        return entityMapper.toSalleDTO(salle);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Room ID cannot be null");
+            }
+
+            // Retrieve room
+            Salle salle = salleRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Room not found with ID: " + id));
+
+            // Convert to DTO
+            return entityMapper.toSalleDTO(salle);
+        } catch (CustomException e) {
+            throw e; // Rethrow custom exceptions as-is
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve room with ID: " + id, e);
+        }
     }
 
     @Override
     public List<SalleDTO> findAll() throws CustomException {
-        List<Salle> salles = salleRepository.findAll();
-        return salles.stream()
-                .map(entityMapper::toSalleDTO)
-                .collect(Collectors.toList());
+        try {
+            // Retrieve all rooms
+            List<Salle> salles = salleRepository.findAll();
+
+            // Convert to DTOs
+            return salles.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toSalleDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve all rooms", e);
+        }
     }
 
     @Override
     public SalleDTO create(SalleDTO salleDTO) throws CustomException {
-        Salle salle = entityMapper.toSalle(salleDTO);
-        Salle savedSalle = salleRepository.save(salle);
-        return entityMapper.toSalleDTO(savedSalle);
+        try {
+            // Validate input
+            if (salleDTO == null) {
+                throw new CustomException("Room data cannot be null");
+            }
+
+            // Check for duplicate ID if provided
+            if (salleDTO.getId() != null && salleRepository.existsById(salleDTO.getId())) {
+                throw new CustomException("Room with ID " + salleDTO.getId() + " already exists");
+            }
+
+            // Convert to entity
+            Salle salle = entityMapper.toSalle(salleDTO);
+
+            // Save entity
+            Salle savedSalle = salleRepository.save(salle);
+
+            // Convert back to DTO
+            return entityMapper.toSalleDTO(savedSalle);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to create room", e);
+        }
     }
 
     @Override
     public SalleDTO update(Long id, SalleDTO salleDTO) throws CustomException {
-        Salle existingSalle = salleRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Room not found with ID: " + id));
-        entityMapper.updateFromDto(salleDTO, existingSalle);
-        Salle updatedSalle = salleRepository.save(existingSalle);
-        return entityMapper.toSalleDTO(updatedSalle);
+        try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("Room ID cannot be null");
+            }
+
+            if (salleDTO == null) {
+                throw new CustomException("Room data cannot be null");
+            }
+
+            // Find existing room
+            Salle existingSalle = salleRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Room not found with ID: " + id));
+
+            // Update entity with DTO data
+            entityMapper.updateFromDto(salleDTO, existingSalle);
+
+            // Save updated entity
+            Salle updatedSalle = salleRepository.save(existingSalle);
+
+            // Convert back to DTO
+            return entityMapper.toSalleDTO(updatedSalle);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to update room with ID: " + id, e);
+        }
     }
 
     @Override
     public void delete(Long id) throws CustomException {
-        if (!salleRepository.existsById(id)) {
-            throw new CustomException("Room not found with ID: " + id);
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Room ID cannot be null");
+            }
+
+            // Check if room exists
+            if (!salleRepository.existsById(id)) {
+                throw new CustomException("Room not found with ID: " + id);
+            }
+
+            // Delete room
+            salleRepository.deleteById(id);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to delete room with ID: " + id, e);
         }
-        salleRepository.deleteById(id);
     }
 
     @Override
     public List<SalleDTO> getAvailableRooms(LocalDate date, DayOfWeek day, LocalTime startTime, LocalTime endTime) throws CustomException {
-       try {
-//            // 1. Get all rooms
-//            List<Salle> allRooms = salleRepository.findAll();
-//
-//            // 2. Parse input times with formatters
-//            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-//            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//
-//            LocalTime requestedStartTime = LocalTime.parse(startTime, timeFormatter);
-//            LocalTime requestedEndTime = LocalTime.parse(endTime, timeFormatter);
-//            LocalDate requestedDate = LocalDate.parse(date, dateFormatter);
-//
-//            // 3. Get all sessions that might conflict with the requested time slot
-//            List<Seance> conflictingSeances = seanceRepository.findAll().stream()
-//                    .filter(seance -> {
-//                        // Filter by day of week
-//                        if (seance.getJour() != null && seance.getJour().equalsIgnoreCase(day)) {
-//                            try {
-//                                // Parse seance times
-//                                LocalTime seanceStartTime = LocalTime.parse(seance.getHeureDebut(), timeFormatter);
-//                                LocalTime seanceEndTime = LocalTime.parse(seance.getHeureFin(), timeFormatter);
-//
-//                                // Check if times overlap
-//                                boolean timesOverlap = isTimeOverlapping(requestedStartTime, requestedEndTime, seanceStartTime, seanceEndTime);
-//
-//                                if (!timesOverlap) {
-//                                    return false; // No time overlap, no conflict
-//                                }
-//
-//                                // Check frequency
-//                                String frequency = seance.getFrequence();
-//                                if (frequency == null || frequency.isEmpty() || frequency.equals("1/15")) {
-//                                    // Weekly or default frequency - always conflicts on the same day
-//                                    return true;
-//                                } else {
-//                                    // For specific dates, check if it's the requested date
-//                                    // Attempting to parse frequency as a date - will throw exception if not valid
-//                                    LocalDate sessionDate = LocalDate.parse(frequency, dateFormatter);
-//                                    return requestedDate.equals(sessionDate);
-//                                }
-//                            } catch (DateTimeParseException e) {
-//                                // Let the upper function handle this
-//                                throw new RuntimeException("Error parsing date/time in seance ID: " +
-//                                        seance.getId() + ": " + e.getMessage(), e);
-//                            }
-//                        }
-//                        return false;
-//                    })
-//                    .toList();
-//
-//            // 4. Extract IDs of rooms that are occupied during the requested time slot
-//            Set<Long> occupiedRoomIds = conflictingSeances.stream()
-//                    .filter(seance -> seance.getSalle() != null)
-//                    .map(seance -> seance.getSalle().getId())
-//                    .collect(Collectors.toSet());
-//
-//            // 5. Filter out occupied rooms and get available ones
-//            List<Salle> availableRooms = allRooms.stream()
-//                    .filter(room -> !occupiedRoomIds.contains(room.getId()))
-//                    .toList();
-//
-//            // 6. Convert to DTOs and return
-//            return availableRooms.stream()
-//                    .map(entityMapper::toSalleDTO)
-//                    .collect(Collectors.toList());
+        try {
+            // Input validation
+            if (day == null) {
+                throw new CustomException("Day of week cannot be null");
+            }
+            if (startTime == null || endTime == null) {
+                throw new CustomException("Start time and end time cannot be null");
+            }
+            if (startTime.isAfter(endTime) || startTime.equals(endTime)) {
+                throw new CustomException("Start time must be before end time");
+            }
+
+            // For catch-up sessions (which require a specific date)
+            // the date parameter is optional for regular sessions
+
+            // Use the repository's custom query method that already handles the logic efficiently
+            List<Salle> availableRooms = salleRepository.findAvailableRooms(day, startTime, endTime, date);
+
+            // Transform to DTOs
+            return availableRooms.stream()
+                    .filter(Objects::nonNull)
+                    .map(entityMapper::toSalleDTO)
+                    .collect(Collectors.toList());
+
+        } catch (CustomException e) {
+            throw e; // Rethrow custom exceptions as-is
         } catch (DateTimeParseException e) {
-            // Convert to custom exception with clear message and rethrow
             throw new CustomException("Invalid date/time format: " + e.getMessage(), e);
-        } catch (RuntimeException e) {
-            // Capture and rethrow any runtime exceptions from the stream
-            throw new CustomException("Error during room availability check: " + e.getMessage(), e);
         } catch (Exception e) {
             throw new CustomException("Failed to find available rooms: " + e.getMessage(), e);
         }
-        return List.of();
-    }
-
-    /**
-     * Helper method to determine if two time ranges overlap using Java's LocalTime
-     *
-     * @param start1 Start time of first range
-     * @param end1   End time of first range
-     * @param start2 Start time of second range
-     * @param end2   End time of second range
-     * @return true if the time ranges overlap
-     */
-    private boolean isTimeOverlapping(LocalTime start1, LocalTime end1, LocalTime start2, LocalTime end2) {
-        return !start1.isAfter(end2) && !start2.isAfter(end1);
     }
 }package com.scheduling.universityschedule_backend.service.impl;
 
-import com.scheduling.universityschedule_backend.dto.SeanceConflictDTO;
 import com.scheduling.universityschedule_backend.dto.SeanceDTO;
+import com.scheduling.universityschedule_backend.dto.SeanceConflictDTO;
 import com.scheduling.universityschedule_backend.dto.SeanceRoomConflictDTO;
 import com.scheduling.universityschedule_backend.dto.SingleSeanceConflictDTO;
 import com.scheduling.universityschedule_backend.exception.CustomException;
 import com.scheduling.universityschedule_backend.mapper.EntityMapper;
-import com.scheduling.universityschedule_backend.model.FrequenceType;
 import com.scheduling.universityschedule_backend.model.Seance;
+import com.scheduling.universityschedule_backend.model.FrequenceType;
 import com.scheduling.universityschedule_backend.repository.SeanceRepository;
 import com.scheduling.universityschedule_backend.service.SeanceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for session operations.
+ * Handles session creation, scheduling, conflict detection, and related operations.
+ */
 @Service
 @Transactional
 public class SeanceServiceImpl implements SeanceService {
 
-    @Autowired
-    private SeanceRepository seanceRepository;
+    /**
+     * Frequency type constants
+     */
+    private static final FrequenceType BIWEEKLY = FrequenceType.BIWEEKLY;
+    private static final FrequenceType CATCHUP = FrequenceType.CATCHUP;
+    private static final FrequenceType WEEKLY = FrequenceType.WEEKLY;
 
-    @Autowired
-    private EntityMapper entityMapper;
+    private final SeanceRepository seanceRepository;
+    private final EntityMapper entityMapper;
+
+    /**
+     * Constructor injection for dependencies
+     */
+    public SeanceServiceImpl(SeanceRepository seanceRepository,
+                             EntityMapper entityMapper) {
+        this.seanceRepository = seanceRepository;
+        this.entityMapper = entityMapper;
+    }
+
+    @Override
+    public SeanceDTO findById(Long id) throws CustomException {
+        try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Session ID cannot be null");
+            }
+
+            // Retrieve session
+            Seance seance = seanceRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Session not found with ID: " + id));
+
+            // Convert to DTO
+            return entityMapper.toSeanceDTO(seance);
+        } catch (CustomException e) {
+            throw e; // Rethrow custom exceptions as-is
+        } catch (Exception e) {
+            throw new CustomException("Failed to retrieve session with ID: " + id, e);
+        }
+    }
 
     @Override
     public List<SeanceDTO> findAll() throws CustomException {
         try {
+            // Retrieve all sessions
             List<Seance> seances = seanceRepository.findAll();
+
+            // Convert to DTOs
             return seances.stream()
+                    .filter(Objects::nonNull)
                     .map(entityMapper::toSeanceDTO)
                     .collect(Collectors.toList());
         } catch (Exception e) {
@@ -857,52 +1795,97 @@ public class SeanceServiceImpl implements SeanceService {
     }
 
     @Override
-    public SeanceDTO findById(Long id) throws CustomException {
-        Seance seance = seanceRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Session not found with ID: " + id));
-        return entityMapper.toSeanceDTO(seance);
-    }
-
-    @Override
     public SeanceDTO create(SeanceDTO seanceDTO) throws CustomException {
         try {
+            // Validate input
+            if (seanceDTO == null) {
+                throw new CustomException("Session data cannot be null");
+            }
+
+            // Note: We're allowing creation even with conflicts as per instructions
+
+            // Convert DTO to entity
             Seance seance = entityMapper.toSeance(seanceDTO);
+
+            // Save entity
             Seance savedSeance = seanceRepository.save(seance);
+
+            // Convert back to DTO
             return entityMapper.toSeanceDTO(savedSeance);
+        } catch (DateTimeParseException e) {
+            throw new CustomException("Invalid date/time format: " + e.getMessage(), e);
         } catch (Exception e) {
-            throw new CustomException("Failed to create session", e);
+            throw new CustomException("Failed to create session: " + e.getMessage(), e);
         }
     }
 
     @Override
     public SeanceDTO update(Long id, SeanceDTO seanceDTO) throws CustomException {
-        Seance existingSeance = seanceRepository.findById(id)
-                .orElseThrow(() -> new CustomException("Session not found with ID: " + id));
-        entityMapper.updateFromDto(seanceDTO, existingSeance);
         try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("Session ID cannot be null");
+            }
+
+            if (seanceDTO == null) {
+                throw new CustomException("Session data cannot be null");
+            }
+
+            // Find existing session
+            Seance existingSeance = seanceRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Session not found with ID: " + id));
+
+            // Note: We're allowing updates even with conflicts as per instructions
+
+            // Set ID in DTO to ensure we're updating the right entity
+            seanceDTO.setId(id);
+
+            // Update entity
+            entityMapper.updateFromDto(seanceDTO, existingSeance);
+
+            // Save updated entity
             Seance updatedSeance = seanceRepository.save(existingSeance);
+
+            // Convert back to DTO
             return entityMapper.toSeanceDTO(updatedSeance);
+        } catch (CustomException e) {
+            throw e;
+        } catch (DateTimeParseException e) {
+            throw new CustomException("Invalid date/time format: " + e.getMessage(), e);
         } catch (Exception e) {
-            throw new CustomException("Failed to update session", e);
+            throw new CustomException("Failed to update session with ID: " + id, e);
         }
     }
 
     @Override
     public void delete(Long id) throws CustomException {
-        if (!seanceRepository.existsById(id)) {
-            throw new CustomException("Session not found with ID: " + id);
-        }
         try {
+            // Validate input
+            if (id == null) {
+                throw new CustomException("Session ID cannot be null");
+            }
+
+            // Check if session exists
+            if (!seanceRepository.existsById(id)) {
+                throw new CustomException("Session not found with ID: " + id);
+            }
+
+            // Delete session
             seanceRepository.deleteById(id);
+        } catch (CustomException e) {
+            throw e;
         } catch (Exception e) {
-            throw new CustomException("Failed to delete session", e);
+            throw new CustomException("Failed to delete session with ID: " + id, e);
         }
     }
 
     @Override
     public List<SeanceConflictDTO> getAllConflicts() throws CustomException {
         try {
-            List<Object[]> conflicts = seanceRepository.findConflictingSeancePairs(FrequenceType.BIWEEKLY,FrequenceType.CATCHUP);
+            // Directly call repository method to find all conflicts
+            List<Object[]> conflicts = seanceRepository.findConflictingSeancePairs(BIWEEKLY, CATCHUP);
+
+            // Map conflicts to DTOs
             return entityMapper.toSeanceConflictDTOList(conflicts);
         } catch (Exception e) {
             throw new CustomException("Failed to retrieve all session conflicts", e);
@@ -912,8 +1895,11 @@ public class SeanceServiceImpl implements SeanceService {
     @Override
     public List<SeanceRoomConflictDTO> getRoomConflicts() throws CustomException {
         try {
-            List<Object[]> roomConflicts = seanceRepository.findConflictingByRooms(FrequenceType.BIWEEKLY,FrequenceType.CATCHUP);
-            return entityMapper.toSeanceRoomConflictDTOList(roomConflicts);
+            // Directly call repository method to find room conflicts
+            List<Object[]> conflicts = seanceRepository.findConflictingByRooms(BIWEEKLY, CATCHUP);
+
+            // Map conflicts to DTOs
+            return entityMapper.toSeanceRoomConflictDTOList(conflicts);
         } catch (Exception e) {
             throw new CustomException("Failed to retrieve room conflicts", e);
         }
@@ -922,10 +1908,101 @@ public class SeanceServiceImpl implements SeanceService {
     @Override
     public List<SingleSeanceConflictDTO> getConflictsForSession(Long seanceId) throws CustomException {
         try {
-            List<Object[]> conflicts = seanceRepository.findRoomConflictsForSeanceById(seanceId,FrequenceType.BIWEEKLY,FrequenceType.CATCHUP);
+            // Validate input
+            if (seanceId == null) {
+                throw new CustomException("Session ID cannot be null");
+            }
+
+            // Directly call repository method to find conflicts for specific session
+            List<Object[]> conflicts = seanceRepository.findRoomConflictsForSeanceById(seanceId, BIWEEKLY, CATCHUP);
+
+            // Map conflicts to DTOs
             return entityMapper.toSingleSeanceConflictDTOList(conflicts);
+        } catch (CustomException e) {
+            throw e;
         } catch (Exception e) {
-            throw new CustomException("Failed to retrieve conflicts for session", e);
+            throw new CustomException("Failed to retrieve conflicts for session with ID: " + seanceId, e);
+        }
+    }
+
+    @Override
+    public List<SingleSeanceConflictDTO> getConflictsForSession(SeanceDTO seanceDTO) throws CustomException {
+        try {
+            // Validate input
+            if (seanceDTO == null) {
+                throw new CustomException("Session data cannot be null");
+            }
+
+            // Parse time strings to LocalTime objects
+            LocalTime startTime = null;
+            LocalTime endTime = null;
+            try {
+                if (seanceDTO.getHeureDebut() != null) {
+                    startTime = LocalTime.parse(seanceDTO.getHeureDebut());
+                }
+                if (seanceDTO.getHeureFin() != null) {
+                    endTime = LocalTime.parse(seanceDTO.getHeureFin());
+                }
+            } catch (DateTimeParseException e) {
+                throw new CustomException("Invalid time format: " + e.getMessage(), e);
+            }
+
+            // Parse day of week
+            DayOfWeek dayOfWeek = null;
+            if (seanceDTO.getJour() != null) {
+                try {
+                    dayOfWeek = DayOfWeek.valueOf(seanceDTO.getJour());
+                } catch (IllegalArgumentException e) {
+                    throw new CustomException("Invalid day of week: " + seanceDTO.getJour(), e);
+                }
+            }
+
+            // Parse frequency type
+            FrequenceType frequenceType =null ;
+            if (seanceDTO.getFrequence() != null) {
+                try {
+                    frequenceType = FrequenceType.valueOf(seanceDTO.getFrequence());
+                } catch (IllegalArgumentException e) {
+                    throw new CustomException("Invalid frequency type: " + seanceDTO.getFrequence(), e);
+                }
+            } else {
+                // Default to weekly if not specified
+                frequenceType = WEEKLY;
+            }
+
+            // Parse date (optional, used for catch-up sessions)
+            LocalDate date = null;
+            if (seanceDTO.getDate() != null && !seanceDTO.getDate().isEmpty()) {
+                try {
+                    date = LocalDate.parse(seanceDTO.getDate());
+                } catch (DateTimeParseException e) {
+                    throw new CustomException("Invalid date format: " + e.getMessage(), e);
+                }
+            }
+
+            // Directly call repository method to find conflicts
+            List<Object[]> conflicts = seanceRepository.findConflictsForSeance(
+                    seanceDTO.getSalleId(),
+                    seanceDTO.getEnseignantId(),
+                    seanceDTO.getTpIds(),
+                    seanceDTO.getTdIds(),
+                    seanceDTO.getBrancheIds(),
+                    dayOfWeek,
+                    startTime,
+                    endTime,
+                    frequenceType,
+                    date,
+                    BIWEEKLY,
+                    CATCHUP
+            );
+
+            // Map conflicts to DTOs
+            return entityMapper.toSingleSeanceConflictDTOList(conflicts);
+
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to check for session conflicts: " + e.getMessage(), e);
         }
     }
 }package com.scheduling.universityschedule_backend.service.impl;

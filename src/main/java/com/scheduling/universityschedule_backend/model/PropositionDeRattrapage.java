@@ -20,8 +20,14 @@ public class PropositionDeRattrapage {
     private LocalDateTime date;
     private String reason;
     private String status;
+    public enum Status {
+        PENDING,
+        APPROVED,
+        REJECTED
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
 }
+
