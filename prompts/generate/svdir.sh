@@ -67,9 +67,20 @@ fi
 # Special Case: service/impl
 #########################
 if [ -d "$srcprj/service/impl" ]; then
-  output_file="$dest/impl.txt"
-  cat "$srcprj/service/impl/"* > "$output_file"
-  echo "Content from service/impl/* has been written to $output_file"
+  output_file1="$dest/impl1.txt"
+  output_file2="$dest/impl2.txt"
+
+  files=("$srcprj/service/impl/"*) # Get list of files
+  total_files=${#files[@]}
+  mid=$((total_files / 2)) # Find the midpoint to split
+
+  # Write first half to impl1.txt
+  cat "${files[@]:0:mid}" > "$output_file1"
+
+  # Write second half to impl2.txt
+  cat "${files[@]:mid}" > "$output_file2"
+
+  echo "Content from service/impl/* has been split into $output_file1 and $output_file2"
 fi
 
 #########################################
