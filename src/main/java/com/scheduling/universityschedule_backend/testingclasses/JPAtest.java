@@ -9,10 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -173,6 +170,7 @@ public class JPAtest {
             seance.setHeureDebut(randomTime());
             seance.setHeureFin(randomTimeAfter(seance.getHeureDebut()));
             seance.setFrequence(randomFrequence());
+            seance.setType(pickRandomSeanceType());
             seance.setDate(randomFrequence() == FrequenceType.CATCHUP ? LocalDate.now().plusDays(i) : null);
             seance.setSalle(salles.get((int)(Math.random() * salles.size())));
             seance.setEnseignant(enseignants.get((int)(Math.random() * enseignants.size())));
@@ -201,10 +199,28 @@ public class JPAtest {
         List<PropositionDeRattrapage> propositions = new ArrayList<>();
         for (int i = 0; i < Math.max(1, sampleSize / 3); i++) {
             PropositionDeRattrapage prop = new PropositionDeRattrapage();
-            prop.setDate(LocalDateTime.now().plusDays((int)(Math.random() * 10)));
-            prop.setReason("Rattrapage for session " + i);
-            prop.setStatus("Pending");
-            prop.setEnseignant(enseignants.get((int)(Math.random() * enseignants.size())));
+
+            // Basic info
+            prop.setName("Makeup Session " + i);
+            prop.setMatiere(pickRandomSubject());
+            prop.setType(pickRandomSeanceType());
+
+            // Time settings
+            LocalTime startTime = randomTime();
+            prop.setHeureDebut(startTime);
+            prop.setHeureFin(randomTimeAfter(startTime));
+            prop.setDate(LocalDateTime.now().plusDays(RANDOM.nextInt(14))); // Next 2 weeks
+
+            // Status and reason
+            prop.setStatus(Status.PENDING); // New propositions always start as PENDING
+            prop.setReason(pickRandomReason());
+
+            // Relationships
+            prop.setEnseignant(enseignants.get(RANDOM.nextInt(enseignants.size())));
+            prop.setBranches(pickRandomBranches(branches, 1, 3));  // 1-3 branches
+            prop.setTds(pickRandomTDs(tds, 1, 2));                 // 1-2 TDs
+            prop.setTps(pickRandomTPs(tps, 0, 2));                 // 0-2 TPs
+
             propositions.add(prop);
         }
         propositionDeRattrapageRepository.saveAll(propositions);
@@ -243,6 +259,71 @@ public class JPAtest {
     }
 
     // Helper methods
+
+    private SeanceType pickRandomSeanceType() {
+        SeanceType[] types = SeanceType.values();
+        return types[RANDOM.nextInt(types.length)];
+    }
+
+    private String pickRandomSubject() {
+        String[] subjects = {
+                "Mathematics", "Physics", "Chemistry",
+                "Computer Architecture", "Database Systems", "Operating Systems",
+                "Data Structures", "Algorithms", "Software Engineering",
+                "Networks", "Artificial Intelligence", "Web Development",
+                "Mobile Development", "Cloud Computing", "Security",
+                "Statistics", "Linear Algebra", "Calculus"
+        };
+        return subjects[RANDOM.nextInt(subjects.length)];
+    }
+
+    private Status pickRandomStatus() {
+        Status[] statuses = Status.values();
+        return statuses[RANDOM.nextInt(statuses.length)];
+    }
+
+    private String pickRandomReason() {
+        String[] reasons = {
+                "Previous session cancelled due to emergency",
+                "Holiday makeup session",
+                "Extra practice needed before exam",
+                "Schedule conflict resolution",
+                "Weather-related cancellation makeup",
+                "Technical issues in previous session",
+                "Extended topic coverage needed",
+                "Preparatory session for upcoming exam",
+                "Missed class coverage",
+                "Student request for additional practice"
+        };
+        return reasons[RANDOM.nextInt(reasons.length)];
+    }
+
+    private List<Branche> pickRandomBranches(List<Branche> branches, int min, int max) {
+        int count = min + RANDOM.nextInt(max - min + 1);
+        List<Branche> selected = new ArrayList<>();
+        for (int i = 0; i < count && i < branches.size(); i++) {
+            selected.add(branches.get(RANDOM.nextInt(branches.size())));
+        }
+        return new ArrayList<>(new HashSet<>(selected)); // Remove duplicates
+    }
+
+    private List<TD> pickRandomTDs(List<TD> tds, int min, int max) {
+        int count = min + RANDOM.nextInt(max - min + 1);
+        List<TD> selected = new ArrayList<>();
+        for (int i = 0; i < count && i < tds.size(); i++) {
+            selected.add(tds.get(RANDOM.nextInt(tds.size())));
+        }
+        return new ArrayList<>(new HashSet<>(selected)); // Remove duplicates
+    }
+
+    private List<TP> pickRandomTPs(List<TP> tps, int min, int max) {
+        int count = min + RANDOM.nextInt(max - min + 1);
+        List<TP> selected = new ArrayList<>();
+        for (int i = 0; i < count && i < tps.size(); i++) {
+            selected.add(tps.get(RANDOM.nextInt(tps.size())));
+        }
+        return new ArrayList<>(new HashSet<>(selected)); // Remove duplicates
+    }
     private DayOfWeek randomDay() {
         return DayOfWeek.values()[RANDOM.nextInt(5)];
     }
