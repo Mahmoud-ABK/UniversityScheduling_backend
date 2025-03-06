@@ -4,16 +4,17 @@ import com.scheduling.universityschedule_backend.dto.AdministrateurDTO;
 import com.scheduling.universityschedule_backend.dto.PropositionDeRattrapageDTO;
 import com.scheduling.universityschedule_backend.exception.CustomException;
 import com.scheduling.universityschedule_backend.mapper.EntityMapper;
-import com.scheduling.universityschedule_backend.model.Administrateur;
-import com.scheduling.universityschedule_backend.model.PropositionDeRattrapage;
+import com.scheduling.universityschedule_backend.model.*;
 import com.scheduling.universityschedule_backend.repository.AdministrateurRepository;
 import com.scheduling.universityschedule_backend.repository.PropositionDeRattrapageRepository;
+import com.scheduling.universityschedule_backend.repository.SalleRepository;
+import com.scheduling.universityschedule_backend.repository.SeanceRepository;
 import com.scheduling.universityschedule_backend.service.AdministrateurService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,6 +36,8 @@ public class AdministrateurServiceImpl implements AdministrateurService {
     private final AdministrateurRepository administrateurRepository;
     private final PropositionDeRattrapageRepository propositionDeRattrapageRepository;
     private final EntityMapper entityMapper;
+    private final SalleRepository salleRepository;
+    private final SeanceRepository seanceRepository;
 
 
     /**
@@ -42,10 +45,13 @@ public class AdministrateurServiceImpl implements AdministrateurService {
      */
     public AdministrateurServiceImpl(AdministrateurRepository administrateurRepository,
                                      PropositionDeRattrapageRepository propositionDeRattrapageRepository,
-                                     EntityMapper entityMapper) {
+                                     EntityMapper entityMapper, SalleRepository salleRepository,SeanceRepository seanceRepository) {
         this.administrateurRepository = administrateurRepository;
         this.propositionDeRattrapageRepository = propositionDeRattrapageRepository;
         this.entityMapper = entityMapper;
+        this.salleRepository = salleRepository;
+        this.seanceRepository = seanceRepository;
+
     }
 
     @Override
@@ -190,8 +196,9 @@ public class AdministrateurServiceImpl implements AdministrateurService {
         }
     }
     // still needs refinement
+    // In AdministrateurServiceImpl.java
     @Override
-    public void approveMakeupSession(Long id) throws CustomException {
+    public PropositionDeRattrapageDTO approveMakeupSession(Long id, Long salleId) throws CustomException {
         try {
             // Validate input
             if (id == null) {
@@ -202,32 +209,54 @@ public class AdministrateurServiceImpl implements AdministrateurService {
             PropositionDeRattrapage proposition = propositionDeRattrapageRepository.findById(id)
                     .orElseThrow(() -> new CustomException("Makeup session proposal not found with ID: " + id));
 
-            // Validate current status
-            String currentStatus = proposition.getStatus();
-            if (STATUS_APPROVED.equals(currentStatus)) {
-                // Already approved, no need to update
-                return;
+            if (proposition.getStatus() == Status.APPROVED) {
+                throw new CustomException("Makeup session proposal is already approved");
             }
 
-            if (STATUS_REJECTED.equals(currentStatus)) {
-                throw new CustomException("Cannot approve: makeup session proposal already rejected");
+            if (salleId == null) {
+                // Set status to SCHEDULED if no room is assigned
+                proposition.setStatus(Status.SCHEDULED);
+                PropositionDeRattrapage savedProposition = propositionDeRattrapageRepository.save(proposition);
+                return entityMapper.toPropositionDeRattrapageDTO(savedProposition);
+            } else {
+                // Find the room
+                Salle salle = salleRepository.findById(salleId)
+                        .orElseThrow(() -> new CustomException("Room not found with ID: " + salleId));
+
+                // Create new Seance from proposition
+                Seance newSeance = new Seance();
+                newSeance.setName(proposition.getName());
+                newSeance.setMatiere(proposition.getMatiere());
+                newSeance.setType(proposition.getType());
+                newSeance.setHeureDebut(proposition.getHeureDebut());
+                newSeance.setHeureFin(proposition.getHeureFin());
+                newSeance.setDate(proposition.getDate().toLocalDate());
+                newSeance.setJour(proposition.getDate().getDayOfWeek());
+                newSeance.setFrequence(FrequenceType.CATCHUP);
+                newSeance.setSalle(salle);
+                newSeance.setEnseignant(proposition.getEnseignant());
+                newSeance.setBranches(new ArrayList<>(proposition.getBranches()));
+                newSeance.setTds(new ArrayList<>(proposition.getTds()));
+                newSeance.setTps(new ArrayList<>(proposition.getTps()));
+
+                // Save the new Seance
+                seanceRepository.save(newSeance);
+
+                // Update proposition status
+                proposition.setStatus(Status.APPROVED);
+                PropositionDeRattrapage savedProposition = propositionDeRattrapageRepository.save(proposition);
+
+                return entityMapper.toPropositionDeRattrapageDTO(savedProposition);
             }
-
-            // Update status to approved
-            proposition.setStatus(STATUS_APPROVED);
-
-
-            // Save updated entity
-            propositionDeRattrapageRepository.save(proposition);
         } catch (CustomException e) {
             throw e;
         } catch (Exception e) {
-            throw new CustomException("Failed to approve makeup session proposal with ID: " + id, e);
+            throw new CustomException("Failed to process makeup session proposal with ID: " + id, e);
         }
     }
 
     @Override
-    public void rejectMakeupSession(Long id) throws CustomException {
+    public PropositionDeRattrapageDTO rejectMakeupSession(Long id) throws CustomException {
         try {
             // Validate input
             if (id == null) {
@@ -239,25 +268,23 @@ public class AdministrateurServiceImpl implements AdministrateurService {
                     .orElseThrow(() -> new CustomException("Makeup session proposal not found with ID: " + id));
 
             // Validate current status
-            String currentStatus = proposition.getStatus();
-            if (STATUS_REJECTED.equals(currentStatus)) {
-                // Already rejected, no need to update
-                return;
+            if (proposition.getStatus() == Status.REJECTED) {
+                return entityMapper.toPropositionDeRattrapageDTO(proposition); // Already rejected, no need to update
             }
 
-            if (STATUS_APPROVED.equals(currentStatus)) {
+            if (proposition.getStatus() == Status.APPROVED) {
                 throw new CustomException("Cannot reject: makeup session proposal already approved");
             }
 
             // Update status to rejected
-            proposition.setStatus(STATUS_REJECTED);
-
-            // Save updated entity
+            proposition.setStatus(Status.REJECTED);
             propositionDeRattrapageRepository.save(proposition);
+            return entityMapper.toPropositionDeRattrapageDTO(proposition);
         } catch (CustomException e) {
             throw e;
         } catch (Exception e) {
             throw new CustomException("Failed to reject makeup session proposal with ID: " + id, e);
         }
     }
+
 }

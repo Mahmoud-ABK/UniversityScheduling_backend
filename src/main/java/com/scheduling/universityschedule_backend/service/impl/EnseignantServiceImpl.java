@@ -305,7 +305,7 @@ public class EnseignantServiceImpl implements EnseignantService {
             if (seance.getDate() == null ) return 0;
 
             LocalDate sessionDate = seance.getDate();
-            return (sessionDate.compareTo(start) >= 0 && sessionDate.compareTo(end) <= 0) ? hours : 0;
+            return (!sessionDate.isBefore(start) && !sessionDate.isAfter(end)) ? hours : 0;
         } catch (Exception e) {
             return 0;
         }
@@ -362,14 +362,11 @@ public class EnseignantServiceImpl implements EnseignantService {
                 propositionEntity.setDate(LocalDateTime.now());
             }
 
-            // Set initial status if not provided
-            if (propositionEntity.getStatus() == null || propositionEntity.getStatus().isEmpty()) {
-                propositionEntity.setStatus("pending");
-            }
+            // Set initial status
+            propositionEntity.setStatus(Status.PENDING);
 
             // Associate proposal with teacher
             propositionEntity.setEnseignant(enseignant);
-
 
             // Save the proposition entity
             propositionDeRattrapageRepository.save(propositionEntity);

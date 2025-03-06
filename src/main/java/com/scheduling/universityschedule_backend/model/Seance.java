@@ -33,6 +33,10 @@ public class Seance {
     @Enumerated(EnumType.STRING)
     private DayOfWeek jour;
 
+    @Enumerated(EnumType.STRING)
+    private SeanceType type;    // New field for session type (CI, CR, TD, TP)
+
+
     private LocalTime heureDebut;
     private LocalTime heureFin;
 

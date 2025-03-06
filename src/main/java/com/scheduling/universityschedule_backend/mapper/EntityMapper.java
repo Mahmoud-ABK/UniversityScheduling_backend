@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -354,24 +355,87 @@ public abstract class EntityMapper {
 
     /**
      * Maps a PropositionDeRattrapage entity to PropositionDeRattrapageDTO.
-     * Converts entity references to IDs.
+     * Converts entity references to IDs and enum types to strings.
      */
     @Mapping(target = "enseignantId", source = "enseignant.id")
+    @Mapping(target = "brancheIds", source = "branches", qualifiedByName = "mapBrancheListToIds")
+    @Mapping(target = "tdIds", source = "tds", qualifiedByName = "mapTDListToIds")
+    @Mapping(target = "tpIds", source = "tps", qualifiedByName = "mapTPListToIds")
+    @Mapping(target = "heureDebut", source = "heureDebut", qualifiedByName = "localTimeToString")
+    @Mapping(target = "heureFin", source = "heureFin", qualifiedByName = "localTimeToString")
+    @Mapping(target = "date", source = "date", qualifiedByName = "localDateTimeToString")
+    @Mapping(target = "type", source = "type", qualifiedByName = "seanceTypeToString")
+    @Mapping(target = "status",source = "status",qualifiedByName = "statusToString")
     public abstract PropositionDeRattrapageDTO toPropositionDeRattrapageDTO(PropositionDeRattrapage proposition);
 
     /**
      * Maps a PropositionDeRattrapageDTO to PropositionDeRattrapage entity.
-     * Converts IDs to entity references.
+     * Converts IDs to entity references and strings to enum types.
      */
     @Mapping(target = "enseignant", source = "enseignantId", qualifiedByName = "idToEnseignant")
+    @Mapping(target = "branches", source = "brancheIds", qualifiedByName = "mapIdListToBrancheList")
+    @Mapping(target = "tds", source = "tdIds", qualifiedByName = "mapIdListToTDList")
+    @Mapping(target = "tps", source = "tpIds", qualifiedByName = "mapIdListToTPList")
+    @Mapping(target = "heureDebut", source = "heureDebut", qualifiedByName = "stringToLocalTime")
+    @Mapping(target = "heureFin", source = "heureFin", qualifiedByName = "stringToLocalTime")
+    @Mapping(target = "date", source = "date", qualifiedByName = "stringToLocalDateTime")
+    @Mapping(target = "type", source = "type", qualifiedByName = "stringToSeanceType")
+    @Mapping(target = "status",source = "status",qualifiedByName = "stringToStatus")
     public abstract PropositionDeRattrapage toPropositionDeRattrapage(PropositionDeRattrapageDTO dto);
 
     /**
-     * Updates an existing PropositionDeRattrapage entity with data from PropositionDeRattrapageDTO.
+     * Updates an existing PropositionDeRattrapage entity with data from DTO.
      */
     @Mapping(target = "enseignant", source = "enseignantId", qualifiedByName = "idToEnseignant")
+    @Mapping(target = "branches", source = "brancheIds", qualifiedByName = "mapIdListToBrancheList")
+    @Mapping(target = "tds", source = "tdIds", qualifiedByName = "mapIdListToTDList")
+    @Mapping(target = "tps", source = "tpIds", qualifiedByName = "mapIdListToTPList")
+    @Mapping(target = "heureDebut", source = "heureDebut", qualifiedByName = "stringToLocalTime")
+    @Mapping(target = "heureFin", source = "heureFin", qualifiedByName = "stringToLocalTime")
+    @Mapping(target = "date", source = "date", qualifiedByName = "stringToLocalDateTime")
+    @Mapping(target = "type", source = "type", qualifiedByName = "stringToSeanceType")
+    @Mapping(target = "status",source = "status",qualifiedByName = "stringToStatus")
     public abstract void updateFromDto(PropositionDeRattrapageDTO dto, @MappingTarget PropositionDeRattrapage proposition);
 
+    /**
+     * Converts LocalDateTime to String.
+     */
+    @Named("localDateTimeToString")
+    protected String localDateTimeToString(LocalDateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
+        return dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    }
+
+    /**
+     * Converts String to LocalDateTime.
+     */
+    @Named("stringToLocalDateTime")
+    protected LocalDateTime stringToLocalDateTime(String dateTime) throws CustomException {
+        if (dateTime == null || dateTime.isEmpty()) {
+            return null;
+        }
+        try {
+            return LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        } catch (DateTimeParseException e) {
+            throw new CustomException("Invalid datetime format. Expected format: yyyy-MM-dd'T'HH:mm:ss");
+        }
+    }
+    @Named("stringToStatus")
+    protected Status stringToStatus(String status) {
+        if (status == null) {
+            return null;
+        }
+        return Status.valueOf(status.toUpperCase());
+    }
+    @Named("statusToString")
+    protected String statusToString(Status status) {
+        if (status == null) {
+            return null;
+        }
+        return status.name();
+    }
     /* --------------------------- */
     /* SALLE MAPPINGS              */
     /* --------------------------- */
@@ -401,12 +465,13 @@ public abstract class EntityMapper {
 
     /**
      * Maps a SeanceDTO to Seance entity.
-     * Includes conversions for the new date/time types and entity references.
+     * Includes conversions for the new date/time types, entity references, and session type.
      */
     @Mapping(target = "jour", source = "jour", qualifiedByName = "stringToDayOfWeek")
     @Mapping(target = "heureDebut", source = "heureDebut", qualifiedByName = "stringToLocalTime")
     @Mapping(target = "heureFin", source = "heureFin", qualifiedByName = "stringToLocalTime")
     @Mapping(target = "frequence", source = "frequence", qualifiedByName = "stringToFrequenceType")
+    @Mapping(target = "type", source = "type", qualifiedByName = "stringToSeanceType")
     @Mapping(target = "date", source = "date", qualifiedByName = "stringToLocalDate")
     @Mapping(target = "salle", source = "salleId", qualifiedByName = "idToSalle")
     @Mapping(target = "enseignant", source = "enseignantId", qualifiedByName = "idToEnseignant")
@@ -417,7 +482,7 @@ public abstract class EntityMapper {
 
     /**
      * Maps a Seance entity to SeanceDTO.
-     * Converts entity references to IDs and date/time types to strings.
+     * Converts entity references to IDs, date/time types to strings, and session type to string.
      */
     @Mapping(target = "salleId", source = "salle.id")
     @Mapping(target = "enseignantId", source = "enseignant.id")
@@ -428,17 +493,43 @@ public abstract class EntityMapper {
     @Mapping(target = "heureDebut", source = "heureDebut", qualifiedByName = "localTimeToString")
     @Mapping(target = "heureFin", source = "heureFin", qualifiedByName = "localTimeToString")
     @Mapping(target = "frequence", source = "frequence", qualifiedByName = "frequenceTypeToString")
+    @Mapping(target = "type", source = "type", qualifiedByName = "seanceTypeToString")
     @Mapping(target = "date", source = "date", qualifiedByName = "localDateToString")
     public abstract SeanceDTO toSeanceDTO(Seance seance);
 
     /**
+     * Converts a string to SeanceType enum value.
+     */
+    @Named("stringToSeanceType")
+    protected SeanceType stringToSeanceType(String type) {
+        if (type == null) {
+            return null;
+        }
+        return SeanceType.valueOf(type.toUpperCase());
+    }
+
+    /**
+     * Converts SeanceType enum to string.
+     */
+    @Named("seanceTypeToString")
+    protected String seanceTypeToString(SeanceType type) {
+        if (type == null) {
+            return null;
+        }
+        return type.name();
+    }
+
+
+
+    /**
      * Updates an existing Seance entity with data from SeanceDTO.
-     * Includes conversions for the new date/time types and entity references.
+     * Includes conversions for the new date/time types, entity references, and session type.
      */
     @Mapping(target = "jour", source = "jour", qualifiedByName = "stringToDayOfWeek")
     @Mapping(target = "heureDebut", source = "heureDebut", qualifiedByName = "stringToLocalTime")
     @Mapping(target = "heureFin", source = "heureFin", qualifiedByName = "stringToLocalTime")
     @Mapping(target = "frequence", source = "frequence", qualifiedByName = "stringToFrequenceType")
+    @Mapping(target = "type", source = "type", qualifiedByName = "stringToSeanceType")
     @Mapping(target = "date", source = "date", qualifiedByName = "stringToLocalDate")
     @Mapping(target = "salle", source = "salleId", qualifiedByName = "idToSalle")
     @Mapping(target = "enseignant", source = "enseignantId", qualifiedByName = "idToEnseignant")

@@ -1,19 +1,29 @@
 package com.scheduling.universityschedule_backend.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import java.time.LocalDateTime;
+import lombok.NoArgsConstructor;
 
-/**
- * Data Transfer Object for PropositionDeRattrapage entity.
- * Represents a proposal submitted by a teacher to schedule a make-up session.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PropositionDeRattrapageDTO {
-    private Long id;               // Unique identifier for the proposal
-    private LocalDateTime date;    // Proposed date for the catch-up session
-    private String reason;         // Explanation for the catch-up session
-    private String status;         // Current status of the proposal (e.g., pending, approved, rejected)
+    private Long id;
+    private String name;
+    private String matiere;
+    private String type;        // Will be mapped to/from SeanceType enum
+    private String heureDebut;  // Format: HH:mm
+    private String heureFin;    // Format: HH:mm
+    private String date;        // Format: yyyy-MM-dd'T'HH:mm:ss
+    private String reason;
+    private String status;      // PENDING, APPROVED, REJECTED,SCHEDULED
 
-    // ID of the associated Enseignant who proposed the catch-up session
+    // Relationships
     private Long enseignantId;
+    private List<Long> brancheIds = new ArrayList<>();
+    private List<Long> tdIds = new ArrayList<>();
+    private List<Long> tpIds = new ArrayList<>();
 }

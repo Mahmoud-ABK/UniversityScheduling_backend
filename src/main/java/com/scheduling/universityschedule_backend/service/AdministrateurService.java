@@ -72,14 +72,17 @@ public interface AdministrateurService {
      * @param id Makeup session proposal ID
      * @throws CustomException if approval fails
      */
-    void approveMakeupSession(Long id) throws CustomException;
+
+    // still needs refinement
+    // In AdministrateurServiceImpl.java
+    PropositionDeRattrapageDTO approveMakeupSession(Long id, Long salleId) throws CustomException;
 
     /**
      * Rejects a makeup session request.
      * @param id Makeup session proposal ID
      * @throws CustomException if rejection fails
      */
-    void rejectMakeupSession(Long id) throws CustomException;
+    PropositionDeRattrapageDTO rejectMakeupSession(Long id) throws CustomException;
 
 
 }
