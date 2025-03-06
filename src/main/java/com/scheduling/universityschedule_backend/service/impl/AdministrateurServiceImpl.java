@@ -286,5 +286,90 @@ public class AdministrateurServiceImpl implements AdministrateurService {
             throw new CustomException("Failed to reject makeup session proposal with ID: " + id, e);
         }
     }
+    // AdministrateurServiceImpl.java
+    @Override
+    public PropositionDeRattrapageDTO approveScheduled(Long id, Long salleId) throws CustomException {
+        try {
+            // Validate inputs
+            if (id == null || salleId == null) {
+                throw new CustomException("Both proposal ID and room ID are required");
+            }
 
+            // Find existing makeup session proposal
+            PropositionDeRattrapage proposition = propositionDeRattrapageRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Makeup session proposal not found with ID: " + id));
+
+            // Validate current status
+            if (proposition.getStatus() != Status.SCHEDULED) {
+                throw new CustomException("Can only approve SCHEDULED makeup sessions");
+            }
+
+            // Find the room
+            Salle salle = salleRepository.findById(salleId)
+                    .orElseThrow(() -> new CustomException("Room not found with ID: " + salleId));
+
+            // Create new Seance from proposition
+            Seance newSeance = new Seance();
+            newSeance.setName(proposition.getName());
+            newSeance.setMatiere(proposition.getMatiere());
+            newSeance.setType(proposition.getType());
+            newSeance.setHeureDebut(proposition.getHeureDebut());
+            newSeance.setHeureFin(proposition.getHeureFin());
+            newSeance.setDate(proposition.getDate().toLocalDate());
+            newSeance.setJour(proposition.getDate().getDayOfWeek());
+            newSeance.setFrequence(FrequenceType.CATCHUP);
+            newSeance.setSalle(salle);
+            newSeance.setEnseignant(proposition.getEnseignant());
+            newSeance.setBranches(new ArrayList<>(proposition.getBranches()));
+            newSeance.setTds(new ArrayList<>(proposition.getTds()));
+            newSeance.setTps(new ArrayList<>(proposition.getTps()));
+
+            // Save the new Seance
+            seanceRepository.save(newSeance);
+
+            // Update proposition status
+            proposition.setStatus(Status.APPROVED);
+            PropositionDeRattrapage savedProposition = propositionDeRattrapageRepository.save(proposition);
+
+            return entityMapper.toPropositionDeRattrapageDTO(savedProposition);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to approve scheduled makeup session with ID: " + id, e);
+        }
+    }
+
+    @Override
+    public PropositionDeRattrapageDTO rejectScheduled(Long id, String reason) throws CustomException {
+        try {
+            // Validate inputs
+            if (id == null) {
+                throw new CustomException("Proposal ID cannot be null");
+            }
+
+            if (reason == null || reason.trim().isEmpty()) {
+                throw new CustomException("Rejection reason is required");
+            }
+
+            // Find existing makeup session proposal
+            PropositionDeRattrapage proposition = propositionDeRattrapageRepository.findById(id)
+                    .orElseThrow(() -> new CustomException("Makeup session proposal not found with ID: " + id));
+
+            // Validate current status
+            if (proposition.getStatus() != Status.SCHEDULED) {
+                throw new CustomException("Can only reject SCHEDULED makeup sessions");
+            }
+
+            // Update status and reason
+            proposition.setStatus(Status.REJECTED);
+            proposition.setReason(reason);
+            PropositionDeRattrapage savedProposition = propositionDeRattrapageRepository.save(proposition);
+
+            return entityMapper.toPropositionDeRattrapageDTO(savedProposition);
+        } catch (CustomException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new CustomException("Failed to reject scheduled makeup session with ID: " + id, e);
+        }
+    }
 }

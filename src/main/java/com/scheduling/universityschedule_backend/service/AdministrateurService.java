@@ -68,21 +68,47 @@ public interface AdministrateurService {
     List<PropositionDeRattrapageDTO> getAllMakeupSessions() throws CustomException;
 
     /**
-     * Approves a makeup session request.
-     * @param id Makeup session proposal ID
-     * @throws CustomException if approval fails
+     * Processes initial makeup session requests (Admin only).
+     * Status Flow: PENDING -> SCHEDULED or APPROVED
+     *
+     * @param id      Proposal ID
+     * @param salleId Optional room ID. If null, sets status to SCHEDULED
+     * @return Updated proposal
+     * @throws CustomException if proposal isn't PENDING or other errors occur
      */
-
-    // still needs refinement
-    // In AdministrateurServiceImpl.java
     PropositionDeRattrapageDTO approveMakeupSession(Long id, Long salleId) throws CustomException;
 
     /**
-     * Rejects a makeup session request.
-     * @param id Makeup session proposal ID
-     * @throws CustomException if rejection fails
+     * Rejects a PENDING makeup session proposal (Admin only).
+     * Status Flow: PENDING -> REJECTED
+     *
+     * @param id Proposal ID
+     * @return Updated proposal
+     * @throws CustomException if proposal isn't PENDING or other errors occur
      */
     PropositionDeRattrapageDTO rejectMakeupSession(Long id) throws CustomException;
+
+    /**
+     * Approves a SCHEDULED makeup session (Technician/Admin).
+     * Status Flow: SCHEDULED -> APPROVED
+     *
+     * @param id      Proposal ID
+     * @param salleId Room ID (required)
+     * @return Updated proposal with created Seance
+     * @throws CustomException if proposal isn't SCHEDULED or other errors occur
+     */
+    PropositionDeRattrapageDTO approveScheduled(Long id, Long salleId) throws CustomException;
+
+    /**
+     * Rejects a SCHEDULED makeup session (Technician/Admin).
+     * Status Flow: SCHEDULED -> REJECTED
+     *
+     * @param id     Proposal ID
+     * @param reason Rejection reason
+     * @return Updated proposal
+     * @throws CustomException if proposal isn't SCHEDULED or other errors occur
+     */
+    PropositionDeRattrapageDTO rejectScheduled(Long id, String reason) throws CustomException;
 
 
 }
