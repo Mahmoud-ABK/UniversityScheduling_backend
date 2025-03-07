@@ -48,13 +48,15 @@ public class ServiceTest {
         testSeanceService();
     }
 
-    private void testAdministrateurService() throws CustomException {
+    public void testAdministrateurService() throws CustomException {
         CustomLogger.logInfo("=================== Testing AdministrateurService ===================");
 
         try {
             // Test approve makeup session
             Long testPropositionId = 1L; // Assuming this exists
             Long testSalleId = 1L; // Assuming this exists
+            Long testrejectid=15L;
+            Long testrejectid2=16L;
 
             PropositionDeRattrapageDTO approvedProposition =
                     administrateurService.approveMakeupSession(testPropositionId, testSalleId);
@@ -62,17 +64,17 @@ public class ServiceTest {
 
             // Test reject makeup session
             PropositionDeRattrapageDTO rejectedProposition =
-                    administrateurService.rejectMakeupSession(testPropositionId);
+                    administrateurService.rejectMakeupSession(testrejectid);
             CustomLogger.logInfo("Rejected Proposition: " + rejectedProposition);
 
             // Test approve scheduled
             PropositionDeRattrapageDTO approvedScheduled =
-                    administrateurService.approveScheduled(testPropositionId, testSalleId);
+                    administrateurService.approveScheduled(18L, testSalleId);
             CustomLogger.logInfo("Approved Scheduled: " + approvedScheduled);
 
             // Test reject scheduled
             PropositionDeRattrapageDTO rejectedScheduled =
-                    administrateurService.rejectScheduled(testPropositionId, "Room not available");
+                    administrateurService.rejectScheduled(testrejectid2, "Room not available");
             CustomLogger.logInfo("Rejected Scheduled: " + rejectedScheduled);
 
         } catch (CustomException e) {
@@ -81,7 +83,7 @@ public class ServiceTest {
         }
     }
 
-    private void testBrancheService() throws CustomException {
+    public void testBrancheService() throws CustomException {
         CustomLogger.logInfo("=================== Testing BrancheService ===================");
 
         try {
@@ -128,7 +130,7 @@ public class ServiceTest {
         }
     }
 
-    private void testEtudiantService() throws CustomException {
+    public void testEtudiantService() throws CustomException {
         CustomLogger.logInfo("=================== Testing EtudiantService ===================");
 
         try {
@@ -183,7 +185,7 @@ public class ServiceTest {
         }
     }
 
-    private void testExcelFileService() throws CustomException {
+    public void testExcelFileService() throws CustomException {
         CustomLogger.logInfo("=================== Testing ExcelFileService ===================");
 
         try {
@@ -228,7 +230,7 @@ public class ServiceTest {
         }
     }
 
-    private void testSalleService() throws CustomException {
+    public void testSalleService() throws CustomException {
         CustomLogger.logInfo("=================== Testing SalleService ===================");
 
         try {
@@ -272,7 +274,7 @@ public class ServiceTest {
         }
     }
 
-    private void testSeanceService() throws CustomException {
+    public void testSeanceService() throws CustomException {
         CustomLogger.logInfo("=================== Testing SeanceService ===================");
 
         try {
@@ -327,7 +329,7 @@ public class ServiceTest {
     }
     // Add these test methods to your ServiceTest class
 
-    private void testEnseignantService() throws CustomException {
+    public void testEnseignantService() throws CustomException {
         CustomLogger.logInfo("=================== Testing EnseignantService ===================");
 
         try {
@@ -405,7 +407,7 @@ public class ServiceTest {
         }
     }
 
-    private void testTDService() throws CustomException {
+    public void testTDService() throws CustomException {
         CustomLogger.logInfo("=================== Testing TDService ===================");
 
         try {
@@ -451,7 +453,7 @@ public class ServiceTest {
         }
     }
 
-    private void testTPService() throws CustomException {
+    public void testTPService() throws CustomException {
         CustomLogger.logInfo("=================== Testing TPService ===================");
 
         try {

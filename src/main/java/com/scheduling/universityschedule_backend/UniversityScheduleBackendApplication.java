@@ -16,6 +16,8 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 
 	@Autowired
 	private EntityMapperTester entityMapperTester;
+	@Autowired
+	ServiceTest serviceTest;
 
 	public static void main(String[] args) {
 		SpringApplication.run(UniversityScheduleBackendApplication.class, args);
@@ -24,9 +26,9 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		try {
-			CustomLogger.logInfo("==================== entity mapper test======================");
-			entityMapperTester.testEntityMapper();
-			CustomLogger.logInfo("==================== entity mapper test end ======================");
+			CustomLogger.logInfo("==================== service test======================");
+			serviceTest.testAdministrateurService();
+			CustomLogger.logInfo("==================== service test end ======================");
 		} catch (Exception e) {
 			CustomLogger.logError("Error during testing: " + e.getMessage());
 			e.printStackTrace();

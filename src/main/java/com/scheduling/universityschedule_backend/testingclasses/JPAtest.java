@@ -165,7 +165,7 @@ public class JPAtest {
         for (int i = 0; i < sampleSize * 2; i++) {
             Seance seance = new Seance();
             seance.setName("Seance " + i);
-            seance.setMatiere("Matiere " + i);
+            seance.setMatiere(pickRandomSubject());
             seance.setJour(randomDay());
             seance.setHeureDebut(randomTime());
             seance.setHeureFin(randomTimeAfter(seance.getHeureDebut()));

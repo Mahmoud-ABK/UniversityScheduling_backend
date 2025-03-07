@@ -1,0 +1,53 @@
+2025-03-06 07:46:52 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-06 07:46:52 [restartedMain] INFO  CustomLogger - =================== Testing AdministrateurService ===================
+2025-03-06 07:46:52 [restartedMain] INFO  CustomLogger - Approved Proposition: PropositionDeRattrapageDTO(id=1, name=Makeup Session 0, matiere=Physics, type=CR, heureDebut=12:45, heureFin=14:27, date=2025-03-07T07:41:17.495326, reason=Weather-related cancellation makeup, status=APPROVED, enseignantId=14, brancheIds=[1], tdIds=[1], tpIds=[4])
+2025-03-06 07:46:52 [restartedMain] ERROR CustomLogger - AdministrateurService test failed: Cannot reject: makeup session proposal already approved
+2025-03-06 07:46:52 [restartedMain] ERROR CustomLogger - Error during testing: Cannot reject: makeup session proposal already approved
+2025-03-06 07:46:52 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-03-06 07:49:22 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-06 07:49:22 [restartedMain] INFO  CustomLogger - =================== Testing AdministrateurService ===================
+2025-03-06 07:49:22 [restartedMain] ERROR CustomLogger - AdministrateurService test failed: Makeup session proposal is already approved
+2025-03-06 07:49:22 [restartedMain] ERROR CustomLogger - Error during testing: Makeup session proposal is already approved
+2025-03-06 07:49:22 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-03-06 07:52:04 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-06 07:52:04 [restartedMain] INFO  CustomLogger - =================== Testing AdministrateurService ===================
+2025-03-06 07:52:04 [restartedMain] ERROR CustomLogger - AdministrateurService test failed: Makeup session proposal is already approved
+2025-03-06 07:52:04 [restartedMain] ERROR CustomLogger - Error during testing: Makeup session proposal is already approved
+2025-03-06 07:52:04 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-03-06 07:52:06 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-06 07:52:06 [restartedMain] INFO  CustomLogger - =================== Testing AdministrateurService ===================
+2025-03-06 07:52:06 [restartedMain] ERROR CustomLogger - AdministrateurService test failed: Makeup session proposal is already approved
+2025-03-06 07:52:06 [restartedMain] ERROR CustomLogger - Error during testing: Makeup session proposal is already approved
+2025-03-06 07:52:06 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-03-06 07:55:22 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-06 07:55:22 [restartedMain] INFO  CustomLogger - =================== Testing AdministrateurService ===================
+2025-03-06 07:55:22 [restartedMain] ERROR CustomLogger - AdministrateurService test failed: Makeup session proposal is already approved
+2025-03-06 07:55:22 [restartedMain] ERROR CustomLogger - Error during testing: Makeup session proposal is already approved
+2025-03-06 07:55:22 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-03-06 07:57:11 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-06 07:57:11 [restartedMain] INFO  CustomLogger - =================== Testing AdministrateurService ===================
+2025-03-06 07:57:11 [restartedMain] ERROR CustomLogger - AdministrateurService test failed: Makeup session proposal is already approved
+2025-03-06 07:57:11 [restartedMain] ERROR CustomLogger - Error during testing: Makeup session proposal is already approved
+2025-03-06 07:57:11 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-03-06 07:57:49 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-06 07:57:49 [restartedMain] INFO  CustomLogger - =================== Testing AdministrateurService ===================
+2025-03-06 07:57:49 [restartedMain] INFO  CustomLogger - Approved Proposition: PropositionDeRattrapageDTO(id=1, name=Makeup Session 0, matiere=Physics, type=CR, heureDebut=12:45, heureFin=14:27, date=2025-03-07T07:41:17.495326, reason=Weather-related cancellation makeup, status=APPROVED, enseignantId=14, brancheIds=[1], tdIds=[1], tpIds=[4])
+2025-03-06 07:57:49 [restartedMain] INFO  CustomLogger - Rejected Proposition: PropositionDeRattrapageDTO(id=15, name=Makeup Session 2, matiere=Statistics, type=CR, heureDebut=12:25, heureFin=15:01, date=2025-03-14T07:42:43.305056, reason=Missed class coverage, status=REJECTED, enseignantId=182, brancheIds=[3], tdIds=[7], tpIds=[10])
+2025-03-06 07:57:49 [restartedMain] ERROR CustomLogger - AdministrateurService test failed: Can only approve SCHEDULED makeup sessions
+2025-03-06 07:57:49 [restartedMain] ERROR CustomLogger - Error during testing: Can only approve SCHEDULED makeup sessions
+2025-03-06 07:57:49 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-03-06 07:59:33 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-06 07:59:33 [restartedMain] INFO  CustomLogger - =================== Testing AdministrateurService ===================
+2025-03-06 07:59:33 [restartedMain] INFO  CustomLogger - Approved Proposition: PropositionDeRattrapageDTO(id=1, name=Makeup Session 0, matiere=Physics, type=CR, heureDebut=12:45, heureFin=14:27, date=2025-03-07T07:41:17.495326, reason=Weather-related cancellation makeup, status=APPROVED, enseignantId=14, brancheIds=[1], tdIds=[1], tpIds=[4])
+2025-03-06 07:59:33 [restartedMain] INFO  CustomLogger - Rejected Proposition: PropositionDeRattrapageDTO(id=15, name=Makeup Session 2, matiere=Statistics, type=CR, heureDebut=12:25, heureFin=15:01, date=2025-03-14T07:42:43.305056, reason=Missed class coverage, status=REJECTED, enseignantId=182, brancheIds=[3], tdIds=[7], tpIds=[10])
+2025-03-06 07:59:33 [restartedMain] INFO  CustomLogger - Approved Scheduled: PropositionDeRattrapageDTO(id=18, name=Makeup Session 5, matiere=Mobile Development, type=TP, heureDebut=11:30, heureFin=13:11, date=2025-03-16T07:42:43.305101, reason=Previous session cancelled due to emergency, status=APPROVED, enseignantId=185, brancheIds=[3], tdIds=[7], tpIds=[10])
+2025-03-06 07:59:33 [restartedMain] ERROR CustomLogger - AdministrateurService test failed: Can only reject SCHEDULED makeup sessions
+2025-03-06 07:59:33 [restartedMain] ERROR CustomLogger - Error during testing: Can only reject SCHEDULED makeup sessions
+2025-03-06 07:59:33 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-03-06 08:00:49 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-06 08:00:49 [restartedMain] INFO  CustomLogger - =================== Testing AdministrateurService ===================
+2025-03-06 08:00:49 [restartedMain] INFO  CustomLogger - Approved Proposition: PropositionDeRattrapageDTO(id=1, name=Makeup Session 0, matiere=Physics, type=CR, heureDebut=12:45, heureFin=14:27, date=2025-03-07T07:41:17.495326, reason=Weather-related cancellation makeup, status=APPROVED, enseignantId=14, brancheIds=[1], tdIds=[1], tpIds=[4])
+2025-03-06 08:00:50 [restartedMain] INFO  CustomLogger - Rejected Proposition: PropositionDeRattrapageDTO(id=15, name=Makeup Session 2, matiere=Statistics, type=CR, heureDebut=12:25, heureFin=15:01, date=2025-03-14T07:42:43.305056, reason=Missed class coverage, status=REJECTED, enseignantId=182, brancheIds=[3], tdIds=[7], tpIds=[10])
+2025-03-06 08:00:50 [restartedMain] INFO  CustomLogger - Approved Scheduled: PropositionDeRattrapageDTO(id=18, name=Makeup Session 5, matiere=Mobile Development, type=TP, heureDebut=11:30, heureFin=13:11, date=2025-03-16T07:42:43.305101, reason=Previous session cancelled due to emergency, status=APPROVED, enseignantId=185, brancheIds=[3], tdIds=[7], tpIds=[10])
+2025-03-06 08:00:50 [restartedMain] INFO  CustomLogger - Rejected Scheduled: PropositionDeRattrapageDTO(id=16, name=Makeup Session 3, matiere=Artificial Intelligence, type=CI, heureDebut=12:05, heureFin=15:04, date=2025-03-16T07:42:43.305068, reason=Room not available, status=REJECTED, enseignantId=187, brancheIds=[3], tdIds=[7], tpIds=[10])
+2025-03-06 08:00:50 [restartedMain] INFO  CustomLogger - ==================== service test end ======================
