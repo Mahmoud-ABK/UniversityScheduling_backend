@@ -176,7 +176,7 @@ public interface SeanceRepository extends JpaRepository<Seance, Long> {
                                                   @Param("biweekly") FrequenceType biweekly,
                                                   @Param("catchup") FrequenceType catchup);
     @Query("""
-SELECT s.id,
+SELECT s,
        CONCAT(
            CASE WHEN (:salleId IS NOT NULL AND s.salle.id = :salleId) 
                 THEN 'Room Conflict; ' ELSE '' END,
@@ -295,3 +295,8 @@ WHERE s.jour = :jour
 
 
 }
+/*
+,<- vr
+          CASE WHEN ((s.frequence = :catchup AND s_main.frequence = :biweekly)
+                     OR (s.frequence = :biweekly AND s_main.frequence = :catchup))
+               THEN 'Catch-Up Exception; ' ELSE '' END*/

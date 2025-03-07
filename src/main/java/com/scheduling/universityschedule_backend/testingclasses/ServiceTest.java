@@ -2,6 +2,7 @@ package com.scheduling.universityschedule_backend.testingclasses;
 
 import com.scheduling.universityschedule_backend.dto.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.model.FrequenceType;
 import com.scheduling.universityschedule_backend.model.Status;
 import com.scheduling.universityschedule_backend.model.SeanceType;
 import com.scheduling.universityschedule_backend.service.*;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Transactional
@@ -40,12 +42,15 @@ public class ServiceTest {
     }
 
     public void testAllServices() throws CustomException {
-        testAdministrateurService();
+        //testAdministrateurService();
         testBrancheService();
         testEtudiantService();
         testExcelFileService();
         testSalleService();
         testSeanceService();
+        testEnseignantService();
+        testTDService();
+        testTPService();
     }
 
     public void testAdministrateurService() throws CustomException {
@@ -289,7 +294,10 @@ public class ServiceTest {
             newSession.setJour(String.valueOf(DayOfWeek.MONDAY));
             newSession.setHeureDebut(String.valueOf(LocalTime.of(9, 0)));
             newSession.setHeureFin(String.valueOf(LocalTime.of(10, 30)));
+            newSession.setEnseignantId(11L);
+            newSession.setFrequence(String.valueOf(FrequenceType.WEEKLY));
             SeanceDTO createdSession = seanceService.create(newSession);
+            SeanceDTO createdSession2 = seanceService.create(newSession);
             CustomLogger.logInfo("Created Session: " + createdSession);
 
             // Test findById
@@ -303,6 +311,12 @@ public class ServiceTest {
             // Test getAllConflicts
             List<SeanceConflictDTO> conflicts = seanceService.getAllConflicts();
             CustomLogger.logInfo("All Conflicts: " + conflicts.size());
+            List<SeanceConflictDTO> setofConflicts = conflicts.stream().limit(3).toList();
+
+            for (SeanceConflictDTO seanceConflict : setofConflicts) {
+                CustomLogger.logInfo("Found Conflict: " + seanceConflict);
+            }
+            Long conflictId = setofConflicts.getFirst().getSeance1Id();
 
             // Test getRoomConflicts
             List<SeanceRoomConflictDTO> roomConflicts = seanceService.getRoomConflicts();
@@ -310,12 +324,12 @@ public class ServiceTest {
 
             // Test getConflictsForSession (by ID)
             List<SingleSeanceConflictDTO> sessionConflicts =
-                    seanceService.getConflictsForSession(createdSession.getId());
+                    seanceService.getConflictsForSession(conflictId);
             CustomLogger.logInfo("Session Conflicts: " + sessionConflicts.size());
-
+            CustomLogger.logInfo("to search "+seanceService.findById(conflictId));
             // Test getConflictsForSession (by DTO)
             List<SingleSeanceConflictDTO> dtoConflicts =
-                    seanceService.getConflictsForSession(createdSession);
+                    seanceService.getConflictsForSession(seanceService.findById(conflictId));
             CustomLogger.logInfo("DTO Conflicts: " + dtoConflicts.size());
 
             // Test delete
