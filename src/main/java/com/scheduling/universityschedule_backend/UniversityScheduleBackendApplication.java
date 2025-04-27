@@ -76,6 +76,11 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 			for (Object[] conflict1 : conflicts1) {
 				CustomLogger.logInfo(entityMapper.toSingleSeanceConflictDTO(conflict1).toString());
 			}
+			List<SingleSeanceConflictDTO> aftermapping = entityMapper.toSingleSeanceConflictDTOList(conflicts1);
+			for (SingleSeanceConflictDTO aftermapping1 : aftermapping) {
+				CustomLogger.logInfo(aftermapping1.toString());
+			}
+
 
 
 

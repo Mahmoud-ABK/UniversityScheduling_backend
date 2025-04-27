@@ -869,6 +869,7 @@ import com.scheduling.universityschedule_backend.model.Seance;
 import com.scheduling.universityschedule_backend.model.FrequenceType;
 import com.scheduling.universityschedule_backend.repository.SeanceRepository;
 import com.scheduling.universityschedule_backend.service.SeanceService;
+import com.scheduling.universityschedule_backend.util.CustomLogger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -876,6 +877,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -1076,16 +1078,23 @@ public class SeanceServiceImpl implements SeanceService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SingleSeanceConflictDTO> getConflictsForSession(SeanceDTO seanceDTO) throws CustomException {
         try {
+
             // Validate input
             if (seanceDTO == null) {
                 throw new CustomException("Session data cannot be null");
             }
 
-            // Parse time strings to LocalTime objects
+            // Initialize variables with default values
             LocalTime startTime = null;
             LocalTime endTime = null;
+            DayOfWeek dayOfWeek = null;
+            FrequenceType frequenceType = FrequenceType.WEEKLY; // Default value
+            LocalDate date = null;
+
+            // Parse time with validation
             try {
                 if (seanceDTO.getHeureDebut() != null) {
                     startTime = LocalTime.parse(seanceDTO.getHeureDebut());
@@ -1094,43 +1103,52 @@ public class SeanceServiceImpl implements SeanceService {
                     endTime = LocalTime.parse(seanceDTO.getHeureFin());
                 }
             } catch (DateTimeParseException e) {
-                throw new CustomException("Invalid time format: " + e.getMessage(), e);
+                throw new CustomException("Invalid time format: " + e.getMessage());
             }
 
-            // Parse day of week
-            DayOfWeek dayOfWeek = null;
+            // Validate times
+            if (startTime != null && endTime != null && endTime.isBefore(startTime)) {
+                throw new CustomException("End time cannot be before start time");
+            }
+
+            // Parse day of week with validation
             if (seanceDTO.getJour() != null) {
                 try {
-                    dayOfWeek = DayOfWeek.valueOf(seanceDTO.getJour());
+                    dayOfWeek = DayOfWeek.valueOf(seanceDTO.getJour().toUpperCase());
                 } catch (IllegalArgumentException e) {
-                    throw new CustomException("Invalid day of week: " + seanceDTO.getJour(), e);
+                    throw new CustomException("Invalid day of week: " + seanceDTO.getJour());
                 }
             }
 
-            // Parse frequency type
-            FrequenceType frequenceType =null ;
+            // Parse frequency type with validation
             if (seanceDTO.getFrequence() != null) {
                 try {
-                    frequenceType = FrequenceType.valueOf(seanceDTO.getFrequence());
+                    frequenceType = FrequenceType.fromString(seanceDTO.getFrequence().toUpperCase());
                 } catch (IllegalArgumentException e) {
-                    throw new CustomException("Invalid frequency type: " + seanceDTO.getFrequence(), e);
+                    throw new CustomException("Invalid frequency type: " + seanceDTO.getFrequence());
                 }
-            } else {
-                // Default to weekly if not specified
-                frequenceType = WEEKLY;
             }
 
-            // Parse date (optional, used for catch-up sessions)
-            LocalDate date = null;
+            // Parse date with validation
             if (seanceDTO.getDate() != null && !seanceDTO.getDate().isEmpty()) {
                 try {
                     date = LocalDate.parse(seanceDTO.getDate());
                 } catch (DateTimeParseException e) {
-                    throw new CustomException("Invalid date format: " + e.getMessage(), e);
+                    throw new CustomException("Invalid date format: " + e.getMessage());
                 }
             }
 
-            // Directly call repository method to find conflicts
+            // Ensure at least one search criterion is provided
+            if (startTime == null && endTime == null && dayOfWeek == null &&
+                    seanceDTO.getSalleId() == null && seanceDTO.getEnseignantId() == null &&
+                    (seanceDTO.getTpIds() == null || seanceDTO.getTpIds().isEmpty()) &&
+                    (seanceDTO.getTdIds() == null || seanceDTO.getTdIds().isEmpty()) &&
+                    (seanceDTO.getBrancheIds() == null || seanceDTO.getBrancheIds().isEmpty())) {
+                throw new CustomException("At least one search criterion must be provided");
+            }
+            CustomLogger.logInfo("after checking"+ seanceDTO);
+
+            // Call repository with validated data
             List<Object[]> conflicts = seanceRepository.findConflictsForSeance(
                     seanceDTO.getSalleId(),
                     seanceDTO.getEnseignantId(),
@@ -1142,17 +1160,29 @@ public class SeanceServiceImpl implements SeanceService {
                     endTime,
                     frequenceType,
                     date,
-                    BIWEEKLY,
-                    CATCHUP
+                    FrequenceType.BIWEEKLY,
+                    FrequenceType.CATCHUP
             );
 
-            // Map conflicts to DTOs
+            for (Object[] conflict : conflicts) {
+                Long seanceId = (Long) conflict[0];
+                Long types = (Long) conflict[1];
+                CustomLogger.logInfo("debug 1"+seanceId);
+                CustomLogger.logInfo("debug 2"+types);
+            }
+
+
+            // Handle null result
+            if (conflicts == null) {
+                return new ArrayList<>();
+            }
+
             return entityMapper.toSingleSeanceConflictDTOList(conflicts);
 
         } catch (CustomException e) {
             throw e;
         } catch (Exception e) {
-            throw new CustomException("Failed to check for session conflicts: " + e.getMessage(), e);
+            throw new CustomException("Failed to check for session conflicts: " + e.getMessage());
         }
     }
 }package com.scheduling.universityschedule_backend.service.impl;

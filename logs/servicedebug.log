@@ -530,3 +530,103 @@
 2025-03-07 03:02:04 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=73, conflictTypes=[Student Group Conflict])
 2025-03-07 03:02:04 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=103, conflictTypes=[Student Group Conflict])
 2025-03-07 03:02:04 [restartedMain] INFO  CustomLogger - ==================== service test end ======================
+2025-03-07 03:04:40 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-07 03:04:41 [restartedMain] INFO  CustomLogger - ===================== seance DTO=====================
+2025-03-07 03:04:41 [restartedMain] INFO  CustomLogger - SeanceDTO(id=1, jour=MONDAY, heureDebut=09:30, heureFin=11:13, type=TP, matiere=Matiere 0, frequence=1/15, date=2025-03-06, salleId=2, enseignantId=7, brancheIds=[1], tdIds=[2], tpIds=[1])
+2025-03-07 03:04:41 [restartedMain] INFO  CustomLogger - ===================== using id=====================
+2025-03-07 03:04:41 [restartedMain] INFO  CustomLogger - SeanceDTO(id=9, jour=MONDAY, heureDebut=08:55, heureFin=10:59, type=CI, matiere=Matiere 8, frequence=1/15, date=null, salleId=2, enseignantId=6, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:04:41 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict, Bi-Weekly Conflict]
+2025-03-07 03:04:41 [restartedMain] INFO  CustomLogger - SeanceDTO(id=18, jour=MONDAY, heureDebut=09:30, heureFin=11:59, type=CI, matiere=Matiere 17, frequence=weekly, date=null, salleId=2, enseignantId=5, brancheIds=[1], tdIds=[1], tpIds=[2])
+2025-03-07 03:04:41 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict]
+2025-03-07 03:04:41 [restartedMain] INFO  CustomLogger - SeanceDTO(id=39, jour=MONDAY, heureDebut=09:35, heureFin=12:13, type=TD, matiere=Matiere 38, frequence=catch-up, date=null, salleId=1, enseignantId=3, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:04:41 [restartedMain] INFO  CustomLogger - info[Student Group Conflict, Catch-Up Exception]
+2025-03-07 03:04:41 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=1, jour=MONDAY, heureDebut=09:30, heureFin=11:13, type=TP, matiere=Matiere 0, frequence=1/15, date=2025-03-06, salleId=2, enseignantId=7, brancheIds=[1], tdIds=[2], tpIds=[1])
+2025-03-07 03:04:41 [restartedMain] ERROR CustomLogger - Error during testing: Failed to check for session conflicts: class com.scheduling.universityschedule_backend.model.Seance cannot be cast to class java.lang.Long (com.scheduling.universityschedule_backend.model.Seance is in unnamed module of loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader @70591cd9; java.lang.Long is in module java.base of loader 'bootstrap')
+2025-03-07 03:04:41 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - ===================== seance DTO=====================
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - SeanceDTO(id=1, jour=MONDAY, heureDebut=09:30, heureFin=11:13, type=TP, matiere=Matiere 0, frequence=1/15, date=2025-03-06, salleId=2, enseignantId=7, brancheIds=[1], tdIds=[2], tpIds=[1])
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - ===================== using id=====================
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - SeanceDTO(id=9, jour=MONDAY, heureDebut=08:55, heureFin=10:59, type=CI, matiere=Matiere 8, frequence=1/15, date=null, salleId=2, enseignantId=6, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict, Bi-Weekly Conflict]
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - SeanceDTO(id=18, jour=MONDAY, heureDebut=09:30, heureFin=11:59, type=CI, matiere=Matiere 17, frequence=weekly, date=null, salleId=2, enseignantId=5, brancheIds=[1], tdIds=[1], tpIds=[2])
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict]
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - SeanceDTO(id=39, jour=MONDAY, heureDebut=09:35, heureFin=12:13, type=TD, matiere=Matiere 38, frequence=catch-up, date=null, salleId=1, enseignantId=3, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - info[Student Group Conflict, Catch-Up Exception]
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - ===================== using dto=====================
+2025-03-07 03:05:00 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=1, jour=MONDAY, heureDebut=09:30, heureFin=11:13, type=TP, matiere=Matiere 0, frequence=1/15, date=2025-03-06, salleId=2, enseignantId=7, brancheIds=[1], tdIds=[2], tpIds=[1])
+2025-03-07 03:05:00 [restartedMain] ERROR CustomLogger - Error during testing: Failed to check for session conflicts: class com.scheduling.universityschedule_backend.model.Seance cannot be cast to class java.lang.Long (com.scheduling.universityschedule_backend.model.Seance is in unnamed module of loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader @49fe95e8; java.lang.Long is in module java.base of loader 'bootstrap')
+2025-03-07 03:05:00 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - ===================== seance DTO=====================
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - SeanceDTO(id=1, jour=MONDAY, heureDebut=09:30, heureFin=11:13, type=TP, matiere=Matiere 0, frequence=1/15, date=2025-03-06, salleId=2, enseignantId=7, brancheIds=[1], tdIds=[2], tpIds=[1])
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - ===================== using id=====================
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - SeanceDTO(id=9, jour=MONDAY, heureDebut=08:55, heureFin=10:59, type=CI, matiere=Matiere 8, frequence=1/15, date=null, salleId=2, enseignantId=6, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict, Bi-Weekly Conflict]
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - SeanceDTO(id=18, jour=MONDAY, heureDebut=09:30, heureFin=11:59, type=CI, matiere=Matiere 17, frequence=weekly, date=null, salleId=2, enseignantId=5, brancheIds=[1], tdIds=[1], tpIds=[2])
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict]
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - SeanceDTO(id=39, jour=MONDAY, heureDebut=09:35, heureFin=12:13, type=TD, matiere=Matiere 38, frequence=catch-up, date=null, salleId=1, enseignantId=3, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - info[Student Group Conflict, Catch-Up Exception]
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - ==================== using dto=======================
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=18, conflictTypes=[Room Conflict, Student Group Conflict])
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=46, conflictTypes=[Student Group Conflict])
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=67, conflictTypes=[Student Group Conflict])
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=73, conflictTypes=[Student Group Conflict])
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=103, conflictTypes=[Student Group Conflict])
+2025-03-07 03:06:45 [restartedMain] INFO  CustomLogger - ==================== service test end ======================
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - ===================== seance DTO=====================
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - SeanceDTO(id=1, jour=MONDAY, heureDebut=09:30, heureFin=11:13, type=TP, matiere=Matiere 0, frequence=1/15, date=2025-03-06, salleId=2, enseignantId=7, brancheIds=[1], tdIds=[2], tpIds=[1])
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - ===================== using id=====================
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - SeanceDTO(id=9, jour=MONDAY, heureDebut=08:55, heureFin=10:59, type=CI, matiere=Matiere 8, frequence=1/15, date=null, salleId=2, enseignantId=6, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict, Bi-Weekly Conflict]
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - SeanceDTO(id=18, jour=MONDAY, heureDebut=09:30, heureFin=11:59, type=CI, matiere=Matiere 17, frequence=weekly, date=null, salleId=2, enseignantId=5, brancheIds=[1], tdIds=[1], tpIds=[2])
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict]
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - SeanceDTO(id=39, jour=MONDAY, heureDebut=09:35, heureFin=12:13, type=TD, matiere=Matiere 38, frequence=catch-up, date=null, salleId=1, enseignantId=3, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - info[Student Group Conflict, Catch-Up Exception]
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - ==================== using dto=======================
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=18, conflictTypes=[Room Conflict, Student Group Conflict])
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=46, conflictTypes=[Student Group Conflict])
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=67, conflictTypes=[Student Group Conflict])
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=73, conflictTypes=[Student Group Conflict])
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=103, conflictTypes=[Student Group Conflict])
+2025-03-07 03:07:12 [restartedMain] INFO  CustomLogger - ==================== service test end ======================
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - ===================== seance DTO=====================
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - SeanceDTO(id=1, jour=MONDAY, heureDebut=09:30, heureFin=11:13, type=TP, matiere=Matiere 0, frequence=1/15, date=2025-03-06, salleId=2, enseignantId=7, brancheIds=[1], tdIds=[2], tpIds=[1])
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - ===================== using id=====================
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - SeanceDTO(id=9, jour=MONDAY, heureDebut=08:55, heureFin=10:59, type=CI, matiere=Matiere 8, frequence=1/15, date=null, salleId=2, enseignantId=6, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict, Bi-Weekly Conflict]
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - SeanceDTO(id=18, jour=MONDAY, heureDebut=09:30, heureFin=11:59, type=CI, matiere=Matiere 17, frequence=weekly, date=null, salleId=2, enseignantId=5, brancheIds=[1], tdIds=[1], tpIds=[2])
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict]
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - SeanceDTO(id=39, jour=MONDAY, heureDebut=09:35, heureFin=12:13, type=TD, matiere=Matiere 38, frequence=catch-up, date=null, salleId=1, enseignantId=3, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - info[Student Group Conflict, Catch-Up Exception]
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - ==================== using dto=======================
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=18, conflictTypes=[Room Conflict, Student Group Conflict])
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=46, conflictTypes=[Student Group Conflict])
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=67, conflictTypes=[Student Group Conflict])
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=73, conflictTypes=[Student Group Conflict])
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=103, conflictTypes=[Student Group Conflict])
+2025-03-07 03:07:14 [restartedMain] INFO  CustomLogger - ==================== service test end ======================
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - ==================== service test======================
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - ===================== seance DTO=====================
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SeanceDTO(id=1, jour=MONDAY, heureDebut=09:30, heureFin=11:13, type=TP, matiere=Matiere 0, frequence=1/15, date=2025-03-06, salleId=2, enseignantId=7, brancheIds=[1], tdIds=[2], tpIds=[1])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - ===================== using id=====================
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SeanceDTO(id=9, jour=MONDAY, heureDebut=08:55, heureFin=10:59, type=CI, matiere=Matiere 8, frequence=1/15, date=null, salleId=2, enseignantId=6, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict, Bi-Weekly Conflict]
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SeanceDTO(id=18, jour=MONDAY, heureDebut=09:30, heureFin=11:59, type=CI, matiere=Matiere 17, frequence=weekly, date=null, salleId=2, enseignantId=5, brancheIds=[1], tdIds=[1], tpIds=[2])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - info[Room Conflict, Student Group Conflict]
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SeanceDTO(id=39, jour=MONDAY, heureDebut=09:35, heureFin=12:13, type=TD, matiere=Matiere 38, frequence=catch-up, date=null, salleId=1, enseignantId=3, brancheIds=[1], tdIds=[1], tpIds=[5])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - info[Student Group Conflict, Catch-Up Exception]
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - ==================== using dto=======================
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=18, conflictTypes=[Room Conflict, Student Group Conflict])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=46, conflictTypes=[Student Group Conflict])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=67, conflictTypes=[Student Group Conflict])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=73, conflictTypes=[Student Group Conflict])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=103, conflictTypes=[Student Group Conflict])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=18, conflictTypes=[Room Conflict, Student Group Conflict])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=46, conflictTypes=[Student Group Conflict])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=67, conflictTypes=[Student Group Conflict])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=73, conflictTypes=[Student Group Conflict])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - SingleSeanceConflictDTO(seanceId=103, conflictTypes=[Student Group Conflict])
+2025-03-07 03:09:07 [restartedMain] INFO  CustomLogger - ==================== service test end ======================
