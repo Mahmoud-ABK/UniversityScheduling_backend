@@ -1,0 +1,36 @@
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 1
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 2
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created practical group with ID: 1
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created practical group with ID: 2
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created practical group with ID: 3
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, jour=WEDNESDAY, heureDebut=12:35, heureFin=14:54, type=TP, matiere=Software Engineering, frequence=1/15, date=null, salleId=3, enseignantId=2, brancheIds=[1], tdIds=[1], tpIds=[2])
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, jour=TUESDAY, heureDebut=10:55, heureFin=12:30, type=CR, matiere=Physics, frequence=weekly, date=null, salleId=1, enseignantId=5, brancheIds=[1], tdIds=[1], tpIds=[1])
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, jour=MONDAY, heureDebut=13:30, heureFin=16:11, type=CR, matiere=Artificial Intelligence, frequence=catch-up, date=null, salleId=3, enseignantId=3, brancheIds=[1], tdIds=[1], tpIds=[1])
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, jour=MONDAY, heureDebut=15:05, heureFin=17:43, type=TD, matiere=Chemistry, frequence=weekly, date=null, salleId=1, enseignantId=5, brancheIds=[1], tdIds=[2], tpIds=[3])
+2025-04-27 20:47:24 [restartedMain] ERROR CustomLogger - Failed to create seance 3: Failed to check for session conflicts: class com.scheduling.universityschedule_backend.model.Seance cannot be cast to class java.lang.Long (com.scheduling.universityschedule_backend.model.Seance is in unnamed module of loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader @4ef4e7b4; java.lang.Long is in module java.base of loader 'bootstrap')
+2025-04-27 20:47:24 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, jour=THURSDAY, heureDebut=16:00, heureFin=18:07, type=TP, matiere=Networks, frequence=1/15, date=null, salleId=1, enseignantId=2, brancheIds=[1], tdIds=[1], tpIds=[1])
+2025-04-27 20:47:25 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, jour=FRIDAY, heureDebut=09:25, heureFin=11:27, type=CR, matiere=Chemistry, frequence=weekly, date=null, salleId=2, enseignantId=6, brancheIds=[1], tdIds=[1], tpIds=[1])
+2025-04-27 20:47:25 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, jour=TUESDAY, heureDebut=13:40, heureFin=16:04, type=TP, matiere=Networks, frequence=weekly, date=null, salleId=2, enseignantId=3, brancheIds=[1], tdIds=[2], tpIds=[2])
+2025-04-27 20:47:25 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, jour=FRIDAY, heureDebut=08:55, heureFin=11:26, type=CI, matiere=Artificial Intelligence, frequence=weekly, date=null, salleId=1, enseignantId=3, brancheIds=[1], tdIds=[1], tpIds=[1])
+2025-04-27 20:47:25 [restartedMain] ERROR CustomLogger - Failed to create seance 7: Failed to check for session conflicts: class com.scheduling.universityschedule_backend.model.Seance cannot be cast to class java.lang.Long (com.scheduling.universityschedule_backend.model.Seance is in unnamed module of loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader @4ef4e7b4; java.lang.Long is in module java.base of loader 'bootstrap')
+2025-04-27 20:47:25 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, jour=MONDAY, heureDebut=08:15, heureFin=09:51, type=TD, matiere=Database Systems, frequence=1/15, date=null, salleId=3, enseignantId=4, brancheIds=[1], tdIds=[1], tpIds=[2])
+2025-04-27 20:47:25 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, jour=FRIDAY, heureDebut=11:00, heureFin=13:46, type=TP, matiere=Mathematics, frequence=weekly, date=null, salleId=2, enseignantId=5, brancheIds=[1], tdIds=[1], tpIds=[2])
+2025-04-27 20:47:25 [restartedMain] ERROR CustomLogger - Failed to create seance 9: Failed to check for session conflicts: class com.scheduling.universityschedule_backend.model.Seance cannot be cast to class java.lang.Long (com.scheduling.universityschedule_backend.model.Seance is in unnamed module of loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader @4ef4e7b4; java.lang.Long is in module java.base of loader 'bootstrap')
+2025-04-27 20:47:25 [restartedMain] INFO  CustomLogger - Created Sessions: 7 (with 0 conflicts)
+2025-04-27 20:47:25 [restartedMain] ERROR CustomLogger - Failed to create signal: Failed to submit signal for teacher with ID: 5
+2025-04-27 20:47:25 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-04-27 20:47:25 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================

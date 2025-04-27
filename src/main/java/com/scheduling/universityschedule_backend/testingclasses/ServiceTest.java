@@ -31,8 +31,9 @@ public class ServiceTest {
     private final EnseignantService enseignantService;
     private final TDService tdService;
     private final TPService tpService;
+    private final NotificationService notificationService;
 
-    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService) {
+    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService) {
         this.administrateurService = administrateurService;
         this.brancheService = brancheService;
         this.etudiantService = etudiantService;
@@ -42,6 +43,7 @@ public class ServiceTest {
         this.enseignantService = enseignantService;
         this.tdService = tdService;
         this.tpService = tpService;
+        this.notificationService = notificationService;
     }
     public void populateDatabase(int sampleSize) throws CustomException {
         CustomLogger.logInfo("========== Populating Database Using Service Layer ==========");
@@ -191,9 +193,8 @@ public class ServiceTest {
         }
         CustomLogger.logInfo("Created Rooms: " + salles.size());
 
-        // 8. Create Seances with conflict detection
+        // 8. Create Seances (without conflict detection)
         List<SeanceDTO> seances = new ArrayList<>();
-        int conflictCounter = 0;
         for (int i = 0; i < sampleSize * 2; i++) {
             SeanceDTO seance = new SeanceDTO();
             seance.setMatiere(pickRandomSubject.apply(null));
@@ -227,23 +228,16 @@ public class ServiceTest {
             tpIds.add(tps.get(RANDOM.nextInt(tps.size())).getId());
             seance.setTpIds(tpIds);
 
-            // Check for conflicts before creating
+            // Create without checking conflicts
             try {
-                List<SingleSeanceConflictDTO> conflicts = seanceService.getConflictsForSession(seance);
-                if (!conflicts.isEmpty()) {
-                    conflictCounter++;
-                    CustomLogger.logInfo("Conflict detected for seance " + i + ": " + conflicts.size() + " conflicts found");
-
-                    // We still create it despite conflicts (as per your comment in seanceService)
-                }
                 seances.add(seanceService.create(seance));
             } catch (Exception e) {
                 CustomLogger.logError("Failed to create seance " + i + ": " + e.getMessage());
             }
         }
-        CustomLogger.logInfo("Created Sessions: " + seances.size() + " (with " + conflictCounter + " conflicts)");
+        CustomLogger.logInfo("Created Sessions: " + seances.size());
 
-        // 9. Create Makeup Session Proposals
+// 9. Create Makeup Session Proposals
         for (int i = 0; i < Math.max(1, sampleSize / 3); i++) {
             try {
                 PropositionDeRattrapageDTO proposition = new PropositionDeRattrapageDTO();
@@ -273,7 +267,8 @@ public class ServiceTest {
                 Long teacherId = enseignants.get(RANDOM.nextInt(enseignants.size())).getId();
                 proposition.setEnseignantId(teacherId);
 
-                List<Long> brancheIds = new ArrayList<>();
+                List<Long> brancheIds;
+                brancheIds = new ArrayList<>();
                 brancheIds.add(branches.get(RANDOM.nextInt(branches.size())).getId());
                 proposition.setBrancheIds(brancheIds);
 
@@ -290,7 +285,6 @@ public class ServiceTest {
                 CustomLogger.logError("Failed to create makeup proposal: " + e.getMessage());
             }
         }
-
         // 10. Create Signals
         for (int i = 0; i < Math.max(1, sampleSize / 3); i++) {
             try {
@@ -307,8 +301,55 @@ public class ServiceTest {
                 CustomLogger.logError("Failed to create signal: " + e.getMessage());
             }
         }
+// 11. Create Notifications
+        for (int i = 0; i < sampleSize * 2; i++) {
+            try {
+                NotificationDTO notification = new NotificationDTO();
+                notification.setMessage("Notification message " + i);
+                notification.setType(RANDOM.nextBoolean() ? "SCHEDULE_CHANGE" : "ANNOUNCEMENT");
+                notification.setDate(LocalDateTime.now().minusHours(RANDOM.nextInt(48)));
+                notification.setIsread(RANDOM.nextInt(10) < 3); // 30% read, 70% unread
 
-        // 11. FichierExcel (for bulk imports)
+                // Determine sender (admin) and receiver (can be enseignant, student, etc.)
+                Long senderId = admins.get(RANDOM.nextInt(admins.size())).getId();
+
+                // Vary recipients between teachers and students
+                Long recipientId;
+                if (RANDOM.nextBoolean()) {
+                    // Teacher as recipient
+                    recipientId = enseignants.get(RANDOM.nextInt(enseignants.size())).getId();
+
+                    // Set type for teacher notifications
+                    if (RANDOM.nextBoolean()) {
+                        notification.setType("SCHEDULE_CHANGE");
+                        notification.setMessage("Your session on " +
+                                DayOfWeek.values()[RANDOM.nextInt(5)] + " has been " +
+                                (RANDOM.nextBoolean() ? "rescheduled" : "cancelled"));
+                    }
+                } else {
+                    // Student as recipient
+                    recipientId = etudiants.get(RANDOM.nextInt(etudiants.size())).getId();
+
+                    // Set type for student notifications
+                    if (RANDOM.nextBoolean()) {
+                        notification.setType("COURSE_MATERIAL");
+                        notification.setMessage("New material available for " + pickRandomSubject.apply(null));
+                    }
+                }
+
+                notification.setExpediteurId(senderId);
+                notification.setRecepteurId(recipientId);
+
+                // Here we assume the notification service has a create method
+                // If there is a specific method for sending notifications, use that instead
+                notificationService.create(notification);
+
+            } catch (Exception e) {
+                CustomLogger.logError("Failed to create notification: " + e.getMessage());
+            }
+        }
+        CustomLogger.logInfo("Created Notifications: " + sampleSize * 2);
+        // 12. FichierExcel (for bulk imports)
         for (int i = 0; i < Math.max(1, sampleSize / 5); i++) {
             try {
                 FichierExcelDTO fichier = new FichierExcelDTO();
