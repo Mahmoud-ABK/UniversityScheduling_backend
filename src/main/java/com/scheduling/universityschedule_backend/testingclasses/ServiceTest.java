@@ -394,7 +394,7 @@ public class ServiceTest {
 
                 // Test delete
                 administrateurService.delete(admin2.getId());
-  
+
                 CustomLogger.logInfo("AdministrateurService RUD operations completed successfully");
             } else {
                 CustomLogger.logInfo("Not enough administrators for RUD testing");
