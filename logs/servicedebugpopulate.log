@@ -1,0 +1,252 @@
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 1
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 2
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created practical group with ID: 1
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created practical group with ID: 2
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created practical group with ID: 3
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created Sessions: 10
+2025-04-29 18:18:02 [restartedMain] ERROR CustomLogger - Failed to create signal: Failed to submit signal for teacher with ID: 6
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - Created Notifications: 10
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-04-29 18:18:02 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 3
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 4
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created practical group with ID: 4
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created practical group with ID: 5
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created practical group with ID: 6
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created Sessions: 10
+2025-04-29 18:20:01 [restartedMain] ERROR CustomLogger - Failed to create signal: Failed to submit signal for teacher with ID: 24
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - Created Notifications: 10
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-04-29 18:20:01 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 5
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 6
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created practical group with ID: 7
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created practical group with ID: 8
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created practical group with ID: 9
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-29 21:19:06 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-29 21:19:07 [restartedMain] INFO  CustomLogger - Created Sessions: 10
+2025-04-29 21:19:07 [restartedMain] ERROR CustomLogger - Failed to create signal: Failed to submit signal for teacher with ID: 46
+null
+2025-04-29 21:19:07 [restartedMain] INFO  CustomLogger - Created Notifications: 10
+2025-04-29 21:19:07 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-04-29 21:19:07 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 7
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 8
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created practical group with ID: 10
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created practical group with ID: 11
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created practical group with ID: 12
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-29 21:20:01 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-29 21:20:02 [restartedMain] INFO  CustomLogger - Created Sessions: 10
+2025-04-29 21:20:02 [restartedMain] ERROR CustomLogger - Failed to create signal: Failed to submit signal for teacher with ID: 68
+java.lang.UnsupportedOperationException
+2025-04-29 21:20:02 [restartedMain] INFO  CustomLogger - Created Notifications: 10
+2025-04-29 21:20:02 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-04-29 21:20:02 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 9
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 10
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created practical group with ID: 13
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created practical group with ID: 14
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created practical group with ID: 15
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created Sessions: 10
+2025-04-29 21:21:00 [restartedMain] ERROR CustomLogger - Failed to create signal: null
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - Created Notifications: 10
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-04-29 21:21:00 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 11
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 12
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created practical group with ID: 16
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created practical group with ID: 17
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created practical group with ID: 18
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-29 21:24:03 [restartedMain] INFO  CustomLogger - Created Sessions: 10
+2025-04-29 21:24:03 [restartedMain] ERROR CustomLogger - Failed to create signal: null
+2025-04-29 21:24:03 [restartedMain] ERROR CustomLogger - Unexpected error: null
+2025-04-29 21:24:03 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH UNEXPECTED ERROR ======================
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 13
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 14
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created practical group with ID: 19
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created practical group with ID: 20
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created practical group with ID: 21
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-29 21:27:09 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-29 21:27:10 [restartedMain] INFO  CustomLogger - Created Sessions: 10
+2025-04-29 21:27:10 [restartedMain] INFO  CustomLogger - SignalDTO(id=null, message=Signal Issue 0, severity=Low, timestamp=2025-04-29T21:27:10.097941690, enseignantId=131)
+2025-04-29 21:27:10 [restartedMain] ERROR CustomLogger - Failed to create signal: null
+2025-04-29 21:27:10 [restartedMain] INFO  CustomLogger - Created Notifications: 10
+2025-04-29 21:27:10 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-04-29 21:27:10 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 15
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 16
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created practical group with ID: 22
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created practical group with ID: 23
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created practical group with ID: 24
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-29 21:34:00 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-29 21:34:01 [restartedMain] INFO  CustomLogger - Created Sessions: 10
+2025-04-29 21:34:01 [restartedMain] INFO  CustomLogger - SignalDTO(id=null, message=Signal Issue 0, severity=Low, timestamp=2025-04-29T21:34:01.021023559, enseignantId=152)
+2025-04-29 21:34:01 [restartedMain] ERROR CustomLogger - Failed to create signal: null
+2025-04-29 21:34:01 [restartedMain] INFO  CustomLogger - Created Notifications: 10
+2025-04-29 21:34:01 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-04-29 21:34:01 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 17
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 18
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created practical group with ID: 25
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created practical group with ID: 26
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created practical group with ID: 27
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-29 21:39:32 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-29 21:39:33 [restartedMain] INFO  CustomLogger - Created Sessions: 10
+2025-04-29 21:39:33 [restartedMain] INFO  CustomLogger - SignalDTO(id=null, message=Signal Issue 0, severity=Low, timestamp=2025-04-29T21:39:33.029381044, enseignantId=173)
+2025-04-29 21:39:33 [restartedMain] INFO  CustomLogger - teacher found
+2025-04-29 21:39:33 [restartedMain] INFO  CustomLogger - Signal(id=null, message=Signal Issue 0, severity=Low, timestamp=2025-04-29T21:39:33.029381044)
+2025-04-29 21:39:33 [restartedMain] INFO  CustomLogger - Signal(id=null, message=Signal Issue 0, severity=Low, timestamp=2025-04-29T21:39:33.029381044)
+2025-04-29 21:39:33 [restartedMain] INFO  CustomLogger - SignalDTO(id=1, message=Signal Issue 0, severity=Low, timestamp=2025-04-29T21:39:33.029381044, enseignantId=173)
+2025-04-29 21:39:33 [restartedMain] INFO  CustomLogger - Created Notifications: 10
+2025-04-29 21:39:33 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-04-29 21:39:33 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-29 21:42:55 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-29 21:42:55 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-04-29 21:42:55 [restartedMain] INFO  CustomLogger - Created Administrators: 1
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created Teachers: 5
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 19
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 20
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created practical group with ID: 28
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created practical group with ID: 29
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created practical group with ID: 30
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created Students: 15
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created Sessions: 10
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - SignalDTO(id=null, message=Signal Issue 0, severity=Low, timestamp=2025-04-29T21:42:56.186277696, enseignantId=192)
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - teacher found
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Signal(id=null, message=Signal Issue 0, severity=Low, timestamp=2025-04-29T21:42:56.186277696)
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Signal(id=null, message=Signal Issue 0, severity=Low, timestamp=2025-04-29T21:42:56.186277696)
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - SignalDTO(id=2, message=Signal Issue 0, severity=Low, timestamp=2025-04-29T21:42:56.186277696, enseignantId=192)
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created Signals: 1
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - Created Notifications: 10
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-04-29 21:42:56 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
