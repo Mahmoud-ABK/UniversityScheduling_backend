@@ -11,7 +11,9 @@ import com.scheduling.universityschedule_backend.model.*;
 import com.scheduling.universityschedule_backend.repository.EnseignantRepository;
 import com.scheduling.universityschedule_backend.repository.PropositionDeRattrapageRepository;
 import com.scheduling.universityschedule_backend.repository.SeanceRepository;
+import com.scheduling.universityschedule_backend.repository.SignalRepository;
 import com.scheduling.universityschedule_backend.service.EnseignantService;
+import com.scheduling.universityschedule_backend.util.CustomLogger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,17 +33,19 @@ public class EnseignantServiceImpl implements EnseignantService {
     private final SeanceRepository seanceRepository;
     private final EntityMapper entityMapper;
     private final PropositionDeRattrapageRepository propositionDeRattrapageRepository;
+    private final SignalRepository signalRepository;
 
     /**
      * Constructor injection for dependencies
      */
     public EnseignantServiceImpl(EnseignantRepository enseignantRepository,
                                  SeanceRepository seanceRepository,
-                                 EntityMapper entityMapper,PropositionDeRattrapageRepository propositionDeRattrapageRepository) {
+                                 EntityMapper entityMapper, PropositionDeRattrapageRepository propositionDeRattrapageRepository, SignalRepository signalRepository) {
         this.enseignantRepository = enseignantRepository;
         this.seanceRepository = seanceRepository;
         this.entityMapper = entityMapper;
         this.propositionDeRattrapageRepository = propositionDeRattrapageRepository;
+        this.signalRepository = signalRepository;
     }
 
     @Override
@@ -402,9 +406,11 @@ public class EnseignantServiceImpl implements EnseignantService {
             // Find teacher
             Enseignant enseignant = enseignantRepository.findById(id)
                     .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
+            CustomLogger.logInfo("teacher found");
 
             // Convert DTO to entity
             Signal signalEntity = entityMapper.toSignal(signal);
+            CustomLogger.logInfo(signalEntity.toString());
 
             // Set submission date if not provided
             if (signalEntity.getTimestamp() == null) {
@@ -418,17 +424,19 @@ public class EnseignantServiceImpl implements EnseignantService {
             if (enseignant.getSignals() == null) {
                 enseignant.setSignals(new ArrayList<>());
             }
-            enseignant.getSignals().add(signalEntity);
-
+            CustomLogger.logInfo(signalEntity.toString());
             // Save teacher to persist the relationship
-            enseignantRepository.save(enseignant);
+            signalRepository.save(signalEntity);
 
             // Convert back to DTO
-            return entityMapper.toSignalDTO(signalEntity);
+            SignalDTO returned = entityMapper.toSignalDTO(signalEntity);
+            CustomLogger.logInfo(returned.toString());
+            return returned;
         } catch (CustomException e) {
             throw e;
         } catch (Exception e) {
-            throw new CustomException("Failed to submit signal for teacher with ID: " + id, e);
+           // throw new CustomException("Failed to submit signal for teacher with ID: " + id +'\n' + e.toString() );
+        throw e ;
         }
     }
 

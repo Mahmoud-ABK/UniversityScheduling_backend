@@ -286,6 +286,7 @@ public class ServiceTest {
             }
         }
         // 10. Create Signals
+        int signalcount=0;
         for (int i = 0; i < Math.max(1, sampleSize / 3); i++) {
             try {
                 SignalDTO signal = new SignalDTO();
@@ -293,14 +294,17 @@ public class ServiceTest {
                 signal.setSeverity(Math.random() > 0.5 ? "High" : "Low");
                 signal.setTimestamp(LocalDateTime.parse(LocalDateTime.now().toString()));
 
-                Long teacherId = enseignants.get(RANDOM.nextInt(enseignants.size())).getId();
+                Long teacherId = enseignants.get(RANDOM.nextInt(enseignants.size()-1)).getId();
                 signal.setEnseignantId(String.valueOf(teacherId));
+                CustomLogger.logInfo(signal.toString());
 
                 enseignantService.submitSignal(teacherId, signal);
+                signalcount++;
             } catch (Exception e) {
                 CustomLogger.logError("Failed to create signal: " + e.getMessage());
             }
         }
+        CustomLogger.logInfo("Created Signals: " + signalcount);
 // 11. Create Notifications
         for (int i = 0; i < sampleSize * 2; i++) {
             try {
@@ -365,4 +369,311 @@ public class ServiceTest {
         }
         CustomLogger.logInfo("========== Database Population Complete ==========");
     }
+    public void rudTest() throws CustomException {
+        CustomLogger.logInfo("========== Testing Retrieval, Update, Delete Operations ==========");
+        Random RANDOM = new Random();
+
+        // Testing AdministrateurService
+        try {
+            CustomLogger.logInfo("Testing AdministrateurService RUD operations...");
+            List<AdministrateurDTO> allAdmins = administrateurService.findAll();
+            if (allAdmins.size() >= 2) {
+                // Get 2 random admins
+                int index1 = RANDOM.nextInt(allAdmins.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allAdmins.size() - 1)) % allAdmins.size();
+                AdministrateurDTO admin1 = allAdmins.get(index1);
+                AdministrateurDTO admin2 = allAdmins.get(index2);
+
+                // Test findById
+                AdministrateurDTO fetchedAdmin1 = administrateurService.findById(admin1.getId());
+                AdministrateurDTO fetchedAdmin2 = administrateurService.findById(admin2.getId());
+
+                // Test update
+                fetchedAdmin1.setNom("Updated Name");
+                AdministrateurDTO updatedAdmin = administrateurService.update(fetchedAdmin1.getId(), fetchedAdmin1);
+
+                // Test delete
+                administrateurService.delete(admin2.getId());
+
+                CustomLogger.logInfo("AdministrateurService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough administrators for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing AdministrateurService: " + e.getMessage(), e);
+        }
+
+        // Testing BrancheService
+        try {
+            CustomLogger.logInfo("Testing BrancheService RUD operations...");
+            List<BrancheDTO> allBranches = brancheService.findAll();
+            if (allBranches.size() >= 2) {
+                // Get 2 random branches
+                int index1 = RANDOM.nextInt(allBranches.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allBranches.size() - 1)) % allBranches.size();
+                BrancheDTO branche1 = allBranches.get(index1);
+                BrancheDTO branche2 = allBranches.get(index2);
+
+                // Test findById
+                BrancheDTO fetchedBranche1 = brancheService.findById(branche1.getId());
+                BrancheDTO fetchedBranche2 = brancheService.findById(branche2.getId());
+
+                // Test update
+                fetchedBranche1.setDepartement("Updated Department");
+                BrancheDTO updatedBranche = brancheService.update(fetchedBranche1.getId(), fetchedBranche1);
+
+                // Test delete
+                brancheService.delete(branche2.getId());
+
+                CustomLogger.logInfo("BrancheService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough branches for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing BrancheService: " + e.getMessage(), e);
+        }
+
+        // Testing EnseignantService
+        try {
+            CustomLogger.logInfo("Testing EnseignantService RUD operations...");
+            List<EnseignantDTO> allTeachers = enseignantService.findAll();
+            if (allTeachers.size() >= 2) {
+                // Get 2 random teachers
+                int index1 = RANDOM.nextInt(allTeachers.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allTeachers.size() - 1)) % allTeachers.size();
+                EnseignantDTO teacher1 = allTeachers.get(index1);
+                EnseignantDTO teacher2 = allTeachers.get(index2);
+
+                // Test findById
+                EnseignantDTO fetchedTeacher1 = enseignantService.findById(teacher1.getId());
+                EnseignantDTO fetchedTeacher2 = enseignantService.findById(teacher2.getId());
+
+                // Test update
+                fetchedTeacher1.setHeures(fetchedTeacher1.getHeures() + 5);
+                EnseignantDTO updatedTeacher = enseignantService.update(fetchedTeacher1.getId(), fetchedTeacher1);
+
+                // Test delete
+                enseignantService.delete(teacher2.getId());
+
+                CustomLogger.logInfo("EnseignantService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough teachers for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing EnseignantService: " + e.getMessage(), e);
+        }
+
+        // Testing EtudiantService
+        try {
+            CustomLogger.logInfo("Testing EtudiantService RUD operations...");
+            List<EtudiantDTO> allStudents = etudiantService.findAll();
+            if (allStudents.size() >= 2) {
+                // Get 2 random students
+                int index1 = RANDOM.nextInt(allStudents.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allStudents.size() - 1)) % allStudents.size();
+                EtudiantDTO student1 = allStudents.get(index1);
+                EtudiantDTO student2 = allStudents.get(index2);
+
+                // Test findById
+                EtudiantDTO fetchedStudent1 = etudiantService.findById(student1.getId());
+                EtudiantDTO fetchedStudent2 = etudiantService.findById(student2.getId());
+
+                // Test update
+                fetchedStudent1.setEmail("updated.email" + RANDOM.nextInt(100) + "@example.com");
+                EtudiantDTO updatedStudent = etudiantService.update(fetchedStudent1.getId(), fetchedStudent1);
+
+                // Test delete
+                etudiantService.delete(student2.getId());
+
+                CustomLogger.logInfo("EtudiantService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough students for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing EtudiantService: " + e.getMessage(), e);
+        }
+
+        // Testing SalleService
+        try {
+            CustomLogger.logInfo("Testing SalleService RUD operations...");
+            List<SalleDTO> allRooms = salleService.findAll();
+            if (allRooms.size() >= 2) {
+                // Get 2 random rooms
+                int index1 = RANDOM.nextInt(allRooms.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allRooms.size() - 1)) % allRooms.size();
+                SalleDTO room1 = allRooms.get(index1);
+                SalleDTO room2 = allRooms.get(index2);
+
+                // Test findById
+                SalleDTO fetchedRoom1 = salleService.findById(room1.getId());
+                SalleDTO fetchedRoom2 = salleService.findById(room2.getId());
+
+                // Test update
+                fetchedRoom1.setCapacite(fetchedRoom1.getCapacite() + 10);
+                SalleDTO updatedRoom = salleService.update(fetchedRoom1.getId(), fetchedRoom1);
+
+                // Test delete
+                salleService.delete(room2.getId());
+
+                CustomLogger.logInfo("SalleService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough rooms for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing SalleService: " + e.getMessage(), e);
+        }
+
+        // Testing SeanceService
+        try {
+            CustomLogger.logInfo("Testing SeanceService RUD operations...");
+            List<SeanceDTO> allSessions = seanceService.findAll();
+            if (allSessions.size() >= 2) {
+                // Get 2 random sessions
+                int index1 = RANDOM.nextInt(allSessions.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allSessions.size() - 1)) % allSessions.size();
+                SeanceDTO session1 = allSessions.get(index1);
+                SeanceDTO session2 = allSessions.get(index2);
+
+                // Test findById
+                SeanceDTO fetchedSession1 = seanceService.findById(session1.getId());
+                SeanceDTO fetchedSession2 = seanceService.findById(session2.getId());
+
+                // Test update
+                fetchedSession1.setMatiere("Updated Subject " + RANDOM.nextInt(100));
+                SeanceDTO updatedSession = seanceService.update(fetchedSession1.getId(), fetchedSession1);
+
+                // Test delete
+                seanceService.delete(session2.getId());
+
+                CustomLogger.logInfo("SeanceService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough sessions for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing SeanceService: " + e.getMessage(), e);
+        }
+
+        // Testing TDService
+        try {
+            CustomLogger.logInfo("Testing TDService RUD operations...");
+            List<TDDTO> allTDs = tdService.findAll();
+            if (allTDs.size() >= 2) {
+                // Get 2 random TDs
+                int index1 = RANDOM.nextInt(allTDs.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allTDs.size() - 1)) % allTDs.size();
+                TDDTO td1 = allTDs.get(index1);
+                TDDTO td2 = allTDs.get(index2);
+
+                // Test findById
+                TDDTO fetchedTD1 = tdService.findById(td1.getId());
+                TDDTO fetchedTD2 = tdService.findById(td2.getId());
+
+                // Test update
+                fetchedTD1.setNb(fetchedTD1.getNb() + 1);
+                TDDTO updatedTD = tdService.update(fetchedTD1.getId(), fetchedTD1);
+
+                // Test delete
+                tdService.delete(td2.getId());
+
+                CustomLogger.logInfo("TDService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough TDs for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing TDService: " + e.getMessage(), e);
+        }
+
+        // Testing TPService
+        try {
+            CustomLogger.logInfo("Testing TPService RUD operations...");
+            List<TPDTO> allTPs = tpService.findAll();
+            if (allTPs.size() >= 2) {
+                // Get 2 random TPs
+                int index1 = RANDOM.nextInt(allTPs.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allTPs.size() - 1)) % allTPs.size();
+                TPDTO tp1 = allTPs.get(index1);
+                TPDTO tp2 = allTPs.get(index2);
+
+                // Test findById
+                TPDTO fetchedTP1 = tpService.findById(tp1.getId());
+                TPDTO fetchedTP2 = tpService.findById(tp2.getId());
+
+                // Test update
+                fetchedTP1.setNb(fetchedTP1.getNb() + 1);
+                TPDTO updatedTP = tpService.update(fetchedTP1.getId(), fetchedTP1);
+
+                // Test delete
+                tpService.delete(tp2.getId());
+
+                CustomLogger.logInfo("TPService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough TPs for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing TPService: " + e.getMessage(), e);
+        }
+
+        // Testing NotificationService
+        try {
+            CustomLogger.logInfo("Testing NotificationService RUD operations...");
+            List<NotificationDTO> allNotifications = notificationService.findAll();
+            if (allNotifications.size() >= 2) {
+                // Get 2 random notifications
+                int index1 = RANDOM.nextInt(allNotifications.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allNotifications.size() - 1)) % allNotifications.size();
+                NotificationDTO notification1 = allNotifications.get(index1);
+                NotificationDTO notification2 = allNotifications.get(index2);
+
+                // Test findById
+                NotificationDTO fetchedNotification1 = notificationService.findById(notification1.getId());
+                NotificationDTO fetchedNotification2 = notificationService.findById(notification2.getId());
+
+                // Test update
+                fetchedNotification1.setMessage("Updated message " + RANDOM.nextInt(100));
+                NotificationDTO updatedNotification = notificationService.update(fetchedNotification1.getId(), fetchedNotification1);
+
+                // Test delete
+                notificationService.delete(notification2.getId());
+
+                CustomLogger.logInfo("NotificationService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough notifications for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing NotificationService: " + e.getMessage(), e);
+        }
+
+        // Testing ExcelFileService
+        try {
+            CustomLogger.logInfo("Testing ExcelFileService RUD operations...");
+            List<FichierExcelDTO> allFiles = excelFileService.findAll();
+            if (allFiles.size() >= 2) {
+                // Get 2 random files
+                int index1 = RANDOM.nextInt(allFiles.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allFiles.size() - 1)) % allFiles.size();
+                FichierExcelDTO file1 = allFiles.get(index1);
+                FichierExcelDTO file2 = allFiles.get(index2);
+
+                // Test findById
+                FichierExcelDTO fetchedFile1 = excelFileService.findById(file1.getId());
+                FichierExcelDTO fetchedFile2 = excelFileService.findById(file2.getId());
+
+                // Test update
+                fetchedFile1.setStatus("Updated Status");
+                FichierExcelDTO updatedFile = excelFileService.update(fetchedFile1.getId(), fetchedFile1);
+
+                // Test delete
+                excelFileService.delete(file2.getId());
+
+                CustomLogger.logInfo("ExcelFileService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough excel files for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing ExcelFileService: " + e.getMessage(), e);
+        }
+
+        CustomLogger.logInfo("========== RUD Testing Complete ==========");
+    }
+
 }

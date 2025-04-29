@@ -2,6 +2,8 @@ package com.scheduling.universityschedule_backend.dto;
 
 import com.scheduling.universityschedule_backend.model.Enseignant;
 import lombok.Data;
+import lombok.Generated;
+
 import java.time.LocalDateTime;
 
 /**

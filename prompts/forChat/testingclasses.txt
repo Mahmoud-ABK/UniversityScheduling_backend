@@ -893,6 +893,9 @@ import com.scheduling.universityschedule_backend.service.*;
 import com.scheduling.universityschedule_backend.util.CustomLogger;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import java.time.*;
+import java.util.*;
+import java.util.function.Function;
 
 import java.time.*;
 import java.util.ArrayList;
@@ -912,8 +915,9 @@ public class ServiceTest {
     private final EnseignantService enseignantService;
     private final TDService tdService;
     private final TPService tpService;
+    private final NotificationService notificationService;
 
-    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService) {
+    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService) {
         this.administrateurService = administrateurService;
         this.brancheService = brancheService;
         this.etudiantService = etudiantService;
@@ -923,476 +927,332 @@ public class ServiceTest {
         this.enseignantService = enseignantService;
         this.tdService = tdService;
         this.tpService = tpService;
+        this.notificationService = notificationService;
     }
+    public void populateDatabase(int sampleSize) throws CustomException {
+        CustomLogger.logInfo("========== Populating Database Using Service Layer ==========");
 
-    public void testAllServices() throws CustomException {
-        //testAdministrateurService();
-        testBrancheService();
-        testEtudiantService();
-        testExcelFileService();
-        testSalleService();
-        testSeanceService();
-        testEnseignantService();
-        testTDService();
-        testTPService();
-    }
+        // Random generators
+        Random RANDOM = new Random();
+        List<String> NOMS = Arrays.asList("Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller",
+                "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White");
+        List<String> PRENOMS = Arrays.asList("James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael",
+                "Linda", "William", "Elizabeth", "David", "Barbara", "Richard", "Susan");
 
-    public void testAdministrateurService() throws CustomException {
-        CustomLogger.logInfo("=================== Testing AdministrateurService ===================");
+        // Helper functions for random data
+        Function<Void, String> generateRandomCin = v -> String.valueOf(100000000 + RANDOM.nextInt(900000000));
+        Function<Void, String> generateRandomTel = v -> String.valueOf(1000000000L + RANDOM.nextLong(9000000000L));
+        Function<Void, String> pickNom = v -> NOMS.get(RANDOM.nextInt(NOMS.size()));
+        Function<Void, String> pickPrenom = v -> PRENOMS.get(RANDOM.nextInt(PRENOMS.size()));
+        Function<Void, DayOfWeek> randomDay = v -> DayOfWeek.values()[RANDOM.nextInt(5)];
+        Function<Void, String> randomDayString = v -> randomDay.apply(null).toString();
+        Function<Void, LocalTime> randomTime = v -> LocalTime.of(8 + RANDOM.nextInt(9), RANDOM.nextInt(12) * 5);
+        Function<LocalTime, LocalTime> randomTimeAfter = start -> start.plusMinutes(90 + RANDOM.nextInt(90));
+        Function<Void, String> randomFrequenceString = v -> {
+            FrequenceType[] freqs = FrequenceType.values();
+            return freqs[RANDOM.nextInt(freqs.length)].toString();
+        };
+        Function<Void, String> pickSeanceType = v -> {
+            SeanceType[] types = SeanceType.values();
+            return types[RANDOM.nextInt(types.length)].toString();
+        };
+        Function<Void, String> pickRandomSubject = v -> {
+            String[] subjects = {
+                    "Mathematics", "Physics", "Chemistry", "Computer Architecture",
+                    "Database Systems", "Operating Systems", "Data Structures",
+                    "Algorithms", "Software Engineering", "Networks", "Artificial Intelligence"
+            };
+            return subjects[RANDOM.nextInt(subjects.length)];
+        };
 
-        try {
-            // Test approve makeup session
-            Long testPropositionId = 1L; // Assuming this exists
-            Long testSalleId = 1L; // Assuming this exists
-            Long testrejectid=15L;
-            Long testrejectid2=16L;
+        Function<Void, String> pickNiveau = v -> {
+            String[] systems = {"L", "CPI", "ING", "MR", "MP"};
+            String system = systems[RANDOM.nextInt(systems.length)];
+            int yearLevel = switch (system) {
+                case "L" -> RANDOM.nextInt(3) + 1;
+                case "CPI" -> RANDOM.nextInt(2) + 1;
+                case "ING" -> RANDOM.nextInt(3) + 1;
+                default -> RANDOM.nextInt(2) + 1;
+            };
+            return system + yearLevel;
+        };
 
-            PropositionDeRattrapageDTO approvedProposition =
-                    administrateurService.approveMakeupSession(testPropositionId, testSalleId);
-            CustomLogger.logInfo("Approved Proposition: " + approvedProposition);
+        Function<String, String> pickSpecialty = niveau -> {
+            if (niveau.startsWith("L")) return Arrays.asList("EEA", "INFO", "TIC", "MATH").get(RANDOM.nextInt(4));
+            if (niveau.startsWith("CPI")) return "INFO";
+            if (niveau.startsWith("ING")) return Arrays.asList("ELEC", "INFO").get(RANDOM.nextInt(2));
+            return Arrays.asList("GL", "I3", "DS").get(RANDOM.nextInt(3));
+        };
 
-            // Test reject makeup session
-            PropositionDeRattrapageDTO rejectedProposition =
-                    administrateurService.rejectMakeupSession(testrejectid);
-            CustomLogger.logInfo("Rejected Proposition: " + rejectedProposition);
-
-            // Test approve scheduled
-            PropositionDeRattrapageDTO approvedScheduled =
-                    administrateurService.approveScheduled(18L, testSalleId);
-            CustomLogger.logInfo("Approved Scheduled: " + approvedScheduled);
-
-            // Test reject scheduled
-            PropositionDeRattrapageDTO rejectedScheduled =
-                    administrateurService.rejectScheduled(testrejectid2, "Room not available");
-            CustomLogger.logInfo("Rejected Scheduled: " + rejectedScheduled);
-
-        } catch (CustomException e) {
-            CustomLogger.logError("AdministrateurService test failed: " + e.getMessage());
-            throw e;
+        // 1. Create Administrateurs
+        List<AdministrateurDTO> admins = new ArrayList<>();
+        for (int i = 0; i < Math.max(1, sampleSize / 5); i++) {
+            AdministrateurDTO admin = new AdministrateurDTO();
+            admin.setCin(generateRandomCin.apply(null));
+            admin.setNom(pickNom.apply(null));
+            admin.setPrenom(pickPrenom.apply(null));
+            admin.setEmail("admin" + i + "@example.com");
+            admin.setTel(generateRandomTel.apply(null));
+            admin.setAdresse("Admin Address " + i);
+            admin.setCodeAdmin("ADM" + i);
+            admins.add(administrateurService.create(admin));
         }
-    }
+        CustomLogger.logInfo("Created Administrators: " + admins.size());
 
-    public void testBrancheService() throws CustomException {
-        CustomLogger.logInfo("=================== Testing BrancheService ===================");
+        // 2. Create Enseignants
+        List<EnseignantDTO> enseignants = new ArrayList<>();
+        for (int i = 0; i < sampleSize; i++) {
+            EnseignantDTO enseignant = new EnseignantDTO();
+            enseignant.setCin(generateRandomCin.apply(null));
+            enseignant.setNom(pickNom.apply(null));
+            enseignant.setPrenom(pickPrenom.apply(null));
+            enseignant.setEmail("enseignant" + i + "@example.com");
+            enseignant.setTel(generateRandomTel.apply(null));
+            enseignant.setAdresse("Teacher Address " + i);
+            enseignant.setCodeEnseignant("ENS" + i);
+            enseignant.setHeures((int)(Math.random() * 40) + 1);
+            enseignants.add(enseignantService.create(enseignant));
+        }
+        CustomLogger.logInfo("Created Teachers: " + enseignants.size());
 
-        try {
-            // Test findAll
-            List<BrancheDTO> allBranches = brancheService.findAll();
-            CustomLogger.logInfo("All Branches: " + allBranches.size());
+        // 3. Create Branches
+        List<BrancheDTO> branches = new ArrayList<>();
+        for (int i = 0; i < Math.max(1, sampleSize / 15); i++) {
+            BrancheDTO branche = new BrancheDTO();
+            String niveau = pickNiveau.apply(null);
+            branche.setNiveau(niveau);
+            branche.setSpecialite(pickSpecialty.apply(niveau));
+            branche.setNbTD((int)(Math.random() * 5) + 1);
+            branche.setDepartement(Math.random() < 0.33 ? "Technologie" : "informatique");
+            branches.add(brancheService.create(branche));
+        }
+        CustomLogger.logInfo("Created Branches: " + branches.size());
 
-            if (!allBranches.isEmpty()) {
-                Long testBranchId = allBranches.getFirst().getId();
+        // 4. Create TDs
+        List<TDDTO> tds = new ArrayList<>();
+        for (int i = 0; i < Math.max(2, (sampleSize * 3) / 20); i++) {
+            TDDTO td = new TDDTO();
+            td.setNb((int)(Math.random() * 5) + 1);
+            td.setNbTP((int)(Math.random() * 3) + 1);
+            td.setBrancheId(branches.get(RANDOM.nextInt(branches.size())).getId());
+            tds.add(tdService.create(td));
+        }
+        CustomLogger.logInfo("Created TDs: " + tds.size());
 
-                // Test findById
-                BrancheDTO branch = brancheService.findById(testBranchId);
-                CustomLogger.logInfo("Found Branch: " + branch);
+        // 5. Create TPs
+        List<TPDTO> tps = new ArrayList<>();
+        for (int i = 0; i < Math.max(3, sampleSize / 3); i++) {
+            TPDTO tp = new TPDTO();
+            tp.setNb((int)(Math.random() * 3) + 1);
+            tp.setTdId(tds.get(RANDOM.nextInt(tds.size())).getId());
+            tps.add(tpService.create(tp));
+        }
+        CustomLogger.logInfo("Created TPs: " + tps.size());
 
-                // Test create
-                BrancheDTO newBranch = new BrancheDTO();
-                newBranch.setNiveau("L3");
-                newBranch.setSpecialite("INFO");
-                newBranch.setDepartement("Informatique");
-                newBranch.setNbTD(3);
-                BrancheDTO createdBranch = brancheService.create(newBranch);
-                CustomLogger.logInfo("Created Branch: " + createdBranch);
+        // 6. Create Etudiants
+        List<EtudiantDTO> etudiants = new ArrayList<>();
+        for (int i = 0; i < sampleSize * 3; i++) {
+            EtudiantDTO etudiant = new EtudiantDTO();
+            etudiant.setCin(generateRandomCin.apply(null));
+            etudiant.setNom(pickNom.apply(null));
+            etudiant.setPrenom(pickPrenom.apply(null));
+            etudiant.setEmail("etudiant" + i + "@example.com");
+            etudiant.setTel(generateRandomTel.apply(null));
+            etudiant.setAdresse("Student Address " + i);
+            etudiant.setMatricule("MAT" + i);
+            etudiant.setBrancheId(branches.get(RANDOM.nextInt(branches.size())).getId());
+            etudiant.setTpId(tps.get(RANDOM.nextInt(tps.size())).getId());
+            etudiants.add(etudiantService.create(etudiant));
+        }
+        CustomLogger.logInfo("Created Students: " + etudiants.size());
 
-                // Test update
-                createdBranch.setNbTD(4);
-                BrancheDTO updatedBranch = brancheService.update(createdBranch.getId(), createdBranch);
-                CustomLogger.logInfo("Updated Branch: " + updatedBranch);
+        // 7. Create Salles
+        List<SalleDTO> salles = new ArrayList<>();
+        for (int i = 0; i < Math.max(3, sampleSize / 10); i++) {
+            SalleDTO salle = new SalleDTO();
+            salle.setIdentifiant("SAL" + i);
+            salle.setType("Lecture Hall");
+            salle.setCapacite((int)(Math.random() * 150) + 50);
+            salles.add(salleService.create(salle));
+        }
+        CustomLogger.logInfo("Created Rooms: " + salles.size());
 
-                // Test getSchedule
-                List<SeanceDTO> schedule = brancheService.getSchedule(testBranchId);
-                CustomLogger.logInfo("Branch Schedule: " + schedule.size() + " sessions");
+        // 8. Create Seances (without conflict detection)
+        List<SeanceDTO> seances = new ArrayList<>();
+        for (int i = 0; i < sampleSize * 2; i++) {
+            SeanceDTO seance = new SeanceDTO();
+            seance.setMatiere(pickRandomSubject.apply(null));
+            seance.setJour(randomDayString.apply(null));
 
-                // Test getEtudiants
-                List<EtudiantDTO> students = brancheService.getEtudiants(testBranchId);
-                CustomLogger.logInfo("Branch Students: " + students.size() + " students");
+            LocalTime startTime = randomTime.apply(null);
+            LocalTime endTime = randomTimeAfter.apply(startTime);
+            seance.setHeureDebut(startTime.toString());
+            seance.setHeureFin(endTime.toString());
 
-                // Test delete
-                brancheService.delete(createdBranch.getId());
-                CustomLogger.logInfo("Deleted Branch with ID: " + createdBranch.getId());
+            seance.setFrequence(randomFrequenceString.apply(null));
+            seance.setType(pickSeanceType.apply(null));
+
+            if (seance.getFrequence().equals("CATCHUP")) {
+                seance.setDate(LocalDate.now().plusDays(i % 14).toString());
             }
-        } catch (CustomException e) {
-            CustomLogger.logError("BrancheService test failed: " + e.getMessage());
-            throw e;
-        }
-    }
 
-    public void testEtudiantService() throws CustomException {
-        CustomLogger.logInfo("=================== Testing EtudiantService ===================");
+            seance.setSalleId(salles.get(RANDOM.nextInt(salles.size())).getId());
+            seance.setEnseignantId(enseignants.get(RANDOM.nextInt(enseignants.size())).getId());
 
-        try {
-            // Test findAll
-            List<EtudiantDTO> allStudents = etudiantService.findAll();
-            CustomLogger.logInfo("All Students: " + allStudents.size());
+            // Add related entities (branches, TDs, TPs)
+            List<Long> brancheIds = new ArrayList<>();
+            brancheIds.add(branches.get(RANDOM.nextInt(branches.size())).getId());
+            seance.setBrancheIds(brancheIds);
 
-            if (!allStudents.isEmpty()) {
-                Long testStudentId = allStudents.getFirst().getId();
+            List<Long> tdIds = new ArrayList<>();
+            tdIds.add(tds.get(RANDOM.nextInt(tds.size())).getId());
+            seance.setTdIds(tdIds);
 
-                // Test findById
-                EtudiantDTO student = etudiantService.findById(testStudentId);
-                CustomLogger.logInfo("Found Student: " + student);
+            List<Long> tpIds = new ArrayList<>();
+            tpIds.add(tps.get(RANDOM.nextInt(tps.size())).getId());
+            seance.setTpIds(tpIds);
 
-                // Test create
-                EtudiantDTO newStudent = new EtudiantDTO();
-                newStudent.setNom("Test");
-                newStudent.setPrenom("Student");
-                newStudent.setEmail("test.student@example.com");
-                newStudent.setMatricule("TEST123");
-                EtudiantDTO createdStudent = etudiantService.create(newStudent);
-                CustomLogger.logInfo("Created Student: " + createdStudent);
-
-                // Test update
-                createdStudent.setEmail("updated.test@example.com");
-                EtudiantDTO updatedStudent = etudiantService.update(createdStudent.getId(), createdStudent);
-                CustomLogger.logInfo("Updated Student: " + updatedStudent);
-
-                // Test getPersonalSchedule
-                List<SeanceDTO> personalSchedule = etudiantService.getPersonalSchedule(testStudentId);
-                CustomLogger.logInfo("Personal Schedule: " + personalSchedule.size() + " sessions");
-
-                // Test getBranchSchedule
-                List<SeanceDTO> branchSchedule = etudiantService.getBranchSchedule(testStudentId);
-                CustomLogger.logInfo("Branch Schedule: " + branchSchedule.size() + " sessions");
-
-                // Test getTDSchedule
-                List<SeanceDTO> tdSchedule = etudiantService.getTDSchedule(testStudentId);
-                CustomLogger.logInfo("TD Schedule: " + tdSchedule.size() + " sessions");
-
-                // Test getNotifications
-                List<NotificationDTO> notifications = etudiantService.getNotifications(testStudentId);
-                CustomLogger.logInfo("Notifications: " + notifications.size() + " notifications");
-
-                // Test delete
-                etudiantService.delete(createdStudent.getId());
-                CustomLogger.logInfo("Deleted Student with ID: " + createdStudent.getId());
+            // Create without checking conflicts
+            try {
+                seances.add(seanceService.create(seance));
+            } catch (Exception e) {
+                CustomLogger.logError("Failed to create seance " + i + ": " + e.getMessage());
             }
-        } catch (CustomException e) {
-            CustomLogger.logError("EtudiantService test failed: " + e.getMessage());
-            throw e;
         }
-    }
+        CustomLogger.logInfo("Created Sessions: " + seances.size());
 
-    public void testExcelFileService() throws CustomException {
-        CustomLogger.logInfo("=================== Testing ExcelFileService ===================");
+// 9. Create Makeup Session Proposals
+        for (int i = 0; i < Math.max(1, sampleSize / 3); i++) {
+            try {
+                PropositionDeRattrapageDTO proposition = new PropositionDeRattrapageDTO();
+                proposition.setName("Makeup Session " + i);
+                proposition.setMatiere(pickRandomSubject.apply(null));
+                proposition.setType(pickSeanceType.apply(null));
 
-        try {
-            // Test findAll
-            List<FichierExcelDTO> allFiles = excelFileService.findAll();
-            CustomLogger.logInfo("All Files: " + allFiles.size());
+                LocalTime startTime = randomTime.apply(null);
+                LocalTime endTime = randomTimeAfter.apply(startTime);
+                proposition.setHeureDebut(startTime.toString());
+                proposition.setHeureFin(endTime.toString());
 
-            // Test create
-            FichierExcelDTO newFile = new FichierExcelDTO();
-            newFile.setFileName("test_file.xlsx");
-            newFile.setStatus("Processing");
-            newFile.setImportDate(LocalDateTime.now());
-            newFile.setErrors(List.of("No errors"));
-            FichierExcelDTO createdFile = excelFileService.create(newFile);
-            CustomLogger.logInfo("Created File: " + createdFile);
+                LocalDateTime proposalDate = LocalDateTime.now().plusDays(RANDOM.nextInt(14));
+                proposition.setDate(proposalDate.toString());
+                proposition.setStatus(Status.PENDING.name());
 
-            // Test findById
-            FichierExcelDTO foundFile = excelFileService.findById(createdFile.getId());
-            CustomLogger.logInfo("Found File: " + foundFile);
+                // Add random reason
+                String[] reasons = {
+                        "Previous session cancelled due to emergency",
+                        "Holiday makeup session",
+                        "Extra practice needed before exam",
+                        "Schedule conflict resolution"
+                };
+                proposition.setReason(reasons[RANDOM.nextInt(reasons.length)]);
 
-            // Test update
-            createdFile.setStatus("Completed");
-            FichierExcelDTO updatedFile = excelFileService.update(createdFile.getId(), createdFile);
-            CustomLogger.logInfo("Updated File: " + updatedFile);
+                // Add related entities
+                Long teacherId = enseignants.get(RANDOM.nextInt(enseignants.size())).getId();
+                proposition.setEnseignantId(teacherId);
 
-            // Test upload
-            List<SeanceDTO> seances = new ArrayList<>(); // Add some test seances
-            excelFileService.upload(createdFile, seances);
-            CustomLogger.logInfo("Uploaded File with sessions");
+                List<Long> brancheIds;
+                brancheIds = new ArrayList<>();
+                brancheIds.add(branches.get(RANDOM.nextInt(branches.size())).getId());
+                proposition.setBrancheIds(brancheIds);
 
-            // Test getImportHistory
-            List<FichierExcelDTO> history = excelFileService.getImportHistory();
-            CustomLogger.logInfo("Import History: " + history.size() + " files");
+                List<Long> tdIds = new ArrayList<>();
+                tdIds.add(tds.get(RANDOM.nextInt(tds.size())).getId());
+                proposition.setTdIds(tdIds);
 
-            // Test delete
-            excelFileService.delete(createdFile.getId());
-            CustomLogger.logInfo("Deleted File with ID: " + createdFile.getId());
+                List<Long> tpIds = new ArrayList<>();
+                tpIds.add(tps.get(RANDOM.nextInt(tps.size())).getId());
+                proposition.setTpIds(tpIds);
 
-        } catch (CustomException e) {
-            CustomLogger.logError("ExcelFileService test failed: " + e.getMessage());
-            throw e;
-        }
-    }
-
-    public void testSalleService() throws CustomException {
-        CustomLogger.logInfo("=================== Testing SalleService ===================");
-
-        try {
-            // Test findAll
-            List<SalleDTO> allRooms = salleService.findAll();
-            CustomLogger.logInfo("All Rooms: " + allRooms.size());
-
-            // Test create
-            SalleDTO newRoom = new SalleDTO();
-            newRoom.setIdentifiant("TEST-ROOM");
-            newRoom.setType("Classroom");
-            newRoom.setCapacite(30);
-            SalleDTO createdRoom = salleService.create(newRoom);
-            CustomLogger.logInfo("Created Room: " + createdRoom);
-
-            // Test findById
-            SalleDTO foundRoom = salleService.findById(createdRoom.getId());
-            CustomLogger.logInfo("Found Room: " + foundRoom);
-
-            // Test update
-            createdRoom.setCapacite(40);
-            SalleDTO updatedRoom = salleService.update(createdRoom.getId(), createdRoom);
-            CustomLogger.logInfo("Updated Room: " + updatedRoom);
-
-            // Test getAvailableRooms
-            List<SalleDTO> availableRooms = salleService.getAvailableRooms(
-                    LocalDate.now(),
-                    DayOfWeek.MONDAY,
-                    LocalTime.of(9, 0),
-                    LocalTime.of(10, 30)
-            );
-            CustomLogger.logInfo("Available Rooms: " + availableRooms.size());
-
-            // Test delete
-            salleService.delete(createdRoom.getId());
-            CustomLogger.logInfo("Deleted Room with ID: " + createdRoom.getId());
-
-        } catch (CustomException e) {
-            CustomLogger.logError("SalleService test failed: " + e.getMessage());
-            throw e;
-        }
-    }
-
-    public void testSeanceService() throws CustomException {
-        CustomLogger.logInfo("=================== Testing SeanceService ===================");
-
-        try {
-            // Test findAll
-            List<SeanceDTO> allSessions = seanceService.findAll();
-            CustomLogger.logInfo("All Sessions: " + allSessions.size());
-
-            // Test create
-            SeanceDTO newSession = new SeanceDTO();
-            newSession.setMatiere("Test Subject");
-            newSession.setType(String.valueOf(SeanceType.CR));
-            newSession.setJour(String.valueOf(DayOfWeek.MONDAY));
-            newSession.setHeureDebut(String.valueOf(LocalTime.of(9, 0)));
-            newSession.setHeureFin(String.valueOf(LocalTime.of(10, 30)));
-            newSession.setEnseignantId(11L);
-            newSession.setFrequence(String.valueOf(FrequenceType.WEEKLY));
-            SeanceDTO createdSession = seanceService.create(newSession);
-            SeanceDTO createdSession2 = seanceService.create(newSession);
-            CustomLogger.logInfo("Created Session: " + createdSession);
-
-            // Test findById
-            SeanceDTO foundSession = seanceService.findById(createdSession.getId());
-            CustomLogger.logInfo("Found Session: " + foundSession);
-
-            // Test update
-            SeanceDTO updatedSession = seanceService.update(createdSession.getId(), createdSession);
-            CustomLogger.logInfo("Updated Session: " + updatedSession);
-
-            // Test getAllConflicts
-            List<SeanceConflictDTO> conflicts = seanceService.getAllConflicts();
-            CustomLogger.logInfo("All Conflicts: " + conflicts.size());
-            List<SeanceConflictDTO> setofConflicts = conflicts.stream().limit(3).toList();
-
-            for (SeanceConflictDTO seanceConflict : setofConflicts) {
-                CustomLogger.logInfo("Found Conflict: " + seanceConflict);
+                enseignantService.submitMakeupRequest(teacherId, proposition);
+            } catch (Exception e) {
+                CustomLogger.logError("Failed to create makeup proposal: " + e.getMessage());
             }
-            Long conflictId = setofConflicts.getFirst().getSeance1Id();
-
-            // Test getRoomConflicts
-            List<SeanceRoomConflictDTO> roomConflicts = seanceService.getRoomConflicts();
-            CustomLogger.logInfo("Room Conflicts: " + roomConflicts.size());
-
-            // Test getConflictsForSession (by ID)
-            List<SingleSeanceConflictDTO> sessionConflicts =
-                    seanceService.getConflictsForSession(conflictId);
-            CustomLogger.logInfo("Session Conflicts: " + sessionConflicts.size());
-            CustomLogger.logInfo("to search "+seanceService.findById(conflictId));
-            // Test getConflictsForSession (by DTO)
-            List<SingleSeanceConflictDTO> dtoConflicts =
-                    seanceService.getConflictsForSession(seanceService.findById(conflictId));
-            CustomLogger.logInfo("DTO Conflicts: " + dtoConflicts.size());
-
-            // Test delete
-            seanceService.delete(createdSession.getId());
-            CustomLogger.logInfo("Deleted Session with ID: " + createdSession.getId());
-
-        } catch (CustomException e) {
-            CustomLogger.logError("SeanceService test failed: " + e.getMessage());
-            throw e;
         }
-    }
-    // Add these test methods to your ServiceTest class
+        // 10. Create Signals
+        int signalcount=0;
+        for (int i = 0; i < Math.max(1, sampleSize / 3); i++) {
+            try {
+                SignalDTO signal = new SignalDTO();
+                signal.setMessage("Signal Issue " + i);
+                signal.setSeverity(Math.random() > 0.5 ? "High" : "Low");
+                signal.setTimestamp(LocalDateTime.parse(LocalDateTime.now().toString()));
 
-    public void testEnseignantService() throws CustomException {
-        CustomLogger.logInfo("=================== Testing EnseignantService ===================");
+                Long teacherId = enseignants.get(RANDOM.nextInt(enseignants.size()-1)).getId();
+                signal.setEnseignantId(String.valueOf(teacherId));
+                CustomLogger.logInfo(signal.toString());
 
-        try {
-            // Test findAll
-            List<EnseignantDTO> allTeachers = enseignantService.findAll();
-            CustomLogger.logInfo("All Teachers: " + allTeachers.size());
-
-            // Test create
-            EnseignantDTO newTeacher = new EnseignantDTO();
-            newTeacher.setNom("Test");
-            newTeacher.setPrenom("Teacher");
-            newTeacher.setEmail("test.teacher@example.com");
-            newTeacher.setCodeEnseignant("TEACH123");
-            newTeacher.setHeures(20);
-            EnseignantDTO createdTeacher = enseignantService.create(newTeacher);
-            CustomLogger.logInfo("Created Teacher: " + createdTeacher);
-
-            // Test findById
-            EnseignantDTO foundTeacher = enseignantService.findById(createdTeacher.getId());
-            CustomLogger.logInfo("Found Teacher: " + foundTeacher);
-
-            // Test update
-            createdTeacher.setHeures(25);
-            EnseignantDTO updatedTeacher = enseignantService.update(createdTeacher.getId(), createdTeacher);
-            CustomLogger.logInfo("Updated Teacher: " + updatedTeacher);
-
-            // Test getSchedule
-            List<SeanceDTO> schedule = enseignantService.getSchedule(createdTeacher.getId());
-            CustomLogger.logInfo("Teacher Schedule: " + schedule.size() + " sessions");
-
-            // Test getTotalTeachingHours
-            int hours = enseignantService.getTotalTeachingHours(
-                    createdTeacher.getId(),
-                    LocalDate.now(),
-                    LocalDate.now().plusMonths(1)
-            );
-            CustomLogger.logInfo("Total Teaching Hours: " + hours);
-
-            // Test submitMakeupRequest
-            PropositionDeRattrapageDTO proposition = new PropositionDeRattrapageDTO();
-            proposition.setName("Makeup Test");
-            proposition.setMatiere("Test Subject");
-            proposition.setType(String.valueOf(SeanceType.CI));
-            proposition.setDate(String.valueOf(LocalDateTime.now().plusDays(7)));
-            PropositionDeRattrapageDTO submittedProposition =
-                    enseignantService.submitMakeupRequest(createdTeacher.getId(), proposition);
-            CustomLogger.logInfo("Submitted Makeup Request: " + submittedProposition);
-
-            // Test submitSignal
-            SignalDTO signal = new SignalDTO();
-            signal.setMessage("Test Signal");
-            signal.setSeverity("Low");
-            SignalDTO submittedSignal = enseignantService.submitSignal(createdTeacher.getId(), signal);
-            CustomLogger.logInfo("Submitted Signal: " + submittedSignal);
-
-            // Test getSignals
-            List<SignalDTO> signals = enseignantService.getSignals(createdTeacher.getId());
-            CustomLogger.logInfo("Teacher Signals: " + signals.size());
-
-            // Test getSubjects
-            List<String> subjects = enseignantService.getSubjects(createdTeacher.getId());
-            CustomLogger.logInfo("Teacher Subjects: " + subjects.size());
-
-            // Test getStudentGroups
-            List<TPDTO> groups = enseignantService.getStudentGroups(createdTeacher.getId());
-            CustomLogger.logInfo("Teacher Student Groups: " + groups.size());
-
-            // Test delete
-            enseignantService.delete(createdTeacher.getId());
-            CustomLogger.logInfo("Deleted Teacher with ID: " + createdTeacher.getId());
-
-        } catch (CustomException e) {
-            CustomLogger.logError("EnseignantService test failed: " + e.getMessage());
-            throw e;
+                enseignantService.submitSignal(teacherId, signal);
+                signalcount++;
+            } catch (Exception e) {
+                CustomLogger.logError("Failed to create signal: " + e.getMessage());
+            }
         }
+        CustomLogger.logInfo("Created Signals: " + signalcount);
+// 11. Create Notifications
+        for (int i = 0; i < sampleSize * 2; i++) {
+            try {
+                NotificationDTO notification = new NotificationDTO();
+                notification.setMessage("Notification message " + i);
+                notification.setType(RANDOM.nextBoolean() ? "SCHEDULE_CHANGE" : "ANNOUNCEMENT");
+                notification.setDate(LocalDateTime.now().minusHours(RANDOM.nextInt(48)));
+                notification.setIsread(RANDOM.nextInt(10) < 3); // 30% read, 70% unread
+
+                // Determine sender (admin) and receiver (can be enseignant, student, etc.)
+                Long senderId = admins.get(RANDOM.nextInt(admins.size())).getId();
+
+                // Vary recipients between teachers and students
+                Long recipientId;
+                if (RANDOM.nextBoolean()) {
+                    // Teacher as recipient
+                    recipientId = enseignants.get(RANDOM.nextInt(enseignants.size())).getId();
+
+                    // Set type for teacher notifications
+                    if (RANDOM.nextBoolean()) {
+                        notification.setType("SCHEDULE_CHANGE");
+                        notification.setMessage("Your session on " +
+                                DayOfWeek.values()[RANDOM.nextInt(5)] + " has been " +
+                                (RANDOM.nextBoolean() ? "rescheduled" : "cancelled"));
+                    }
+                } else {
+                    // Student as recipient
+                    recipientId = etudiants.get(RANDOM.nextInt(etudiants.size())).getId();
+
+                    // Set type for student notifications
+                    if (RANDOM.nextBoolean()) {
+                        notification.setType("COURSE_MATERIAL");
+                        notification.setMessage("New material available for " + pickRandomSubject.apply(null));
+                    }
+                }
+
+                notification.setExpediteurId(senderId);
+                notification.setRecepteurId(recipientId);
+
+                // Here we assume the notification service has a create method
+                // If there is a specific method for sending notifications, use that instead
+                notificationService.create(notification);
+
+            } catch (Exception e) {
+                CustomLogger.logError("Failed to create notification: " + e.getMessage());
+            }
+        }
+        CustomLogger.logInfo("Created Notifications: " + sampleSize * 2);
+        // 12. FichierExcel (for bulk imports)
+        for (int i = 0; i < Math.max(1, sampleSize / 5); i++) {
+            try {
+                FichierExcelDTO fichier = new FichierExcelDTO();
+                fichier.setFileName("schedule_" + i + ".xlsx");
+                fichier.setStatus("Imported");
+                fichier.setErrors(List.of("No errors"));
+                fichier.setImportDate(LocalDateTime.parse(LocalDateTime.now().toString()));
+
+                excelFileService.create(fichier);
+            } catch (Exception e) {
+                CustomLogger.logError("Failed to create excel file record: " + e.getMessage());
+            }
+        }
+        CustomLogger.logInfo("========== Database Population Complete ==========");
     }
 
-    public void testTDService() throws CustomException {
-        CustomLogger.logInfo("=================== Testing TDService ===================");
 
-        try {
-            // Test findAll
-            List<TDDTO> allTDs = tdService.findAll();
-            CustomLogger.logInfo("All TDs: " + allTDs.size());
-
-            // Test create
-            TDDTO newTD = new TDDTO();
-            newTD.setNb(1);
-            newTD.setNbTP(2);
-            TDDTO createdTD = tdService.create(newTD);
-            CustomLogger.logInfo("Created TD: " + createdTD);
-
-            // Test findById
-            TDDTO foundTD = tdService.findById(createdTD.getId());
-            CustomLogger.logInfo("Found TD: " + foundTD);
-
-            // Test update
-            createdTD.setNbTP(3);
-            TDDTO updatedTD = tdService.update(createdTD.getId(), createdTD);
-            CustomLogger.logInfo("Updated TD: " + updatedTD);
-
-            // Test getTPs
-            List<TPDTO> tps = tdService.getTPs(createdTD.getId());
-            CustomLogger.logInfo("TD TPs: " + tps.size());
-
-            // Test generateSchedule
-            List<SeanceDTO> schedule = tdService.generateSchedule(createdTD.getId());
-            CustomLogger.logInfo("TD Schedule: " + schedule.size() + " sessions");
-
-            // Test getEtudiants
-            List<EtudiantDTO> students = tdService.getEtudiants(createdTD.getId());
-            CustomLogger.logInfo("TD Students: " + students.size());
-
-            // Test delete
-            tdService.delete(createdTD.getId());
-            CustomLogger.logInfo("Deleted TD with ID: " + createdTD.getId());
-
-        } catch (CustomException e) {
-            CustomLogger.logError("TDService test failed: " + e.getMessage());
-            throw e;
-        }
-    }
-
-    public void testTPService() throws CustomException {
-        CustomLogger.logInfo("=================== Testing TPService ===================");
-
-        try {
-            // Test findAll
-            List<TPDTO> allTPs = tpService.findAll();
-            CustomLogger.logInfo("All TPs: " + allTPs.size());
-
-            // Test create
-            TPDTO newTP = new TPDTO();
-            newTP.setNb(1);
-            TPDTO createdTP = tpService.create(newTP);
-            CustomLogger.logInfo("Created TP: " + createdTP);
-
-            // Test findById
-            TPDTO foundTP = tpService.findById(createdTP.getId());
-            CustomLogger.logInfo("Found TP: " + foundTP);
-
-            // Test update
-            createdTP.setNb(2);
-            TPDTO updatedTP = tpService.update(createdTP.getId(), createdTP);
-            CustomLogger.logInfo("Updated TP: " + updatedTP);
-
-            // Test getStudents
-            List<EtudiantDTO> students = tpService.getStudents(createdTP.getId());
-            CustomLogger.logInfo("TP Students: " + students.size());
-
-            // Test generateSchedule
-            List<SeanceDTO> schedule = tpService.generateSchedule(createdTP.getId());
-            CustomLogger.logInfo("TP Schedule: " + schedule.size() + " sessions");
-
-            // Test getEtudiants
-            List<EtudiantDTO> allStudents = tpService.getEtudiants(createdTP.getId());
-            CustomLogger.logInfo("TP All Students: " + allStudents.size());
-
-            // Test delete
-            tpService.delete(createdTP.getId());
-            CustomLogger.logInfo("Deleted TP with ID: " + createdTP.getId());
-
-        } catch (CustomException e) {
-            CustomLogger.logError("TPService test failed: " + e.getMessage());
-            throw e;
-        }
-    }
 }
