@@ -33,6 +33,9 @@ public class ServiceTest {
     private final TPService tpService;
     private final NotificationService notificationService;
 
+
+    public Random RANDOM = new Random();
+
     public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService) {
         this.administrateurService = administrateurService;
         this.brancheService = brancheService;
@@ -369,10 +372,8 @@ public class ServiceTest {
         }
         CustomLogger.logInfo("========== Database Population Complete ==========");
     }
-    public void rudTest() throws CustomException {
-        CustomLogger.logInfo("========== Testing Retrieval, Update, Delete Operations ==========");
-        Random RANDOM = new Random();
-
+    public void debugrud() throws CustomException {
+        CustomLogger.logInfo("========== Debugging functions ==========");
         // Testing AdministrateurService
         try {
             CustomLogger.logInfo("Testing AdministrateurService RUD operations...");
@@ -389,10 +390,13 @@ public class ServiceTest {
                 AdministrateurDTO fetchedAdmin2 = administrateurService.findById(admin2.getId());
 
                 // Test update
+                CustomLogger.logInfo("Admin to be updated ID : " + fetchedAdmin1.getId().toString() + "| object:  " + fetchedAdmin2);
                 fetchedAdmin1.setNom("Updated Name");
                 AdministrateurDTO updatedAdmin = administrateurService.update(fetchedAdmin1.getId(), fetchedAdmin1);
+                CustomLogger.logInfo("Updated admin ID: " + updatedAdmin.getId().toString()+ " " + updatedAdmin);
 
                 // Test delete
+                CustomLogger.logInfo("Admin to be deleted: ID " + fetchedAdmin2.getId().toString() + "| object:  " + fetchedAdmin2);
                 administrateurService.delete(admin2.getId());
 
                 CustomLogger.logInfo("AdministrateurService RUD operations completed successfully");
@@ -419,10 +423,84 @@ public class ServiceTest {
                 BrancheDTO fetchedBranche2 = brancheService.findById(branche2.getId());
 
                 // Test update
+                CustomLogger.logInfo("Branch to be updated: " + fetchedBranche1);
                 fetchedBranche1.setDepartement("Updated Department");
                 BrancheDTO updatedBranche = brancheService.update(fetchedBranche1.getId(), fetchedBranche1);
+                CustomLogger.logInfo("Updated branch: " + updatedBranche);
 
                 // Test delete
+                CustomLogger.logInfo("Branch to be deleted: " + fetchedBranche2);
+                brancheService.delete(branche2.getId());
+
+                CustomLogger.logInfo("BrancheService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough branches for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing BrancheService: " + e.getMessage(), e);
+        }
+
+        CustomLogger.logInfo("========== End Debugging functions ==========");
+    }
+    public void rudTest() throws CustomException {
+        CustomLogger.logInfo("========== Testing Retrieval, Update, Delete Operations ==========");
+
+        // Testing AdministrateurService
+        try {
+            CustomLogger.logInfo("Testing AdministrateurService RUD operations...");
+            List<AdministrateurDTO> allAdmins = administrateurService.findAll();
+            if (allAdmins.size() >= 2) {
+                // Get 2 random admins
+                int index1 = RANDOM.nextInt(allAdmins.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allAdmins.size() - 1)) % allAdmins.size();
+                AdministrateurDTO admin1 = allAdmins.get(index1);
+                AdministrateurDTO admin2 = allAdmins.get(index2);
+
+                // Test findById
+                AdministrateurDTO fetchedAdmin1 = administrateurService.findById(admin1.getId());
+                AdministrateurDTO fetchedAdmin2 = administrateurService.findById(admin2.getId());
+
+                // Test update
+                CustomLogger.logInfo("Admin to be updated: " + fetchedAdmin1);
+                fetchedAdmin1.setNom("Updated Name");
+                AdministrateurDTO updatedAdmin = administrateurService.update(fetchedAdmin1.getId(), fetchedAdmin1);
+                CustomLogger.logInfo("Updated admin: " + updatedAdmin);
+
+                // Test delete
+                CustomLogger.logInfo("Admin to be deleted: " + fetchedAdmin2);
+                administrateurService.delete(admin2.getId());
+
+                CustomLogger.logInfo("AdministrateurService RUD operations completed successfully");
+            } else {
+                CustomLogger.logInfo("Not enough administrators for RUD testing");
+            }
+        } catch (Exception e) {
+            CustomLogger.logError("Error testing AdministrateurService: " + e.getMessage(), e);
+        }
+
+        // Testing BrancheService
+        try {
+            CustomLogger.logInfo("Testing BrancheService RUD operations...");
+            List<BrancheDTO> allBranches = brancheService.findAll();
+            if (allBranches.size() >= 2) {
+                // Get 2 random branches
+                int index1 = RANDOM.nextInt(allBranches.size());
+                int index2 = (index1 + 1 + RANDOM.nextInt(allBranches.size() - 1)) % allBranches.size();
+                BrancheDTO branche1 = allBranches.get(index1);
+                BrancheDTO branche2 = allBranches.get(index2);
+
+                // Test findById
+                BrancheDTO fetchedBranche1 = brancheService.findById(branche1.getId());
+                BrancheDTO fetchedBranche2 = brancheService.findById(branche2.getId());
+
+                // Test update
+                CustomLogger.logInfo("Branch to be updated: " + fetchedBranche1);
+                fetchedBranche1.setDepartement("Updated Department");
+                BrancheDTO updatedBranche = brancheService.update(fetchedBranche1.getId(), fetchedBranche1);
+                CustomLogger.logInfo("Updated branch: " + updatedBranche);
+
+                // Test delete
+                CustomLogger.logInfo("Branch to be deleted: " + fetchedBranche2);
                 brancheService.delete(branche2.getId());
 
                 CustomLogger.logInfo("BrancheService RUD operations completed successfully");
@@ -449,10 +527,13 @@ public class ServiceTest {
                 EnseignantDTO fetchedTeacher2 = enseignantService.findById(teacher2.getId());
 
                 // Test update
+                CustomLogger.logInfo("Teacher to be updated: " + fetchedTeacher1);
                 fetchedTeacher1.setHeures(fetchedTeacher1.getHeures() + 5);
                 EnseignantDTO updatedTeacher = enseignantService.update(fetchedTeacher1.getId(), fetchedTeacher1);
+                CustomLogger.logInfo("Updated teacher: " + updatedTeacher);
 
                 // Test delete
+                CustomLogger.logInfo("Teacher to be deleted: " + fetchedTeacher2);
                 enseignantService.delete(teacher2.getId());
 
                 CustomLogger.logInfo("EnseignantService RUD operations completed successfully");
@@ -479,10 +560,13 @@ public class ServiceTest {
                 EtudiantDTO fetchedStudent2 = etudiantService.findById(student2.getId());
 
                 // Test update
+                CustomLogger.logInfo("Student to be updated: " + fetchedStudent1);
                 fetchedStudent1.setEmail("updated.email" + RANDOM.nextInt(100) + "@example.com");
                 EtudiantDTO updatedStudent = etudiantService.update(fetchedStudent1.getId(), fetchedStudent1);
+                CustomLogger.logInfo("Updated student: " + updatedStudent);
 
                 // Test delete
+                CustomLogger.logInfo("Student to be deleted: " + fetchedStudent2);
                 etudiantService.delete(student2.getId());
 
                 CustomLogger.logInfo("EtudiantService RUD operations completed successfully");
@@ -509,10 +593,13 @@ public class ServiceTest {
                 SalleDTO fetchedRoom2 = salleService.findById(room2.getId());
 
                 // Test update
+                CustomLogger.logInfo("Room to be updated: " + fetchedRoom1);
                 fetchedRoom1.setCapacite(fetchedRoom1.getCapacite() + 10);
                 SalleDTO updatedRoom = salleService.update(fetchedRoom1.getId(), fetchedRoom1);
+                CustomLogger.logInfo("Updated room: " + updatedRoom);
 
                 // Test delete
+                CustomLogger.logInfo("Room to be deleted: " + fetchedRoom2);
                 salleService.delete(room2.getId());
 
                 CustomLogger.logInfo("SalleService RUD operations completed successfully");
@@ -539,10 +626,13 @@ public class ServiceTest {
                 SeanceDTO fetchedSession2 = seanceService.findById(session2.getId());
 
                 // Test update
+                CustomLogger.logInfo("Session to be updated: " + fetchedSession1);
                 fetchedSession1.setMatiere("Updated Subject " + RANDOM.nextInt(100));
                 SeanceDTO updatedSession = seanceService.update(fetchedSession1.getId(), fetchedSession1);
+                CustomLogger.logInfo("Updated session: " + updatedSession);
 
                 // Test delete
+                CustomLogger.logInfo("Session to be deleted: " + fetchedSession2);
                 seanceService.delete(session2.getId());
 
                 CustomLogger.logInfo("SeanceService RUD operations completed successfully");
@@ -569,10 +659,13 @@ public class ServiceTest {
                 TDDTO fetchedTD2 = tdService.findById(td2.getId());
 
                 // Test update
+                CustomLogger.logInfo("TD to be updated: " + fetchedTD1);
                 fetchedTD1.setNb(fetchedTD1.getNb() + 1);
                 TDDTO updatedTD = tdService.update(fetchedTD1.getId(), fetchedTD1);
+                CustomLogger.logInfo("Updated TD: " + updatedTD);
 
                 // Test delete
+                CustomLogger.logInfo("TD to be deleted: " + fetchedTD2);
                 tdService.delete(td2.getId());
 
                 CustomLogger.logInfo("TDService RUD operations completed successfully");
@@ -599,10 +692,13 @@ public class ServiceTest {
                 TPDTO fetchedTP2 = tpService.findById(tp2.getId());
 
                 // Test update
+                CustomLogger.logInfo("TP to be updated: " + fetchedTP1);
                 fetchedTP1.setNb(fetchedTP1.getNb() + 1);
                 TPDTO updatedTP = tpService.update(fetchedTP1.getId(), fetchedTP1);
+                CustomLogger.logInfo("Updated TP: " + updatedTP);
 
                 // Test delete
+                CustomLogger.logInfo("TP to be deleted: " + fetchedTP2);
                 tpService.delete(tp2.getId());
 
                 CustomLogger.logInfo("TPService RUD operations completed successfully");
@@ -629,10 +725,13 @@ public class ServiceTest {
                 NotificationDTO fetchedNotification2 = notificationService.findById(notification2.getId());
 
                 // Test update
+                CustomLogger.logInfo("Notification to be updated: " + fetchedNotification1);
                 fetchedNotification1.setMessage("Updated message " + RANDOM.nextInt(100));
                 NotificationDTO updatedNotification = notificationService.update(fetchedNotification1.getId(), fetchedNotification1);
+                CustomLogger.logInfo("Updated notification: " + updatedNotification);
 
                 // Test delete
+                CustomLogger.logInfo("Notification to be deleted: " + fetchedNotification2);
                 notificationService.delete(notification2.getId());
 
                 CustomLogger.logInfo("NotificationService RUD operations completed successfully");
@@ -659,10 +758,13 @@ public class ServiceTest {
                 FichierExcelDTO fetchedFile2 = excelFileService.findById(file2.getId());
 
                 // Test update
+                CustomLogger.logInfo("Excel file to be updated: " + fetchedFile1);
                 fetchedFile1.setStatus("Updated Status");
                 FichierExcelDTO updatedFile = excelFileService.update(fetchedFile1.getId(), fetchedFile1);
+                CustomLogger.logInfo("Updated excel file: " + updatedFile);
 
                 // Test delete
+                CustomLogger.logInfo("Excel file to be deleted: " + fetchedFile2);
                 excelFileService.delete(file2.getId());
 
                 CustomLogger.logInfo("ExcelFileService RUD operations completed successfully");

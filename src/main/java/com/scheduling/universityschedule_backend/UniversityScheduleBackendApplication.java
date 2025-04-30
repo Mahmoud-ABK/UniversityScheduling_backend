@@ -30,17 +30,18 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 
 			// Call the populateDatabase method with a sample size of 5
 			// You can adjust this number based on how much test data you want
-			//serviceTest.populateDatabase(5);
+//			serviceTest.populateDatabase(30);
 
-			serviceTest.rudTest();
+//			serviceTest.rudTest();
+			serviceTest.debugrud();
 			CustomLogger.logInfo("==================== Finished operation successfully ======================");
 		} catch (CustomException e) {
 			CustomLogger.logError("Error during database population: " + e.getMessage());
-			e.printStackTrace();
+			//e.printStackTrace();
 			CustomLogger.logError("==================== FINISHED WITH ERROR ======================");
 		} catch (Exception e) {
 			CustomLogger.logError("Unexpected error: " + e.getMessage());
-			e.printStackTrace();
+			//e.printStackTrace();
 			CustomLogger.logError("==================== FINISHED WITH UNEXPECTED ERROR ======================");
 		}
 	}
