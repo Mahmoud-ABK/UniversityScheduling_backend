@@ -72,13 +72,13 @@ public class Enseignant extends Personne {
     private String codeEnseignant;
     private int heures;
 
-    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Seance> seances;
 
-    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<PropositionDeRattrapage> propositionsDeRattrapage;
 
-    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Signal> signals;
 }
 package com.scheduling.universityschedule_backend.model;
@@ -352,7 +352,7 @@ public class Salle {
     private String type;
     private int capacite;
 
-    @OneToMany(mappedBy = "salle", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "salle", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Seance> seances;
 
 
@@ -523,7 +523,7 @@ public class TD {
     @JoinColumn(name = "branche_id")
     private Branche branche;
 
-    @OneToMany(mappedBy = "td", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "td", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<TP> tpList;
 
     @ManyToMany(mappedBy = "tds", fetch = FetchType.LAZY)
@@ -574,7 +574,7 @@ public class TP {
     @JoinColumn(name = "td_id")
     private TD td;
 
-    @OneToMany(mappedBy = "tp", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tp", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Etudiant> etudiants;
 
     @ManyToMany(mappedBy = "tps", fetch = FetchType.LAZY)

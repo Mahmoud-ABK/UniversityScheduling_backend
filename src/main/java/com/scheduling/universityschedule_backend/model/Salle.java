@@ -27,7 +27,7 @@ public class Salle {
     private String type;
     private int capacite;
 
-    @OneToMany(mappedBy = "salle", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "salle", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Seance> seances;
 
 

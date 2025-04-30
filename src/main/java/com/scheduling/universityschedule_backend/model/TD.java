@@ -26,7 +26,7 @@ public class TD {
     @JoinColumn(name = "branche_id")
     private Branche branche;
 
-    @OneToMany(mappedBy = "td", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "td", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<TP> tpList;
 
     @ManyToMany(mappedBy = "tds", fetch = FetchType.LAZY)

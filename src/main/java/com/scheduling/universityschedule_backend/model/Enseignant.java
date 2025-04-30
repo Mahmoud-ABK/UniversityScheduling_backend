@@ -19,12 +19,12 @@ public class Enseignant extends Personne {
     private String codeEnseignant;
     private int heures;
 
-    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Seance> seances;
 
-    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<PropositionDeRattrapage> propositionsDeRattrapage;
 
-    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "enseignant", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Signal> signals;
 }

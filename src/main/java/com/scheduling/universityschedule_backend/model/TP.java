@@ -25,7 +25,7 @@ public class TP {
     @JoinColumn(name = "td_id")
     private TD td;
 
-    @OneToMany(mappedBy = "tp", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tp", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Etudiant> etudiants;
 
     @ManyToMany(mappedBy = "tps", fetch = FetchType.LAZY)
