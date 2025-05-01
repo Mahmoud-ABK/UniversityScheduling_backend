@@ -21,4 +21,6 @@ public class BrancheDTO {
 
     // List of Seance IDs associated with this Branche
     private List<Long> seanceIds;
+
+    private List<Long> tdIds;
 }

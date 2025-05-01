@@ -45,7 +45,7 @@ public class PropositionDeRattrapage {
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(
             name = "proposition_branche",
             joinColumns = @JoinColumn(name = "proposition_id"),

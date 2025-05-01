@@ -196,6 +196,7 @@ public abstract class EntityMapper {
     /**
      * Maps a PersonneDTO to Personne entity.
      */
+
     public abstract Personne toPersonne(PersonneDTO dto);
 
     /* --------------------------- */
@@ -255,7 +256,7 @@ public abstract class EntityMapper {
 
     /**
      * Maps an Etudiant entity to EtudiantDTO.
-     * Converts relations to IDs for DTO.
+     * Converts relations to IDs for DTO
      */
     @Mapping(target = "brancheId", source = "branche.id")
     @Mapping(target = "tpId", source = "tp.id")
@@ -285,6 +286,7 @@ public abstract class EntityMapper {
      * Converts collections to lists of IDs.
      */
     @Mapping(target = "seanceIds", source = "seances", qualifiedByName = "mapSeancesToIds")
+    @Mapping(target = "tdIds", source = "tds", qualifiedByName = "mapTDListToIds")
     public abstract BrancheDTO toBrancheDTO(Branche branche);
 
     /**
@@ -292,12 +294,14 @@ public abstract class EntityMapper {
      * Converts lists of IDs to entity collections.
      */
     @Mapping(target = "seances", source = "seanceIds", qualifiedByName = "mapIdListToSeanceList")
+    @Mapping(target = "tds", source = "tdIds", qualifiedByName = "mapIdListToTDList")
     public abstract Branche toBranche(BrancheDTO dto);
 
     /**
      * Updates an existing Branche entity with data from BrancheDTO.
      */
     @Mapping(target = "seances", ignore = true) // Avoid updating collections directly
+    @Mapping(target = "tds", source = "tdIds", qualifiedByName = "mapIdListToTDList")
     public abstract void updateFromDto(BrancheDTO dto, @MappingTarget Branche branche);
 
     /* --------------------------- */

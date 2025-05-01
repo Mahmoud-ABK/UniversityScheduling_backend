@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,6 +30,12 @@ public class Branche {
     private int nbTD;
     private String departement;
 
-    @ManyToMany(mappedBy = "branches", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy ="branche", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
+    private List<TD> tds;
+
+    @ManyToMany(mappedBy = "branches" , fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    private List<PropositionDeRattrapage> propositionDeRattrapages = new ArrayList<>() ;
+
+    @ManyToMany(mappedBy = "branches", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     private List<Seance> seances;
 }

@@ -32,6 +32,7 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 			// You can adjust this number based on how much test data you want
 //			serviceTest.populateDatabase(30);
 
+
 //			serviceTest.rudTest();
 			serviceTest.debugrud();
 			CustomLogger.logInfo("==================== Finished operation successfully ======================");

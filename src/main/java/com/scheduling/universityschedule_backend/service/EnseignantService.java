@@ -53,7 +53,7 @@ public interface EnseignantService {
      * @param id Teacher's unique identifier
      * @throws CustomException if deletion fails
      */
-    void delete(Long id) throws CustomException;
+    EnseignantDTO delete(Long id) throws CustomException;
 
 
     // ============================

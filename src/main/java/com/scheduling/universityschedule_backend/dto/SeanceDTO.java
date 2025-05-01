@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SeanceDTO {
     private Long id;            // Unique identifier for the session
+    private String name;
     private String jour;        // Day of the session
     private String heureDebut;  // Start time of the session
     private String heureFin;    // End time of the session

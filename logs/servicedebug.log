@@ -856,3 +856,1690 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or u
 	... 102 common frames omitted
 2025-04-30 18:03:19 [restartedMain] INFO  CustomLogger - ========== End Debugging functions ==========
 2025-04-30 18:03:19 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-30 19:04:04 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:04:04 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-04-30 19:04:04 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=informatique, seanceIds=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+2025-04-30 19:04:04 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=Updated Department, seanceIds=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+2025-04-30 19:04:04 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=11, niveau=MR1, specialite=I3, nbTD=4, departement=informatique, seanceIds=[101, 103, 104, 105, 106, 107, 109, 110, 114, 118, 119, 120, 123, 124, 127, 129, 130, 131, 133, 135, 139, 140, 141, 143, 144, 145, 151, 152, 153, 154, 155, 156, 158])
+2025-04-30 19:04:04 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-04-30 19:04:04 [restartedMain] INFO  CustomLogger - ========== End Debugging functions ==========
+2025-04-30 19:04:04 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-30 19:14:29 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:14:29 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-04-30 19:14:29 [restartedMain] INFO  CustomLogger - Admin to be updated: AdministrateurDTO(codeAdmin=ADM0)
+2025-04-30 19:14:29 [restartedMain] INFO  CustomLogger - Updated admin: AdministrateurDTO(codeAdmin=ADM0)
+2025-04-30 19:14:29 [restartedMain] INFO  CustomLogger - Admin to be deleted: AdministrateurDTO(codeAdmin=ADM0)
+2025-04-30 19:14:29 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-04-30 19:14:29 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-30 19:17:12 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:17:12 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-04-30 19:17:12 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=3, niveau=MP2, specialite=DS, nbTD=4, departement=Technologie, seanceIds=[21, 22, 23, 24, 25, 26, 27, 28, 29, 30])
+2025-04-30 19:17:12 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=3, niveau=MP2, specialite=DS, nbTD=4, departement=Updated Department, seanceIds=[21, 22, 23, 24, 25, 26, 27, 28, 29, 30])
+2025-04-30 19:17:12 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=4, niveau=L2, specialite=EEA, nbTD=4, departement=Technologie, seanceIds=[31, 32, 33, 34, 35, 36, 37, 38, 39, 40])
+2025-04-30 19:17:12 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-04-30 19:17:12 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-30 19:21:32 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:21:32 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-04-30 19:21:32 [restartedMain] INFO  CustomLogger - Teacher to be updated: 238
+2025-04-30 19:21:32 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS21, heures=21, seanceIds=[127, 141, 157], propositionIds=[], signalIds=[])
+2025-04-30 19:21:32 [restartedMain] INFO  CustomLogger - Teacher to be deleted: EnseignantDTO(codeEnseignant=ENS20, heures=38, seanceIds=[124, 129, 145], propositionIds=[17, 19], signalIds=[11])
+2025-04-30 19:21:32 [restartedMain] INFO  CustomLogger - EnseignantService RUD operations completed successfully
+2025-04-30 19:21:32 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-30 19:23:19 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:23:19 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-04-30 19:23:20 [restartedMain] INFO  CustomLogger - Teacher to be updated: 218
+2025-04-30 19:23:20 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS1, heures=31, seanceIds=[116], propositionIds=[], signalIds=[12])
+2025-04-30 19:23:20 [restartedMain] INFO  CustomLogger - Teacher to be deleted: 218
+2025-04-30 19:23:20 [restartedMain] INFO  CustomLogger - EnseignantService RUD operations completed successfully
+2025-04-30 19:23:20 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-30 19:24:59 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:24:59 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-04-30 19:24:59 [restartedMain] INFO  CustomLogger - Teacher to be updated: 194
+2025-04-30 19:24:59 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS3, heures=45, seanceIds=[96, 100], propositionIds=[], signalIds=[])
+2025-04-30 19:24:59 [restartedMain] INFO  CustomLogger - Teacher to be deleted: 194
+2025-04-30 19:24:59 [restartedMain] INFO  CustomLogger - EnseignantService RUD operations completed successfully
+2025-04-30 19:24:59 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-30 19:32:28 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:32:28 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-04-30 19:33:22 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:33:22 [restartedMain] ERROR CustomLogger - Error during database population: Teacher not found with ID: 194
+2025-04-30 19:33:22 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-04-30 19:41:40 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:41:40 [restartedMain] INFO  CustomLogger - 194
+2025-04-30 19:41:40 [restartedMain] ERROR CustomLogger - Error during database population: Teacher not found with ID: 194
+2025-04-30 19:41:40 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-04-30 19:42:47 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:42:47 [restartedMain] INFO  CustomLogger - 194
+2025-04-30 19:42:47 [restartedMain] INFO  CustomLogger - deletion successful
+2025-04-30 19:42:47 [restartedMain] ERROR CustomLogger - Error during database population: Teacher not found with ID: 194
+2025-04-30 19:42:47 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-04-30 19:52:42 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:52:42 [restartedMain] ERROR CustomLogger - Error during database population: Failed to delete teacher with ID: 194
+2025-04-30 19:52:42 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-04-30 19:55:09 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 19:55:09 [restartedMain] ERROR CustomLogger - Error during database population: Failed to delete teacher with ID: 194could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`notification`, CONSTRAINT `FKndqyiy1lg3bkfc1h9uh8otd4h` FOREIGN KEY (`recepteur_id`) REFERENCES `personne` (`id`))] [delete from personne where id=?]; SQL [delete from personne where id=?]; constraint [null]
+2025-04-30 19:55:09 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-04-30 20:02:43 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 20:02:43 [restartedMain] ERROR CustomLogger - Error during database population: Failed to delete teacher with ID: 194could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`notification`, CONSTRAINT `FKndqyiy1lg3bkfc1h9uh8otd4h` FOREIGN KEY (`recepteur_id`) REFERENCES `personne` (`id`))] [delete from personne where id=?]; SQL [delete from personne where id=?]; constraint [null]
+2025-04-30 20:02:43 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-04-30 20:16:37 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-04-30 20:16:37 [restartedMain] INFO  CustomLogger - 194
+2025-04-30 20:16:37 [restartedMain] INFO  CustomLogger - deletion successful
+2025-04-30 20:16:37 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 01:36:40 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 01:36:40 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 01:36:40 [restartedMain] INFO  CustomLogger - Admin to be updated: 1
+2025-05-01 01:36:40 [restartedMain] INFO  CustomLogger - Updated admin: 1
+2025-05-01 01:36:40 [restartedMain] INFO  CustomLogger - Admin to be deleted: 211
+2025-05-01 01:36:40 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-05-01 01:36:40 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-05-01 01:36:41 [restartedMain] INFO  CustomLogger - Teacher to be updated: 235
+2025-05-01 01:36:41 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS18, heures=45, seanceIds=[108, 143], propositionIds=[], signalIds=[10])
+2025-05-01 01:36:41 [restartedMain] INFO  CustomLogger - Teacher to be deleted: 235
+2025-05-01 01:36:41 [restartedMain] INFO  CustomLogger - EnseignantService RUD operations completed successfully
+2025-05-01 01:36:41 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 01:37:20 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 01:37:20 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Admin to be updated: 43
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Updated admin: 43
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Admin to be deleted: 1
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=informatique, seanceIds=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=Updated Department, seanceIds=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=9, niveau=MP2, specialite=GL, nbTD=5, departement=informatique, seanceIds=[81, 82, 83, 84, 85, 86, 87, 88, 89, 90])
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Teacher to be updated: 67
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS2, heures=41, seanceIds=[31], propositionIds=[], signalIds=[])
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Teacher to be deleted: 67
+2025-05-01 01:37:21 [restartedMain] ERROR CustomLogger - Error testing EnseignantService: Failed to delete teacher with ID: 27could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`seance_branche`, CONSTRAINT `FK2ppwwd0oi8k4id1whf8kitijd` FOREIGN KEY (`branche_id`) REFERENCES `branches` (`id`))] [delete from branches where id=?]; SQL [delete from branches where id=?]; constraint [null]
+com.scheduling.universityschedule_backend.exception.CustomException: Failed to delete teacher with ID: 27could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`seance_branche`, CONSTRAINT `FK2ppwwd0oi8k4id1whf8kitijd` FOREIGN KEY (`branche_id`) REFERENCES `branches` (`id`))] [delete from branches where id=?]; SQL [delete from branches where id=?]; constraint [null]
+	at com.scheduling.universityschedule_backend.service.impl.EnseignantServiceImpl.delete(EnseignantServiceImpl.java:166)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.service.impl.EnseignantServiceImpl$$SpringCGLIB$$0.delete(<generated>)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.testEnseignantService(ServiceTest.java:497)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.debugrud(ServiceTest.java:379)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest$$SpringCGLIB$$0.debugrud(<generated>)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication$$SpringCGLIB$$1.run(<generated>)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`seance_branche`, CONSTRAINT `FK2ppwwd0oi8k4id1whf8kitijd` FOREIGN KEY (`branche_id`) REFERENCES `branches` (`id`))] [delete from branches where id=?]; SQL [delete from branches where id=?]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy4/jdk.proxy4.$Proxy140.existsById(Unknown Source)
+	at com.scheduling.universityschedule_backend.service.impl.EnseignantServiceImpl.delete(EnseignantServiceImpl.java:155)
+	... 56 common frames omitted
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`seance_branche`, CONSTRAINT `FK2ppwwd0oi8k4id1whf8kitijd` FOREIGN KEY (`branche_id`) REFERENCES `branches` (`id`))] [delete from branches where id=?]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:134)
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:55)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
+	at org.hibernate.persister.entity.mutation.AbstractDeleteCoordinator.doStaticDelete(AbstractDeleteCoordinator.java:279)
+	at org.hibernate.persister.entity.mutation.AbstractDeleteCoordinator.delete(AbstractDeleteCoordinator.java:87)
+	at org.hibernate.action.internal.EntityDeleteAction.execute(EntityDeleteAction.java:131)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:644)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:511)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:414)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoFlush(DefaultAutoFlushEventListener.java:67)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.autoFlushIfRequired(SessionImpl.java:1379)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:145)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:442)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:362)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	at org.hibernate.query.spi.AbstractSelectionQuery.getSingleResult(AbstractSelectionQuery.java:275)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById(SimpleJpaRepository.java:369)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:752)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 62 common frames omitted
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`seance_branche`, CONSTRAINT `FK2ppwwd0oi8k4id1whf8kitijd` FOREIGN KEY (`branche_id`) REFERENCES `branches` (`id`))
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:109)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:988)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1166)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1101)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1467)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1084)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194)
+	... 100 common frames omitted
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Testing EtudiantService RUD operations...
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Student to be updated: EtudiantDTO(matricule=MAT2, brancheId=9, tpId=25)
+2025-05-01 01:37:21 [restartedMain] ERROR CustomLogger - Error testing EtudiantService: Failed to update student with ID: 177
+com.scheduling.universityschedule_backend.exception.CustomException: Failed to update student with ID: 177
+	at com.scheduling.universityschedule_backend.service.impl.EtudiantServiceImpl.update(EtudiantServiceImpl.java:137)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.service.impl.EtudiantServiceImpl$$SpringCGLIB$$0.update(<generated>)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.testEtudiantService(ServiceTest.java:526)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.debugrud(ServiceTest.java:380)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest$$SpringCGLIB$$0.debugrud(<generated>)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication$$SpringCGLIB$$1.run(<generated>)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: java.lang.RuntimeException: CustomException(type=null)
+	at com.scheduling.universityschedule_backend.mapper.EntityMapperImpl.updateFromDto(EntityMapperImpl.java:283)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.mapper.EntityMapperImpl$$SpringCGLIB$$0.updateFromDto(<generated>)
+	at com.scheduling.universityschedule_backend.service.impl.EtudiantServiceImpl.update(EtudiantServiceImpl.java:127)
+	... 56 common frames omitted
+Caused by: com.scheduling.universityschedule_backend.exception.CustomException: Branche not found with ID: 9
+	at com.scheduling.universityschedule_backend.mapper.EntityMapper.lambda$idToBranche$0(EntityMapper.java:830)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.scheduling.universityschedule_backend.mapper.EntityMapper.idToBranche(EntityMapper.java:830)
+	at com.scheduling.universityschedule_backend.mapper.EntityMapperImpl.updateFromDto(EntityMapperImpl.java:280)
+	... 67 common frames omitted
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Testing SalleService RUD operations...
+2025-05-01 01:37:21 [restartedMain] ERROR CustomLogger - Error testing SalleService: Failed to retrieve all rooms
+com.scheduling.universityschedule_backend.exception.CustomException: Failed to retrieve all rooms
+	at com.scheduling.universityschedule_backend.service.impl.SalleServiceImpl.findAll(SalleServiceImpl.java:73)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.service.impl.SalleServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.testSalleService(ServiceTest.java:545)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.debugrud(ServiceTest.java:381)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest$$SpringCGLIB$$0.debugrud(<generated>)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication$$SpringCGLIB$$1.run(<generated>)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:368)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy4/jdk.proxy4.$Proxy143.findAll(Unknown Source)
+	at com.scheduling.universityschedule_backend.service.impl.SalleServiceImpl.findAll(SalleServiceImpl.java:65)
+	... 56 common frames omitted
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:151)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:393)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:752)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 62 common frames omitted
+Caused by: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:382)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:372)
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:570)
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:492)
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:253)
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:192)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:169)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.preFlush(AbstractFlushingEventListener.java:107)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoPreFlush(DefaultAutoFlushEventListener.java:104)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.autoPreFlush(SessionImpl.java:1391)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:382)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:362)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	... 83 common frames omitted
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Testing SeanceService RUD operations...
+2025-05-01 01:37:21 [restartedMain] ERROR CustomLogger - Error testing SeanceService: Failed to retrieve all sessions
+com.scheduling.universityschedule_backend.exception.CustomException: Failed to retrieve all sessions
+	at com.scheduling.universityschedule_backend.service.impl.SeanceServiceImpl.findAll(SeanceServiceImpl.java:86)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.service.impl.SeanceServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.testSeanceService(ServiceTest.java:579)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.debugrud(ServiceTest.java:382)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest$$SpringCGLIB$$0.debugrud(<generated>)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication$$SpringCGLIB$$1.run(<generated>)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:368)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy4/jdk.proxy4.$Proxy146.findAll(Unknown Source)
+	at com.scheduling.universityschedule_backend.service.impl.SeanceServiceImpl.findAll(SeanceServiceImpl.java:78)
+	... 56 common frames omitted
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:151)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:393)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:752)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 62 common frames omitted
+Caused by: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:382)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:372)
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:570)
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:492)
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:253)
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:192)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:169)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.preFlush(AbstractFlushingEventListener.java:107)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoPreFlush(DefaultAutoFlushEventListener.java:104)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.autoPreFlush(SessionImpl.java:1391)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:382)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:362)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	... 83 common frames omitted
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Testing TDService RUD operations...
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-01 01:37:21 [restartedMain] ERROR CustomLogger - Failed to retrieve all tutorial groups
+org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:368)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy4/jdk.proxy4.$Proxy144.findAll(Unknown Source)
+	at com.scheduling.universityschedule_backend.service.impl.TDServiceImpl.findAll(TDServiceImpl.java:50)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.service.impl.TDServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.testTDService(ServiceTest.java:613)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.debugrud(ServiceTest.java:383)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest$$SpringCGLIB$$0.debugrud(<generated>)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication$$SpringCGLIB$$1.run(<generated>)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:151)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:393)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:752)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 62 common frames omitted
+Caused by: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:382)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:372)
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:570)
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:492)
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:253)
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:192)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:169)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.preFlush(AbstractFlushingEventListener.java:107)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoPreFlush(DefaultAutoFlushEventListener.java:104)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.autoPreFlush(SessionImpl.java:1391)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:382)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:362)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	... 83 common frames omitted
+2025-05-01 01:37:21 [restartedMain] ERROR CustomLogger - Error testing TDService: Failed to retrieve all tutorial groups
+com.scheduling.universityschedule_backend.exception.CustomException: Failed to retrieve all tutorial groups
+	at com.scheduling.universityschedule_backend.service.impl.TDServiceImpl.findAll(TDServiceImpl.java:58)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.service.impl.TDServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.testTDService(ServiceTest.java:613)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.debugrud(ServiceTest.java:383)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest$$SpringCGLIB$$0.debugrud(<generated>)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication$$SpringCGLIB$$1.run(<generated>)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:368)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy4/jdk.proxy4.$Proxy144.findAll(Unknown Source)
+	at com.scheduling.universityschedule_backend.service.impl.TDServiceImpl.findAll(TDServiceImpl.java:50)
+	... 56 common frames omitted
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:151)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:393)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:752)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 62 common frames omitted
+Caused by: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:382)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:372)
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:570)
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:492)
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:253)
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:192)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:169)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.preFlush(AbstractFlushingEventListener.java:107)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoPreFlush(DefaultAutoFlushEventListener.java:104)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.autoPreFlush(SessionImpl.java:1391)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:382)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:362)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	... 83 common frames omitted
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Testing TPService RUD operations...
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-01 01:37:21 [restartedMain] ERROR CustomLogger - Failed to retrieve all practical groups
+org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:368)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy4/jdk.proxy4.$Proxy138.findAll(Unknown Source)
+	at com.scheduling.universityschedule_backend.service.impl.TPServiceImpl.findAll(TPServiceImpl.java:51)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.service.impl.TPServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.testTPService(ServiceTest.java:647)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.debugrud(ServiceTest.java:384)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest$$SpringCGLIB$$0.debugrud(<generated>)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication$$SpringCGLIB$$1.run(<generated>)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:151)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:393)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:752)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 62 common frames omitted
+Caused by: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:382)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:372)
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:570)
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:492)
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:253)
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:192)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:169)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.preFlush(AbstractFlushingEventListener.java:107)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoPreFlush(DefaultAutoFlushEventListener.java:104)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.autoPreFlush(SessionImpl.java:1391)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:382)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:362)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	... 83 common frames omitted
+2025-05-01 01:37:21 [restartedMain] ERROR CustomLogger - Error testing TPService: Failed to retrieve all practical groups
+com.scheduling.universityschedule_backend.exception.CustomException: Failed to retrieve all practical groups
+	at com.scheduling.universityschedule_backend.service.impl.TPServiceImpl.findAll(TPServiceImpl.java:62)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.service.impl.TPServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.testTPService(ServiceTest.java:647)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.debugrud(ServiceTest.java:384)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest$$SpringCGLIB$$0.debugrud(<generated>)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication$$SpringCGLIB$$1.run(<generated>)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:368)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy4/jdk.proxy4.$Proxy138.findAll(Unknown Source)
+	at com.scheduling.universityschedule_backend.service.impl.TPServiceImpl.findAll(TPServiceImpl.java:51)
+	... 56 common frames omitted
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:151)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:393)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:752)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 62 common frames omitted
+Caused by: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:382)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:372)
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:570)
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:492)
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:253)
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:192)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:169)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.preFlush(AbstractFlushingEventListener.java:107)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoPreFlush(DefaultAutoFlushEventListener.java:104)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.autoPreFlush(SessionImpl.java:1391)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:382)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:362)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	... 83 common frames omitted
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Testing NotificationService RUD operations...
+2025-05-01 01:37:21 [restartedMain] ERROR CustomLogger - Error testing NotificationService: Failed to retrieve all notifications
+com.scheduling.universityschedule_backend.exception.CustomException: Failed to retrieve all notifications
+	at com.scheduling.universityschedule_backend.service.impl.NotificationServiceImpl.findAll(NotificationServiceImpl.java:81)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.service.impl.NotificationServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.testNotificationService(ServiceTest.java:681)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.debugrud(ServiceTest.java:385)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest$$SpringCGLIB$$0.debugrud(<generated>)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication$$SpringCGLIB$$1.run(<generated>)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:368)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy4/jdk.proxy4.$Proxy148.findAll(Unknown Source)
+	at com.scheduling.universityschedule_backend.service.impl.NotificationServiceImpl.findAll(NotificationServiceImpl.java:73)
+	... 56 common frames omitted
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:151)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:393)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:752)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 62 common frames omitted
+Caused by: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:382)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:372)
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:570)
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:492)
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:253)
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:192)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:169)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.preFlush(AbstractFlushingEventListener.java:107)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoPreFlush(DefaultAutoFlushEventListener.java:104)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.autoPreFlush(SessionImpl.java:1391)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:382)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:362)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	... 83 common frames omitted
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - Testing ExcelFileService RUD operations...
+2025-05-01 01:37:21 [restartedMain] ERROR CustomLogger - Error testing ExcelFileService: Failed to retrieve all files
+com.scheduling.universityschedule_backend.exception.CustomException: Failed to retrieve all files
+	at com.scheduling.universityschedule_backend.service.impl.ExcelFileServiceImpl.findAll(ExcelFileServiceImpl.java:84)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.service.impl.ExcelFileServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.testExcelFileService(ServiceTest.java:715)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest.debugrud(ServiceTest.java:386)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.testingclasses.ServiceTest$$SpringCGLIB$$0.debugrud(<generated>)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.run(UniversityScheduleBackendApplication.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication$$SpringCGLIB$$1.run(<generated>)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.scheduling.universityschedule_backend.UniversityScheduleBackendApplication.main(UniversityScheduleBackendApplication.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:368)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy4/jdk.proxy4.$Proxy149.findAll(Unknown Source)
+	at com.scheduling.universityschedule_backend.service.impl.ExcelFileServiceImpl.findAll(ExcelFileServiceImpl.java:76)
+	... 56 common frames omitted
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:151)
+	at org.hibernate.query.Query.getResultList(Query.java:120)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:393)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:752)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 62 common frames omitted
+Caused by: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.scheduling.universityschedule_backend.model.Branche' (save the transient instance before flushing)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:382)
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:372)
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:570)
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:492)
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:253)
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:192)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:169)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.preFlush(AbstractFlushingEventListener.java:107)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoPreFlush(DefaultAutoFlushEventListener.java:104)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.autoPreFlush(SessionImpl.java:1391)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:382)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:362)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
+	... 83 common frames omitted
+2025-05-01 01:37:21 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 01:40:42 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 01:40:42 [restartedMain] INFO  CustomLogger - Testing EtudiantService RUD operations...
+2025-05-01 01:40:42 [restartedMain] INFO  CustomLogger - Student to be updated: EtudiantDTO(matricule=MAT3, brancheId=4, tpId=11)
+2025-05-01 01:40:42 [restartedMain] INFO  CustomLogger - Updated student: EtudiantDTO(matricule=MAT3, brancheId=4, tpId=11)
+2025-05-01 01:40:42 [restartedMain] INFO  CustomLogger - Student to be deleted: EtudiantDTO(matricule=MAT83, brancheId=11, tpId=35)
+2025-05-01 01:40:42 [restartedMain] INFO  CustomLogger - EtudiantService RUD operations completed successfully
+2025-05-01 01:40:42 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 01:41:14 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 01:41:14 [restartedMain] INFO  CustomLogger - Testing SalleService RUD operations...
+2025-05-01 01:41:14 [restartedMain] INFO  CustomLogger - Room to be updated: SalleDTO(id=6, identifiant=SAL2, type=Lecture Hall, capacite=54, seanceIds=[12, 13, 14, 17, 18, 19])
+2025-05-01 01:41:14 [restartedMain] INFO  CustomLogger - Updated room: SalleDTO(id=6, identifiant=SAL2, type=Lecture Hall, capacite=64, seanceIds=[12, 13, 14, 17, 18, 19])
+2025-05-01 01:41:14 [restartedMain] INFO  CustomLogger - Room to be deleted: SalleDTO(id=29, identifiant=SAL1, type=Lecture Hall, capacite=194, seanceIds=[])
+2025-05-01 01:41:14 [restartedMain] INFO  CustomLogger - SalleService RUD operations completed successfully
+2025-05-01 01:41:14 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 01:41:58 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 01:41:58 [restartedMain] INFO  CustomLogger - Testing SeanceService RUD operations...
+2025-05-01 01:41:58 [restartedMain] INFO  CustomLogger - Session to be updated: SeanceDTO(id=35, name=null, jour=THURSDAY, heureDebut=08:30, heureFin=10:01, type=TD, matiere=Data Structures, frequence=catch-up, date=null, salleId=10, enseignantId=65, brancheIds=[4], tdIds=[7], tpIds=[11])
+2025-05-01 01:41:58 [restartedMain] INFO  CustomLogger - Updated session: SeanceDTO(id=35, name=null, jour=THURSDAY, heureDebut=08:30, heureFin=10:01, type=TD, matiere=Updated Subject 27, frequence=catch-up, date=null, salleId=10, enseignantId=65, brancheIds=[4], tdIds=[7], tpIds=[11])
+2025-05-01 01:41:58 [restartedMain] INFO  CustomLogger - Session to be deleted: SeanceDTO(id=84, name=null, jour=WEDNESDAY, heureDebut=09:40, heureFin=11:35, type=CI, matiere=Physics, frequence=weekly, date=null, salleId=27, enseignantId=172, brancheIds=[9], tdIds=[17], tpIds=[27])
+2025-05-01 01:41:58 [restartedMain] INFO  CustomLogger - SeanceService RUD operations completed successfully
+2025-05-01 01:41:58 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - Testing TDService RUD operations...
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - Fetching tutorial group with ID: 23
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - Fetching tutorial group with ID: 6
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - TD to be updated: TDDTO(id=23, nb=4, nbTP=3, brancheId=12, tpIds=[34, 36], seanceIds=[108, 109, 114, 122, 130, 137, 138, 148])
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - Updating tutorial group with ID: 23
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - Updated tutorial group with ID: 23
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - Updated TD: TDDTO(id=23, nb=5, nbTP=3, brancheId=12, tpIds=[34, 36], seanceIds=[108, 109, 114, 122, 130, 137, 138, 148])
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - TD to be deleted: TDDTO(id=6, nb=1, nbTP=2, brancheId=3, tpIds=[8, 9], seanceIds=[21, 22, 24, 28])
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - Checking if tutorial group with ID: 6 exists
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - Deleting tutorial group with ID: 6
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - Deleted tutorial group with ID: 6
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - TDService RUD operations completed successfully
+2025-05-01 01:44:26 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Testing TPService RUD operations...
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Found 28 practical groups
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Fetching practical group with ID: 25
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Fetching practical group with ID: 34
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - TP to be updated: TPDTO(id=25, nb=2, tdId=18, etudiantIds=[177, 178, 181, 183, 185, 188, 189], seanceIds=[82, 87, 88, 90])
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Updating practical group with ID: 25
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Updated practical group with ID: 25
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Updated TP: TPDTO(id=25, nb=3, tdId=18, etudiantIds=[177, 178, 181, 183, 185, 188, 189], seanceIds=[82, 87, 88, 90])
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - TP to be deleted: TPDTO(id=34, nb=3, tdId=23, etudiantIds=[247, 249, 252, 257, 311], seanceIds=[143, 151])
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Checking if practical group with ID: 34 exists
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Deleting practical group with ID: 34
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - Deleted practical group with ID: 34
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - TPService RUD operations completed successfully
+2025-05-01 01:45:55 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 01:46:24 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 01:46:24 [restartedMain] INFO  CustomLogger - Testing NotificationService RUD operations...
+2025-05-01 01:46:24 [restartedMain] INFO  CustomLogger - Notification to be updated: NotificationDTO(id=30, message=Your session on FRIDAY has been rescheduled, date=2025-04-29T17:19:07.032015, type=SCHEDULE_CHANGE, isread=true, recepteurId=44, expediteurId=43)
+2025-05-01 01:46:24 [restartedMain] INFO  CustomLogger - Updated notification: NotificationDTO(id=30, message=Updated message 45, date=2025-04-29T17:19:07.032015, type=SCHEDULE_CHANGE, isread=true, recepteurId=44, expediteurId=43)
+2025-05-01 01:46:24 [restartedMain] INFO  CustomLogger - Notification to be deleted: NotificationDTO(id=8, message=New material available for Data Structures, date=2025-04-28T16:18:02.973097, type=COURSE_MATERIAL, isread=false, recepteurId=21, expediteurId=1)
+2025-05-01 01:46:24 [restartedMain] INFO  CustomLogger - NotificationService RUD operations completed successfully
+2025-05-01 01:46:24 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 01:48:39 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 01:48:39 [restartedMain] INFO  CustomLogger - Testing ExcelFileService RUD operations...
+2025-05-01 01:48:39 [restartedMain] INFO  CustomLogger - Excel file to be updated: FichierExcelDTO(id=9, fileName=schedule_0.xlsx, status=Imported, errors=[No errors], importDate=2025-04-29T21:42:56.206816)
+2025-05-01 01:48:39 [restartedMain] INFO  CustomLogger - Updated excel file: FichierExcelDTO(id=9, fileName=schedule_0.xlsx, status=Updated Status, errors=[No errors], importDate=2025-04-29T21:42:56.206816)
+2025-05-01 01:48:39 [restartedMain] INFO  CustomLogger - Excel file to be deleted: FichierExcelDTO(id=14, fileName=schedule_4.xlsx, status=Imported, errors=[No errors], importDate=2025-04-30T16:30:10.411684)
+2025-05-01 01:48:39 [restartedMain] INFO  CustomLogger - ExcelFileService RUD operations completed successfully
+2025-05-01 01:48:39 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - Admin to be updated: 43
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - Updated admin: 43
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - Admin to be deleted: 64
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=informatique, seanceIds=[1, 2, 6, 7])
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=Updated Department, seanceIds=[1, 2, 6, 7])
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=3, niveau=MP2, specialite=DS, nbTD=4, departement=Technologie, seanceIds=[21, 22, 23, 24, 25, 26, 27, 28, 29, 30])
+2025-05-01 01:57:59 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 01:57:59 [restartedMain] ERROR CustomLogger - Unexpected error: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`seance_branche`, CONSTRAINT `FK2ppwwd0oi8k4id1whf8kitijd` FOREIGN KEY (`branche_id`) REFERENCES `branches` (`id`))] [delete from branches where id=?]
+2025-05-01 01:57:59 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH UNEXPECTED ERROR ======================
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - Admin to be updated: 169
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - Updated admin: 169
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - Admin to be deleted: 22
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=informatique, seanceIds=[1, 2, 6, 7])
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=Updated Department, seanceIds=[1, 2, 6, 7])
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=12, niveau=MP2, specialite=GL, nbTD=1, departement=informatique, seanceIds=[108, 112, 116, 122, 137, 138, 148, 159])
+2025-05-01 02:05:18 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 02:05:18 [restartedMain] ERROR CustomLogger - Unexpected error: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`etudiants`, CONSTRAINT `FK38lix7124ynaaopimrg3tspm9` FOREIGN KEY (`branche_id`) REFERENCES `branches` (`id`))] [delete from branches where id=?]
+2025-05-01 02:05:18 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH UNEXPECTED ERROR ======================
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - Admin to be updated: 43
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - Updated admin: 43
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - Admin to be deleted: 22
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=informatique, seanceIds=[1, 2, 6, 7], tdIds=[1, 2])
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=Updated Department, seanceIds=[1, 2, 6, 7], tdIds=[1, 2])
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=12, niveau=MP2, specialite=GL, nbTD=1, departement=informatique, seanceIds=[108, 112, 116, 122, 137, 138, 148, 159], tdIds=[22, 23, 24])
+2025-05-01 02:17:47 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 02:17:47 [restartedMain] ERROR CustomLogger - Unexpected error: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`seance_tp`, CONSTRAINT `FKplmho5vnrpv0wyccpekgyse1x` FOREIGN KEY (`tp_id`) REFERENCES `tps` (`id`))] [delete from tps where id=?]
+2025-05-01 02:17:47 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH UNEXPECTED ERROR ======================
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Admin to be updated: 169
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Updated admin: 169
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Admin to be deleted: 64
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=12, niveau=MP2, specialite=GL, nbTD=1, departement=informatique, seanceIds=[108, 112, 116, 122, 137, 138, 148, 159], tdIds=[22, 23, 24])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=12, niveau=MP2, specialite=GL, nbTD=1, departement=Updated Department, seanceIds=[108, 112, 116, 122, 137, 138, 148, 159], tdIds=[22, 23, 24])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=2, niveau=ING2, specialite=INFO, nbTD=3, departement=Technologie, seanceIds=[11, 12, 13, 14, 15, 16, 17, 18, 19, 20], tdIds=[3, 4])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Teacher to be updated: 229
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS12, heures=13, seanceIds=[105, 119, 137, 152, 159], propositionIds=[], signalIds=[])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Teacher to be deleted: 229
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - EnseignantService RUD operations completed successfully
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Testing EtudiantService RUD operations...
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Student to be updated: EtudiantDTO(matricule=MAT17, brancheId=11, tpId=33)
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Updated student: EtudiantDTO(matricule=MAT17, brancheId=11, tpId=33)
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Student to be deleted: EtudiantDTO(matricule=MAT2, brancheId=9, tpId=25)
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - EtudiantService RUD operations completed successfully
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Testing SalleService RUD operations...
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Room to be updated: SalleDTO(id=32, identifiant=SAL1, type=Lecture Hall, capacite=58, seanceIds=[133, 139, 148, 159])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Updated room: SalleDTO(id=32, identifiant=SAL1, type=Lecture Hall, capacite=68, seanceIds=[133, 139, 148, 159])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Room to be deleted: SalleDTO(id=9, identifiant=SAL2, type=Lecture Hall, capacite=152, seanceIds=[22, 24, 26, 28, 29, 30])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - SalleService RUD operations completed successfully
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Testing SeanceService RUD operations...
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Session to be updated: SeanceDTO(id=32, name=null, jour=WEDNESDAY, heureDebut=09:50, heureFin=12:35, type=TP, matiere=Computer Architecture, frequence=weekly, date=null, salleId=11, enseignantId=65, brancheIds=[4], tdIds=[7], tpIds=[10])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Updated session: SeanceDTO(id=32, name=null, jour=WEDNESDAY, heureDebut=09:50, heureFin=12:35, type=TP, matiere=Updated Subject 45, frequence=weekly, date=null, salleId=11, enseignantId=65, brancheIds=[4], tdIds=[7], tpIds=[10])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Session to be deleted: SeanceDTO(id=107, name=null, jour=FRIDAY, heureDebut=16:00, heureFin=18:49, type=TP, matiere=Mathematics, frequence=weekly, date=null, salleId=33, enseignantId=239, brancheIds=[11], tdIds=[22], tpIds=[39])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - SeanceService RUD operations completed successfully
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Testing TDService RUD operations...
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Fetching tutorial group with ID: 7
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Fetching tutorial group with ID: 21
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - TD to be updated: TDDTO(id=7, nb=2, nbTP=2, brancheId=4, tpIds=[], seanceIds=[31, 35, 32])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Updating tutorial group with ID: 7
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Updated tutorial group with ID: 7
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Updated TD: TDDTO(id=7, nb=3, nbTP=2, brancheId=4, tpIds=[], seanceIds=[31, 35, 32])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - TD to be deleted: TDDTO(id=21, nb=5, nbTP=2, brancheId=11, tpIds=[32, 37, 40], seanceIds=[105, 116, 152])
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Checking if tutorial group with ID: 21 exists
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Deleting tutorial group with ID: 21
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - Deleted tutorial group with ID: 21
+2025-05-01 02:20:58 [restartedMain] INFO  CustomLogger - TDService RUD operations completed successfully
+2025-05-01 02:20:59 [restartedMain] ERROR CustomLogger - Unexpected error: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`seance_td`, CONSTRAINT `FKd5x8sua88r3nw5wdefpoo8iqb` FOREIGN KEY (`td_id`) REFERENCES `tds` (`id`))] [delete from tds where id=?]
+2025-05-01 02:20:59 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH UNEXPECTED ERROR ======================
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Admin to be updated: 43
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Updated admin: 43
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Admin to be deleted: 64
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=2, niveau=ING2, specialite=INFO, nbTD=3, departement=Technologie, seanceIds=[11, 12, 13, 14, 15, 16, 17, 18, 19, 20], tdIds=[3, 4])
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=2, niveau=ING2, specialite=INFO, nbTD=3, departement=Updated Department, seanceIds=[11, 12, 13, 14, 15, 16, 17, 18, 19, 20], tdIds=[3, 4])
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=informatique, seanceIds=[1, 2, 6, 7], tdIds=[1, 2])
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Teacher to be updated: 173
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS3, heures=19, seanceIds=[82, 87], propositionIds=[9], signalIds=[1])
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Teacher to be deleted: 173
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - EnseignantService RUD operations completed successfully
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Testing EtudiantService RUD operations...
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Student to be updated: EtudiantDTO(matricule=MAT6, brancheId=10, tpId=30)
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Updated student: EtudiantDTO(matricule=MAT6, brancheId=10, tpId=30)
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - Student to be deleted: EtudiantDTO(matricule=MAT12, brancheId=3, tpId=7)
+2025-05-01 02:21:52 [restartedMain] INFO  CustomLogger - EtudiantService RUD operations completed successfully
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Testing SalleService RUD operations...
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Room to be updated: SalleDTO(id=4, identifiant=SAL0, type=Lecture Hall, capacite=180, seanceIds=[16, 20])
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Updated room: SalleDTO(id=4, identifiant=SAL0, type=Lecture Hall, capacite=190, seanceIds=[16, 20])
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Room to be deleted: SalleDTO(id=6, identifiant=SAL2, type=Lecture Hall, capacite=64, seanceIds=[12, 13, 14, 17, 18, 19])
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - SalleService RUD operations completed successfully
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Testing SeanceService RUD operations...
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Session to be updated: SeanceDTO(id=152, name=null, jour=THURSDAY, heureDebut=12:15, heureFin=15:14, type=CR, matiere=Software Engineering, frequence=1/15, date=null, salleId=31, enseignantId=229, brancheIds=[11], tdIds=[21], tpIds=[33])
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Updated session: SeanceDTO(id=152, name=null, jour=THURSDAY, heureDebut=12:15, heureFin=15:14, type=CR, matiere=Updated Subject 19, frequence=1/15, date=null, salleId=31, enseignantId=229, brancheIds=[11], tdIds=[21], tpIds=[33])
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Session to be deleted: SeanceDTO(id=119, name=null, jour=FRIDAY, heureDebut=11:10, heureFin=12:49, type=TP, matiere=Networks, frequence=weekly, date=null, salleId=31, enseignantId=229, brancheIds=[11], tdIds=[22], tpIds=[31])
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - SeanceService RUD operations completed successfully
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Testing TDService RUD operations...
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Fetching tutorial group with ID: 17
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Fetching tutorial group with ID: 8
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - TD to be updated: TDDTO(id=17, nb=1, nbTP=1, brancheId=9, tpIds=[26], seanceIds=[81, 82, 85, 88, 89, 90])
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Updating tutorial group with ID: 17
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Updated tutorial group with ID: 17
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Updated TD: TDDTO(id=17, nb=2, nbTP=1, brancheId=9, tpIds=[26], seanceIds=[81, 82, 85, 88, 89, 90])
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - TD to be deleted: TDDTO(id=8, nb=4, nbTP=3, brancheId=4, tpIds=[10, 11, 12], seanceIds=[])
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Checking if tutorial group with ID: 8 exists
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Deleting tutorial group with ID: 8
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - Deleted tutorial group with ID: 8
+2025-05-01 02:21:53 [restartedMain] INFO  CustomLogger - TDService RUD operations completed successfully
+2025-05-01 02:21:53 [restartedMain] ERROR CustomLogger - Unexpected error: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`seance_tp`, CONSTRAINT `FKplmho5vnrpv0wyccpekgyse1x` FOREIGN KEY (`tp_id`) REFERENCES `tps` (`id`))] [delete from tps where id=?]
+2025-05-01 02:21:53 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH UNEXPECTED ERROR ======================
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - Admin to be updated: 22
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - Updated admin: 22
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - Admin to be deleted: 64
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=4, niveau=L2, specialite=EEA, nbTD=4, departement=Technologie, seanceIds=[31, 32, 33, 35], tdIds=[7, 8])
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=4, niveau=L2, specialite=EEA, nbTD=4, departement=Updated Department, seanceIds=[31, 32, 33, 35], tdIds=[7, 8])
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=11, niveau=MR1, specialite=I3, nbTD=4, departement=informatique, seanceIds=[105, 107, 109, 114, 119, 130, 133, 139, 140, 143, 151, 152], tdIds=[21])
+2025-05-01 02:27:46 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 02:27:47 [restartedMain] ERROR CustomLogger - Unexpected error: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`proposition_td`, CONSTRAINT `FKjg09pguri59jfpv835abb7ims` FOREIGN KEY (`td_id`) REFERENCES `tds` (`id`))] [delete from tds where id=?]
+2025-05-01 02:27:47 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH UNEXPECTED ERROR ======================
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - Admin to be updated: 64
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - Updated admin: 64
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - Admin to be deleted: 22
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=9, niveau=MP2, specialite=GL, nbTD=5, departement=informatique, seanceIds=[81, 82, 83, 85, 86, 87, 88, 89, 90], tdIds=[17, 18])
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=9, niveau=MP2, specialite=GL, nbTD=5, departement=Updated Department, seanceIds=[81, 82, 83, 85, 86, 87, 88, 89, 90], tdIds=[17, 18])
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=11, niveau=MR1, specialite=I3, nbTD=4, departement=informatique, seanceIds=[105, 107, 109, 114, 119, 130, 133, 139, 140, 143, 151, 152], tdIds=[21])
+2025-05-01 19:09:23 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 19:09:24 [restartedMain] ERROR CustomLogger - Unexpected error: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`university_scheduling`.`proposition_td`, CONSTRAINT `FKjg09pguri59jfpv835abb7ims` FOREIGN KEY (`td_id`) REFERENCES `tds` (`id`))] [delete from tds where id=?]
+2025-05-01 19:09:24 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH UNEXPECTED ERROR ======================
+2025-05-01 19:15:10 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 19:15:10 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 19:15:10 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 19:15:10 [restartedMain] INFO  CustomLogger - Admin to be updated: 169
+2025-05-01 19:15:10 [restartedMain] INFO  CustomLogger - Updated admin: 169
+2025-05-01 19:15:10 [restartedMain] INFO  CustomLogger - Admin to be deleted: 43
+2025-05-01 19:15:10 [restartedMain] INFO  CustomLogger - AdministrateurService RUD operations completed successfully
+2025-05-01 19:15:10 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=informatique, seanceIds=[1, 2, 6, 7], tdIds=[1, 2])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=Updated Department, seanceIds=[1, 2, 6, 7], tdIds=[1, 2])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=9, niveau=MP2, specialite=GL, nbTD=5, departement=informatique, seanceIds=[81, 82, 83, 85, 86, 87, 88, 89, 90], tdIds=[17, 18])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Teacher to be updated: 69
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS4, heures=9, seanceIds=[36, 39], propositionIds=[4], signalIds=[])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Teacher to be deleted: 69
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - EnseignantService RUD operations completed successfully
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Testing EtudiantService RUD operations...
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Student to be updated: EtudiantDTO(matricule=MAT73, brancheId=11, tpId=38)
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated student: EtudiantDTO(matricule=MAT73, brancheId=11, tpId=38)
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Student to be deleted: EtudiantDTO(matricule=MAT2, brancheId=12, tpId=34)
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - EtudiantService RUD operations completed successfully
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Testing SalleService RUD operations...
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Room to be updated: SalleDTO(id=1, identifiant=SAL0, type=Lecture Hall, capacite=136, seanceIds=[2])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated room: SalleDTO(id=1, identifiant=SAL0, type=Lecture Hall, capacite=146, seanceIds=[2])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Room to be deleted: SalleDTO(id=31, identifiant=SAL0, type=Lecture Hall, capacite=189, seanceIds=[108, 109, 112, 119, 130, 137, 138, 140, 152])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - SalleService RUD operations completed successfully
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Testing SeanceService RUD operations...
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Session to be updated: SeanceDTO(id=12, name=null, jour=FRIDAY, heureDebut=10:45, heureFin=13:19, type=TP, matiere=Database Systems, frequence=catch-up, date=null, salleId=6, enseignantId=27, brancheIds=[2], tdIds=[4], tpIds=[4])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated session: SeanceDTO(id=12, name=null, jour=FRIDAY, heureDebut=10:45, heureFin=13:19, type=TP, matiere=Updated Subject 18, frequence=catch-up, date=null, salleId=6, enseignantId=27, brancheIds=[2], tdIds=[4], tpIds=[4])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Session to be deleted: SeanceDTO(id=18, name=null, jour=WEDNESDAY, heureDebut=13:20, heureFin=15:39, type=CI, matiere=Networks, frequence=weekly, date=null, salleId=6, enseignantId=25, brancheIds=[2], tdIds=[4], tpIds=[5])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - SeanceService RUD operations completed successfully
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Testing TDService RUD operations...
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Fetching tutorial group with ID: 7
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Fetching tutorial group with ID: 3
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - TD to be updated: TDDTO(id=7, nb=2, nbTP=2, brancheId=4, tpIds=[], seanceIds=[31, 32, 34, 36, 39, 35])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updating tutorial group with ID: 7
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated tutorial group with ID: 7
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated TD: TDDTO(id=7, nb=3, nbTP=2, brancheId=4, tpIds=[], seanceIds=[31, 32, 34, 36, 39, 35])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - TD to be deleted: TDDTO(id=3, nb=3, nbTP=1, brancheId=2, tpIds=[4, 5, 6], seanceIds=[11, 13, 14, 16, 19, 20])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Checking if tutorial group with ID: 3 exists
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Deleting tutorial group with ID: 3
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Deleted tutorial group with ID: 3
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - TDService RUD operations completed successfully
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Testing TPService RUD operations...
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Found 19 practical groups
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Fetching practical group with ID: 10
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Fetching practical group with ID: 39
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - TP to be updated: TPDTO(id=10, nb=3, tdId=8, etudiantIds=[74, 78, 79, 81, 84], seanceIds=[31, 32, 33, 39, 40])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updating practical group with ID: 10
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated practical group with ID: 10
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated TP: TPDTO(id=10, nb=4, tdId=8, etudiantIds=[74, 78, 79, 81, 84], seanceIds=[31, 32, 33, 39, 40])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - TP to be deleted: TPDTO(id=39, nb=2, tdId=22, etudiantIds=[251, 260, 292, 305], seanceIds=[107, 116])
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Checking if practical group with ID: 39 exists
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Deleting practical group with ID: 39
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Deleted practical group with ID: 39
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - TPService RUD operations completed successfully
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Testing NotificationService RUD operations...
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Notification to be updated: NotificationDTO(id=31, message=Notification message 0, date=2025-04-28T18:20:02.079640, type=ANNOUNCEMENT, isread=false, recepteurId=68, expediteurId=64)
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated notification: NotificationDTO(id=31, message=Updated message 83, date=2025-04-28T18:20:02.079640, type=ANNOUNCEMENT, isread=false, recepteurId=68, expediteurId=64)
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Notification to be deleted: NotificationDTO(id=37, message=Notification message 6, date=2025-04-28T03:20:02.091722, type=ANNOUNCEMENT, isread=false, recepteurId=68, expediteurId=64)
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - NotificationService RUD operations completed successfully
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Testing ExcelFileService RUD operations...
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Excel file to be updated: FichierExcelDTO(id=12, fileName=schedule_2.xlsx, status=Imported, errors=[No errors], importDate=2025-04-30T16:30:10.410003)
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Updated excel file: FichierExcelDTO(id=12, fileName=schedule_2.xlsx, status=Updated Status, errors=[No errors], importDate=2025-04-30T16:30:10.410003)
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - Excel file to be deleted: FichierExcelDTO(id=1, fileName=schedule_0.xlsx, status=Imported, errors=[No errors], importDate=2025-04-29T18:18:02.976296)
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - ExcelFileService RUD operations completed successfully
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - ========== RUD Testing Complete ==========
+2025-05-01 19:15:11 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Not enough administrators for RUD testing
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=3, niveau=MP2, specialite=DS, nbTD=4, departement=Technologie, seanceIds=[23, 25, 26, 29, 30], tdIds=[5, 6])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=3, niveau=MP2, specialite=DS, nbTD=4, departement=Updated Department, seanceIds=[23, 25, 26, 29, 30], tdIds=[5, 6])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=12, niveau=MP2, specialite=GL, nbTD=1, departement=informatique, seanceIds=[122, 148, 159], tdIds=[22, 23, 24])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Teacher to be updated: 67
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS2, heures=41, seanceIds=[], propositionIds=[], signalIds=[])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Teacher to be deleted: 67
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - EnseignantService RUD operations completed successfully
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Testing EtudiantService RUD operations...
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Student to be updated: EtudiantDTO(matricule=MAT9, brancheId=1, tpId=3)
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updated student: EtudiantDTO(matricule=MAT9, brancheId=1, tpId=3)
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Student to be deleted: EtudiantDTO(matricule=MAT1, brancheId=3, tpId=8)
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - EtudiantService RUD operations completed successfully
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Testing SalleService RUD operations...
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Room to be updated: SalleDTO(id=6, identifiant=SAL2, type=Lecture Hall, capacite=64, seanceIds=[])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updated room: SalleDTO(id=6, identifiant=SAL2, type=Lecture Hall, capacite=74, seanceIds=[])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Room to be deleted: SalleDTO(id=4, identifiant=SAL0, type=Lecture Hall, capacite=180, seanceIds=[])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - SalleService RUD operations completed successfully
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Testing SeanceService RUD operations...
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Session to be updated: SeanceDTO(id=7, name=null, jour=THURSDAY, heureDebut=16:20, heureFin=19:18, type=CI, matiere=Artificial Intelligence, frequence=1/15, date=null, salleId=2, enseignantId=2, brancheIds=[1], tdIds=[2], tpIds=[2])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updated session: SeanceDTO(id=7, name=null, jour=THURSDAY, heureDebut=16:20, heureFin=19:18, type=CI, matiere=Updated Subject 2, frequence=1/15, date=null, salleId=2, enseignantId=2, brancheIds=[1], tdIds=[2], tpIds=[2])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Session to be deleted: SeanceDTO(id=6, name=null, jour=THURSDAY, heureDebut=15:55, heureFin=18:47, type=CI, matiere=Database Systems, frequence=1/15, date=null, salleId=3, enseignantId=4, brancheIds=[1], tdIds=[1], tpIds=[3])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - SeanceService RUD operations completed successfully
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Testing TDService RUD operations...
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Fetching tutorial group with ID: 1
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Fetching tutorial group with ID: 5
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - TD to be updated: TDDTO(id=1, nb=1, nbTP=3, brancheId=1, tpIds=[1, 2], seanceIds=[1])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updating tutorial group with ID: 1
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updated tutorial group with ID: 1
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updated TD: TDDTO(id=1, nb=2, nbTP=3, brancheId=1, tpIds=[1, 2], seanceIds=[1])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - TD to be deleted: TDDTO(id=5, nb=1, nbTP=1, brancheId=3, tpIds=[7], seanceIds=[23, 25, 26, 29, 30])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Checking if tutorial group with ID: 5 exists
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Deleting tutorial group with ID: 5
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Deleted tutorial group with ID: 5
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - TDService RUD operations completed successfully
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Testing TPService RUD operations...
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Found 5 practical groups
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Fetching practical group with ID: 8
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Fetching practical group with ID: 2
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - TP to be updated: TPDTO(id=8, nb=1, tdId=6, etudiantIds=[59, 62], seanceIds=[])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updating practical group with ID: 8
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updated practical group with ID: 8
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updated TP: TPDTO(id=8, nb=2, tdId=6, etudiantIds=[59, 62], seanceIds=[])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - TP to be deleted: TPDTO(id=2, nb=2, tdId=1, etudiantIds=[8, 12, 20], seanceIds=[7])
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Checking if practical group with ID: 2 exists
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Deleting practical group with ID: 2
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Deleted practical group with ID: 2
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - TPService RUD operations completed successfully
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Testing NotificationService RUD operations...
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Not enough notifications for RUD testing
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Testing ExcelFileService RUD operations...
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Excel file to be updated: FichierExcelDTO(id=4, fileName=schedule_0.xlsx, status=Imported, errors=[No errors], importDate=2025-04-29T21:20:02.096107)
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Updated excel file: FichierExcelDTO(id=4, fileName=schedule_0.xlsx, status=Updated Status, errors=[No errors], importDate=2025-04-29T21:20:02.096107)
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - Excel file to be deleted: FichierExcelDTO(id=8, fileName=schedule_0.xlsx, status=Imported, errors=[No errors], importDate=2025-04-29T21:39:33.049310)
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - ExcelFileService RUD operations completed successfully
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - ========== RUD Testing Complete ==========
+2025-05-01 19:17:28 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Not enough administrators for RUD testing
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Branch to be updated: BrancheDTO(id=3, niveau=MP2, specialite=DS, nbTD=4, departement=Updated Department, seanceIds=[], tdIds=[6])
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Updated branch: BrancheDTO(id=3, niveau=MP2, specialite=DS, nbTD=4, departement=Updated Department, seanceIds=[], tdIds=[6])
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Branch to be deleted: BrancheDTO(id=1, niveau=CPI2, specialite=INFO, nbTD=1, departement=Updated Department, seanceIds=[1, 2], tdIds=[1, 2])
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - BrancheService RUD operations completed successfully
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Teacher to be updated: 218
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS1, heures=31, seanceIds=[], propositionIds=[], signalIds=[12])
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Teacher to be deleted: 218
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - EnseignantService RUD operations completed successfully
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Testing EtudiantService RUD operations...
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Student to be updated: EtudiantDTO(matricule=MAT10, brancheId=3, tpId=8)
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Updated student: EtudiantDTO(matricule=MAT10, brancheId=3, tpId=8)
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Student to be deleted: EtudiantDTO(matricule=MAT2, brancheId=3, tpId=9)
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - EtudiantService RUD operations completed successfully
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Testing SalleService RUD operations...
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Room to be updated: SalleDTO(id=3, identifiant=SAL2, type=Lecture Hall, capacite=99, seanceIds=[])
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Updated room: SalleDTO(id=3, identifiant=SAL2, type=Lecture Hall, capacite=109, seanceIds=[])
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Room to be deleted: SalleDTO(id=33, identifiant=SAL2, type=Lecture Hall, capacite=101, seanceIds=[])
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - SalleService RUD operations completed successfully
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Testing SeanceService RUD operations...
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Not enough sessions for RUD testing
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Testing TDService RUD operations...
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Not enough TDs for RUD testing
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Testing TPService RUD operations...
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Found 2 practical groups
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Fetching practical group with ID: 8
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Fetching practical group with ID: 9
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - TP to be updated: TPDTO(id=8, nb=2, tdId=6, etudiantIds=[59, 62], seanceIds=[])
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Updating practical group with ID: 8
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Updated practical group with ID: 8
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Updated TP: TPDTO(id=8, nb=3, tdId=6, etudiantIds=[59, 62], seanceIds=[])
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - TP to be deleted: TPDTO(id=9, nb=2, tdId=6, etudiantIds=[52, 53, 57], seanceIds=[])
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Checking if practical group with ID: 9 exists
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Deleting practical group with ID: 9
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Deleted practical group with ID: 9
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - TPService RUD operations completed successfully
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Testing NotificationService RUD operations...
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Not enough notifications for RUD testing
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Testing ExcelFileService RUD operations...
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Excel file to be updated: FichierExcelDTO(id=4, fileName=schedule_0.xlsx, status=Updated Status, errors=[No errors], importDate=2025-04-29T21:20:02.096107)
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Updated excel file: FichierExcelDTO(id=4, fileName=schedule_0.xlsx, status=Updated Status, errors=[No errors], importDate=2025-04-29T21:20:02.096107)
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - Excel file to be deleted: FichierExcelDTO(id=13, fileName=schedule_3.xlsx, status=Imported, errors=[No errors], importDate=2025-04-30T16:30:10.410822)
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - ExcelFileService RUD operations completed successfully
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - ========== RUD Testing Complete ==========
+2025-05-01 19:17:30 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - ========== Testing Retrieval, Update, Delete Operations ==========
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Testing AdministrateurService RUD operations...
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Not enough administrators for RUD testing
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Testing BrancheService RUD operations...
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Not enough branches for RUD testing
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Testing EnseignantService RUD operations...
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Teacher to be updated: 65
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Updated teacher: EnseignantDTO(codeEnseignant=ENS0, heures=31, seanceIds=[], propositionIds=[], signalIds=[])
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Teacher to be deleted: 65
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - EnseignantService RUD operations completed successfully
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Testing EtudiantService RUD operations...
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Student to be updated: EtudiantDTO(matricule=MAT13, brancheId=3, tpId=8)
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Updated student: EtudiantDTO(matricule=MAT13, brancheId=3, tpId=8)
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Student to be deleted: EtudiantDTO(matricule=MAT10, brancheId=3, tpId=8)
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - EtudiantService RUD operations completed successfully
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Testing SalleService RUD operations...
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Room to be updated: SalleDTO(id=1, identifiant=SAL0, type=Lecture Hall, capacite=146, seanceIds=[])
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Updated room: SalleDTO(id=1, identifiant=SAL0, type=Lecture Hall, capacite=156, seanceIds=[])
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Room to be deleted: SalleDTO(id=6, identifiant=SAL2, type=Lecture Hall, capacite=74, seanceIds=[])
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - SalleService RUD operations completed successfully
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Testing SeanceService RUD operations...
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Not enough sessions for RUD testing
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Testing TDService RUD operations...
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Not enough TDs for RUD testing
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Testing TPService RUD operations...
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Found 1 practical groups
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Not enough TPs for RUD testing
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Testing NotificationService RUD operations...
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Not enough notifications for RUD testing
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Testing ExcelFileService RUD operations...
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Excel file to be updated: FichierExcelDTO(id=15, fileName=schedule_5.xlsx, status=Imported, errors=[No errors], importDate=2025-04-30T16:30:10.412296)
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Updated excel file: FichierExcelDTO(id=15, fileName=schedule_5.xlsx, status=Updated Status, errors=[No errors], importDate=2025-04-30T16:30:10.412296)
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - Excel file to be deleted: FichierExcelDTO(id=2, fileName=schedule_0.xlsx, status=Imported, errors=[No errors], importDate=2025-04-29T18:20:01.551432)
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - ExcelFileService RUD operations completed successfully
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - ========== RUD Testing Complete ==========
+2025-05-01 19:18:02 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
@@ -22,4 +24,10 @@ public class Personne {
     private String email;
     private String tel;
     private String adresse;
+
+    @OneToMany(mappedBy = "recepteur", cascade = CascadeType.REMOVE)
+    private List<Notification> receivednotifications;
+    @OneToMany(mappedBy = "expediteur", cascade = CascadeType.REMOVE)
+    private List<Notification> sentnotifications;
+
 }

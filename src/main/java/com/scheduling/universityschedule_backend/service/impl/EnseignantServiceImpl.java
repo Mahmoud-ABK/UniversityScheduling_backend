@@ -144,7 +144,7 @@ public class EnseignantServiceImpl implements EnseignantService {
     }
 
     @Override
-    public void delete(Long id) throws CustomException {
+    public EnseignantDTO delete(Long id) throws CustomException {
         try {
             // Validate input
             if (id == null) {
@@ -155,13 +155,15 @@ public class EnseignantServiceImpl implements EnseignantService {
             if (!enseignantRepository.existsById(id)) {
                 throw new CustomException("Teacher not found with ID: " + id);
             }
-
+            EnseignantDTO returnedEnseignant = this.findById(id);
             // Delete teacher
             enseignantRepository.deleteById(id);
+            enseignantRepository.flush();
+            return returnedEnseignant;
         } catch (CustomException e) {
             throw e;
         } catch (Exception e) {
-            throw new CustomException("Failed to delete teacher with ID: " + id, e);
+            throw new CustomException("Failed to delete teacher with ID: " + id + e.getMessage(), e);
         }
     }
 

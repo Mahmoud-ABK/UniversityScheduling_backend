@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,6 +30,16 @@ public class TP {
     @OneToMany(mappedBy = "tp", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Etudiant> etudiants;
 
-    @ManyToMany(mappedBy = "tps", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "tps", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
     private List<Seance> seances;
+
+    @ManyToMany(mappedBy = "tps" , fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    private List<PropositionDeRattrapage> propositionDeRattrapages = new ArrayList<>() ;
+
+    @PreRemove
+    private void removeTPFromSeances() {
+        for (Seance seance : this.seances) {
+            seance.getTps().remove(this);
+        }
+    }
 }

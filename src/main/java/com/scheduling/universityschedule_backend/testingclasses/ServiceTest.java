@@ -7,6 +7,9 @@ import com.scheduling.universityschedule_backend.model.Status;
 import com.scheduling.universityschedule_backend.model.SeanceType;
 import com.scheduling.universityschedule_backend.service.*;
 import com.scheduling.universityschedule_backend.util.CustomLogger;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.*;
@@ -35,6 +38,18 @@ public class ServiceTest {
 
 
     public Random RANDOM = new Random();
+    // Add to ServiceTest class
+    @Autowired
+    private EntityManager entityManager;
+
+    @PersistenceContext
+    private EntityManager em;
+
+    // Add this method to be called at the beginning of each test method
+    private void clearDatabase() {
+        entityManager.flush();
+        entityManager.clear();
+    }
 
     public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService) {
         this.administrateurService = administrateurService;
@@ -373,79 +388,48 @@ public class ServiceTest {
         CustomLogger.logInfo("========== Database Population Complete ==========");
     }
     public void debugrud() throws CustomException {
-        CustomLogger.logInfo("========== Debugging functions ==========");
-        // Testing AdministrateurService
-        try {
-            CustomLogger.logInfo("Testing AdministrateurService RUD operations...");
-            List<AdministrateurDTO> allAdmins = administrateurService.findAll();
-            if (allAdmins.size() >= 2) {
-                // Get 2 random admins
-                int index1 = RANDOM.nextInt(allAdmins.size());
-                int index2 = (index1 + 1 + RANDOM.nextInt(allAdmins.size() - 1)) % allAdmins.size();
-                AdministrateurDTO admin1 = allAdmins.get(index1);
-                AdministrateurDTO admin2 = allAdmins.get(index2);
 
-                // Test findById
-                AdministrateurDTO fetchedAdmin1 = administrateurService.findById(admin1.getId());
-                AdministrateurDTO fetchedAdmin2 = administrateurService.findById(admin2.getId());
+//        testAdministrateurService();
+//        testEtudiantService();
+//        testSalleService();
+//        testSeanceService();
+//        testTDService();
+//        testTPService();
 
-                // Test update
-                CustomLogger.logInfo("Admin to be updated ID : " + fetchedAdmin1.getId().toString() + "| object:  " + fetchedAdmin2);
-                fetchedAdmin1.setNom("Updated Name");
-                AdministrateurDTO updatedAdmin = administrateurService.update(fetchedAdmin1.getId(), fetchedAdmin1);
-                CustomLogger.logInfo("Updated admin ID: " + updatedAdmin.getId().toString()+ " " + updatedAdmin);
+//        testNotificationService();
+//        testExcelFileService();
+        rudTest();
 
-                // Test delete
-                CustomLogger.logInfo("Admin to be deleted: ID " + fetchedAdmin2.getId().toString() + "| object:  " + fetchedAdmin2);
-                administrateurService.delete(admin2.getId());
-
-                CustomLogger.logInfo("AdministrateurService RUD operations completed successfully");
-            } else {
-                CustomLogger.logInfo("Not enough administrators for RUD testing");
-            }
-        } catch (Exception e) {
-            CustomLogger.logError("Error testing AdministrateurService: " + e.getMessage(), e);
-        }
-
-        // Testing BrancheService
-        try {
-            CustomLogger.logInfo("Testing BrancheService RUD operations...");
-            List<BrancheDTO> allBranches = brancheService.findAll();
-            if (allBranches.size() >= 2) {
-                // Get 2 random branches
-                int index1 = RANDOM.nextInt(allBranches.size());
-                int index2 = (index1 + 1 + RANDOM.nextInt(allBranches.size() - 1)) % allBranches.size();
-                BrancheDTO branche1 = allBranches.get(index1);
-                BrancheDTO branche2 = allBranches.get(index2);
-
-                // Test findById
-                BrancheDTO fetchedBranche1 = brancheService.findById(branche1.getId());
-                BrancheDTO fetchedBranche2 = brancheService.findById(branche2.getId());
-
-                // Test update
-                CustomLogger.logInfo("Branch to be updated: " + fetchedBranche1);
-                fetchedBranche1.setDepartement("Updated Department");
-                BrancheDTO updatedBranche = brancheService.update(fetchedBranche1.getId(), fetchedBranche1);
-                CustomLogger.logInfo("Updated branch: " + updatedBranche);
-
-                // Test delete
-                CustomLogger.logInfo("Branch to be deleted: " + fetchedBranche2);
-                brancheService.delete(branche2.getId());
-
-                CustomLogger.logInfo("BrancheService RUD operations completed successfully");
-            } else {
-                CustomLogger.logInfo("Not enough branches for RUD testing");
-            }
-        } catch (Exception e) {
-            CustomLogger.logError("Error testing BrancheService: " + e.getMessage(), e);
-        }
-
-        CustomLogger.logInfo("========== End Debugging functions ==========");
     }
+
     public void rudTest() throws CustomException {
         CustomLogger.logInfo("========== Testing Retrieval, Update, Delete Operations ==========");
+        clearDatabase();
+        testAdministrateurService();
+        clearDatabase();
+        testBrancheService();
+        clearDatabase();
+        testEnseignantService();
+        clearDatabase();
+        testEtudiantService();
+        clearDatabase();
+        testSalleService();
+        clearDatabase();
+        testSeanceService();
+        clearDatabase();
+        testTDService();
+        clearDatabase();
+        testTPService();
+        clearDatabase();
+        testNotificationService();
+        clearDatabase();
+        testExcelFileService();
+        clearDatabase();
 
-        // Testing AdministrateurService
+        CustomLogger.logInfo("========== RUD Testing Complete ==========");
+    }
+
+    private void testAdministrateurService() {
         try {
             CustomLogger.logInfo("Testing AdministrateurService RUD operations...");
             List<AdministrateurDTO> allAdmins = administrateurService.findAll();
@@ -461,13 +445,13 @@ public class ServiceTest {
                 AdministrateurDTO fetchedAdmin2 = administrateurService.findById(admin2.getId());
 
                 // Test update
-                CustomLogger.logInfo("Admin to be updated: " + fetchedAdmin1);
+                CustomLogger.logInfo("Admin to be updated: " + fetchedAdmin1.getId().toString());
                 fetchedAdmin1.setNom("Updated Name");
                 AdministrateurDTO updatedAdmin = administrateurService.update(fetchedAdmin1.getId(), fetchedAdmin1);
-                CustomLogger.logInfo("Updated admin: " + updatedAdmin);
+                CustomLogger.logInfo("Updated admin: " + updatedAdmin.getId().toString());
 
                 // Test delete
-                CustomLogger.logInfo("Admin to be deleted: " + fetchedAdmin2);
+                CustomLogger.logInfo("Admin to be deleted: " + fetchedAdmin2.getId().toString());
                 administrateurService.delete(admin2.getId());
 
                 CustomLogger.logInfo("AdministrateurService RUD operations completed successfully");
@@ -477,8 +461,9 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing AdministrateurService: " + e.getMessage(), e);
         }
+    }
 
-        // Testing BrancheService
+    private void testBrancheService() {
         try {
             CustomLogger.logInfo("Testing BrancheService RUD operations...");
             List<BrancheDTO> allBranches = brancheService.findAll();
@@ -510,8 +495,9 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing BrancheService: " + e.getMessage(), e);
         }
+    }
 
-        // Testing EnseignantService
+    private void testEnseignantService() {
         try {
             CustomLogger.logInfo("Testing EnseignantService RUD operations...");
             List<EnseignantDTO> allTeachers = enseignantService.findAll();
@@ -527,13 +513,13 @@ public class ServiceTest {
                 EnseignantDTO fetchedTeacher2 = enseignantService.findById(teacher2.getId());
 
                 // Test update
-                CustomLogger.logInfo("Teacher to be updated: " + fetchedTeacher1);
+                CustomLogger.logInfo("Teacher to be updated: " + fetchedTeacher1.getId().toString());
                 fetchedTeacher1.setHeures(fetchedTeacher1.getHeures() + 5);
                 EnseignantDTO updatedTeacher = enseignantService.update(fetchedTeacher1.getId(), fetchedTeacher1);
                 CustomLogger.logInfo("Updated teacher: " + updatedTeacher);
 
                 // Test delete
-                CustomLogger.logInfo("Teacher to be deleted: " + fetchedTeacher2);
+                CustomLogger.logInfo("Teacher to be deleted: " + fetchedTeacher1.getId().toString());
                 enseignantService.delete(teacher2.getId());
 
                 CustomLogger.logInfo("EnseignantService RUD operations completed successfully");
@@ -543,8 +529,9 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing EnseignantService: " + e.getMessage(), e);
         }
+    }
 
-        // Testing EtudiantService
+    private void testEtudiantService() {
         try {
             CustomLogger.logInfo("Testing EtudiantService RUD operations...");
             List<EtudiantDTO> allStudents = etudiantService.findAll();
@@ -576,8 +563,9 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing EtudiantService: " + e.getMessage(), e);
         }
+    }
 
-        // Testing SalleService
+    private void testSalleService() {
         try {
             CustomLogger.logInfo("Testing SalleService RUD operations...");
             List<SalleDTO> allRooms = salleService.findAll();
@@ -609,8 +597,9 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing SalleService: " + e.getMessage(), e);
         }
+    }
 
-        // Testing SeanceService
+    private void testSeanceService() {
         try {
             CustomLogger.logInfo("Testing SeanceService RUD operations...");
             List<SeanceDTO> allSessions = seanceService.findAll();
@@ -642,8 +631,9 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing SeanceService: " + e.getMessage(), e);
         }
+    }
 
-        // Testing TDService
+    private void testTDService() {
         try {
             CustomLogger.logInfo("Testing TDService RUD operations...");
             List<TDDTO> allTDs = tdService.findAll();
@@ -675,8 +665,9 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing TDService: " + e.getMessage(), e);
         }
+    }
 
-        // Testing TPService
+    private void testTPService() {
         try {
             CustomLogger.logInfo("Testing TPService RUD operations...");
             List<TPDTO> allTPs = tpService.findAll();
@@ -708,8 +699,9 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing TPService: " + e.getMessage(), e);
         }
+    }
 
-        // Testing NotificationService
+    private void testNotificationService() {
         try {
             CustomLogger.logInfo("Testing NotificationService RUD operations...");
             List<NotificationDTO> allNotifications = notificationService.findAll();
@@ -741,8 +733,9 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing NotificationService: " + e.getMessage(), e);
         }
+    }
 
-        // Testing ExcelFileService
+    private void testExcelFileService() {
         try {
             CustomLogger.logInfo("Testing ExcelFileService RUD operations...");
             List<FichierExcelDTO> allFiles = excelFileService.findAll();
@@ -774,8 +767,6 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing ExcelFileService: " + e.getMessage(), e);
         }
-
-        CustomLogger.logInfo("========== RUD Testing Complete ==========");
     }
 
 }
