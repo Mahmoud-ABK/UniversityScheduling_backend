@@ -25,6 +25,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -48,7 +50,13 @@ public class Branche {
     private int nbTD;
     private String departement;
 
-    @ManyToMany(mappedBy = "branches", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy ="branche", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
+    private List<TD> tds;
+
+    @ManyToMany(mappedBy = "branches" , fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    private List<PropositionDeRattrapage> propositionDeRattrapages = new ArrayList<>() ;
+
+    @ManyToMany(mappedBy = "branches", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     private List<Seance> seances;
 }
 package com.scheduling.universityschedule_backend.model;
@@ -216,11 +224,11 @@ public class Notification {
     private String type;
     private Boolean isread;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "recepteur_id")
     private Personne recepteur;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "expediteur_id")
     private Personne expediteur;
 
@@ -235,6 +243,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -252,6 +262,12 @@ public class Personne {
     private String email;
     private String tel;
     private String adresse;
+
+    @OneToMany(mappedBy = "recepteur", cascade = CascadeType.REMOVE)
+    private List<Notification> receivednotifications;
+    @OneToMany(mappedBy = "expediteur", cascade = CascadeType.REMOVE)
+    private List<Notification> sentnotifications;
+
 }
 package com.scheduling.universityschedule_backend.model;
 
@@ -300,7 +316,7 @@ public class PropositionDeRattrapage {
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(
             name = "proposition_branche",
             joinColumns = @JoinColumn(name = "proposition_id"),
@@ -502,6 +518,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -526,8 +544,11 @@ public class TD {
     @OneToMany(mappedBy = "td", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<TP> tpList;
 
-    @ManyToMany(mappedBy = "tds", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "tds", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Seance> seances;
+
+    @ManyToMany(mappedBy = "tds" , fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    private List<PropositionDeRattrapage> propositionDeRattrapages = new ArrayList<>() ;
 }
 package com.scheduling.universityschedule_backend.model;
 
@@ -554,6 +575,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -577,6 +600,16 @@ public class TP {
     @OneToMany(mappedBy = "tp", fetch = FetchType.LAZY, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Etudiant> etudiants;
 
-    @ManyToMany(mappedBy = "tps", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "tps", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
     private List<Seance> seances;
+
+    @ManyToMany(mappedBy = "tps" , fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    private List<PropositionDeRattrapage> propositionDeRattrapages = new ArrayList<>() ;
+
+    @PreRemove
+    private void removeTPFromSeances() {
+        for (Seance seance : this.seances) {
+            seance.getTps().remove(this);
+        }
+    }
 }
