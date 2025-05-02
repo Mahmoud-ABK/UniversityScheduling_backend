@@ -382,7 +382,7 @@ public class EnseignantServiceImpl implements EnseignantService {
         } catch (CustomException e) {
             throw e;
         } catch (Exception e) {
-            throw new CustomException("Failed to submit makeup session request for teacher with ID: " + id, e);
+            throw new CustomException("Failed to submit makeup session request for teacher with ID: " + id + e.getMessage());
         }
     }
 

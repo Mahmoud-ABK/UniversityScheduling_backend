@@ -5547,3 +5547,981 @@ Rejection reason: Test rejection reason
 2025-05-02 17:12:56 [restartedMain] INFO  CustomLogger - Database cleared
 2025-05-02 17:12:56 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
 2025-05-02 17:12:56 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - ========== Starting BrancheService Functionality Tests ==========
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 16:26:46
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Branches -----
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Found 25 branches
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 22, Level: MP2, Specialty: DS, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 23, Level: L2, Specialty: MATH, Department: Technologie
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 24, Level: ING2, Specialty: ELEC, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 25, Level: L3, Specialty: INFO, Department: Informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 26, Level: L2, Specialty: INFO, Department: Informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 27, Level: L3, Specialty: INFO, Department: Informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 28, Level: L2, Specialty: INFO, Department: Informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 29, Level: ING3, Specialty: ELEC, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 30, Level: MP1, Specialty: DS, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 31, Level: ING2, Specialty: INFO, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 32, Level: CPI2, Specialty: INFO, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 33, Level: MR1, Specialty: GL, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 34, Level: CPI2, Specialty: INFO, Department: Technologie
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 35, Level: MP2, Specialty: GL, Department: Technologie
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 36, Level: CPI1, Specialty: INFO, Department: Technologie
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 37, Level: L1, Specialty: TIC, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 38, Level: MR2, Specialty: DS, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 39, Level: L2, Specialty: MATH, Department: Technologie
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 40, Level: CPI1, Specialty: INFO, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 41, Level: ING1, Specialty: ELEC, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 42, Level: L3, Specialty: EEA, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 43, Level: ING3, Specialty: INFO, Department: Technologie
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 44, Level: L2, Specialty: EEA, Department: Technologie
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 45, Level: L2, Specialty: EEA, Department: informatique
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Branch ID: 46, Level: MP2, Specialty: I3, Department: Technologie
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - 
+----- Testing getSchedule functionality -----
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Searching for a branch with scheduled sessions...
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Retrieved schedule for Branch ID: 22
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Total sessions found: 32
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Sample of scheduled sessions:
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Session ID: 462, Subject: Operating Systems, Day: MONDAY, Time: 10:40 - 13:14, Type: CI, Room: 52
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Session ID: 466, Subject: Data Structures, Day: MONDAY, Time: 10:50 - 13:05, Type: CI, Room: 51
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Session ID: 467, Subject: Operating Systems, Day: MONDAY, Time: 16:05 - 18:29, Type: TP, Room: 52
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Session ID: 470, Subject: Computer Architecture, Day: THURSDAY, Time: 08:25 - 10:34, Type: CI, Room: 50
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Session ID: 471, Subject: Networks, Day: TUESDAY, Time: 14:45 - 17:17, Type: CR, Room: 52
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - 
+----- Testing getEtudiants functionality -----
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Retrieving students for Branch ID: 22
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Total students found: 44
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Sample of enrolled students:
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Student ID: 1027, Name: Taylor Barbara, CIN: 574045563, Registration: MAT0, Email: etudiant0@example.com
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Student ID: 1029, Name: Davis Barbara, CIN: 406230455, Registration: MAT2, Email: etudiant2@example.com
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Student ID: 1036, Name: Thomas Mary, CIN: 429733118, Registration: MAT9, Email: etudiant9@example.com
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Student ID: 1037, Name: Jackson Richard, CIN: 301581123, Registration: MAT10, Email: etudiant10@example.com
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Student ID: 1041, Name: Smith Richard, CIN: 358070214, Registration: MAT14, Email: etudiant14@example.com
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - 
+Student Distribution Statistics:
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Students per TP group:
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-94: 3 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-95: 3 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-96: 3 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-90: 4 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-91: 5 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-92: 3 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-93: 4 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-103: 3 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-102: 3 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-101: 3 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-100: 6 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-98: 1 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-99: 2 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - TP-89: 1 students
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - 1. Schedule Test Results:
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger -    - Total sessions found: 32
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger -    - Unique subjects: 11
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger -    - Session types distribution: 
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger -      TD: 7
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger -      CI: 10
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger -      TP: 8
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger -      CR: 7
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - 
+2. Student Test Results:
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger -    - Total students: 44
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger -    - Students with TP assignments: 44
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger -    - Students without TP assignments: 0
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - 
+========== BrancheService Functionality Tests Completed Successfully ==========
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-02 17:28:25 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - ========== Starting BrancheService Functionality Tests ==========
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 16:26:46
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Branches -----
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Found 25 branches
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 22, Level: MP2, Specialty: DS, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 23, Level: L2, Specialty: MATH, Department: Technologie
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 24, Level: ING2, Specialty: ELEC, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 25, Level: L3, Specialty: INFO, Department: Informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 26, Level: L2, Specialty: INFO, Department: Informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 27, Level: L3, Specialty: INFO, Department: Informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 28, Level: L2, Specialty: INFO, Department: Informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 29, Level: ING3, Specialty: ELEC, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 30, Level: MP1, Specialty: DS, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 31, Level: ING2, Specialty: INFO, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 32, Level: CPI2, Specialty: INFO, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 33, Level: MR1, Specialty: GL, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 34, Level: CPI2, Specialty: INFO, Department: Technologie
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 35, Level: MP2, Specialty: GL, Department: Technologie
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 36, Level: CPI1, Specialty: INFO, Department: Technologie
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 37, Level: L1, Specialty: TIC, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 38, Level: MR2, Specialty: DS, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 39, Level: L2, Specialty: MATH, Department: Technologie
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 40, Level: CPI1, Specialty: INFO, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 41, Level: ING1, Specialty: ELEC, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 42, Level: L3, Specialty: EEA, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 43, Level: ING3, Specialty: INFO, Department: Technologie
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 44, Level: L2, Specialty: EEA, Department: Technologie
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 45, Level: L2, Specialty: EEA, Department: informatique
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Branch ID: 46, Level: MP2, Specialty: I3, Department: Technologie
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - 
+----- Testing getSchedule functionality -----
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Searching for a branch with scheduled sessions...
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Retrieved schedule for Branch ID: 22
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Total sessions found: 32
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Sample of scheduled sessions:
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Session ID: 462, Subject: Operating Systems, Day: MONDAY, Time: 10:40 - 13:14, Type: CI, Room: 52
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Session ID: 466, Subject: Data Structures, Day: MONDAY, Time: 10:50 - 13:05, Type: CI, Room: 51
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Session ID: 467, Subject: Operating Systems, Day: MONDAY, Time: 16:05 - 18:29, Type: TP, Room: 52
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Session ID: 470, Subject: Computer Architecture, Day: THURSDAY, Time: 08:25 - 10:34, Type: CI, Room: 50
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Session ID: 471, Subject: Networks, Day: TUESDAY, Time: 14:45 - 17:17, Type: CR, Room: 52
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - 
+----- Testing getEtudiants functionality -----
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Retrieving students for Branch ID: 22
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Total students found: 44
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Sample of enrolled students:
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Student ID: 1027, Name: Taylor Barbara, CIN: 574045563, Registration: MAT0, Email: etudiant0@example.com
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Student ID: 1029, Name: Davis Barbara, CIN: 406230455, Registration: MAT2, Email: etudiant2@example.com
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Student ID: 1036, Name: Thomas Mary, CIN: 429733118, Registration: MAT9, Email: etudiant9@example.com
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Student ID: 1037, Name: Jackson Richard, CIN: 301581123, Registration: MAT10, Email: etudiant10@example.com
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Student ID: 1041, Name: Smith Richard, CIN: 358070214, Registration: MAT14, Email: etudiant14@example.com
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - 
+Student Distribution Statistics:
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Students per TP group:
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-94: 3 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-95: 3 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-96: 3 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-90: 4 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-91: 5 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-92: 3 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-93: 4 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-103: 3 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-102: 3 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-101: 3 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-100: 6 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-98: 1 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-99: 2 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - TP-89: 1 students
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - 1. Schedule Test Results:
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger -    - Total sessions found: 32
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger -    - Unique subjects: 11
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger -    - Session types distribution: 
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger -      TD: 7
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger -      CI: 10
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger -      TP: 8
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger -      CR: 7
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - 
+2. Student Test Results:
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger -    - Total students: 44
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger -    - Students with TP assignments: 44
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger -    - Students without TP assignments: 0
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - 
+========== BrancheService Functionality Tests Completed Successfully ==========
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-02 17:34:33 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - ========== Starting EnseignantService Functionality Tests ==========
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 16:31:02
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Teachers -----
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - Selected test teacher - ID: 2, Name: Smith Michael
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - 
+----- Testing getSchedule functionality -----
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - Retrieved schedule for Teacher ID: 2
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - Total sessions found: 0
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - 
+----- Testing getTotalTeachingHours functionality -----
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - Calculating teaching hours from 2025-05-02 to 2025-06-02
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - Total teaching hours: 0
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - 
+----- Testing submitMakeupRequest functionality -----
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - Submitting makeup request for Teacher ID: 2
+2025-05-02 17:35:48 [restartedMain] ERROR CustomLogger - 
+===== ERROR in EnseignantService Tests =====
+2025-05-02 17:35:48 [restartedMain] ERROR CustomLogger - Error type: CustomException
+2025-05-02 17:35:48 [restartedMain] ERROR CustomLogger - Error message: Failed to submit makeup session request for teacher with ID: 2
+2025-05-02 17:35:48 [restartedMain] ERROR CustomLogger - Stack trace:
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 17:35:48 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 17:35:48 [restartedMain] ERROR CustomLogger - Error during testing: Failed to submit makeup session request for teacher with ID: 2
+2025-05-02 17:35:48 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-05-02 17:39:35 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 17:39:35 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 17:39:35 [restartedMain] INFO  CustomLogger - ========== Starting EnseignantService Functionality Tests ==========
+2025-05-02 17:39:35 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 16:31:02
+2025-05-02 17:39:35 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 17:39:35 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Teachers -----
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Selected test teacher - ID: 2, Name: Smith Michael
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - 
+----- Testing getSchedule functionality -----
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Retrieved schedule for Teacher ID: 2
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Total sessions found: 4
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Schedule details:
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Session ID: 572, Subject: Physics, Day: TUESDAY, Time: 16:35 - 19:16, Frequency: 1/15
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Session ID: 645, Subject: Artificial Intelligence, Day: WEDNESDAY, Time: 10:10 - 12:27, Frequency: 1/15
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Session ID: 653, Subject: Mathematics, Day: THURSDAY, Time: 10:00 - 12:59, Frequency: weekly
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Session ID: 660, Subject: Physics, Day: TUESDAY, Time: 09:00 - 10:33, Frequency: 1/15
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - 
+----- Testing getTotalTeachingHours functionality -----
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Calculating teaching hours from 2025-05-02 to 2025-06-02
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Total teaching hours: 0
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - 
+----- Testing submitMakeupRequest functionality -----
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Submitting makeup request for Teacher ID: 2
+2025-05-02 17:39:36 [restartedMain] ERROR CustomLogger - 
+===== ERROR in EnseignantService Tests =====
+2025-05-02 17:39:36 [restartedMain] ERROR CustomLogger - Error type: CustomException
+2025-05-02 17:39:36 [restartedMain] ERROR CustomLogger - Error message: Failed to submit makeup session request for teacher with ID: 2
+2025-05-02 17:39:36 [restartedMain] ERROR CustomLogger - Stack trace:
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 17:39:36 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 17:39:36 [restartedMain] ERROR CustomLogger - Error during testing: Failed to submit makeup session request for teacher with ID: 2
+2025-05-02 17:39:36 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - ========== Starting EnseignantService Functionality Tests ==========
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 16:31:02
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Teachers -----
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Selected test teacher - ID: 1221, Name: Thomas Michael
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - 
+----- Testing getSchedule functionality -----
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Retrieved schedule for Teacher ID: 1221
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Total sessions found: 4
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Schedule details:
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Session ID: 572, Subject: Physics, Day: TUESDAY, Time: 16:35 - 19:16, Frequency: 1/15
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Session ID: 645, Subject: Artificial Intelligence, Day: WEDNESDAY, Time: 10:10 - 12:27, Frequency: 1/15
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Session ID: 653, Subject: Mathematics, Day: THURSDAY, Time: 10:00 - 12:59, Frequency: weekly
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Session ID: 660, Subject: Physics, Day: TUESDAY, Time: 09:00 - 10:33, Frequency: 1/15
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - 
+----- Testing getTotalTeachingHours functionality -----
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Calculating teaching hours from 2025-05-02 to 2025-06-02
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Total teaching hours: 28
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - 
+----- Testing submitMakeupRequest functionality -----
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Submitting makeup request for Teacher ID: 1221
+2025-05-02 17:40:59 [restartedMain] ERROR CustomLogger - 
+===== ERROR in EnseignantService Tests =====
+2025-05-02 17:40:59 [restartedMain] ERROR CustomLogger - Error type: CustomException
+2025-05-02 17:40:59 [restartedMain] ERROR CustomLogger - Error message: Failed to submit makeup session request for teacher with ID: 1221
+2025-05-02 17:40:59 [restartedMain] ERROR CustomLogger - Stack trace:
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 17:40:59 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 17:40:59 [restartedMain] ERROR CustomLogger - Error during testing: Failed to submit makeup session request for teacher with ID: 1221
+2025-05-02 17:40:59 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-05-02 17:44:29 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 17:44:29 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 17:44:29 [restartedMain] INFO  CustomLogger - ========== Starting EnseignantService Functionality Tests ==========
+2025-05-02 17:44:29 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 16:31:02
+2025-05-02 17:44:29 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 17:44:29 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Teachers -----
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Selected test teacher - ID: 1221, Name: Thomas Michael
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - 
+----- Testing getSchedule functionality -----
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Retrieved schedule for Teacher ID: 1221
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Total sessions found: 4
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Schedule details:
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Session ID: 572, Subject: Physics, Day: TUESDAY, Time: 16:35 - 19:16, Frequency: 1/15
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Session ID: 645, Subject: Artificial Intelligence, Day: WEDNESDAY, Time: 10:10 - 12:27, Frequency: 1/15
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Session ID: 653, Subject: Mathematics, Day: THURSDAY, Time: 10:00 - 12:59, Frequency: weekly
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Session ID: 660, Subject: Physics, Day: TUESDAY, Time: 09:00 - 10:33, Frequency: 1/15
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - 
+----- Testing getTotalTeachingHours functionality -----
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Calculating teaching hours from 2025-05-02 to 2025-06-02
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Total teaching hours: 28
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - 
+----- Testing submitMakeupRequest functionality -----
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Submitting makeup request for Teacher ID: 1221
+2025-05-02 17:44:30 [restartedMain] ERROR CustomLogger - 
+===== ERROR in EnseignantService Tests =====
+2025-05-02 17:44:30 [restartedMain] ERROR CustomLogger - Error type: CustomException
+2025-05-02 17:44:30 [restartedMain] ERROR CustomLogger - Error message: Failed to submit makeup session request for teacher with ID: 1221No enum constant com.scheduling.universityschedule_backend.model.SeanceType.COURSE
+2025-05-02 17:44:30 [restartedMain] ERROR CustomLogger - Stack trace:
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 17:44:30 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 17:44:30 [restartedMain] ERROR CustomLogger - Error during testing: Failed to submit makeup session request for teacher with ID: 1221No enum constant com.scheduling.universityschedule_backend.model.SeanceType.COURSE
+2025-05-02 17:44:30 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-05-02 17:49:53 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 17:49:53 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 17:49:53 [restartedMain] INFO  CustomLogger - ========== Starting EnseignantService Functionality Tests ==========
+2025-05-02 17:49:53 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 16:31:02
+2025-05-02 17:49:53 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 17:49:53 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Teachers -----
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Selected test teacher - ID: 1221, Name: Thomas Michael
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+----- Testing getSchedule functionality -----
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Retrieved schedule for Teacher ID: 1221
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Total sessions found: 4
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Schedule details:
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Session ID: 572, Subject: Physics, Day: TUESDAY, Time: 16:35 - 19:16, Frequency: 1/15
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Session ID: 645, Subject: Artificial Intelligence, Day: WEDNESDAY, Time: 10:10 - 12:27, Frequency: 1/15
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Session ID: 653, Subject: Mathematics, Day: THURSDAY, Time: 10:00 - 12:59, Frequency: weekly
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Session ID: 660, Subject: Physics, Day: TUESDAY, Time: 09:00 - 10:33, Frequency: 1/15
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+----- Testing getTotalTeachingHours functionality -----
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Calculating teaching hours from 2025-05-02 to 2025-06-02
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Total teaching hours: 28
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+----- Testing submitMakeupRequest functionality -----
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Submitting makeup request for Teacher ID: 1221
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Makeup request submitted - ID: 157, Status: PENDING
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+----- Testing Signal submission and retrieval -----
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Submitting signal for Teacher ID: 1221
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Signal submitted - ID: 149
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Retrieving all signals for Teacher ID: 1221
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Total signals found: 0
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+----- Testing getSubjects functionality -----
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Retrieved subjects for Teacher ID: 1221
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Total subjects: 3
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Subjects taught:
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - - Physics
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - - Artificial Intelligence
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - - Mathematics
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+----- Testing getStudentGroups functionality -----
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Retrieved student groups for Teacher ID: 1221
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Total groups: 2
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Student groups:
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - TP ID: 120, Number: 2, TD ID: 60
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - TP ID: 112, Number: 2, TD ID: 62
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 1. Schedule Test:
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger -    - Total sessions: 4
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger -    - Weekly hours: 28
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+2. Makeup Request Test:
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger -    - Request status: PENDING
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+3. Signals Test:
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger -    - Total signals: 0
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger -    - Latest signal status: N/A
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+4. Subjects and Groups:
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger -    - Total subjects: 3
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger -    - Total student groups: 2
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+========== EnseignantService Functionality Tests Completed Successfully ==========
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-02 17:49:54 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - ========== Starting EtudiantService Functionality Tests ==========
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 16:59:04
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Students -----
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+----- Selecting test student with required assignments -----
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Selected test student - ID: 1027, Name: Taylor Barbara, TP ID: 98, Branch ID: 22
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+----- Testing getPersonalSchedule functionality -----
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Retrieved personal schedule for Student ID: 1027
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Total personal sessions found: 5
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Personal schedule details:
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 468, Subject: Networks, Day: THURSDAY, Time: 10:40 - 12:50, Type: CI, Room: 52
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 474, Subject: Database Systems, Day: THURSDAY, Time: 09:30 - 12:06, Type: TD, Room: 49
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 505, Subject: Mathematics, Day: THURSDAY, Time: 15:10 - 18:03, Type: CR, Room: 50
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 525, Subject: Operating Systems, Day: WEDNESDAY, Time: 08:45 - 11:42, Type: TP, Room: 50
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 545, Subject: Operating Systems, Day: FRIDAY, Time: 14:40 - 17:04, Type: TD, Room: 53
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+----- Testing getTDSchedule functionality -----
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Retrieved TD schedule for Student ID: 1027
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Total TD sessions found: 23
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - TD schedule details:
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 461, Subject: Chemistry, Day: WEDNESDAY, Time: 08:50 - 11:44, Type: TD
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 462, Subject: Operating Systems, Day: MONDAY, Time: 10:40 - 13:14, Type: CI
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 465, Subject: Algorithms, Day: WEDNESDAY, Time: 12:50 - 15:14, Type: CR
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 466, Subject: Data Structures, Day: MONDAY, Time: 10:50 - 13:05, Type: CI
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 471, Subject: Networks, Day: TUESDAY, Time: 14:45 - 17:17, Type: CR
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+----- Testing getBranchSchedule functionality -----
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Retrieved branch schedule for Student ID: 1027
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Total branch sessions found: 32
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Branch schedule details:
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 462, Subject: Operating Systems, Day: MONDAY, Time: 10:40 - 13:14, Type: CI
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 466, Subject: Data Structures, Day: MONDAY, Time: 10:50 - 13:05, Type: CI
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 467, Subject: Operating Systems, Day: MONDAY, Time: 16:05 - 18:29, Type: TP
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 470, Subject: Computer Architecture, Day: THURSDAY, Time: 08:25 - 10:34, Type: CI
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Session ID: 471, Subject: Networks, Day: TUESDAY, Time: 14:45 - 17:17, Type: CR
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+Session type distribution in branch schedule:
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - TD: 7 sessions
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - CI: 10 sessions
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - TP: 8 sessions
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - CR: 7 sessions
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+----- Testing getNotifications functionality -----
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Retrieved notifications for Student ID: 1027
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Total notifications found: 10
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Recent notifications:
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Notification ID: 2667, Message: Broadcast test, Created: 2025-05-02T16:02:35.894263, Read: false
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Notification ID: 2562, Message: Broadcast test, Created: 2025-05-02T16:02:35.620075, Read: false
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Notification ID: 2416, Message: Broadcast test, Created: 2025-05-02T16:02:35.420833, Read: false
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Notification ID: 2151, Message: Broadcast test, Created: 2025-05-02T16:02:35.304677, Read: false
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Notification ID: 1833, Message: Broadcast test, Created: 2025-05-02T16:02:35.124177, Read: false
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+Notification Statistics:
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Total notifications: 10
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Unread notifications: 10
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Read notifications: 0
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 1. Schedule Test Results:
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger -    - Personal schedule sessions: 5
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger -    - TD schedule sessions: 23
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger -    - Branch schedule sessions: 32
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger -    - Total unique subjects: 11
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+2. Notification Test Results:
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger -    - Total notifications: 10
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger -    - Most recent notification: Broadcast test
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+========== EtudiantService Functionality Tests Completed Successfully ==========
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-02 18:03:55 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - ========== Starting EtudiantService Functionality Tests ==========
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 16:59:04
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Students -----
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+----- Selecting test student with required assignments -----
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Selected test student - ID: 1027, Name: Taylor Barbara, TP ID: 98, Branch ID: 22
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+----- Testing getPersonalSchedule functionality -----
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Retrieved personal schedule for Student ID: 1027
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Total personal sessions found: 5
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Personal schedule details:
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 468, Subject: Networks, Day: THURSDAY, Time: 10:40 - 12:50, Type: CI, Room: 52
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 474, Subject: Database Systems, Day: THURSDAY, Time: 09:30 - 12:06, Type: TD, Room: 49
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 505, Subject: Mathematics, Day: THURSDAY, Time: 15:10 - 18:03, Type: CR, Room: 50
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 525, Subject: Operating Systems, Day: WEDNESDAY, Time: 08:45 - 11:42, Type: TP, Room: 50
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 545, Subject: Operating Systems, Day: FRIDAY, Time: 14:40 - 17:04, Type: TD, Room: 53
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+----- Testing getTDSchedule functionality -----
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Retrieved TD schedule for Student ID: 1027
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Total TD sessions found: 23
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - TD schedule details:
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 461, Subject: Chemistry, Day: WEDNESDAY, Time: 08:50 - 11:44, Type: TD
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 462, Subject: Operating Systems, Day: MONDAY, Time: 10:40 - 13:14, Type: CI
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 465, Subject: Algorithms, Day: WEDNESDAY, Time: 12:50 - 15:14, Type: CR
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 466, Subject: Data Structures, Day: MONDAY, Time: 10:50 - 13:05, Type: CI
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 471, Subject: Networks, Day: TUESDAY, Time: 14:45 - 17:17, Type: CR
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+----- Testing getBranchSchedule functionality -----
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Retrieved branch schedule for Student ID: 1027
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Total branch sessions found: 32
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Branch schedule details:
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 462, Subject: Operating Systems, Day: MONDAY, Time: 10:40 - 13:14, Type: CI
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 466, Subject: Data Structures, Day: MONDAY, Time: 10:50 - 13:05, Type: CI
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 467, Subject: Operating Systems, Day: MONDAY, Time: 16:05 - 18:29, Type: TP
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 470, Subject: Computer Architecture, Day: THURSDAY, Time: 08:25 - 10:34, Type: CI
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Session ID: 471, Subject: Networks, Day: TUESDAY, Time: 14:45 - 17:17, Type: CR
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+Session type distribution in branch schedule:
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - TD: 7 sessions
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - CI: 10 sessions
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - TP: 8 sessions
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - CR: 7 sessions
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+----- Testing getNotifications functionality -----
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Retrieved notifications for Student ID: 1027
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Total notifications found: 10
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Recent notifications:
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Notification ID: 2667, Message: Broadcast test, Created: 2025-05-02T16:02:35.894263, Read: false
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Notification ID: 2562, Message: Broadcast test, Created: 2025-05-02T16:02:35.620075, Read: false
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Notification ID: 2416, Message: Broadcast test, Created: 2025-05-02T16:02:35.420833, Read: false
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Notification ID: 2151, Message: Broadcast test, Created: 2025-05-02T16:02:35.304677, Read: false
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Notification ID: 1833, Message: Broadcast test, Created: 2025-05-02T16:02:35.124177, Read: false
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+Notification Statistics:
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Total notifications: 10
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Unread notifications: 10
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Read notifications: 0
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 1. Schedule Test Results:
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger -    - Personal schedule sessions: 5
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger -    - TD schedule sessions: 23
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger -    - Branch schedule sessions: 32
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger -    - Total unique subjects: 11
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+2. Notification Test Results:
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger -    - Total notifications: 10
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger -    - Most recent notification: Broadcast test
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+========== EtudiantService Functionality Tests Completed Successfully ==========
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-02 18:17:40 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - ========== Starting SalleService Functionality Tests ==========
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 17:17:13
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - 
+----- Testing getAvailableRooms functionality -----
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Scenario 1: Regular session availability
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Parameters:
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - - Day: MONDAY
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - - Time: 09:00 - 10:30
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Available rooms (57):
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 66, Identifier: SAL0, Type: Lecture Hall, Capacity: 124
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 27
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 49, Identifier: SAL0, Type: Lecture Hall, Capacity: 151
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 20
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 83, Identifier: SAL0, Type: Lecture Hall, Capacity: 101
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 3
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 39, Identifier: SAL0, Type: Lecture Hall, Capacity: 102
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 80, Identifier: SAL0, Type: Lecture Hall, Capacity: 190
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 3
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 86, Identifier: SAL0, Type: Lecture Hall, Capacity: 108
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 16
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 77, Identifier: SAL0, Type: Lecture Hall, Capacity: 197
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 34, Identifier: SAL0, Type: Lecture Hall, Capacity: 63
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 56, Identifier: SAL0, Type: Lecture Hall, Capacity: 198
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 15
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 74, Identifier: SAL0, Type: Lecture Hall, Capacity: 165
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 25, Identifier: SAL0, Type: Lecture Hall, Capacity: 53
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 91, Identifier: SAL0, Type: Lecture Hall, Capacity: 162
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 4
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 10, Identifier: SAL0, Type: Lecture Hall, Capacity: 95
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 7, Identifier: SAL0, Type: Lecture Hall, Capacity: 156
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 71, Identifier: SAL0, Type: Lecture Hall, Capacity: 166
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 3
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 1, Identifier: SAL0, Type: Lecture Hall, Capacity: 156
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 11
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 75, Identifier: SAL1, Type: Lecture Hall, Capacity: 171
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 2
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 72, Identifier: SAL1, Type: Lecture Hall, Capacity: 155
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 78, Identifier: SAL1, Type: Lecture Hall, Capacity: 94
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 3
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 50, Identifier: SAL1, Type: Lecture Hall, Capacity: 93
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 14
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 40, Identifier: SAL1, Type: Lecture Hall, Capacity: 141
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 84, Identifier: SAL1, Type: Lecture Hall, Capacity: 97
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 2, Identifier: SAL1, Type: Lecture Hall, Capacity: 100
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 35, Identifier: SAL1, Type: Lecture Hall, Capacity: 111
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 5, Identifier: SAL1, Type: Lecture Hall, Capacity: 181
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 32, Identifier: SAL1, Type: Lecture Hall, Capacity: 58
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 87, Identifier: SAL1, Type: Lecture Hall, Capacity: 131
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 29
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 81, Identifier: SAL1, Type: Lecture Hall, Capacity: 152
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 26, Identifier: SAL1, Type: Lecture Hall, Capacity: 67
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 8, Identifier: SAL1, Type: Lecture Hall, Capacity: 82
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 11, Identifier: SAL1, Type: Lecture Hall, Capacity: 104
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 92, Identifier: SAL1, Type: Lecture Hall, Capacity: 157
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 1
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 88, Identifier: SAL2, Type: Lecture Hall, Capacity: 90
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 15
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 93, Identifier: SAL2, Type: Lecture Hall, Capacity: 194
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 68, Identifier: SAL2, Type: Lecture Hall, Capacity: 94
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 13
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 73, Identifier: SAL2, Type: Lecture Hall, Capacity: 95
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 2
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 76, Identifier: SAL2, Type: Lecture Hall, Capacity: 168
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 3
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 85, Identifier: SAL2, Type: Lecture Hall, Capacity: 71
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 2
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 79, Identifier: SAL2, Type: Lecture Hall, Capacity: 82
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 2
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 82, Identifier: SAL2, Type: Lecture Hall, Capacity: 123
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 2
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 3, Identifier: SAL2, Type: Lecture Hall, Capacity: 109
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 9, Identifier: SAL2, Type: Lecture Hall, Capacity: 152
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 12, Identifier: SAL2, Type: Lecture Hall, Capacity: 146
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 27, Identifier: SAL2, Type: Lecture Hall, Capacity: 173
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 30, Identifier: SAL2, Type: Lecture Hall, Capacity: 112
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 36, Identifier: SAL2, Type: Lecture Hall, Capacity: 126
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 41, Identifier: SAL2, Type: Lecture Hall, Capacity: 149
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 51, Identifier: SAL2, Type: Lecture Hall, Capacity: 115
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 16
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 69, Identifier: SAL3, Type: Lecture Hall, Capacity: 124
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 19
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 89, Identifier: SAL3, Type: Lecture Hall, Capacity: 157
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 23
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 37, Identifier: SAL3, Type: Lecture Hall, Capacity: 130
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 42, Identifier: SAL3, Type: Lecture Hall, Capacity: 120
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 43, Identifier: SAL4, Type: Lecture Hall, Capacity: 187
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 38, Identifier: SAL4, Type: Lecture Hall, Capacity: 116
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 70, Identifier: SAL4, Type: Lecture Hall, Capacity: 141
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 17
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 54, Identifier: TEST-ROOM, Type: Classroom, Capacity: 30
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 1
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 55, Identifier: TEST-ROOM, Type: Classroom, Capacity: 30
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 1
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - 
+Room Type Distribution:
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Lecture Hall: 55 rooms
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Classroom: 2 rooms
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - 
+Scenario 2: Makeup session availability
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Parameters:
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - - Date: 2025-05-09
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - - Day: FRIDAY
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - - Time: 09:00 - 10:30
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Available rooms for makeup session (61):
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 49, Identifier: SAL0, Type: Lecture Hall, Capacity: 151
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 83, Identifier: SAL0, Type: Lecture Hall, Capacity: 101
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 39, Identifier: SAL0, Type: Lecture Hall, Capacity: 102
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 80, Identifier: SAL0, Type: Lecture Hall, Capacity: 190
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 86, Identifier: SAL0, Type: Lecture Hall, Capacity: 108
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 77, Identifier: SAL0, Type: Lecture Hall, Capacity: 197
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 34, Identifier: SAL0, Type: Lecture Hall, Capacity: 63
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 56, Identifier: SAL0, Type: Lecture Hall, Capacity: 198
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 74, Identifier: SAL0, Type: Lecture Hall, Capacity: 165
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 25, Identifier: SAL0, Type: Lecture Hall, Capacity: 53
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 91, Identifier: SAL0, Type: Lecture Hall, Capacity: 162
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 61, Identifier: SAL0, Type: Lecture Hall, Capacity: 135
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 10, Identifier: SAL0, Type: Lecture Hall, Capacity: 95
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 7, Identifier: SAL0, Type: Lecture Hall, Capacity: 156
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 71, Identifier: SAL0, Type: Lecture Hall, Capacity: 166
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 1, Identifier: SAL0, Type: Lecture Hall, Capacity: 156
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 75, Identifier: SAL1, Type: Lecture Hall, Capacity: 171
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 72, Identifier: SAL1, Type: Lecture Hall, Capacity: 155
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 78, Identifier: SAL1, Type: Lecture Hall, Capacity: 94
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 67, Identifier: SAL1, Type: Lecture Hall, Capacity: 159
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 40, Identifier: SAL1, Type: Lecture Hall, Capacity: 141
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 84, Identifier: SAL1, Type: Lecture Hall, Capacity: 97
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 2, Identifier: SAL1, Type: Lecture Hall, Capacity: 100
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 35, Identifier: SAL1, Type: Lecture Hall, Capacity: 111
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 5, Identifier: SAL1, Type: Lecture Hall, Capacity: 181
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 32, Identifier: SAL1, Type: Lecture Hall, Capacity: 58
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 81, Identifier: SAL1, Type: Lecture Hall, Capacity: 152
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 26, Identifier: SAL1, Type: Lecture Hall, Capacity: 67
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 8, Identifier: SAL1, Type: Lecture Hall, Capacity: 82
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 11, Identifier: SAL1, Type: Lecture Hall, Capacity: 104
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 92, Identifier: SAL1, Type: Lecture Hall, Capacity: 157
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 93, Identifier: SAL2, Type: Lecture Hall, Capacity: 194
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 68, Identifier: SAL2, Type: Lecture Hall, Capacity: 94
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 73, Identifier: SAL2, Type: Lecture Hall, Capacity: 95
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 76, Identifier: SAL2, Type: Lecture Hall, Capacity: 168
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 85, Identifier: SAL2, Type: Lecture Hall, Capacity: 71
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 79, Identifier: SAL2, Type: Lecture Hall, Capacity: 82
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 82, Identifier: SAL2, Type: Lecture Hall, Capacity: 123
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 3, Identifier: SAL2, Type: Lecture Hall, Capacity: 109
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 9, Identifier: SAL2, Type: Lecture Hall, Capacity: 152
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 12, Identifier: SAL2, Type: Lecture Hall, Capacity: 146
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 63, Identifier: SAL2, Type: Lecture Hall, Capacity: 175
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 27, Identifier: SAL2, Type: Lecture Hall, Capacity: 173
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 58, Identifier: SAL2, Type: Lecture Hall, Capacity: 91
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 30, Identifier: SAL2, Type: Lecture Hall, Capacity: 112
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 36, Identifier: SAL2, Type: Lecture Hall, Capacity: 126
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 41, Identifier: SAL2, Type: Lecture Hall, Capacity: 149
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 89, Identifier: SAL3, Type: Lecture Hall, Capacity: 157
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 37, Identifier: SAL3, Type: Lecture Hall, Capacity: 130
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 42, Identifier: SAL3, Type: Lecture Hall, Capacity: 120
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 52, Identifier: SAL3, Type: Lecture Hall, Capacity: 125
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 59, Identifier: SAL3, Type: Lecture Hall, Capacity: 163
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 64, Identifier: SAL3, Type: Lecture Hall, Capacity: 144
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 43, Identifier: SAL4, Type: Lecture Hall, Capacity: 187
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 38, Identifier: SAL4, Type: Lecture Hall, Capacity: 116
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 53, Identifier: SAL4, Type: Lecture Hall, Capacity: 154
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 60, Identifier: SAL4, Type: Lecture Hall, Capacity: 91
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 70, Identifier: SAL4, Type: Lecture Hall, Capacity: 141
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 65, Identifier: SAL4, Type: Lecture Hall, Capacity: 124
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 54, Identifier: TEST-ROOM, Type: Classroom, Capacity: 30
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Room ID: 55, Identifier: TEST-ROOM, Type: Classroom, Capacity: 30
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - 1. Regular Session Test:
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -    - Total available rooms: 57
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -    - Average room capacity: 124.82
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - 
+2. Makeup Session Test:
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -    - Total available rooms: 61
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger -    - Average room capacity: 127.85
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - 
+Availability Comparison:
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - - Rooms available for regular sessions only: 0
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - - Rooms available for makeup sessions only: 0
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - - Rooms available for both scenarios: 6
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - 
+========== SalleService Tests Completed Successfully ==========
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-02 18:20:33 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - ========== Starting ExcelFileService Functionality Tests ==========
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 17:17:13
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - 
+----- Testing Excel File Upload functionality -----
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - Uploading test file with 2 sessions
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - File details:
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - - Name: test_schedule_2025.xlsx
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - - Status: STATUS_PROCESSING
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - - Import Date: 2025-05-02T18:21:49.133795935
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - File uploaded successfully
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - 
+----- Testing Import History functionality -----
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - Retrieved 85 import records
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - Recent imports (last 5):
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - File: test_schedule_2025.xlsx, Status: Completed, Import Date: 2025-05-02T18:21:49.135572298, Errors: 0
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - File: schedule_0.xlsx, Status: Imported, Import Date: 2025-05-02T16:57:57.084368, Errors: 1
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - File: schedule_9.xlsx, Status: Imported, Import Date: 2025-05-02T16:57:32.165096, Errors: 1
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - File: schedule_8.xlsx, Status: Imported, Import Date: 2025-05-02T16:57:32.164674, Errors: 1
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - File: schedule_7.xlsx, Status: Imported, Import Date: 2025-05-02T16:57:32.164252, Errors: 1
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - 
+Import Status Distribution:
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - Completed: 3 files
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - Imported: 78 files
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - Updated Status: 4 files
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - 1. Upload Test:
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger -    - File uploaded: test_schedule_2025.xlsx
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger -    - Sessions included: 2
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger -    - Final status: STATUS_COMPLETED
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - 
+2. Import History Test:
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger -    - Total imports: 85
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger -    - Latest import: test_schedule_2025.xlsx
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger -    - Latest status: Completed
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger -    - Import date: 2025-05-02T18:21:49.135572298
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - 
+========== ExcelFileService Tests Completed Successfully ==========
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 18:21:49 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - ========== Starting SalleService Functionality Tests ==========
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 17:17:13
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - 
+----- Testing getAvailableRooms functionality -----
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Scenario 1: Regular session availability
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Parameters:
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - - Day: MONDAY
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - - Time: 09:00 - 10:30
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Available rooms (57):
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 66, Identifier: SAL0, Type: Lecture Hall, Capacity: 124
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 27
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 49, Identifier: SAL0, Type: Lecture Hall, Capacity: 151
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 20
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 83, Identifier: SAL0, Type: Lecture Hall, Capacity: 101
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 3
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 39, Identifier: SAL0, Type: Lecture Hall, Capacity: 102
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 80, Identifier: SAL0, Type: Lecture Hall, Capacity: 190
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 3
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 86, Identifier: SAL0, Type: Lecture Hall, Capacity: 108
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 16
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 77, Identifier: SAL0, Type: Lecture Hall, Capacity: 197
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 34, Identifier: SAL0, Type: Lecture Hall, Capacity: 63
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 56, Identifier: SAL0, Type: Lecture Hall, Capacity: 198
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 15
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 74, Identifier: SAL0, Type: Lecture Hall, Capacity: 165
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 25, Identifier: SAL0, Type: Lecture Hall, Capacity: 53
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 91, Identifier: SAL0, Type: Lecture Hall, Capacity: 162
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 4
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 10, Identifier: SAL0, Type: Lecture Hall, Capacity: 95
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 7, Identifier: SAL0, Type: Lecture Hall, Capacity: 156
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 71, Identifier: SAL0, Type: Lecture Hall, Capacity: 166
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 3
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 1, Identifier: SAL0, Type: Lecture Hall, Capacity: 156
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 11
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 75, Identifier: SAL1, Type: Lecture Hall, Capacity: 171
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 2
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 72, Identifier: SAL1, Type: Lecture Hall, Capacity: 155
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 78, Identifier: SAL1, Type: Lecture Hall, Capacity: 94
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 3
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 50, Identifier: SAL1, Type: Lecture Hall, Capacity: 93
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 14
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 40, Identifier: SAL1, Type: Lecture Hall, Capacity: 141
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 84, Identifier: SAL1, Type: Lecture Hall, Capacity: 97
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 2, Identifier: SAL1, Type: Lecture Hall, Capacity: 100
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 35, Identifier: SAL1, Type: Lecture Hall, Capacity: 111
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 5, Identifier: SAL1, Type: Lecture Hall, Capacity: 181
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 32, Identifier: SAL1, Type: Lecture Hall, Capacity: 58
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 87, Identifier: SAL1, Type: Lecture Hall, Capacity: 131
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 29
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 81, Identifier: SAL1, Type: Lecture Hall, Capacity: 152
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 26, Identifier: SAL1, Type: Lecture Hall, Capacity: 67
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 8, Identifier: SAL1, Type: Lecture Hall, Capacity: 82
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 11, Identifier: SAL1, Type: Lecture Hall, Capacity: 104
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 92, Identifier: SAL1, Type: Lecture Hall, Capacity: 157
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 1
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 88, Identifier: SAL2, Type: Lecture Hall, Capacity: 90
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 15
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 93, Identifier: SAL2, Type: Lecture Hall, Capacity: 194
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 5
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 68, Identifier: SAL2, Type: Lecture Hall, Capacity: 94
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 13
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 73, Identifier: SAL2, Type: Lecture Hall, Capacity: 95
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 2
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 76, Identifier: SAL2, Type: Lecture Hall, Capacity: 168
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 3
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 85, Identifier: SAL2, Type: Lecture Hall, Capacity: 71
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 2
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 79, Identifier: SAL2, Type: Lecture Hall, Capacity: 82
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 2
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 82, Identifier: SAL2, Type: Lecture Hall, Capacity: 123
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 2
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 3, Identifier: SAL2, Type: Lecture Hall, Capacity: 109
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 9, Identifier: SAL2, Type: Lecture Hall, Capacity: 152
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 12, Identifier: SAL2, Type: Lecture Hall, Capacity: 146
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 27, Identifier: SAL2, Type: Lecture Hall, Capacity: 173
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 30, Identifier: SAL2, Type: Lecture Hall, Capacity: 112
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 36, Identifier: SAL2, Type: Lecture Hall, Capacity: 126
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 41, Identifier: SAL2, Type: Lecture Hall, Capacity: 149
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 51, Identifier: SAL2, Type: Lecture Hall, Capacity: 115
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 16
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 69, Identifier: SAL3, Type: Lecture Hall, Capacity: 124
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 19
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 89, Identifier: SAL3, Type: Lecture Hall, Capacity: 157
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 23
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 37, Identifier: SAL3, Type: Lecture Hall, Capacity: 130
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 42, Identifier: SAL3, Type: Lecture Hall, Capacity: 120
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 43, Identifier: SAL4, Type: Lecture Hall, Capacity: 187
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 38, Identifier: SAL4, Type: Lecture Hall, Capacity: 116
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 70, Identifier: SAL4, Type: Lecture Hall, Capacity: 141
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 17
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 54, Identifier: TEST-ROOM, Type: Classroom, Capacity: 30
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 1
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 55, Identifier: TEST-ROOM, Type: Classroom, Capacity: 30
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -   Scheduled sessions: 1
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - 
+Room Type Distribution:
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Lecture Hall: 55 rooms
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Classroom: 2 rooms
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - 
+Scenario 2: Makeup session availability
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Parameters:
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - - Date: 2025-05-09
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - - Day: FRIDAY
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - - Time: 09:00 - 10:30
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Available rooms for makeup session (61):
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 49, Identifier: SAL0, Type: Lecture Hall, Capacity: 151
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 83, Identifier: SAL0, Type: Lecture Hall, Capacity: 101
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 39, Identifier: SAL0, Type: Lecture Hall, Capacity: 102
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 80, Identifier: SAL0, Type: Lecture Hall, Capacity: 190
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 86, Identifier: SAL0, Type: Lecture Hall, Capacity: 108
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 77, Identifier: SAL0, Type: Lecture Hall, Capacity: 197
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 34, Identifier: SAL0, Type: Lecture Hall, Capacity: 63
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 56, Identifier: SAL0, Type: Lecture Hall, Capacity: 198
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 74, Identifier: SAL0, Type: Lecture Hall, Capacity: 165
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 25, Identifier: SAL0, Type: Lecture Hall, Capacity: 53
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 91, Identifier: SAL0, Type: Lecture Hall, Capacity: 162
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 61, Identifier: SAL0, Type: Lecture Hall, Capacity: 135
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 10, Identifier: SAL0, Type: Lecture Hall, Capacity: 95
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 7, Identifier: SAL0, Type: Lecture Hall, Capacity: 156
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 71, Identifier: SAL0, Type: Lecture Hall, Capacity: 166
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 1, Identifier: SAL0, Type: Lecture Hall, Capacity: 156
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 75, Identifier: SAL1, Type: Lecture Hall, Capacity: 171
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 72, Identifier: SAL1, Type: Lecture Hall, Capacity: 155
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 78, Identifier: SAL1, Type: Lecture Hall, Capacity: 94
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 67, Identifier: SAL1, Type: Lecture Hall, Capacity: 159
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 40, Identifier: SAL1, Type: Lecture Hall, Capacity: 141
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 84, Identifier: SAL1, Type: Lecture Hall, Capacity: 97
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 2, Identifier: SAL1, Type: Lecture Hall, Capacity: 100
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 35, Identifier: SAL1, Type: Lecture Hall, Capacity: 111
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 5, Identifier: SAL1, Type: Lecture Hall, Capacity: 181
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 32, Identifier: SAL1, Type: Lecture Hall, Capacity: 58
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 81, Identifier: SAL1, Type: Lecture Hall, Capacity: 152
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 26, Identifier: SAL1, Type: Lecture Hall, Capacity: 67
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 8, Identifier: SAL1, Type: Lecture Hall, Capacity: 82
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 11, Identifier: SAL1, Type: Lecture Hall, Capacity: 104
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 92, Identifier: SAL1, Type: Lecture Hall, Capacity: 157
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 93, Identifier: SAL2, Type: Lecture Hall, Capacity: 194
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 68, Identifier: SAL2, Type: Lecture Hall, Capacity: 94
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 73, Identifier: SAL2, Type: Lecture Hall, Capacity: 95
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 76, Identifier: SAL2, Type: Lecture Hall, Capacity: 168
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 85, Identifier: SAL2, Type: Lecture Hall, Capacity: 71
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 79, Identifier: SAL2, Type: Lecture Hall, Capacity: 82
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 82, Identifier: SAL2, Type: Lecture Hall, Capacity: 123
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 3, Identifier: SAL2, Type: Lecture Hall, Capacity: 109
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 9, Identifier: SAL2, Type: Lecture Hall, Capacity: 152
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 12, Identifier: SAL2, Type: Lecture Hall, Capacity: 146
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 63, Identifier: SAL2, Type: Lecture Hall, Capacity: 175
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 27, Identifier: SAL2, Type: Lecture Hall, Capacity: 173
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 58, Identifier: SAL2, Type: Lecture Hall, Capacity: 91
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 30, Identifier: SAL2, Type: Lecture Hall, Capacity: 112
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 36, Identifier: SAL2, Type: Lecture Hall, Capacity: 126
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 41, Identifier: SAL2, Type: Lecture Hall, Capacity: 149
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 89, Identifier: SAL3, Type: Lecture Hall, Capacity: 157
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 37, Identifier: SAL3, Type: Lecture Hall, Capacity: 130
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 42, Identifier: SAL3, Type: Lecture Hall, Capacity: 120
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 52, Identifier: SAL3, Type: Lecture Hall, Capacity: 125
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 59, Identifier: SAL3, Type: Lecture Hall, Capacity: 163
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 64, Identifier: SAL3, Type: Lecture Hall, Capacity: 144
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 43, Identifier: SAL4, Type: Lecture Hall, Capacity: 187
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 38, Identifier: SAL4, Type: Lecture Hall, Capacity: 116
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 53, Identifier: SAL4, Type: Lecture Hall, Capacity: 154
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 60, Identifier: SAL4, Type: Lecture Hall, Capacity: 91
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 70, Identifier: SAL4, Type: Lecture Hall, Capacity: 141
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 65, Identifier: SAL4, Type: Lecture Hall, Capacity: 124
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 54, Identifier: TEST-ROOM, Type: Classroom, Capacity: 30
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Room ID: 55, Identifier: TEST-ROOM, Type: Classroom, Capacity: 30
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - 1. Regular Session Test:
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -    - Total available rooms: 57
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -    - Average room capacity: 124.82
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - 
+2. Makeup Session Test:
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -    - Total available rooms: 61
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger -    - Average room capacity: 127.85
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - 
+Availability Comparison:
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - - Rooms available for regular sessions only: 0
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - - Rooms available for makeup sessions only: 0
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - - Rooms available for both scenarios: 6
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - 
+========== SalleService Tests Completed Successfully ==========
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-02 19:15:53 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================

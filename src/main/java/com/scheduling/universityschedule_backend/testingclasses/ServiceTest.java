@@ -6,6 +6,7 @@ import com.scheduling.universityschedule_backend.mapper.EntityMapper;
 import com.scheduling.universityschedule_backend.model.FrequenceType;
 import com.scheduling.universityschedule_backend.model.Status;
 import com.scheduling.universityschedule_backend.model.SeanceType;
+import com.scheduling.universityschedule_backend.repository.PropositionDeRattrapageRepository;
 import com.scheduling.universityschedule_backend.service.*;
 import com.scheduling.universityschedule_backend.util.CustomLogger;
 import jakarta.persistence.EntityManager;
@@ -21,6 +22,7 @@ import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 @Transactional
@@ -36,6 +38,7 @@ public class ServiceTest {
     private final TDService tdService;
     private final TPService tpService;
     private final NotificationService notificationService;
+    private final PropositionDeRattrapageRepository propositionDeRattrapageRepository;
 
 
     public Random RANDOM = new Random();
@@ -51,6 +54,7 @@ public class ServiceTest {
         entityManager.flush();
         entityManager.clear();
     }
+
     public void debug() throws CustomException {
 //        populateDatabase(50);
 //        testAdministrateurService();
@@ -64,10 +68,22 @@ public class ServiceTest {
 //        testNotificationService();
 //        testExcelFileService();
 //rudTest();
-testSpecializedFunctionalities();
+//        testSpecializedFunctionalities();
+//    testAllUntestedExcelFileServiceFunctionalities();
+        testSpecializedFunctionalities();
     }
 
-    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService, EntityMapper entityMapper, EntityManager entityManager) {
+    public void testSpecializedFunctionalities() throws CustomException {
+        CustomLogger.logInfo("========== Testing Specialized Functionalities ==========");
+        clearDatabase();
+//        testAllUntestAdministrateurServiceFunctionalities();
+//testAllUntestedBrancheServiceFunctionalities();
+//        testAllUntestedEnseignantServiceFunctionalities()
+        testAllUntestedSalleServiceFunctionalities();
+        CustomLogger.logInfo("========== Specialized Functions Testing Complete ==========");
+    }
+
+    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService, EntityMapper entityMapper, EntityManager entityManager, PropositionDeRattrapageRepository propositionDeRattrapageRepository) {
         this.administrateurService = administrateurService;
         this.brancheService = brancheService;
         this.etudiantService = etudiantService;
@@ -80,7 +96,9 @@ testSpecializedFunctionalities();
         this.notificationService = notificationService;
         this.entityMapper = entityMapper;
         this.entityManager = entityManager;
+        this.propositionDeRattrapageRepository = propositionDeRattrapageRepository;
     }
+
     public void populateDatabase(int sampleSize) throws CustomException {
         CustomLogger.logInfo("========== Populating Database Using Service Layer ==========");
 
@@ -162,7 +180,7 @@ testSpecializedFunctionalities();
             enseignant.setTel(generateRandomTel.apply(null));
             enseignant.setAdresse("Teacher Address " + i);
             enseignant.setCodeEnseignant("ENS" + i);
-            enseignant.setHeures((int)(Math.random() * 40) + 1);
+            enseignant.setHeures((int) (Math.random() * 40) + 1);
             enseignants.add(enseignantService.create(enseignant));
         }
         CustomLogger.logInfo("Created Teachers: " + enseignants.size());
@@ -174,7 +192,7 @@ testSpecializedFunctionalities();
             String niveau = pickNiveau.apply(null);
             branche.setNiveau(niveau);
             branche.setSpecialite(pickSpecialty.apply(niveau));
-            branche.setNbTD((int)(Math.random() * 5) + 1);
+            branche.setNbTD((int) (Math.random() * 5) + 1);
             branche.setDepartement(Math.random() < 0.33 ? "Technologie" : "informatique");
             branches.add(brancheService.create(branche));
         }
@@ -184,8 +202,8 @@ testSpecializedFunctionalities();
         List<TDDTO> tds = new ArrayList<>();
         for (int i = 0; i < Math.max(2, (sampleSize * 3) / 20); i++) {
             TDDTO td = new TDDTO();
-            td.setNb((int)(Math.random() * 5) + 1);
-            td.setNbTP((int)(Math.random() * 3) + 1);
+            td.setNb((int) (Math.random() * 5) + 1);
+            td.setNbTP((int) (Math.random() * 3) + 1);
             td.setBrancheId(branches.get(RANDOM.nextInt(branches.size())).getId());
             tds.add(tdService.create(td));
         }
@@ -195,7 +213,7 @@ testSpecializedFunctionalities();
         List<TPDTO> tps = new ArrayList<>();
         for (int i = 0; i < Math.max(3, sampleSize / 3); i++) {
             TPDTO tp = new TPDTO();
-            tp.setNb((int)(Math.random() * 3) + 1);
+            tp.setNb((int) (Math.random() * 3) + 1);
             tp.setTdId(tds.get(RANDOM.nextInt(tds.size())).getId());
             tps.add(tpService.create(tp));
         }
@@ -224,7 +242,7 @@ testSpecializedFunctionalities();
             SalleDTO salle = new SalleDTO();
             salle.setIdentifiant("SAL" + i);
             salle.setType("Lecture Hall");
-            salle.setCapacite((int)(Math.random() * 150) + 50);
+            salle.setCapacite((int) (Math.random() * 150) + 50);
             salles.add(salleService.create(salle));
         }
         CustomLogger.logInfo("Created Rooms: " + salles.size());
@@ -322,7 +340,7 @@ testSpecializedFunctionalities();
             }
         }
         // 10. Create Signals
-        int signalcount=0;
+        int signalcount = 0;
         for (int i = 0; i < Math.max(1, sampleSize / 3); i++) {
             try {
                 SignalDTO signal = new SignalDTO();
@@ -330,7 +348,7 @@ testSpecializedFunctionalities();
                 signal.setSeverity(Math.random() > 0.5 ? "High" : "Low");
                 signal.setTimestamp(LocalDateTime.parse(LocalDateTime.now().toString()));
 
-                Long teacherId = enseignants.get(RANDOM.nextInt(enseignants.size()-1)).getId();
+                Long teacherId = enseignants.get(RANDOM.nextInt(enseignants.size() - 1)).getId();
                 signal.setEnseignantId(String.valueOf(teacherId));
 
                 enseignantService.submitSignal(teacherId, signal);
@@ -775,19 +793,12 @@ testSpecializedFunctionalities();
 
 
     // ======================================ADVANCED FEATURES ========================
+
     /**
      * Advanced feature testing methods for all services
      * Date: 2025-05-02 00:07:48 UTC
      */
     // Main method to call all specialized test methods
-    public void testSpecializedFunctionalities() throws CustomException {
-        CustomLogger.logInfo("========== Testing Specialized Functionalities ==========");
-        clearDatabase();
-        testAllUntestAdministrateurServiceFunctionalities();
-
-
-        CustomLogger.logInfo("========== Specialized Functions Testing Complete ==========");
-    }
     public void testAllUntestAdministrateurServiceFunctionalities() throws CustomException {
         try {
             CustomLogger.logInfo("========== Starting AdministrateurService Functionality Tests ==========");
@@ -905,7 +916,7 @@ testSpecializedFunctionalities();
                     .orElseThrow(() -> new CustomException("No PENDING sessions available for schedule rejection"));
 
             CustomLogger.logInfo("First scheduling another session...");
-            CustomLogger.logInfo("ID:"+toSchedule.getId());
+            CustomLogger.logInfo("ID:" + toSchedule.getId());
             PropositionDeRattrapageDTO scheduledForRejection = administrateurService.approveMakeupSession(
                     toScheduleForRejection.getId(),
                     null
@@ -956,4 +967,700 @@ testSpecializedFunctionalities();
             CustomLogger.logInfo("Database cleared");
         }
     }
-}
+
+    public void testAllUntestedBrancheServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting BrancheService Functionality Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-02 16:26:46");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            // Get all branches for testing
+            CustomLogger.logInfo("\n----- Retrieving Available Branches -----");
+            List<BrancheDTO> allBranches = brancheService.findAll();
+            if (allBranches.isEmpty()) {
+                throw new CustomException("No branches available for testing");
+            }
+            CustomLogger.logInfo("Found " + allBranches.size() + " branches");
+            allBranches.forEach(branch ->
+                    CustomLogger.logInfo("Branch ID: " + branch.getId() +
+                            ", Level: " + branch.getNiveau() +
+                            ", Specialty: " + branch.getSpecialite() +
+                            ", Department: " + branch.getDepartement())
+            );
+
+            // 1. Test getSchedule
+            CustomLogger.logInfo("\n----- Testing getSchedule functionality -----");
+            // Find a branch that has sessions
+            CustomLogger.logInfo("Searching for a branch with scheduled sessions...");
+            BrancheDTO testBranch = allBranches.getFirst(); // Get first branch for testing
+            List<SeanceDTO> branchSchedule = brancheService.getSchedule(testBranch.getId());
+
+            CustomLogger.logInfo("Retrieved schedule for Branch ID: " + testBranch.getId());
+            CustomLogger.logInfo("Total sessions found: " + branchSchedule.size());
+
+            if (!branchSchedule.isEmpty()) {
+                CustomLogger.logInfo("Sample of scheduled sessions:");
+                branchSchedule.stream().limit(5).forEach(session ->
+                        CustomLogger.logInfo("Session ID: " + session.getId() +
+                                ", Subject: " + session.getMatiere() +
+                                ", Day: " + session.getJour() +
+                                ", Time: " + session.getHeureDebut() + " - " + session.getHeureFin() +
+                                ", Type: " + session.getType() +
+                                ", Room: " + (session.getSalleId() != null ? session.getSalleId() : "Not assigned"))
+                );
+            } else {
+                CustomLogger.logInfo("No sessions found for this branch");
+            }
+
+            // 2. Test getEtudiants
+            CustomLogger.logInfo("\n----- Testing getEtudiants functionality -----");
+            CustomLogger.logInfo("Retrieving students for Branch ID: " + testBranch.getId());
+            List<EtudiantDTO> branchStudents = brancheService.getEtudiants(testBranch.getId());
+
+            CustomLogger.logInfo("Total students found: " + branchStudents.size());
+            if (!branchStudents.isEmpty()) {
+                CustomLogger.logInfo("Sample of enrolled students:");
+                branchStudents.stream().limit(5).forEach(student ->
+                        CustomLogger.logInfo("Student ID: " + student.getId() +
+                                ", Name: " + student.getNom() + " " + student.getPrenom() +
+                                ", CIN: " + student.getCin() +
+                                ", Registration: " + student.getMatricule() +
+                                ", Email: " + student.getEmail())
+                );
+
+                // Additional statistics
+                CustomLogger.logInfo("\nStudent Distribution Statistics:");
+                Map<String, Long> tpDistribution = branchStudents.stream()
+                        .collect(Collectors.groupingBy(
+                                student -> student.getTpId() != null ? "TP-" + student.getTpId() : "No TP",
+                                Collectors.counting()));
+
+                CustomLogger.logInfo("Students per TP group:");
+                tpDistribution.forEach((tp, count) ->
+                        CustomLogger.logInfo(tp + ": " + count + " students"));
+            } else {
+                CustomLogger.logInfo("No students found for this branch");
+            }
+
+            // Test Summary
+            CustomLogger.logInfo("\n========== Test Results Summary ==========");
+            CustomLogger.logInfo("1. Schedule Test Results:");
+            CustomLogger.logInfo("   - Total sessions found: " + branchSchedule.size());
+            CustomLogger.logInfo("   - Unique subjects: " +
+                    branchSchedule.stream().map(SeanceDTO::getMatiere).distinct().count());
+            CustomLogger.logInfo("   - Session types distribution: ");
+            Map<String, Long> sessionTypes = branchSchedule.stream()
+                    .collect(Collectors.groupingBy(SeanceDTO::getType, Collectors.counting()));
+            sessionTypes.forEach((type, count) ->
+                    CustomLogger.logInfo("     " + type + ": " + count));
+
+            CustomLogger.logInfo("\n2. Student Test Results:");
+            CustomLogger.logInfo("   - Total students: " + branchStudents.size());
+            CustomLogger.logInfo("   - Students with TP assignments: " +
+                    branchStudents.stream().filter(s -> s.getTpId() != null).count());
+            CustomLogger.logInfo("   - Students without TP assignments: " +
+                    branchStudents.stream().filter(s -> s.getTpId() == null).count());
+
+            CustomLogger.logInfo("\n========== BrancheService Functionality Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            CustomLogger.logError("\n===== ERROR in BrancheService Tests =====");
+            CustomLogger.logError("Error type: CustomException");
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
+            CustomLogger.logError("\n===== UNEXPECTED ERROR in BrancheService Tests =====");
+            CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw new CustomException("Unexpected error in tests", e);
+        } finally {
+            CustomLogger.logInfo("\n----- Cleaning up test data -----");
+            clearDatabase();
+            CustomLogger.logInfo("Database cleared");
+        }
+    }
+
+    public void testAllUntestedEnseignantServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting EnseignantService Functionality Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-02 16:31:02");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            // Get all teachers for testing
+            CustomLogger.logInfo("\n----- Retrieving Available Teachers -----");
+            List<EnseignantDTO> allTeachers = enseignantService.findAll();
+            if (allTeachers.isEmpty()) {
+                throw new CustomException("No teachers available for testing");
+            }
+
+            EnseignantDTO testTeacher = enseignantService.findById(1221L);
+            CustomLogger.logInfo("Selected test teacher - ID: " + testTeacher.getId() +
+                    ", Name: " + testTeacher.getNom() + " " + testTeacher.getPrenom());
+
+            // 1. Test getSchedule
+            CustomLogger.logInfo("\n----- Testing getSchedule functionality -----");
+            List<SeanceDTO> teacherSchedule = enseignantService.getSchedule(testTeacher.getId());
+            CustomLogger.logInfo("Retrieved schedule for Teacher ID: " + testTeacher.getId());
+            CustomLogger.logInfo("Total sessions found: " + teacherSchedule.size());
+
+            if (!teacherSchedule.isEmpty()) {
+                CustomLogger.logInfo("Schedule details:");
+                teacherSchedule.forEach(session ->
+                        CustomLogger.logInfo("Session ID: " + session.getId() +
+                                ", Subject: " + session.getMatiere() +
+                                ", Day: " + session.getJour() +
+                                ", Time: " + session.getHeureDebut() + " - " + session.getHeureFin() +
+                                ", Frequency: " + session.getFrequence())
+                );
+            }
+
+            // 2. Test getTotalTeachingHours
+            CustomLogger.logInfo("\n----- Testing getTotalTeachingHours functionality -----");
+            LocalDate startDate = LocalDate.now();
+            LocalDate endDate = startDate.plusMonths(1);
+            CustomLogger.logInfo("Calculating teaching hours from " + startDate + " to " + endDate);
+
+            int totalHours = enseignantService.getTotalTeachingHours(
+                    testTeacher.getId(),
+                    startDate,
+                    endDate
+            );
+            CustomLogger.logInfo("Total teaching hours: " + totalHours);
+
+            // 3. Test submitMakeupRequest
+            CustomLogger.logInfo("\n----- Testing submitMakeupRequest functionality -----");
+            PropositionDeRattrapageDTO makeupRequest = new PropositionDeRattrapageDTO();
+            makeupRequest.setName("Test Makeup Session");
+            makeupRequest.setMatiere("Test Subject");
+            makeupRequest.setDate(LocalDateTime.now().plusDays(7).toString());
+            makeupRequest.setHeureDebut(LocalTime.of(10, 0).toString());
+            makeupRequest.setHeureFin(LocalTime.of(12, 0).toString());
+            makeupRequest.setType(entityMapper.seanceTypeToString(SeanceType.CI));
+            makeupRequest.setReason("Test makeup session");
+
+
+            CustomLogger.logInfo("Submitting makeup request for Teacher ID: " + testTeacher.getId());
+            PropositionDeRattrapageDTO submittedRequest = enseignantService.submitMakeupRequest(
+                    testTeacher.getId(),
+                    makeupRequest
+            );
+            CustomLogger.logInfo("Makeup request submitted - ID: " + submittedRequest.getId() +
+                    ", Status: " + submittedRequest.getStatus());
+
+            // 4. Test submitSignal and getSignals
+            CustomLogger.logInfo("\n----- Testing Signal submission and retrieval -----");
+            SignalDTO signal = new SignalDTO();
+            signal.setMessage("Test signal message");
+            signal.setSeverity("HIGH");
+            signal.setTimestamp(LocalDateTime.now());
+
+            CustomLogger.logInfo("Submitting signal for Teacher ID: " + testTeacher.getId());
+            SignalDTO submittedSignal = enseignantService.submitSignal(testTeacher.getId(), signal);
+            CustomLogger.logInfo("Signal submitted - ID: " + submittedSignal.getId());
+
+            // Refresh teacher's signals
+            CustomLogger.logInfo("Retrieving all signals for Teacher ID: " + testTeacher.getId());
+            List<SignalDTO> teacherSignals = enseignantService.getSignals(testTeacher.getId());
+            CustomLogger.logInfo("Total signals found: " + teacherSignals.size());
+            teacherSignals.forEach(s ->
+                    CustomLogger.logInfo("Signal ID: " + s.getId() +
+                            ", Message: " + s.getMessage() +
+                            ", Severity: " + s.getSeverity() +
+                            ", Timestamp: " + s.getTimestamp())
+            );
+
+            // 5. Test getSubjects
+            CustomLogger.logInfo("\n----- Testing getSubjects functionality -----");
+            List<String> teacherSubjects = enseignantService.getSubjects(testTeacher.getId());
+            CustomLogger.logInfo("Retrieved subjects for Teacher ID: " + testTeacher.getId());
+            CustomLogger.logInfo("Total subjects: " + teacherSubjects.size());
+            if (!teacherSubjects.isEmpty()) {
+                CustomLogger.logInfo("Subjects taught:");
+                teacherSubjects.forEach(subject ->
+                        CustomLogger.logInfo("- " + subject)
+                );
+            }
+
+            // 6. Test getStudentGroups
+            CustomLogger.logInfo("\n----- Testing getStudentGroups functionality -----");
+            List<TPDTO> studentGroups = enseignantService.getStudentGroups(testTeacher.getId());
+            CustomLogger.logInfo("Retrieved student groups for Teacher ID: " + testTeacher.getId());
+            CustomLogger.logInfo("Total groups: " + studentGroups.size());
+            if (!studentGroups.isEmpty()) {
+                CustomLogger.logInfo("Student groups:");
+                studentGroups.forEach(tp ->
+                        CustomLogger.logInfo("TP ID: " + tp.getId() +
+                                ", Number: " + tp.getNb() +
+                                ", TD ID: " + tp.getTdId())
+                );
+            }
+
+            // Test Summary
+            CustomLogger.logInfo("\n========== Test Results Summary ==========");
+            CustomLogger.logInfo("1. Schedule Test:");
+            CustomLogger.logInfo("   - Total sessions: " + teacherSchedule.size());
+            CustomLogger.logInfo("   - Weekly hours: " + totalHours);
+
+            CustomLogger.logInfo("\n2. Makeup Request Test:");
+            CustomLogger.logInfo("   - Request status: " + submittedRequest.getStatus());
+
+            CustomLogger.logInfo("\n3. Signals Test:");
+            CustomLogger.logInfo("   - Total signals: " + teacherSignals.size());
+            CustomLogger.logInfo("   - Latest signal status: " +
+                    (teacherSignals.isEmpty() ? "N/A" : teacherSignals.getLast().getMessage()));
+
+            CustomLogger.logInfo("\n4. Subjects and Groups:");
+            CustomLogger.logInfo("   - Total subjects: " + teacherSubjects.size());
+            CustomLogger.logInfo("   - Total student groups: " + studentGroups.size());
+
+            CustomLogger.logInfo("\n========== EnseignantService Functionality Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            CustomLogger.logError("\n===== ERROR in EnseignantService Tests =====");
+            CustomLogger.logError("Error type: CustomException");
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
+            CustomLogger.logError("\n===== UNEXPECTED ERROR in EnseignantService Tests =====");
+            CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw new CustomException("Unexpected error in tests", e);
+        } finally {
+            CustomLogger.logInfo("\n----- Cleaning up test data -----");
+            clearDatabase();
+            CustomLogger.logInfo("Database cleared");
+        }
+    }
+
+    public void testAllUntestedEtudiantServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting EtudiantService Functionality Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-02 16:59:04");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            // Get all students for testing
+            CustomLogger.logInfo("\n----- Retrieving Available Students -----");
+            List<EtudiantDTO> allStudents = etudiantService.findAll();
+            if (allStudents.isEmpty()) {
+                throw new CustomException("No students available for testing");
+            }
+
+            // Find a student with TP and Branch assignments
+            CustomLogger.logInfo("\n----- Selecting test student with required assignments -----");
+            EtudiantDTO testStudent = allStudents.stream()
+                    .filter(s -> s.getTpId() != null)
+                    .filter(s -> s.getBrancheId() != null)
+                    .findFirst()
+                    .orElseThrow(() -> new CustomException("No student found with both TP and Branch assignments"));
+
+            CustomLogger.logInfo("Selected test student - ID: " + testStudent.getId() +
+                    ", Name: " + testStudent.getNom() + " " + testStudent.getPrenom() +
+                    ", TP ID: " + testStudent.getTpId() +
+                    ", Branch ID: " + testStudent.getBrancheId());
+
+            // 1. Test getPersonalSchedule
+            CustomLogger.logInfo("\n----- Testing getPersonalSchedule functionality -----");
+            List<SeanceDTO> personalSchedule = etudiantService.getPersonalSchedule(testStudent.getId());
+            CustomLogger.logInfo("Retrieved personal schedule for Student ID: " + testStudent.getId());
+            CustomLogger.logInfo("Total personal sessions found: " + personalSchedule.size());
+
+            if (!personalSchedule.isEmpty()) {
+                CustomLogger.logInfo("Personal schedule details:");
+                personalSchedule.stream().limit(5).forEach(session ->
+                        CustomLogger.logInfo("Session ID: " + session.getId() +
+                                ", Subject: " + session.getMatiere() +
+                                ", Day: " + session.getJour() +
+                                ", Time: " + session.getHeureDebut() + " - " + session.getHeureFin() +
+                                ", Type: " + session.getType() +
+                                ", Room: " + (session.getSalleId() != null ? session.getSalleId() : "Not assigned"))
+                );
+            }
+
+            // 2. Test getTDSchedule
+            CustomLogger.logInfo("\n----- Testing getTDSchedule functionality -----");
+            List<SeanceDTO> tdSchedule = etudiantService.getTDSchedule(testStudent.getId());
+            CustomLogger.logInfo("Retrieved TD schedule for Student ID: " + testStudent.getId());
+            CustomLogger.logInfo("Total TD sessions found: " + tdSchedule.size());
+
+            if (!tdSchedule.isEmpty()) {
+                CustomLogger.logInfo("TD schedule details:");
+                tdSchedule.stream().limit(5).forEach(session ->
+                        CustomLogger.logInfo("Session ID: " + session.getId() +
+                                ", Subject: " + session.getMatiere() +
+                                ", Day: " + session.getJour() +
+                                ", Time: " + session.getHeureDebut() + " - " + session.getHeureFin() +
+                                ", Type: " + session.getType())
+                );
+            }
+
+            // 3. Test getBranchSchedule
+            CustomLogger.logInfo("\n----- Testing getBranchSchedule functionality -----");
+            List<SeanceDTO> branchSchedule = etudiantService.getBranchSchedule(testStudent.getId());
+            CustomLogger.logInfo("Retrieved branch schedule for Student ID: " + testStudent.getId());
+            CustomLogger.logInfo("Total branch sessions found: " + branchSchedule.size());
+
+            if (!branchSchedule.isEmpty()) {
+                CustomLogger.logInfo("Branch schedule details:");
+                branchSchedule.stream().limit(5).forEach(session ->
+                        CustomLogger.logInfo("Session ID: " + session.getId() +
+                                ", Subject: " + session.getMatiere() +
+                                ", Day: " + session.getJour() +
+                                ", Time: " + session.getHeureDebut() + " - " + session.getHeureFin() +
+                                ", Type: " + session.getType())
+                );
+
+                // Session type distribution
+                Map<String, Long> sessionTypeDistribution = branchSchedule.stream()
+                        .collect(Collectors.groupingBy(
+                                SeanceDTO::getType,
+                                Collectors.counting()
+                        ));
+
+                CustomLogger.logInfo("\nSession type distribution in branch schedule:");
+                sessionTypeDistribution.forEach((type, count) ->
+                        CustomLogger.logInfo(type + ": " + count + " sessions")
+                );
+            }
+
+            // 4. Test getNotifications
+            CustomLogger.logInfo("\n----- Testing getNotifications functionality -----");
+            List<NotificationDTO> notifications = etudiantService.getNotifications(testStudent.getId());
+            CustomLogger.logInfo("Retrieved notifications for Student ID: " + testStudent.getId());
+            CustomLogger.logInfo("Total notifications found: " + notifications.size());
+
+            if (!notifications.isEmpty()) {
+                CustomLogger.logInfo("Recent notifications:");
+                notifications.stream()
+                        .sorted(Comparator.comparing(NotificationDTO::getDate).reversed())
+                        .limit(5)
+                        .forEach(notification ->
+                                CustomLogger.logInfo("Notification ID: " + notification.getId() +
+                                        ", Message: " + notification.getMessage() +
+                                        ", Created: " + notification.getDate() +
+                                        ", Read: " + notification.getIsread())
+                        );
+
+                // Notification statistics
+                long unreadCount = notifications.stream()
+                        .filter(n -> !n.getIsread())
+                        .count();
+                CustomLogger.logInfo("\nNotification Statistics:");
+                CustomLogger.logInfo("Total notifications: " + notifications.size());
+                CustomLogger.logInfo("Unread notifications: " + unreadCount);
+                CustomLogger.logInfo("Read notifications: " + (notifications.size() - unreadCount));
+            }
+
+            // Test Summary
+            CustomLogger.logInfo("\n========== Test Results Summary ==========");
+            CustomLogger.logInfo("1. Schedule Test Results:");
+            CustomLogger.logInfo("   - Personal schedule sessions: " + personalSchedule.size());
+            CustomLogger.logInfo("   - TD schedule sessions: " + tdSchedule.size());
+            CustomLogger.logInfo("   - Branch schedule sessions: " + branchSchedule.size());
+
+            // Unique subjects across all schedules
+            Set<String> uniqueSubjects = Stream.concat(
+                            Stream.concat(
+                                    personalSchedule.stream(),
+                                    tdSchedule.stream()
+                            ),
+                            branchSchedule.stream()
+                    )
+                    .map(SeanceDTO::getMatiere)
+                    .collect(Collectors.toSet());
+
+            CustomLogger.logInfo("   - Total unique subjects: " + uniqueSubjects.size());
+
+            CustomLogger.logInfo("\n2. Notification Test Results:");
+            CustomLogger.logInfo("   - Total notifications: " + notifications.size());
+            if (!notifications.isEmpty()) {
+                CustomLogger.logInfo("   - Most recent notification: " +
+                        notifications.stream()
+                                .max(Comparator.comparing(NotificationDTO::getDate))
+                                .map(NotificationDTO::getMessage)
+                                .orElse("N/A"));
+            }
+
+            CustomLogger.logInfo("\n========== EtudiantService Functionality Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            CustomLogger.logError("\n===== ERROR in EtudiantService Tests =====");
+            CustomLogger.logError("Error type: CustomException");
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
+            CustomLogger.logError("\n===== UNEXPECTED ERROR in EtudiantService Tests =====");
+            CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw new CustomException("Unexpected error in tests", e);
+        } finally {
+            CustomLogger.logInfo("\n----- Cleaning up test data -----");
+            clearDatabase();
+            CustomLogger.logInfo("Database cleared");
+        }
+    }
+    public void testAllUntestedExcelFileServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting ExcelFileService Functionality Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-02 17:17:13");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            // 1. Test upload functionality
+            CustomLogger.logInfo("\n----- Testing Excel File Upload functionality -----");
+
+            // Prepare test file data
+            FichierExcelDTO testFile = new FichierExcelDTO();
+            testFile.setFileName("test_schedule_2025.xlsx");
+            testFile.setImportDate(LocalDateTime.now());
+            testFile.setStatus("STATUS_PROCESSING");
+            testFile.setErrors(new ArrayList<>());
+
+            // Prepare test sessions
+            List<SeanceDTO> testSessions = new ArrayList<>();
+
+            SeanceDTO session1 = new SeanceDTO();
+            session1.setName("Test Session 1");
+            session1.setMatiere("Mathematics");
+            session1.setType(entityMapper.seanceTypeToString(SeanceType.CI));
+            session1.setJour(entityMapper.dayOfWeekToString(DayOfWeek.MONDAY));
+            session1.setHeureDebut(LocalTime.of(9, 0).toString());
+            session1.setHeureFin(LocalTime.of(10, 30).toString());
+            session1.setFrequence(entityMapper.frequenceTypeToString(FrequenceType.WEEKLY));
+            testSessions.add(session1);
+
+            SeanceDTO session2 = new SeanceDTO();
+            session2.setName("Test Session 2");
+            session2.setMatiere("Physics");
+            session2.setType(entityMapper.seanceTypeToString(SeanceType.TD));
+            session2.setJour(entityMapper.dayOfWeekToString(DayOfWeek.WEDNESDAY));
+            session2.setHeureDebut(LocalTime.of(14, 0).toString());
+            session2.setHeureFin(LocalTime.of(15, 30).toString());
+            session2.setFrequence(entityMapper.frequenceTypeToString(FrequenceType.BIWEEKLY));
+            testSessions.add(session2);
+
+            CustomLogger.logInfo("Uploading test file with " + testSessions.size() + " sessions");
+            CustomLogger.logInfo("File details:");
+            CustomLogger.logInfo("- Name: " + testFile.getFileName());
+            CustomLogger.logInfo("- Status: " + testFile.getStatus());
+            CustomLogger.logInfo("- Import Date: " + testFile.getImportDate());
+
+            // Perform upload
+            excelFileService.upload(testFile, testSessions);
+            CustomLogger.logInfo("File uploaded successfully");
+
+            // 2. Test getImportHistory
+            CustomLogger.logInfo("\n----- Testing Import History functionality -----");
+            List<FichierExcelDTO> importHistory = excelFileService.getImportHistory();
+            CustomLogger.logInfo("Retrieved " + importHistory.size() + " import records");
+
+            if (!importHistory.isEmpty()) {
+                CustomLogger.logInfo("Recent imports (last 5):");
+                importHistory.stream()
+                        .sorted(Comparator.comparing(FichierExcelDTO::getImportDate).reversed())
+                        .limit(5)
+                        .forEach(file ->
+                                CustomLogger.logInfo("File: " + file.getFileName() +
+                                        ", Status: " + file.getStatus() +
+                                        ", Import Date: " + file.getImportDate() +
+                                        ", Errors: " + (file.getErrors() != null ? file.getErrors().size() : 0))
+                        );
+
+                // Import statistics
+                Map<String, Long> statusDistribution = importHistory.stream()
+                        .collect(Collectors.groupingBy(
+                                FichierExcelDTO::getStatus,
+                                Collectors.counting()
+                        ));
+
+                CustomLogger.logInfo("\nImport Status Distribution:");
+                statusDistribution.forEach((status, count) ->
+                        CustomLogger.logInfo(status + ": " + count + " files")
+                );
+            }
+
+            CustomLogger.logInfo("\n========== Test Results Summary ==========");
+            CustomLogger.logInfo("1. Upload Test:");
+            CustomLogger.logInfo("   - File uploaded: " + testFile.getFileName());
+            CustomLogger.logInfo("   - Sessions included: " + testSessions.size());
+            CustomLogger.logInfo("   - Final status: " + "STATUS_COMPLETED");
+
+            CustomLogger.logInfo("\n2. Import History Test:");
+            CustomLogger.logInfo("   - Total imports: " + importHistory.size());
+            if (!importHistory.isEmpty()) {
+                FichierExcelDTO latestImport = importHistory.stream()
+                        .max(Comparator.comparing(FichierExcelDTO::getImportDate))
+                        .orElse(null);
+                if (latestImport != null) {
+                    CustomLogger.logInfo("   - Latest import: " + latestImport.getFileName());
+                    CustomLogger.logInfo("   - Latest status: " + latestImport.getStatus());
+                    CustomLogger.logInfo("   - Import date: " + latestImport.getImportDate());
+                }
+            }
+
+            CustomLogger.logInfo("\n========== ExcelFileService Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            CustomLogger.logError("\n===== ERROR in ExcelFileService Tests =====");
+            CustomLogger.logError("Error type: CustomException");
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
+            CustomLogger.logError("\n===== UNEXPECTED ERROR in ExcelFileService Tests =====");
+            CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw new CustomException("Unexpected error in tests", e);
+        } finally {
+            CustomLogger.logInfo("\n----- Cleaning up test data -----");
+            clearDatabase();
+            CustomLogger.logInfo("Database cleared");
+        }
+    }
+
+    public void testAllUntestedSalleServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting SalleService Functionality Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-02 17:17:13");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            CustomLogger.logInfo("\n----- Testing getAvailableRooms functionality -----");
+
+            // 1. Test regular session (without specific date)
+            DayOfWeek day = DayOfWeek.MONDAY;
+            LocalTime startTime = LocalTime.of(9, 0);
+            LocalTime endTime = LocalTime.of(10, 30);
+
+            CustomLogger.logInfo("Scenario 1: Regular session availability");
+            CustomLogger.logInfo("Parameters:");
+            CustomLogger.logInfo("- Day: " + entityMapper.dayOfWeekToString(day));
+            CustomLogger.logInfo("- Time: " + startTime + " - " + endTime);
+
+            List<SalleDTO> regularAvailableRooms = salleService.getAvailableRooms(
+                    null, day, startTime, endTime
+            );
+
+            if (!regularAvailableRooms.isEmpty()) {
+                CustomLogger.logInfo("Available rooms (" + regularAvailableRooms.size() + "):");
+                regularAvailableRooms.forEach(room -> {
+                    CustomLogger.logInfo("Room ID: " + room.getId() +
+                            ", Identifier: " + room.getIdentifiant() +
+                            ", Type: " + room.getType() +
+                            ", Capacity: " + room.getCapacite());
+
+                    if (room.getSeanceIds() != null && !room.getSeanceIds().isEmpty()) {
+                        CustomLogger.logInfo("  Scheduled sessions: " + room.getSeanceIds().size());
+                    }
+                });
+
+                // Room type distribution
+                Map<String, Long> roomTypeDistribution = regularAvailableRooms.stream()
+                        .collect(Collectors.groupingBy(
+                                SalleDTO::getType,
+                                Collectors.counting()
+                        ));
+
+                CustomLogger.logInfo("\nRoom Type Distribution:");
+                roomTypeDistribution.forEach((type, count) ->
+                        CustomLogger.logInfo(type + ": " + count + " rooms")
+                );
+            }
+
+            // 2. Test makeup session (with specific date)
+            LocalDate makeupDate = LocalDate.now().plusDays(7);
+            CustomLogger.logInfo("\nScenario 2: Makeup session availability");
+            CustomLogger.logInfo("Parameters:");
+            CustomLogger.logInfo("- Date: " + makeupDate);
+            CustomLogger.logInfo("- Day: " + entityMapper.dayOfWeekToString(makeupDate.getDayOfWeek()));
+            CustomLogger.logInfo("- Time: " + startTime + " - " + endTime);
+
+            List<SalleDTO> makeupAvailableRooms = salleService.getAvailableRooms(
+                    makeupDate, makeupDate.getDayOfWeek(), startTime, endTime
+            );
+
+            if (!makeupAvailableRooms.isEmpty()) {
+                CustomLogger.logInfo("Available rooms for makeup session (" + makeupAvailableRooms.size() + "):");
+                makeupAvailableRooms.forEach(room -> {
+                    CustomLogger.logInfo("Room ID: " + room.getId() +
+                            ", Identifier: " + room.getIdentifiant() +
+                            ", Type: " + room.getType() +
+                            ", Capacity: " + room.getCapacite());
+                });
+            }
+
+            // Compare results between scenarios
+            CustomLogger.logInfo("\n========== Test Results Summary ==========");
+            CustomLogger.logInfo("1. Regular Session Test:");
+            CustomLogger.logInfo("   - Total available rooms: " + regularAvailableRooms.size());
+            if (!regularAvailableRooms.isEmpty()) {
+                double avgCapacity = regularAvailableRooms.stream()
+                        .mapToInt(SalleDTO::getCapacite)
+                        .average()
+                        .orElse(0.0);
+                CustomLogger.logInfo("   - Average room capacity: " + String.format("%.2f", avgCapacity));
+            }
+
+            CustomLogger.logInfo("\n2. Makeup Session Test:");
+            CustomLogger.logInfo("   - Total available rooms: " + makeupAvailableRooms.size());
+            if (!makeupAvailableRooms.isEmpty()) {
+                double avgCapacity = makeupAvailableRooms.stream()
+                        .mapToInt(SalleDTO::getCapacite)
+                        .average()
+                        .orElse(0.0);
+                CustomLogger.logInfo("   - Average room capacity: " + String.format("%.2f", avgCapacity));
+            }
+
+            // Room availability comparison
+            Set<String> regularRoomIds = regularAvailableRooms.stream()
+                    .map(SalleDTO::getIdentifiant)
+                    .collect(Collectors.toSet());
+            Set<String> makeupRoomIds = makeupAvailableRooms.stream()
+                    .map(SalleDTO::getIdentifiant)
+                    .collect(Collectors.toSet());
+
+            Set<String> commonRooms = new HashSet<>(regularRoomIds);
+            commonRooms.retainAll(makeupRoomIds);
+
+            CustomLogger.logInfo("\nAvailability Comparison:");
+            CustomLogger.logInfo("- Rooms available for regular sessions only: " +
+                    (regularRoomIds.size() - commonRooms.size()));
+            CustomLogger.logInfo("- Rooms available for makeup sessions only: " +
+                    (makeupRoomIds.size() - commonRooms.size()));
+            CustomLogger.logInfo("- Rooms available for both scenarios: " + commonRooms.size());
+
+            CustomLogger.logInfo("\n========== SalleService Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            CustomLogger.logError("\n===== ERROR in SalleService Tests =====");
+            CustomLogger.logError("Error type: CustomException");
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
+            CustomLogger.logError("\n===== UNEXPECTED ERROR in SalleService Tests =====");
+            CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw new CustomException("Unexpected error in tests", e);
+        } finally {
+            CustomLogger.logInfo("\n----- Cleaning up test data -----");
+            clearDatabase();
+            CustomLogger.logInfo("Database cleared");
+        }
+    }
+ }
