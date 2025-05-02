@@ -26,11 +26,11 @@ public class Notification {
     private String type;
     private Boolean isread;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recepteur_id")
     private Personne recepteur;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "expediteur_id")
     private Personne expediteur;
 

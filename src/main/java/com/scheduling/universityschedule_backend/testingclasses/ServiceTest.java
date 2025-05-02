@@ -387,19 +387,20 @@ public class ServiceTest {
         }
         CustomLogger.logInfo("========== Database Population Complete ==========");
     }
-    public void debugrud() throws CustomException {
+    public void debug() throws CustomException {
 
 //        testAdministrateurService();
 //        testEtudiantService();
 //        testSalleService();
 //        testSeanceService();
-//        testTDService();
+//        populateDatabase(50);
+//        clearDatabase();
 //        testTPService();
-
+//        testTDService();
 //        testNotificationService();
 //        testExcelFileService();
-        rudTest();
-
+//rudTest();
+testAllAdvancedFeatures();
     }
 
     public void rudTest() throws CustomException {
@@ -767,6 +768,269 @@ public class ServiceTest {
         } catch (Exception e) {
             CustomLogger.logError("Error testing ExcelFileService: " + e.getMessage(), e);
         }
+    }
+
+
+    // ======================================ADVANCED FEATURES ========================
+    /**
+     * Advanced feature testing methods for all services
+     * Date: 2025-05-02 00:07:48 UTC
+     */
+
+    private void testAdministrateurAdvancedFeatures() throws CustomException {
+        CustomLogger.logInfo("Testing AdministrateurService advanced features...");
+
+        // Get list of makeup sessions
+        List<PropositionDeRattrapageDTO> makeupSessions = administrateurService.getAllMakeupSessions();
+        if (!makeupSessions.isEmpty()) {
+            PropositionDeRattrapageDTO proposal = makeupSessions.getFirst();
+            Long proposalId = proposal.getId();
+
+            // Test approve with room
+            Long randomSalleId = salleService.findAll().getFirst().getId();
+            PropositionDeRattrapageDTO approvedProposal = administrateurService.approveMakeupSession(proposalId, randomSalleId);
+            CustomLogger.logInfo("Approved makeup session: " + approvedProposal.getId());
+
+            // Test approve scheduled
+            if (makeupSessions.size() > 1) {
+                Long secondProposalId = makeupSessions.get(1).getId();
+
+                PropositionDeRattrapageDTO scheduledProposal = administrateurService.approveScheduled(secondProposalId, randomSalleId);
+                CustomLogger.logInfo("Approved scheduled session: " + scheduledProposal.getId());
+            }
+
+            // Test reject makeup
+            if (makeupSessions.size() > 2) {
+                Long thirdProposalId = makeupSessions.get(2).getId();
+                PropositionDeRattrapageDTO rejectedProposal = administrateurService.rejectMakeupSession(thirdProposalId);
+                CustomLogger.logInfo("Rejected makeup session: " + rejectedProposal.getId());
+            }
+
+            // Test reject scheduled
+            if (makeupSessions.size() > 3) {
+                Long fourthProposalId = makeupSessions.get(3).getId();
+                PropositionDeRattrapageDTO rejectedScheduled = administrateurService.rejectScheduled(fourthProposalId, "Schedule conflict");
+                CustomLogger.logInfo("Rejected scheduled session: " + rejectedScheduled.getId());
+            }
+        }
+    }
+
+    private void testBrancheAdvancedFeatures() throws CustomException {
+        CustomLogger.logInfo("Testing BrancheService advanced features...");
+
+        List<BrancheDTO> branches = brancheService.findAll();
+        if (!branches.isEmpty()) {
+            Long brancheId = branches.getFirst().getId();
+
+            // Test getSchedule
+            List<SeanceDTO> schedule = brancheService.getSchedule(brancheId);
+            CustomLogger.logInfo("Retrieved schedule for branch: " + brancheId + ", sessions: " + schedule.size());
+
+            // Test getEtudiants
+            List<EtudiantDTO> students = brancheService.getEtudiants(brancheId);
+            CustomLogger.logInfo("Retrieved students for branch: " + brancheId + ", count: " + students.size());
+        }
+    }
+
+    private void testEnseignantAdvancedFeatures() throws CustomException {
+        CustomLogger.logInfo("Testing EnseignantService advanced features...");
+
+        List<EnseignantDTO> teachers = enseignantService.findAll();
+        if (!teachers.isEmpty()) {
+            Long teacherId = teachers.getFirst().getId();
+
+            // Test getSchedule
+            List<SeanceDTO> schedule = enseignantService.getSchedule(teacherId);
+            CustomLogger.logInfo("Retrieved schedule for teacher: " + teacherId);
+
+            // Test getTotalTeachingHours
+            LocalDate startDate = LocalDate.now().minusMonths(1);
+            LocalDate endDate = LocalDate.now();
+            int hours = enseignantService.getTotalTeachingHours(teacherId, startDate, endDate);
+            CustomLogger.logInfo("Total teaching hours: " + hours);
+
+            // Test getSignals
+            List<SignalDTO> signals = enseignantService.getSignals(teacherId);
+            CustomLogger.logInfo("Retrieved signals for teacher: " + signals.size());
+
+            // Test getSubjects
+            List<String> subjects = enseignantService.getSubjects(teacherId);
+            CustomLogger.logInfo("Retrieved subjects: " + subjects.size());
+
+            // Test getStudentGroups
+            List<TPDTO> groups = enseignantService.getStudentGroups(teacherId);
+            CustomLogger.logInfo("Retrieved student groups: " + groups.size());
+        }
+    }
+
+    private void testEtudiantAdvancedFeatures() throws CustomException {
+        CustomLogger.logInfo("Testing EtudiantService advanced features...");
+
+        List<EtudiantDTO> students = etudiantService.findAll();
+        if (!students.isEmpty()) {
+            Long studentId = students.getFirst().getId();
+
+            // Test getPersonalSchedule
+            List<SeanceDTO> personalSchedule = etudiantService.getPersonalSchedule(studentId);
+            CustomLogger.logInfo("Retrieved personal schedule: " + personalSchedule.size());
+
+            // Test getBranchSchedule
+            List<SeanceDTO> branchSchedule = etudiantService.getBranchSchedule(studentId);
+            CustomLogger.logInfo("Retrieved branch schedule: " + branchSchedule.size());
+
+            // Test getTDSchedule
+            List<SeanceDTO> tdSchedule = etudiantService.getTDSchedule(studentId);
+            CustomLogger.logInfo("Retrieved TD schedule: " + tdSchedule.size());
+
+            // Test getNotifications
+            List<NotificationDTO> notifications = etudiantService.getNotifications(studentId);
+            CustomLogger.logInfo("Retrieved notifications: " + notifications.size());
+        }
+    }
+
+    private void testExcelFileAdvancedFeatures() throws CustomException {
+        CustomLogger.logInfo("Testing ExcelFileService advanced features...");
+
+        // Create test data for upload
+        FichierExcelDTO fileDTO = new FichierExcelDTO();
+        fileDTO.setFileName("test_upload.xlsx");
+        fileDTO.setStatus("Imported");
+        fileDTO.setImportDate(LocalDateTime.now());
+
+        List<SeanceDTO> seancesToImport = new ArrayList<>();
+        // Add some sample seances from existing data
+        List<SeanceDTO> existingSeances = seanceService.findAll();
+        if (!existingSeances.isEmpty()) {
+            seancesToImport.add(existingSeances.getFirst());
+        }
+
+        // Test upload
+        excelFileService.upload(fileDTO, seancesToImport);
+        CustomLogger.logInfo("Tested file upload");
+
+        // Test getImportHistory
+        List<FichierExcelDTO> history = excelFileService.getImportHistory();
+        CustomLogger.logInfo("Retrieved import history: " + history.size());
+    }
+
+    private void testNotificationAdvancedFeatures() throws CustomException {
+        CustomLogger.logInfo("Testing NotificationService advanced features...");
+
+        // Get some test data
+        List<NotificationDTO> notifications = notificationService.findAll();
+        List<BrancheDTO> branches = brancheService.findAll();
+        List<TDDTO> tds = tdService.findAll();
+        List<TPDTO> tps = tpService.findAll();
+
+        if (!notifications.isEmpty()) {
+            // Test markAsRead
+            notificationService.markAsRead(notifications.getFirst().getId());
+
+            // Test getUnreadNotifications
+            List<NotificationDTO> unread = notificationService.getUnreadNotifications();
+            CustomLogger.logInfo("Unread notifications: " + unread.size());
+        }
+
+        // Create test notification
+        NotificationDTO testNotification = new NotificationDTO();
+        testNotification.setMessage("Test notification");
+        testNotification.setType("TEST");
+        testNotification.setDate(LocalDateTime.now());
+
+        // Test broadcast methods
+        notificationService.broadcastNotification(testNotification);
+        notificationService.sendNotificationToTeachers(testNotification);
+        notificationService.sendNotificationToStudents(testNotification);
+
+        if (!branches.isEmpty()) {
+            notificationService.sendNotificationToBranche(testNotification, branches.getFirst());
+            notificationService.sendNotificationToBranches(testNotification, branches);
+        }
+
+        if (!tds.isEmpty()) {
+            notificationService.sendNotificationToTD(testNotification, tds.getFirst());
+            notificationService.sendNotificationToTDs(testNotification, tds);
+        }
+
+        if (!tps.isEmpty()) {
+            notificationService.sendNotificationToTP(testNotification, tps.getFirst());
+            notificationService.sendNotificationToTPs(testNotification, tps);
+        }
+    }
+
+    private void testSalleAdvancedFeatures() throws CustomException {
+        CustomLogger.logInfo("Testing SalleService advanced features...");
+
+        // Test getAvailableRooms with different scenarios
+        LocalDate testDate = LocalDate.now();
+        DayOfWeek testDay = DayOfWeek.MONDAY;
+        LocalTime startTime = LocalTime.of(9, 0);
+        LocalTime endTime = LocalTime.of(10, 30);
+
+        // Test with specific date
+        List<SalleDTO> availableRoomsWithDate = salleService.getAvailableRooms(testDate, testDay, startTime, endTime);
+        CustomLogger.logInfo("Available rooms with date: " + availableRoomsWithDate.size());
+
+        // Test without date (recurring slots)
+        List<SalleDTO> availableRoomsRecurring = salleService.getAvailableRooms(null, testDay, startTime, endTime);
+        CustomLogger.logInfo("Available rooms for recurring slots: " + availableRoomsRecurring.size());
+    }
+
+    private void testTDAdvancedFeatures() throws CustomException {
+        CustomLogger.logInfo("Testing TDService advanced features...");
+
+        List<TDDTO> tds = tdService.findAll();
+        if (!tds.isEmpty()) {
+            Long tdId = tds.getFirst().getId();
+
+            // Test getTPs
+            List<TPDTO> tps = tdService.getTPs(tdId);
+            CustomLogger.logInfo("Retrieved TPs for TD: " + tps.size());
+
+            // Test generateSchedule
+            List<SeanceDTO> schedule = tdService.generateSchedule(tdId);
+            CustomLogger.logInfo("Generated schedule for TD: " + schedule.size());
+
+            // Test getEtudiants
+            List<EtudiantDTO> students = tdService.getEtudiants(tdId);
+            CustomLogger.logInfo("Retrieved students for TD: " + students.size());
+        }
+    }
+
+    private void testTPAdvancedFeatures() throws CustomException {
+        CustomLogger.logInfo("Testing TPService advanced features...");
+
+        List<TPDTO> tps = tpService.findAll();
+        if (!tps.isEmpty()) {
+            Long tpId = tps.getFirst().getId();
+
+            // Test getStudents
+            List<EtudiantDTO> students = tpService.getStudents(tpId);
+            CustomLogger.logInfo("Retrieved students: " + students.size());
+
+            // Test generateSchedule
+            List<SeanceDTO> schedule = tpService.generateSchedule(tpId);
+            CustomLogger.logInfo("Generated schedule: " + schedule.size());
+
+            // Test getEtudiants
+            List<EtudiantDTO> allStudents = tpService.getEtudiants(tpId);
+            CustomLogger.logInfo("Retrieved all students: " + allStudents.size());
+        }
+    }
+    private void testAllAdvancedFeatures() throws CustomException {
+        CustomLogger.logInfo("========== Testing All Advanced Features ==========");
+
+        testAdministrateurAdvancedFeatures();
+        testBrancheAdvancedFeatures();
+        testEnseignantAdvancedFeatures();
+        testEtudiantAdvancedFeatures();
+        testExcelFileAdvancedFeatures();
+        testNotificationAdvancedFeatures();
+        testSalleAdvancedFeatures();
+        testTDAdvancedFeatures();
+        testTPAdvancedFeatures();
+
+        CustomLogger.logInfo("========== Advanced Features Testing Complete ==========");
     }
 
 }
