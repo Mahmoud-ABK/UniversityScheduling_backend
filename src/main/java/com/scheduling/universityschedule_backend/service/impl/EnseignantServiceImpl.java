@@ -408,11 +408,9 @@ public class EnseignantServiceImpl implements EnseignantService {
             // Find teacher
             Enseignant enseignant = enseignantRepository.findById(id)
                     .orElseThrow(() -> new CustomException("Teacher not found with ID: " + id));
-            CustomLogger.logInfo("teacher found");
 
             // Convert DTO to entity
             Signal signalEntity = entityMapper.toSignal(signal);
-            CustomLogger.logInfo(signalEntity.toString());
 
             // Set submission date if not provided
             if (signalEntity.getTimestamp() == null) {
@@ -426,19 +424,16 @@ public class EnseignantServiceImpl implements EnseignantService {
             if (enseignant.getSignals() == null) {
                 enseignant.setSignals(new ArrayList<>());
             }
-            CustomLogger.logInfo(signalEntity.toString());
             // Save teacher to persist the relationship
             signalRepository.save(signalEntity);
 
             // Convert back to DTO
-            SignalDTO returned = entityMapper.toSignalDTO(signalEntity);
-            CustomLogger.logInfo(returned.toString());
-            return returned;
+            return entityMapper.toSignalDTO(signalEntity);
         } catch (CustomException e) {
             throw e;
         } catch (Exception e) {
-           // throw new CustomException("Failed to submit signal for teacher with ID: " + id +'\n' + e.toString() );
-        throw e ;
+            throw new CustomException("Failed to submit signal for teacher with ID: " + id +'\n' + e.toString() );
+
         }
     }
 

@@ -37,7 +37,7 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 			serviceTest.debug();
 			CustomLogger.logInfo("==================== Finished operation successfully ======================");
 		} catch (CustomException e) {
-			CustomLogger.logError("Error during database population: " + e.getMessage());
+			CustomLogger.logError("Error during testing: " + e.getMessage());
 			//e.printStackTrace();
 			CustomLogger.logError("==================== FINISHED WITH ERROR ======================");
 		} catch (Exception e) {

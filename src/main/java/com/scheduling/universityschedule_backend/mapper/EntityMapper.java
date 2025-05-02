@@ -434,7 +434,7 @@ public abstract class EntityMapper {
         return Status.valueOf(status.toUpperCase());
     }
     @Named("statusToString")
-    protected String statusToString(Status status) {
+    public String statusToString(Status status) {
         if (status == null) {
             return null;
         }

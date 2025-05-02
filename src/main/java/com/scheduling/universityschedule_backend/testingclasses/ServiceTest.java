@@ -2,6 +2,7 @@ package com.scheduling.universityschedule_backend.testingclasses;
 
 import com.scheduling.universityschedule_backend.dto.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
+import com.scheduling.universityschedule_backend.mapper.EntityMapper;
 import com.scheduling.universityschedule_backend.model.FrequenceType;
 import com.scheduling.universityschedule_backend.model.Status;
 import com.scheduling.universityschedule_backend.model.SeanceType;
@@ -39,19 +40,34 @@ public class ServiceTest {
 
     public Random RANDOM = new Random();
     // Add to ServiceTest class
-    @Autowired
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @PersistenceContext
     private EntityManager em;
+    private final EntityMapper entityMapper;
 
     // Add this method to be called at the beginning of each test method
     private void clearDatabase() {
         entityManager.flush();
         entityManager.clear();
     }
+    public void debug() throws CustomException {
+//        populateDatabase(50);
+//        testAdministrateurService();
+//        testEtudiantService();
+//        testSalleService();
+//        testSeanceService();
+//
+//        clearDatabase();
+//        testTPService();
+//        testTDService();
+//        testNotificationService();
+//        testExcelFileService();
+//rudTest();
+testSpecializedFunctionalities();
+    }
 
-    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService) {
+    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService, EntityMapper entityMapper, EntityManager entityManager) {
         this.administrateurService = administrateurService;
         this.brancheService = brancheService;
         this.etudiantService = etudiantService;
@@ -62,6 +78,8 @@ public class ServiceTest {
         this.tdService = tdService;
         this.tpService = tpService;
         this.notificationService = notificationService;
+        this.entityMapper = entityMapper;
+        this.entityManager = entityManager;
     }
     public void populateDatabase(int sampleSize) throws CustomException {
         CustomLogger.logInfo("========== Populating Database Using Service Layer ==========");
@@ -314,7 +332,6 @@ public class ServiceTest {
 
                 Long teacherId = enseignants.get(RANDOM.nextInt(enseignants.size()-1)).getId();
                 signal.setEnseignantId(String.valueOf(teacherId));
-                CustomLogger.logInfo(signal.toString());
 
                 enseignantService.submitSignal(teacherId, signal);
                 signalcount++;
@@ -387,21 +404,7 @@ public class ServiceTest {
         }
         CustomLogger.logInfo("========== Database Population Complete ==========");
     }
-    public void debug() throws CustomException {
 
-//        testAdministrateurService();
-//        testEtudiantService();
-//        testSalleService();
-//        testSeanceService();
-//        populateDatabase(50);
-//        clearDatabase();
-//        testTPService();
-//        testTDService();
-//        testNotificationService();
-//        testExcelFileService();
-//rudTest();
-testAllAdvancedFeatures();
-    }
 
     public void rudTest() throws CustomException {
         CustomLogger.logInfo("========== Testing Retrieval, Update, Delete Operations ==========");
@@ -776,261 +779,181 @@ testAllAdvancedFeatures();
      * Advanced feature testing methods for all services
      * Date: 2025-05-02 00:07:48 UTC
      */
+    // Main method to call all specialized test methods
+    public void testSpecializedFunctionalities() throws CustomException {
+        CustomLogger.logInfo("========== Testing Specialized Functionalities ==========");
+        clearDatabase();
+        testAllUntestAdministrateurServiceFunctionalities();
 
-    private void testAdministrateurAdvancedFeatures() throws CustomException {
-        CustomLogger.logInfo("Testing AdministrateurService advanced features...");
 
-        // Get list of makeup sessions
-        List<PropositionDeRattrapageDTO> makeupSessions = administrateurService.getAllMakeupSessions();
-        if (!makeupSessions.isEmpty()) {
-            PropositionDeRattrapageDTO proposal = makeupSessions.getFirst();
-            Long proposalId = proposal.getId();
+        CustomLogger.logInfo("========== Specialized Functions Testing Complete ==========");
+    }
+    public void testAllUntestAdministrateurServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting AdministrateurService Functionality Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-02 16:04:03");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
 
-            // Test approve with room
-            Long randomSalleId = salleService.findAll().getFirst().getId();
-            PropositionDeRattrapageDTO approvedProposal = administrateurService.approveMakeupSession(proposalId, randomSalleId);
-            CustomLogger.logInfo("Approved makeup session: " + approvedProposal.getId());
+            // 1. Test getAllMakeupSessions
+            CustomLogger.logInfo("\n----- Testing getAllMakeupSessions -----");
+            List<PropositionDeRattrapageDTO> allSessions = administrateurService.getAllMakeupSessions();
+            CustomLogger.logInfo("Found " + allSessions.size() + " makeup sessions");
+            allSessions.forEach(session ->
+                    CustomLogger.logInfo("Session ID: " + session.getId() +
+                            ", Status: " + session.getStatus() +
+                            ", Date: " + session.getDate() +
+                            ", Subject: " + session.getMatiere()
+                    )
+            );
 
-            // Test approve scheduled
-            if (makeupSessions.size() > 1) {
-                Long secondProposalId = makeupSessions.get(1).getId();
+            // Find a PENDING session for first test
+            CustomLogger.logInfo("\n----- Selecting test sessions based on status criteria -----");
+            PropositionDeRattrapageDTO pendingSession = allSessions.stream()
+                    .filter(s -> Status.PENDING.name().equals(s.getStatus()))
+                    .findFirst()
+                    .orElseThrow(() -> new CustomException("No PENDING makeup sessions found for testing"));
+            CustomLogger.logInfo("Selected PENDING session - ID: " + pendingSession.getId());
 
-                PropositionDeRattrapageDTO scheduledProposal = administrateurService.approveScheduled(secondProposalId, randomSalleId);
-                CustomLogger.logInfo("Approved scheduled session: " + scheduledProposal.getId());
-            }
+            // 2. Test approveMakeupSession without room
+            CustomLogger.logInfo("\n----- Testing approveMakeupSession without room -----");
+            CustomLogger.logInfo("Attempting to schedule PENDING session ID: " + pendingSession.getId());
+            PropositionDeRattrapageDTO approvedWithoutRoom = administrateurService.approveMakeupSession(
+                    pendingSession.getId(),
+                    null
+            );
+            CustomLogger.logInfo("Session status transition: " + pendingSession.getStatus() +
+                    " -> " + approvedWithoutRoom.getStatus());
 
-            // Test reject makeup
-            if (makeupSessions.size() > 2) {
-                Long thirdProposalId = makeupSessions.get(2).getId();
-                PropositionDeRattrapageDTO rejectedProposal = administrateurService.rejectMakeupSession(thirdProposalId);
-                CustomLogger.logInfo("Rejected makeup session: " + rejectedProposal.getId());
-            }
+            // Get rooms for testing
+            CustomLogger.logInfo("\n----- Retrieving Available Rooms -----");
+            List<SalleDTO> rooms = salleService.findAll();
+            CustomLogger.logInfo("Found " + rooms.size() + " available rooms");
+            SalleDTO testRoom = rooms.getFirst();
+            CustomLogger.logInfo("Selected test room - ID: " + testRoom.getId() +
+                    ", Identifier: " + testRoom.getIdentifiant() +
+                    ", Capacity: " + testRoom.getCapacite());
 
-            // Test reject scheduled
-            if (makeupSessions.size() > 3) {
-                Long fourthProposalId = makeupSessions.get(3).getId();
-                PropositionDeRattrapageDTO rejectedScheduled = administrateurService.rejectScheduled(fourthProposalId, "Schedule conflict");
-                CustomLogger.logInfo("Rejected scheduled session: " + rejectedScheduled.getId());
-            }
+            // Find another PENDING session for room approval test
+            CustomLogger.logInfo("\n----- Selecting another PENDING session for room approval -----");
+            PropositionDeRattrapageDTO anotherPendingSession = allSessions.stream()
+                    .filter(s -> Status.PENDING.name().equals(s.getStatus()))
+                    .filter(s -> !s.getId().equals(pendingSession.getId()))
+                    .findFirst()
+                    .orElseThrow(() -> new CustomException("No additional PENDING sessions found for testing"));
+
+            // 3. Test approveMakeupSession with room
+            CustomLogger.logInfo("\n----- Testing approveMakeupSession with room -----");
+            CustomLogger.logInfo("Attempting to approve PENDING session ID: " + anotherPendingSession.getId() +
+                    " with room ID: " + testRoom.getId());
+            PropositionDeRattrapageDTO approvedWithRoom = administrateurService.approveMakeupSession(
+                    anotherPendingSession.getId(),
+                    testRoom.getId()
+            );
+            CustomLogger.logInfo("Session approved - Status transition: " + anotherPendingSession.getStatus() +
+                    " -> " + approvedWithRoom.getStatus() +
+                    ", Assigned Room: " + testRoom.getIdentifiant());
+
+            // Find a PENDING session for rejection test
+            CustomLogger.logInfo("\n----- Selecting PENDING session for rejection -----");
+            PropositionDeRattrapageDTO sessionToReject = allSessions.stream()
+                    .filter(s -> Status.PENDING.name().equals(s.getStatus()))
+                    .filter(s -> !s.getId().equals(pendingSession.getId()))
+                    .filter(s -> !s.getId().equals(anotherPendingSession.getId()))
+                    .findFirst()
+                    .orElseThrow(() -> new CustomException("No PENDING sessions available for rejection testing"));
+
+            // 4. Test rejectMakeupSession
+            CustomLogger.logInfo("\n----- Testing rejectMakeupSession -----");
+            CustomLogger.logInfo("Attempting to reject PENDING session ID: " + sessionToReject.getId());
+            PropositionDeRattrapageDTO rejectedSession = administrateurService.rejectMakeupSession(sessionToReject.getId());
+            CustomLogger.logInfo("Session rejected - Status transition: " + sessionToReject.getStatus() +
+                    " -> " + rejectedSession.getStatus());
+
+            // 5. Test approveScheduled
+            CustomLogger.logInfo("\n----- Testing approveScheduled -----");
+            // First get a PENDING session and schedule it
+            PropositionDeRattrapageDTO toSchedule = allSessions.stream()
+                    .filter(s -> Status.PENDING.name().equals(s.getStatus()))
+                    .findFirst()
+                    .orElseThrow(() -> new CustomException("No PENDING sessions available for scheduling"));
+
+            CustomLogger.logInfo("First scheduling a session...");
+            PropositionDeRattrapageDTO scheduledSession = administrateurService.approveMakeupSession(
+                    toSchedule.getId(),
+                    null
+            );
+            CustomLogger.logInfo("Session scheduled - ID: " + scheduledSession.getId() +
+                    ", Status: " + scheduledSession.getStatus());
+
+            CustomLogger.logInfo("Now approving SCHEDULED session...");
+            PropositionDeRattrapageDTO approvedScheduled = administrateurService.approveScheduled(
+                    scheduledSession.getId(),
+                    testRoom.getId()
+            );
+            CustomLogger.logInfo("Scheduled session approval - Status transition: " +
+                    scheduledSession.getStatus() + " -> " + approvedScheduled.getStatus());
+
+            // 6. Test rejectScheduled
+            clearDatabase();
+            CustomLogger.logInfo("\n----- Testing rejectScheduled -----");
+            // First get another PENDING session and schedule it
+            // refresh fetched data
+            allSessions = administrateurService.getAllMakeupSessions();
+            PropositionDeRattrapageDTO toScheduleForRejection = allSessions.stream()
+                    .filter(s -> Status.PENDING.name().equals(s.getStatus()))
+                    .findFirst()
+                    .orElseThrow(() -> new CustomException("No PENDING sessions available for schedule rejection"));
+
+            CustomLogger.logInfo("First scheduling another session...");
+            CustomLogger.logInfo("ID:"+toSchedule.getId());
+            PropositionDeRattrapageDTO scheduledForRejection = administrateurService.approveMakeupSession(
+                    toScheduleForRejection.getId(),
+                    null
+            );
+            CustomLogger.logInfo("Session scheduled - ID: " + scheduledForRejection.getId() +
+                    ", Initial Status: " + scheduledForRejection.getStatus());
+
+            CustomLogger.logInfo("Now rejecting SCHEDULED session...");
+            PropositionDeRattrapageDTO rejectedScheduled = administrateurService.rejectScheduled(
+                    scheduledForRejection.getId(),
+                    "Test rejection reason"
+            );
+            CustomLogger.logInfo("Scheduled session rejection - Status transition: " +
+                    scheduledForRejection.getStatus() + " -> " + rejectedScheduled.getStatus() +
+                    "\nRejection reason: " + rejectedScheduled.getReason());
+
+            // Final status summary
+            CustomLogger.logInfo("\n========== Test Results Summary ==========");
+            CustomLogger.logInfo("Total sessions processed: " + allSessions.size());
+            CustomLogger.logInfo("Final Status Distribution:");
+            long pendingCount = allSessions.stream().filter(s -> Status.PENDING.name().equals(s.getStatus())).count();
+            long scheduledCount = allSessions.stream().filter(s -> Status.SCHEDULED.name().equals(s.getStatus())).count();
+            long approvedCount = allSessions.stream().filter(s -> Status.APPROVED.name().equals(s.getStatus())).count();
+            long rejectedCount = allSessions.stream().filter(s -> Status.REJECTED.name().equals(s.getStatus())).count();
+
+            CustomLogger.logInfo("- Pending: " + pendingCount);
+            CustomLogger.logInfo("- Scheduled: " + scheduledCount);
+            CustomLogger.logInfo("- Approved: " + approvedCount);
+            CustomLogger.logInfo("- Rejected: " + rejectedCount);
+
+        } catch (CustomException e) {
+            CustomLogger.logError("\n===== ERROR in AdministrateurService Tests =====");
+            CustomLogger.logError("Error type: CustomException");
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
+            CustomLogger.logError("\n===== UNEXPECTED ERROR in AdministrateurService Tests =====");
+            CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw new CustomException("Unexpected error in tests", e);
+        } finally {
+            CustomLogger.logInfo("\n----- Cleaning up test data -----");
+            clearDatabase();
+            CustomLogger.logInfo("Database cleared");
         }
     }
-
-    private void testBrancheAdvancedFeatures() throws CustomException {
-        CustomLogger.logInfo("Testing BrancheService advanced features...");
-
-        List<BrancheDTO> branches = brancheService.findAll();
-        if (!branches.isEmpty()) {
-            Long brancheId = branches.getFirst().getId();
-
-            // Test getSchedule
-            List<SeanceDTO> schedule = brancheService.getSchedule(brancheId);
-            CustomLogger.logInfo("Retrieved schedule for branch: " + brancheId + ", sessions: " + schedule.size());
-
-            // Test getEtudiants
-            List<EtudiantDTO> students = brancheService.getEtudiants(brancheId);
-            CustomLogger.logInfo("Retrieved students for branch: " + brancheId + ", count: " + students.size());
-        }
-    }
-
-    private void testEnseignantAdvancedFeatures() throws CustomException {
-        CustomLogger.logInfo("Testing EnseignantService advanced features...");
-
-        List<EnseignantDTO> teachers = enseignantService.findAll();
-        if (!teachers.isEmpty()) {
-            Long teacherId = teachers.getFirst().getId();
-
-            // Test getSchedule
-            List<SeanceDTO> schedule = enseignantService.getSchedule(teacherId);
-            CustomLogger.logInfo("Retrieved schedule for teacher: " + teacherId);
-
-            // Test getTotalTeachingHours
-            LocalDate startDate = LocalDate.now().minusMonths(1);
-            LocalDate endDate = LocalDate.now();
-            int hours = enseignantService.getTotalTeachingHours(teacherId, startDate, endDate);
-            CustomLogger.logInfo("Total teaching hours: " + hours);
-
-            // Test getSignals
-            List<SignalDTO> signals = enseignantService.getSignals(teacherId);
-            CustomLogger.logInfo("Retrieved signals for teacher: " + signals.size());
-
-            // Test getSubjects
-            List<String> subjects = enseignantService.getSubjects(teacherId);
-            CustomLogger.logInfo("Retrieved subjects: " + subjects.size());
-
-            // Test getStudentGroups
-            List<TPDTO> groups = enseignantService.getStudentGroups(teacherId);
-            CustomLogger.logInfo("Retrieved student groups: " + groups.size());
-        }
-    }
-
-    private void testEtudiantAdvancedFeatures() throws CustomException {
-        CustomLogger.logInfo("Testing EtudiantService advanced features...");
-
-        List<EtudiantDTO> students = etudiantService.findAll();
-        if (!students.isEmpty()) {
-            Long studentId = students.getFirst().getId();
-
-            // Test getPersonalSchedule
-            List<SeanceDTO> personalSchedule = etudiantService.getPersonalSchedule(studentId);
-            CustomLogger.logInfo("Retrieved personal schedule: " + personalSchedule.size());
-
-            // Test getBranchSchedule
-            List<SeanceDTO> branchSchedule = etudiantService.getBranchSchedule(studentId);
-            CustomLogger.logInfo("Retrieved branch schedule: " + branchSchedule.size());
-
-            // Test getTDSchedule
-            List<SeanceDTO> tdSchedule = etudiantService.getTDSchedule(studentId);
-            CustomLogger.logInfo("Retrieved TD schedule: " + tdSchedule.size());
-
-            // Test getNotifications
-            List<NotificationDTO> notifications = etudiantService.getNotifications(studentId);
-            CustomLogger.logInfo("Retrieved notifications: " + notifications.size());
-        }
-    }
-
-    private void testExcelFileAdvancedFeatures() throws CustomException {
-        CustomLogger.logInfo("Testing ExcelFileService advanced features...");
-
-        // Create test data for upload
-        FichierExcelDTO fileDTO = new FichierExcelDTO();
-        fileDTO.setFileName("test_upload.xlsx");
-        fileDTO.setStatus("Imported");
-        fileDTO.setImportDate(LocalDateTime.now());
-
-        List<SeanceDTO> seancesToImport = new ArrayList<>();
-        // Add some sample seances from existing data
-        List<SeanceDTO> existingSeances = seanceService.findAll();
-        if (!existingSeances.isEmpty()) {
-            seancesToImport.add(existingSeances.getFirst());
-        }
-
-        // Test upload
-        excelFileService.upload(fileDTO, seancesToImport);
-        CustomLogger.logInfo("Tested file upload");
-
-        // Test getImportHistory
-        List<FichierExcelDTO> history = excelFileService.getImportHistory();
-        CustomLogger.logInfo("Retrieved import history: " + history.size());
-    }
-
-    private void testNotificationAdvancedFeatures() throws CustomException {
-        CustomLogger.logInfo("Testing NotificationService advanced features...");
-
-        // Get some test data
-        List<NotificationDTO> notifications = notificationService.findAll();
-        List<BrancheDTO> branches = brancheService.findAll();
-        List<TDDTO> tds = tdService.findAll();
-        List<TPDTO> tps = tpService.findAll();
-
-        if (!notifications.isEmpty()) {
-            // Test markAsRead
-            notificationService.markAsRead(notifications.getFirst().getId());
-
-            // Test getUnreadNotifications
-            List<NotificationDTO> unread = notificationService.getUnreadNotifications();
-            CustomLogger.logInfo("Unread notifications: " + unread.size());
-        }
-
-        // Create test notification
-        NotificationDTO testNotification = new NotificationDTO();
-        testNotification.setMessage("Test notification");
-        testNotification.setType("TEST");
-        testNotification.setDate(LocalDateTime.now());
-
-        // Test broadcast methods
-        notificationService.broadcastNotification(testNotification);
-        notificationService.sendNotificationToTeachers(testNotification);
-        notificationService.sendNotificationToStudents(testNotification);
-
-        if (!branches.isEmpty()) {
-            notificationService.sendNotificationToBranche(testNotification, branches.getFirst());
-            notificationService.sendNotificationToBranches(testNotification, branches);
-        }
-
-        if (!tds.isEmpty()) {
-            notificationService.sendNotificationToTD(testNotification, tds.getFirst());
-            notificationService.sendNotificationToTDs(testNotification, tds);
-        }
-
-        if (!tps.isEmpty()) {
-            notificationService.sendNotificationToTP(testNotification, tps.getFirst());
-            notificationService.sendNotificationToTPs(testNotification, tps);
-        }
-    }
-
-    private void testSalleAdvancedFeatures() throws CustomException {
-        CustomLogger.logInfo("Testing SalleService advanced features...");
-
-        // Test getAvailableRooms with different scenarios
-        LocalDate testDate = LocalDate.now();
-        DayOfWeek testDay = DayOfWeek.MONDAY;
-        LocalTime startTime = LocalTime.of(9, 0);
-        LocalTime endTime = LocalTime.of(10, 30);
-
-        // Test with specific date
-        List<SalleDTO> availableRoomsWithDate = salleService.getAvailableRooms(testDate, testDay, startTime, endTime);
-        CustomLogger.logInfo("Available rooms with date: " + availableRoomsWithDate.size());
-
-        // Test without date (recurring slots)
-        List<SalleDTO> availableRoomsRecurring = salleService.getAvailableRooms(null, testDay, startTime, endTime);
-        CustomLogger.logInfo("Available rooms for recurring slots: " + availableRoomsRecurring.size());
-    }
-
-    private void testTDAdvancedFeatures() throws CustomException {
-        CustomLogger.logInfo("Testing TDService advanced features...");
-
-        List<TDDTO> tds = tdService.findAll();
-        if (!tds.isEmpty()) {
-            Long tdId = tds.getFirst().getId();
-
-            // Test getTPs
-            List<TPDTO> tps = tdService.getTPs(tdId);
-            CustomLogger.logInfo("Retrieved TPs for TD: " + tps.size());
-
-            // Test generateSchedule
-            List<SeanceDTO> schedule = tdService.generateSchedule(tdId);
-            CustomLogger.logInfo("Generated schedule for TD: " + schedule.size());
-
-            // Test getEtudiants
-            List<EtudiantDTO> students = tdService.getEtudiants(tdId);
-            CustomLogger.logInfo("Retrieved students for TD: " + students.size());
-        }
-    }
-
-    private void testTPAdvancedFeatures() throws CustomException {
-        CustomLogger.logInfo("Testing TPService advanced features...");
-
-        List<TPDTO> tps = tpService.findAll();
-        if (!tps.isEmpty()) {
-            Long tpId = tps.getFirst().getId();
-
-            // Test getStudents
-            List<EtudiantDTO> students = tpService.getStudents(tpId);
-            CustomLogger.logInfo("Retrieved students: " + students.size());
-
-            // Test generateSchedule
-            List<SeanceDTO> schedule = tpService.generateSchedule(tpId);
-            CustomLogger.logInfo("Generated schedule: " + schedule.size());
-
-            // Test getEtudiants
-            List<EtudiantDTO> allStudents = tpService.getEtudiants(tpId);
-            CustomLogger.logInfo("Retrieved all students: " + allStudents.size());
-        }
-    }
-    private void testAllAdvancedFeatures() throws CustomException {
-        CustomLogger.logInfo("========== Testing All Advanced Features ==========");
-
-        testAdministrateurAdvancedFeatures();
-        testBrancheAdvancedFeatures();
-        testEnseignantAdvancedFeatures();
-        testEtudiantAdvancedFeatures();
-        testExcelFileAdvancedFeatures();
-        testNotificationAdvancedFeatures();
-        testSalleAdvancedFeatures();
-        testTDAdvancedFeatures();
-        testTPAdvancedFeatures();
-
-        CustomLogger.logInfo("========== Advanced Features Testing Complete ==========");
-    }
-
 }
