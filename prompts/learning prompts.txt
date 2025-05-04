@@ -1,4 +1,6 @@
 
+command: list all files in this folder (prompt/forChat)
+
 
 batch1: project information and base layers
 you learn the following files : project-description.md project-hierarchy.txt model.txt  jparepo.txt
@@ -6,7 +8,7 @@ and don't generate an output
 
 for each files summerise what is has to say briefly ( max 4 lines )
 
-batch2:Data transfer objects , mapper and utilitys 
+batch2:Data transfer objects , mapper and utilities 
 
 you learn the following files : dto.txt  mapper.txt util.txt
 and don't generate an output
@@ -15,8 +17,7 @@ for each files summerise what is has to say briefly ( max 4 lines )
 
 batch 3 : service layer 
 learn ,retrieve and summarize the service.txt 
-
-
+the service implementations are too large , they're provided when needed
 
 
 to test the llm understanding :

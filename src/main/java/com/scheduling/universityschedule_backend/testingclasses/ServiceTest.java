@@ -80,8 +80,11 @@ public class ServiceTest {
 //testAllUntestedBrancheServiceFunctionalities();
 //        testAllUntestedEnseignantServiceFunctionalities()
 //        testAllUntestedSalleServiceFunctionalities();
-        testAllUntestedTDServiceFunctionalities();
-        testAllUntestedTPServiceFunctionalities();
+//        testAllUntestedTDServiceFunctionalities();
+//        testAllUntestedTPServiceFunctionalities();
+//        addConflictingSeances();
+//        testAllUntestedNotificationServiceFunctionalities();
+        testAllUntestedSeanceServiceFunctionalities();
         CustomLogger.logInfo("========== Specialized Functions Testing Complete ==========");
     }
 
@@ -1946,6 +1949,405 @@ public class ServiceTest {
             CustomLogger.logInfo("\n----- Cleaning up test data -----");
             clearDatabase();
             CustomLogger.logInfo("Database cleared");
+        }
+    }
+    public void testAllUntestedNotificationServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting NotificationService Functionality Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-04 17:31:03");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            // 1. Test markAsRead and getUnreadNotifications
+            CustomLogger.logInfo("\n----- Testing Notification Read Status Management -----");
+            // Create test notification
+            NotificationDTO testNotification = new NotificationDTO();
+            testNotification.setMessage("Test notification");
+            testNotification.setIsread(false);
+            testNotification.setType("TEST");
+            testNotification.setDate(LocalDateTime.now());
+            NotificationDTO savedNotification = notificationService.create(testNotification);
+
+            // Test getUnreadNotifications
+            List<NotificationDTO> unreadNotifications = notificationService.getUnreadNotifications();
+            CustomLogger.logInfo("Found " + unreadNotifications.size() + " unread notifications");
+
+            // Test markAsRead
+            notificationService.markAsRead(savedNotification.getId());
+            CustomLogger.logInfo("Marked notification as read: " + savedNotification.getId());
+
+            // Verify read status
+            unreadNotifications = notificationService.getUnreadNotifications();
+            CustomLogger.logInfo("Unread notifications after marking as read: " + unreadNotifications.size());
+
+            // 2. Test broadcastNotification
+            CustomLogger.logInfo("\n----- Testing Broadcast Notification -----");
+            NotificationDTO broadcastNotif = new NotificationDTO();
+            broadcastNotif.setMessage("Broadcast test message");
+            broadcastNotif.setType("BROADCAST");
+            notificationService.broadcastNotification(broadcastNotif);
+            CustomLogger.logInfo("Broadcast notification sent");
+
+            // 3. Test Teacher Notifications
+            CustomLogger.logInfo("\n----- Testing Teacher Notifications -----");
+            NotificationDTO teacherNotif = new NotificationDTO();
+            teacherNotif.setMessage("Teacher test message");
+            teacherNotif.setType("TEACHER_BROADCAST");
+            notificationService.sendNotificationToTeachers(teacherNotif);
+            CustomLogger.logInfo("Teacher notification sent");
+
+            // 4. Test Student Notifications
+            CustomLogger.logInfo("\n----- Testing Student Notifications -----");
+            NotificationDTO studentNotif = new NotificationDTO();
+            studentNotif.setMessage("Student test message");
+            studentNotif.setType("STUDENT_BROADCAST");
+            notificationService.sendNotificationToStudents(studentNotif);
+            CustomLogger.logInfo("Student notification sent");
+
+            // 5. Test Branch Notifications
+            CustomLogger.logInfo("\n----- Testing Branch Notifications -----");
+            // Get test branch
+            List<BrancheDTO> branches = brancheService.findAll();
+            if (!branches.isEmpty()) {
+                NotificationDTO branchNotif = new NotificationDTO();
+                branchNotif.setMessage("Branch test message");
+                branchNotif.setType("BRANCH_NOTIFICATION");
+
+                // Test single branch
+                notificationService.sendNotificationToBranche(branchNotif, branches.getFirst());
+                CustomLogger.logInfo("Single branch notification sent");
+
+                // Test multiple branches
+                notificationService.sendNotificationToBranches(branchNotif, branches);
+                CustomLogger.logInfo("Multiple branches notification sent");
+            }
+
+            // 6. Test TD Notifications
+            CustomLogger.logInfo("\n----- Testing TD Notifications -----");
+            List<TDDTO> tds = tdService.findAll();
+            if (!tds.isEmpty()) {
+                NotificationDTO tdNotif = new NotificationDTO();
+                tdNotif.setMessage("TD test message");
+                tdNotif.setType("TD_NOTIFICATION");
+
+                // Test single TD
+                notificationService.sendNotificationToTD(tdNotif, tds.getFirst());
+                CustomLogger.logInfo("Single TD notification sent");
+
+                // Test multiple TDs
+                notificationService.sendNotificationToTDs(tdNotif, tds);
+                CustomLogger.logInfo("Multiple TDs notification sent");
+            }
+
+            // 7. Test TP Notifications
+            CustomLogger.logInfo("\n----- Testing TP Notifications -----");
+            List<TPDTO> tps = tpService.findAll();
+            if (!tps.isEmpty()) {
+                NotificationDTO tpNotif = new NotificationDTO();
+                tpNotif.setMessage("TP test message");
+                tpNotif.setType("TP_NOTIFICATION");
+
+                // Test single TP
+                notificationService.sendNotificationToTP(tpNotif, tps.getFirst());
+                CustomLogger.logInfo("Single TP notification sent");
+
+                // Test multiple TPs
+                notificationService.sendNotificationToTPs(tpNotif, tps);
+                CustomLogger.logInfo("Multiple TPs notification sent");
+            }
+
+            CustomLogger.logInfo("\n========== NotificationService Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            handleTestException("NotificationService", e);
+        } finally {
+            cleanup();
+        }
+    }
+
+    public void testAllUntestedSeanceServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting SeanceService Conflict Detection Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-04 17:31:03");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            // 1. Test getAllConflicts
+            CustomLogger.logInfo("\n----- Testing getAllConflicts -----");
+            List<SeanceConflictDTO> allConflicts = seanceService.getAllConflicts();
+            CustomLogger.logInfo("Found " + allConflicts.size() + " total conflicts");
+
+            if (!allConflicts.isEmpty()) {
+                CustomLogger.logInfo("Sample conflicts:");
+                allConflicts.stream().limit(5).forEach(conflict ->
+                        CustomLogger.logInfo("Conflict between sessions: " +
+                                conflict.getSeance1Id() + " and " + conflict.getSeance2Id())
+                );
+            }
+
+            // 2. Test getRoomConflicts
+            CustomLogger.logInfo("\n----- Testing getRoomConflicts -----");
+            List<SeanceRoomConflictDTO> roomConflicts = seanceService.getRoomConflicts();
+            CustomLogger.logInfo("Found " + roomConflicts.size() + " room conflicts");
+
+            if (!roomConflicts.isEmpty()) {
+                CustomLogger.logInfo("Sample room conflicts:");
+                roomConflicts.stream().limit(5).forEach(conflict -> {
+                    // get the salle in which there is a conflict
+                            try {
+                                Long salleId = seanceService.findById(conflict.getSeance1Id()).getSalleId();
+                                CustomLogger.logInfo("Room conflict in room " + salleId.toString() +
+                                        " between sessions: " + conflict.getSeance1Id() +
+                                        " and " + conflict.getSeance2Id());
+                            } catch (CustomException e) {
+                                CustomLogger.logError(e.getMessage());
+                            }
+                        }
+                );
+            }
+
+            // 3. Test getConflictsForSession by ID
+            CustomLogger.logInfo("\n----- Testing getConflictsForSession by ID -----");
+            // Get an existing session
+            List<SeanceDTO> sessions = seanceService.findAll();
+            if (!sessions.isEmpty()) {
+                SeanceDTO testSession = sessions.getFirst();
+                List<SingleSeanceConflictDTO> sessionConflicts =
+                        seanceService.getConflictsForSession(testSession.getId());
+
+                CustomLogger.logInfo("Found " + sessionConflicts.size() +
+                        " conflicts for session " + testSession.getId());
+
+                if (!sessionConflicts.isEmpty()) {
+                    CustomLogger.logInfo("Conflict details:");
+                    sessionConflicts.forEach(conflict ->
+                            CustomLogger.logInfo("Conflict type: " + conflict.getConflictTypes() +
+                                    ", Conflicting session: " + conflict.getSeanceId())
+                    );
+                }
+            }
+
+            // 4. Test getConflictsForSession by DTO
+            CustomLogger.logInfo("\n----- Testing getConflictsForSession by DTO -----");
+            SeanceDTO mockSession = new SeanceDTO();
+            mockSession.setHeureDebut(LocalTime.of(9, 0).toString());
+            mockSession.setHeureFin(LocalTime.of(10, 30).toString());
+            mockSession.setJour(DayOfWeek.MONDAY.toString());
+            mockSession.setFrequence("WEEKLY");
+
+            List<SingleSeanceConflictDTO> potentialConflicts =
+                    seanceService.getConflictsForSession(mockSession);
+
+            CustomLogger.logInfo("Found " + potentialConflicts.size() +
+                    " potential conflicts for mock session");
+
+            if (!potentialConflicts.isEmpty()) {
+                CustomLogger.logInfo("Potential conflict details:");
+                potentialConflicts.forEach(conflict ->
+                        CustomLogger.logInfo("Conflict type: " + conflict.getConflictTypes() +
+                                ", Conflicting session: " + conflict.getSeanceId())
+                );
+            }
+
+            // Test Summary
+            CustomLogger.logInfo("\n========== Test Results Summary ==========");
+            CustomLogger.logInfo("Total conflicts found: " + allConflicts.size());
+            CustomLogger.logInfo("Room conflicts found: " + roomConflicts.size());
+            CustomLogger.logInfo("Potential conflicts for mock session: " + potentialConflicts.size());
+
+            CustomLogger.logInfo("\n========== SeanceService Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            handleTestException("SeanceService", e);
+        } finally {
+            cleanup();
+        }
+    }
+
+    private void handleTestException(String serviceName, Exception e) throws CustomException {
+        CustomLogger.logError("\n===== ERROR in " + serviceName + " Tests =====");
+        CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
+        CustomLogger.logError("Error message: " + e.getMessage());
+        CustomLogger.logError("Stack trace:");
+        e.printStackTrace();
+        throw new CustomException("Test failed: " + e.getMessage(), e);
+    }
+
+    private void cleanup() {
+        CustomLogger.logInfo("\n----- Cleaning up test data -----");
+        clearDatabase();
+        CustomLogger.logInfo("Database cleared");
+    }
+
+    @Transactional
+    public void addConflictingSeances() {
+        try {
+            // First, verify/create required entities
+            SalleDTO salle1 = createOrGetSalle("Salle-A1", 30);
+            SalleDTO salle2 = createOrGetSalle("Salle-A2", 30);
+            SalleDTO salle3 = createOrGetSalle("Lab-1", 20);
+            SalleDTO salle4 = createOrGetSalle("TD-Room-1", 25);
+            SalleDTO salle5 = createOrGetSalle("Amphi-1", 100);
+
+            EnseignantDTO prof1 = createOrGetEnseignant("PROF001", "John", "Doe");
+            EnseignantDTO prof2 = createOrGetEnseignant("PROF002", "Jane", "Smith");
+            EnseignantDTO prof3 = createOrGetEnseignant("PROF003", "Robert", "Johnson");
+
+            BrancheDTO branch1 = createOrGetBranche("GI", "2A", "INFO");
+            TDDTO td1 = createOrGetTD(1, branch1.getId());
+            TPDTO tp1 = createOrGetTP(1, td1.getId());
+
+            // Base time slots
+            LocalTime baseStart = LocalTime.of(10, 0);
+            LocalTime baseEnd = LocalTime.of(11, 30);
+            DayOfWeek baseDay = DayOfWeek.MONDAY;
+
+            // 1. Base Session (CI)
+            SeanceDTO baseSession = new SeanceDTO();
+            baseSession.setName("Base Session - CI");
+            baseSession.setMatiere("Mathematics");
+            baseSession.setJour(baseDay.toString());
+            baseSession.setHeureDebut(baseStart.toString());
+            baseSession.setHeureFin(baseEnd.toString());
+            baseSession.setFrequence("WEEKLY");
+            baseSession.setType("CI");
+            baseSession.setSalleId(salle1.getId());
+            baseSession.setEnseignantId(prof1.getId());
+            baseSession.setBrancheIds(List.of(branch1.getId()));
+            seanceService.create(baseSession);
+
+            // 2. Room Conflict (Same room, overlapping time)
+            SeanceDTO roomConflict = new SeanceDTO();
+            roomConflict.setName("Room Conflict - TD");
+            roomConflict.setMatiere("Physics");
+            roomConflict.setJour(baseDay.toString());
+            roomConflict.setHeureDebut(baseStart.plusMinutes(30).toString());
+            roomConflict.setHeureFin(baseEnd.plusMinutes(30).toString());
+            roomConflict.setFrequence("WEEKLY");
+            roomConflict.setType("TD");
+            roomConflict.setSalleId(salle1.getId());  // Same room as base
+            roomConflict.setEnseignantId(prof2.getId());
+            roomConflict.setTdIds(List.of(td1.getId()));
+            seanceService.create(roomConflict);
+
+            // 3. Teacher Conflict (Same teacher, different room)
+            SeanceDTO teacherConflict = new SeanceDTO();
+            teacherConflict.setName("Teacher Conflict - CI");
+            teacherConflict.setMatiere("Chemistry");
+            teacherConflict.setJour(baseDay.toString());
+            teacherConflict.setHeureDebut(baseStart.toString());
+            teacherConflict.setHeureFin(baseEnd.toString());
+            teacherConflict.setFrequence("WEEKLY");
+            teacherConflict.setType("CI");
+            teacherConflict.setSalleId(salle2.getId());
+            teacherConflict.setEnseignantId(prof1.getId());  // Same teacher as base
+            teacherConflict.setBrancheIds(List.of(branch1.getId()));
+            seanceService.create(teacherConflict);
+
+            // 4. Group Conflicts (TP/TD level with same branch)
+            SeanceDTO groupConflict = new SeanceDTO();
+            groupConflict.setName("Group Conflict - TP");
+            groupConflict.setMatiere("Lab Work");
+            groupConflict.setJour(baseDay.toString());
+            groupConflict.setHeureDebut(baseStart.toString());
+            groupConflict.setHeureFin(baseEnd.toString());
+            groupConflict.setFrequence("WEEKLY");
+            groupConflict.setType("TP");
+            groupConflict.setSalleId(salle3.getId());
+            groupConflict.setEnseignantId(prof3.getId());
+            groupConflict.setTpIds(List.of(tp1.getId()));
+            seanceService.create(groupConflict);
+
+            // 5. Biweekly Conflict
+            SeanceDTO biweeklySession = new SeanceDTO();
+            biweeklySession.setName("Biweekly Session");
+            biweeklySession.setMatiere("Advanced Math");
+            biweeklySession.setJour(baseDay.toString());
+            biweeklySession.setHeureDebut(baseStart.toString());
+            biweeklySession.setHeureFin(baseEnd.toString());
+            biweeklySession.setFrequence("BIWEEKLY");
+            biweeklySession.setType("TD");
+            biweeklySession.setSalleId(salle4.getId());
+            biweeklySession.setEnseignantId(prof2.getId());
+            biweeklySession.setTdIds(List.of(td1.getId()));
+            seanceService.create(biweeklySession);
+
+            // 6. Catchup Session (Room conflict with base)
+            SeanceDTO catchupSession = new SeanceDTO();
+            catchupSession.setName("Makeup Session");
+            catchupSession.setMatiere("Mathematics Makeup");
+            catchupSession.setJour(baseDay.toString());
+            catchupSession.setHeureDebut(baseStart.toString());
+            catchupSession.setHeureFin(baseEnd.toString());
+            catchupSession.setFrequence("CATCHUP");
+            catchupSession.setType("CI");
+            catchupSession.setSalleId(salle1.getId());  // Same room as base
+            catchupSession.setEnseignantId(prof1.getId());
+            catchupSession.setBrancheIds(List.of(branch1.getId()));
+            catchupSession.setDate(LocalDate.now().toString());
+            seanceService.create(catchupSession);
+            CustomLogger.logInfo("successfully finished add ====================");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to add conflicting sessions: " + e.getMessage(), e);
+        }
+    }
+
+    // Helper methods to create or get required entities
+    private SalleDTO createOrGetSalle(String identifiant, int capacite) {
+        try {
+            SalleDTO salle = new SalleDTO();
+            salle.setIdentifiant(identifiant);
+            salle.setCapacite(capacite);
+            salle.setType("CLASSROOM");
+            return salleService.create(salle);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create/get room: " + e.getMessage(), e);
+        }
+    }
+
+    private EnseignantDTO createOrGetEnseignant(String code, String nom, String prenom) {
+        try {
+            EnseignantDTO enseignant = new EnseignantDTO();
+            enseignant.setCodeEnseignant(code);
+            enseignant.setNom(nom);
+            enseignant.setPrenom(prenom);
+            enseignant.setEmail(nom.toLowerCase() + "." + prenom.toLowerCase() + "@university.edu");
+            return enseignantService.create(enseignant);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create/get teacher: " + e.getMessage(), e);
+        }
+    }
+
+    private BrancheDTO createOrGetBranche(String specialite, String niveau, String departement) {
+        try {
+            BrancheDTO branche = new BrancheDTO();
+            branche.setSpecialite(specialite);
+            branche.setNiveau(niveau);
+            branche.setDepartement(departement);
+            return brancheService.create(branche);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create/get branch: " + e.getMessage(), e);
+        }
+    }
+
+    private TDDTO createOrGetTD(int number, Long brancheId) {
+        try {
+            TDDTO td = new TDDTO();
+            td.setNb(number);
+            td.setBrancheId(brancheId);
+            return tdService.create(td);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create/get TD: " + e.getMessage(), e);
+        }
+    }
+
+    private TPDTO createOrGetTP(int number, Long tdId) {
+        try {
+            TPDTO tp = new TPDTO();
+            tp.setNb(number);
+            tp.setTdId(tdId);
+            return tpService.create(tp);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create/get TP: " + e.getMessage(), e);
         }
     }
  }

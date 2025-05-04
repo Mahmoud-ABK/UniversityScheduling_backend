@@ -7097,3 +7097,352 @@ Sessions Distribution by Day:
 2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Database cleared
 2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
 2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-04 20:10:18 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 20:10:18 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-04 20:10:19 [restartedMain] ERROR CustomLogger - Unexpected error: Failed to add conflicting sessions
+2025-05-04 20:10:19 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH UNEXPECTED ERROR ======================
+2025-05-04 20:13:11 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 20:13:11 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-04 20:13:11 [restartedMain] ERROR CustomLogger - Unexpected error: Failed to add conflicting sessions
+2025-05-04 20:13:11 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH UNEXPECTED ERROR ======================
+2025-05-04 20:16:05 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 20:16:05 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-04 20:16:06 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-05-04 20:16:06 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 97
+2025-05-04 20:16:06 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-05-04 20:16:06 [restartedMain] INFO  CustomLogger - Created practical group with ID: 187
+2025-05-04 20:16:06 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-04 20:16:06 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-04 20:17:32 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 20:17:32 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-04 20:17:32 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-05-04 20:17:32 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 98
+2025-05-04 20:17:32 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-05-04 20:17:32 [restartedMain] INFO  CustomLogger - Created practical group with ID: 188
+2025-05-04 20:17:32 [restartedMain] INFO  CustomLogger - successfully finished add ====================
+2025-05-04 20:17:32 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-04 20:17:32 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-04 20:18:38 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 20:18:38 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-04 20:18:38 [restartedMain] INFO  CustomLogger - ========== Starting NotificationService Functionality Tests ==========
+2025-05-04 20:18:38 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-04 17:31:03
+2025-05-04 20:18:38 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 20:18:38 [restartedMain] INFO  CustomLogger - 
+----- Testing Notification Read Status Management -----
+2025-05-04 20:18:39 [restartedMain] INFO  CustomLogger - Found 2650 unread notifications
+2025-05-04 20:18:39 [restartedMain] INFO  CustomLogger - Marked notification as read: 3195
+2025-05-04 20:18:39 [restartedMain] INFO  CustomLogger - Unread notifications after marking as read: 2649
+2025-05-04 20:18:39 [restartedMain] INFO  CustomLogger - 
+----- Testing Broadcast Notification -----
+2025-05-04 20:18:39 [restartedMain] INFO  CustomLogger - Broadcast notification sent
+2025-05-04 20:18:39 [restartedMain] INFO  CustomLogger - 
+----- Testing Teacher Notifications -----
+2025-05-04 20:18:39 [restartedMain] INFO  CustomLogger - Teacher notification sent
+2025-05-04 20:18:39 [restartedMain] INFO  CustomLogger - 
+----- Testing Student Notifications -----
+2025-05-04 20:18:40 [restartedMain] INFO  CustomLogger - Student notification sent
+2025-05-04 20:18:40 [restartedMain] INFO  CustomLogger - 
+----- Testing Branch Notifications -----
+2025-05-04 20:18:40 [restartedMain] INFO  CustomLogger - Single branch notification sent
+2025-05-04 20:18:41 [restartedMain] INFO  CustomLogger - Multiple branches notification sent
+2025-05-04 20:18:41 [restartedMain] INFO  CustomLogger - 
+----- Testing TD Notifications -----
+2025-05-04 20:18:41 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-04 20:18:42 [restartedMain] INFO  CustomLogger - Single TD notification sent
+2025-05-04 20:18:43 [restartedMain] INFO  CustomLogger - Multiple TDs notification sent
+2025-05-04 20:18:43 [restartedMain] INFO  CustomLogger - 
+----- Testing TP Notifications -----
+2025-05-04 20:18:43 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-04 20:18:43 [restartedMain] INFO  CustomLogger - Found 99 practical groups
+2025-05-04 20:18:43 [restartedMain] INFO  CustomLogger - Single TP notification sent
+2025-05-04 20:18:47 [restartedMain] INFO  CustomLogger - Multiple TPs notification sent
+2025-05-04 20:18:47 [restartedMain] INFO  CustomLogger - 
+========== NotificationService Tests Completed Successfully ==========
+2025-05-04 20:18:47 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 20:18:47 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 20:18:47 [restartedMain] INFO  CustomLogger - ========== Starting SeanceService Conflict Detection Tests ==========
+2025-05-04 20:18:47 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-04 17:31:03
+2025-05-04 20:18:47 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 20:18:47 [restartedMain] INFO  CustomLogger - 
+----- Testing getAllConflicts -----
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Found 1795 total conflicts
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Sample conflicts:
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Conflict between sessions: 461 and 479
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Conflict between sessions: 461 and 525
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Conflict between sessions: 461 and 556
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Conflict between sessions: 462 and 463
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Conflict between sessions: 462 and 466
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - 
+----- Testing getRoomConflicts -----
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Found 238 room conflicts
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Sample room conflicts:
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Room conflict in room 52 between sessions: 462 and 526
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Room conflict in room 53 between sessions: 463 and 469
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Room conflict in room 53 between sessions: 464 and 553
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Room conflict in room 50 between sessions: 465 and 541
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - Room conflict in room 52 between sessions: 467 and 531
+2025-05-04 20:18:59 [restartedMain] INFO  CustomLogger - 
+----- Testing getConflictsForSession by ID -----
+2025-05-04 20:19:00 [restartedMain] INFO  CustomLogger - Found 3 conflicts for session 461
+2025-05-04 20:19:00 [restartedMain] INFO  CustomLogger - Conflict details:
+2025-05-04 20:19:00 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict, Catch-Up Exception], Conflicting session: 479
+2025-05-04 20:19:00 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict, Catch-Up Exception], Conflicting session: 525
+2025-05-04 20:19:00 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 556
+2025-05-04 20:19:00 [restartedMain] INFO  CustomLogger - 
+----- Testing getConflictsForSession by DTO -----
+2025-05-04 20:19:00 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, name=null, jour=MONDAY, heureDebut=09:00, heureFin=10:30, type=null, matiere=null, frequence=WEEKLY, date=null, salleId=null, enseignantId=null, brancheIds=null, tdIds=null, tpIds=null)
+2025-05-04 20:19:00 [restartedMain] ERROR CustomLogger - 
+===== ERROR in SeanceService Tests =====
+2025-05-04 20:19:00 [restartedMain] ERROR CustomLogger - Error type: CustomException
+2025-05-04 20:19:00 [restartedMain] ERROR CustomLogger - Error message: Failed to check for session conflicts: class com.scheduling.universityschedule_backend.model.Seance cannot be cast to class java.lang.Long (com.scheduling.universityschedule_backend.model.Seance is in unnamed module of loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader @ecd4b6; java.lang.Long is in module java.base of loader 'bootstrap')
+2025-05-04 20:19:00 [restartedMain] ERROR CustomLogger - Stack trace:
+2025-05-04 20:19:00 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 20:19:00 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 20:19:00 [restartedMain] ERROR CustomLogger - Error during testing: Test failed: Failed to check for session conflicts: class com.scheduling.universityschedule_backend.model.Seance cannot be cast to class java.lang.Long (com.scheduling.universityschedule_backend.model.Seance is in unnamed module of loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader @ecd4b6; java.lang.Long is in module java.base of loader 'bootstrap')
+2025-05-04 20:19:00 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-05-04 20:24:09 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 20:24:09 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-04 20:24:09 [restartedMain] INFO  CustomLogger - ========== Starting NotificationService Functionality Tests ==========
+2025-05-04 20:24:09 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-04 17:31:03
+2025-05-04 20:24:09 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 20:24:09 [restartedMain] INFO  CustomLogger - 
+----- Testing Notification Read Status Management -----
+2025-05-04 20:24:09 [restartedMain] INFO  CustomLogger - Found 7714 unread notifications
+2025-05-04 20:24:09 [restartedMain] INFO  CustomLogger - Marked notification as read: 8260
+2025-05-04 20:24:09 [restartedMain] INFO  CustomLogger - Unread notifications after marking as read: 7713
+2025-05-04 20:24:09 [restartedMain] INFO  CustomLogger - 
+----- Testing Broadcast Notification -----
+2025-05-04 20:24:10 [restartedMain] INFO  CustomLogger - Broadcast notification sent
+2025-05-04 20:24:10 [restartedMain] INFO  CustomLogger - 
+----- Testing Teacher Notifications -----
+2025-05-04 20:24:10 [restartedMain] INFO  CustomLogger - Teacher notification sent
+2025-05-04 20:24:10 [restartedMain] INFO  CustomLogger - 
+----- Testing Student Notifications -----
+2025-05-04 20:24:10 [restartedMain] INFO  CustomLogger - Student notification sent
+2025-05-04 20:24:10 [restartedMain] INFO  CustomLogger - 
+----- Testing Branch Notifications -----
+2025-05-04 20:24:10 [restartedMain] INFO  CustomLogger - Single branch notification sent
+2025-05-04 20:24:12 [restartedMain] INFO  CustomLogger - Multiple branches notification sent
+2025-05-04 20:24:12 [restartedMain] INFO  CustomLogger - 
+----- Testing TD Notifications -----
+2025-05-04 20:24:12 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-04 20:24:12 [restartedMain] INFO  CustomLogger - Single TD notification sent
+2025-05-04 20:24:14 [restartedMain] INFO  CustomLogger - Multiple TDs notification sent
+2025-05-04 20:24:14 [restartedMain] INFO  CustomLogger - 
+----- Testing TP Notifications -----
+2025-05-04 20:24:14 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-04 20:24:14 [restartedMain] INFO  CustomLogger - Found 99 practical groups
+2025-05-04 20:24:14 [restartedMain] INFO  CustomLogger - Single TP notification sent
+2025-05-04 20:24:18 [restartedMain] INFO  CustomLogger - Multiple TPs notification sent
+2025-05-04 20:24:18 [restartedMain] INFO  CustomLogger - 
+========== NotificationService Tests Completed Successfully ==========
+2025-05-04 20:24:18 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 20:24:18 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 20:24:18 [restartedMain] INFO  CustomLogger - ========== Starting SeanceService Conflict Detection Tests ==========
+2025-05-04 20:24:18 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-04 17:31:03
+2025-05-04 20:24:18 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 20:24:18 [restartedMain] INFO  CustomLogger - 
+----- Testing getAllConflicts -----
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Found 1795 total conflicts
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Sample conflicts:
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Conflict between sessions: 461 and 479
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Conflict between sessions: 461 and 525
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Conflict between sessions: 461 and 556
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Conflict between sessions: 462 and 463
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Conflict between sessions: 462 and 466
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - 
+----- Testing getRoomConflicts -----
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Found 238 room conflicts
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Sample room conflicts:
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Room conflict in room 52 between sessions: 462 and 526
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Room conflict in room 53 between sessions: 463 and 469
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Room conflict in room 53 between sessions: 464 and 553
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Room conflict in room 50 between sessions: 465 and 541
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Room conflict in room 52 between sessions: 467 and 531
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - 
+----- Testing getConflictsForSession by ID -----
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Found 3 conflicts for session 461
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Conflict details:
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict, Catch-Up Exception], Conflicting session: 479
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict, Catch-Up Exception], Conflicting session: 525
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 556
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - 
+----- Testing getConflictsForSession by DTO -----
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, name=null, jour=MONDAY, heureDebut=09:00, heureFin=10:30, type=null, matiere=null, frequence=WEEKLY, date=null, salleId=null, enseignantId=null, brancheIds=null, tdIds=null, tpIds=null)
+2025-05-04 20:24:31 [restartedMain] ERROR CustomLogger - 
+===== ERROR in SeanceService Tests =====
+2025-05-04 20:24:31 [restartedMain] ERROR CustomLogger - Error type: CustomException
+2025-05-04 20:24:31 [restartedMain] ERROR CustomLogger - Error message: Failed to check for session conflicts: [Ljava.lang.StackTraceElement;@1522951
+2025-05-04 20:24:31 [restartedMain] ERROR CustomLogger - Stack trace:
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 20:24:31 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 20:24:31 [restartedMain] ERROR CustomLogger - Error during testing: Test failed: Failed to check for session conflicts: [Ljava.lang.StackTraceElement;@1522951
+2025-05-04 20:24:31 [restartedMain] ERROR CustomLogger - ==================== FINISHED WITH ERROR ======================
+2025-05-04 20:54:04 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 20:54:04 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-04 20:54:04 [restartedMain] INFO  CustomLogger - ========== Starting SeanceService Conflict Detection Tests ==========
+2025-05-04 20:54:04 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-04 17:31:03
+2025-05-04 20:54:04 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 20:54:04 [restartedMain] INFO  CustomLogger - 
+----- Testing getAllConflicts -----
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Found 1795 total conflicts
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Sample conflicts:
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Conflict between sessions: 461 and 479
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Conflict between sessions: 461 and 525
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Conflict between sessions: 461 and 556
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Conflict between sessions: 462 and 463
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Conflict between sessions: 462 and 466
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - 
+----- Testing getRoomConflicts -----
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Found 238 room conflicts
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Sample room conflicts:
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Room conflict in room 52 between sessions: 462 and 526
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Room conflict in room 53 between sessions: 463 and 469
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Room conflict in room 53 between sessions: 464 and 553
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Room conflict in room 50 between sessions: 465 and 541
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - Room conflict in room 52 between sessions: 467 and 531
+2025-05-04 20:54:16 [restartedMain] INFO  CustomLogger - 
+----- Testing getConflictsForSession by ID -----
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Found 3 conflicts for session 461
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict details:
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict, Catch-Up Exception], Conflicting session: 479
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict, Catch-Up Exception], Conflicting session: 525
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 556
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - 
+----- Testing getConflictsForSession by DTO -----
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - after checkingSeanceDTO(id=null, name=null, jour=MONDAY, heureDebut=09:00, heureFin=10:30, type=null, matiere=null, frequence=WEEKLY, date=null, salleId=null, enseignantId=null, brancheIds=null, tdIds=null, tpIds=null)
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 463
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 478
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 526
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 527
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 566
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 568
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 574
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 600
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 607
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 613
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 620
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 622
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 626
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 634
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 644
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 664
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 668
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 676
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 686
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 687
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 689
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 696
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 714
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 728
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 750
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 758
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 760
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 795
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 797
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 857
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 922
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 925
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 941
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 980
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 1014
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 1041
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 1042
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 1047
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflicting Seance ID: 1048
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict Types: Student Group Conflict; 
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Found 39 potential conflicts for mock session
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Potential conflict details:
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 463
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 478
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 526
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 527
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 566
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 568
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 574
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 600
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 607
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 613
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 620
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 622
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 626
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 634
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 644
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 664
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 668
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 676
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 686
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 687
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 689
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 696
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 714
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 728
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 750
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 758
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 760
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 795
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 797
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 857
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 922
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 925
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 941
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 980
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 1014
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 1041
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 1042
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 1047
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Conflict type: [Student Group Conflict], Conflicting session: 1048
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Total conflicts found: 1795
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Room conflicts found: 238
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Potential conflicts for mock session: 39
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - 
+========== SeanceService Tests Completed Successfully ==========
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================

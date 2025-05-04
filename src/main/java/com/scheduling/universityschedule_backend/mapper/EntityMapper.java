@@ -613,6 +613,7 @@ public abstract class EntityMapper {
      * @return List of SingleSeanceConflictDTO objects
      */
     public List<SingleSeanceConflictDTO> toSingleSeanceConflictDTOList(List<Object[]> conflictsForSeance) {
+        if (conflictsForSeance == null) return Collections.emptyList();  // ADDED: Null check
         return conflictsForSeance.stream()
                 .map(this::toSingleSeanceConflictDTO)
                 .collect(Collectors.toList());
@@ -625,12 +626,16 @@ public abstract class EntityMapper {
      * @return SingleSeanceConflictDTO representing the conflict
      */
     public SingleSeanceConflictDTO toSingleSeanceConflictDTO(Object[] conflictForSeance) {
-        Seance seance = (Seance) conflictForSeance[0];
-        String conflictTypes = (String) conflictForSeance[1];
+        if (conflictForSeance == null) return null;
+
+        Seance seance = (Seance) conflictForSeance[0];           // FIXED: Correct casting to Seance
+        String conflictTypes = (String) conflictForSeance[1];     // FIXED: Correct casting to String
 
         return new SingleSeanceConflictDTO(
                 seance.getId(),
-                List.of(conflictTypes.split("; "))
+                conflictTypes != null && !conflictTypes.isEmpty()
+                        ? List.of(conflictTypes.split("; "))
+                        : Collections.emptyList()
         );
     }
 

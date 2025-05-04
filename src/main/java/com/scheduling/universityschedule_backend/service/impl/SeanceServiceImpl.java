@@ -305,17 +305,12 @@ public class SeanceServiceImpl implements SeanceService {
                     FrequenceType.CATCHUP
             );
 
+            // Debug logging with correct casting
             for (Object[] conflict : conflicts) {
-                Long seanceId = (Long) conflict[0];
-                Long types = (Long) conflict[1];
-                CustomLogger.logInfo("debug 1"+seanceId);
-                CustomLogger.logInfo("debug 2"+types);
-            }
-
-
-            // Handle null result
-            if (conflicts == null) {
-                return new ArrayList<>();
+                Seance conflictingSeance = (Seance) conflict[0];
+                String conflictTypes = (String) conflict[1];
+                CustomLogger.logInfo("Conflicting Seance ID: " + conflictingSeance.getId());
+                CustomLogger.logInfo("Conflict Types: " + conflictTypes);
             }
 
             return entityMapper.toSingleSeanceConflictDTOList(conflicts);
@@ -326,4 +321,5 @@ public class SeanceServiceImpl implements SeanceService {
             throw new CustomException("Failed to check for session conflicts: " + e.getMessage());
         }
     }
+    
 }
