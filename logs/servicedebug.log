@@ -7446,3 +7446,55 @@ Sessions Distribution by Day:
 2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - Database cleared
 2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
 2025-05-04 20:54:17 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Starting technician population - User: Mahmoud-ABK
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Creating technician 1: TECH001
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Creating new technician
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Created technician with ID: 2159
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Creating technician 2: TECH002
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Creating new technician
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Created technician with ID: 2160
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Creating technician 3: TECH003
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Creating new technician
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Created technician with ID: 2161
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Creating technician 4: TECH004
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Creating new technician
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Created technician with ID: 2162
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Creating technician 5: TECH005
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Creating new technician
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Created technician with ID: 2163
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Successfully populated 5 technicians
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 21:37:47 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Starting RUD operations test - User: Mahmoud-ABK
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Fetching all technicians
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Found 5 technicians
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Found 5 technicians in the database
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Fetching technician with ID: 2159
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Retrieved technician: Martin Thomas (ID: 2159)
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Updating technician 2159 - Phone: +21655123456 -> +21655999999
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Updating technician with ID: 2159
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Updated technician with ID: 2159
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Successfully updated technician 2159
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Attempting to delete technician with ID: 2163
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Checking if technician with ID: 2163 exists
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Deleting technician with ID: 2163
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Deleted technician with ID: 2163
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Successfully deleted technician with ID: 2163
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Fetching all technicians
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Found 4 technicians
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Verification - Remaining technicians: 4 (Expected: 4)
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - RUD operations test completed successfully
+2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================

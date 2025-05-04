@@ -39,6 +39,7 @@ public class ServiceTest {
     private final TPService tpService;
     private final NotificationService notificationService;
     private final PropositionDeRattrapageRepository propositionDeRattrapageRepository;
+    private final TechnicienService technicienService;
 
 
     public Random RANDOM = new Random();
@@ -70,7 +71,10 @@ public class ServiceTest {
 //rudTest();
 //        testSpecializedFunctionalities();
 //    testAllUntestedExcelFileServiceFunctionalities();
-        testSpecializedFunctionalities();
+//        testSpecializedFunctionalities();
+//        populateTechniciens();
+        testTechnicienRUD();
+
     }
 
     public void testSpecializedFunctionalities() throws CustomException {
@@ -84,11 +88,12 @@ public class ServiceTest {
 //        testAllUntestedTPServiceFunctionalities();
 //        addConflictingSeances();
 //        testAllUntestedNotificationServiceFunctionalities();
-        testAllUntestedSeanceServiceFunctionalities();
+//        testAllUntestedSeanceServiceFunctionalities();
+
         CustomLogger.logInfo("========== Specialized Functions Testing Complete ==========");
     }
 
-    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService, EntityMapper entityMapper, EntityManager entityManager, PropositionDeRattrapageRepository propositionDeRattrapageRepository) {
+    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService, EntityMapper entityMapper, EntityManager entityManager, PropositionDeRattrapageRepository propositionDeRattrapageRepository, TechnicienService technicienService) {
         this.administrateurService = administrateurService;
         this.brancheService = brancheService;
         this.etudiantService = etudiantService;
@@ -102,6 +107,7 @@ public class ServiceTest {
         this.entityMapper = entityMapper;
         this.entityManager = entityManager;
         this.propositionDeRattrapageRepository = propositionDeRattrapageRepository;
+        this.technicienService = technicienService;
     }
 
     public void populateDatabase(int sampleSize) throws CustomException {
@@ -2348,6 +2354,142 @@ public class ServiceTest {
             return tpService.create(tp);
         } catch (Exception e) {
             throw new RuntimeException("Failed to create/get TP: " + e.getMessage(), e);
+        }
+    }
+    /**
+     * Populates the database with 5 technicians for testing.
+     * Uses the create method from TechnicienService.
+     *
+     * @throws CustomException if creation fails
+     * @author Mahmoud-ABK
+     * @since 2025-05-04 20:32:23
+     */
+    public void populateTechniciens() throws CustomException {
+        CustomLogger.logInfo("Starting technician population - User: Mahmoud-ABK");
+
+        // Create 5 technician DTOs
+        TechnicienDTO tech1 = new TechnicienDTO();
+        tech1.setNom("Martin");
+        tech1.setPrenom("Thomas");
+        tech1.setEmail("t.martin@univ.edu");
+        tech1.setTel("+21655123456");
+        tech1.setAdresse("123 Tech Street");
+        tech1.setCin("12345678");
+        tech1.setCodeTechnicien("TECH001");
+
+        TechnicienDTO tech2 = new TechnicienDTO();
+        tech2.setNom("Bernard");
+        tech2.setPrenom("Sophie");
+        tech2.setEmail("s.bernard@univ.edu");
+        tech2.setTel("+21655234567");
+        tech2.setAdresse("456 Support Ave");
+        tech2.setCin("23456789");
+        tech2.setCodeTechnicien("TECH002");
+
+        TechnicienDTO tech3 = new TechnicienDTO();
+        tech3.setNom("Dubois");
+        tech3.setPrenom("Pierre");
+        tech3.setEmail("p.dubois@univ.edu");
+        tech3.setTel("+21655345678");
+        tech3.setAdresse("789 System Road");
+        tech3.setCin("34567890");
+        tech3.setCodeTechnicien("TECH003");
+
+        TechnicienDTO tech4 = new TechnicienDTO();
+        tech4.setNom("Moreau");
+        tech4.setPrenom("Julie");
+        tech4.setEmail("j.moreau@univ.edu");
+        tech4.setTel("+21655456789");
+        tech4.setAdresse("321 Network Lane");
+        tech4.setCin("45678901");
+        tech4.setCodeTechnicien("TECH004");
+
+        TechnicienDTO tech5 = new TechnicienDTO();
+        tech5.setNom("Petit");
+        tech5.setPrenom("Marc");
+        tech5.setEmail("m.petit@univ.edu");
+        tech5.setTel("+21655567890");
+        tech5.setAdresse("654 Hardware Blvd");
+        tech5.setCin("56789012");
+        tech5.setCodeTechnicien("TECH005");
+
+        try {
+            // Create technicians using service
+            CustomLogger.logInfo("Creating technician 1: " + tech1.getCodeTechnicien());
+            technicienService.create(tech1);
+
+            CustomLogger.logInfo("Creating technician 2: " + tech2.getCodeTechnicien());
+            technicienService.create(tech2);
+
+            CustomLogger.logInfo("Creating technician 3: " + tech3.getCodeTechnicien());
+            technicienService.create(tech3);
+
+            CustomLogger.logInfo("Creating technician 4: " + tech4.getCodeTechnicien());
+            technicienService.create(tech4);
+
+            CustomLogger.logInfo("Creating technician 5: " + tech5.getCodeTechnicien());
+            technicienService.create(tech5);
+
+            CustomLogger.logInfo("Successfully populated 5 technicians");
+        } catch (CustomException e) {
+            CustomLogger.logError("Failed to populate technicians", e);
+            throw e;
+        }
+        cleanup();
+    }
+
+    /**
+     * Tests the Read, Update, and Delete operations for TechnicienService.
+     * Performs a sequence of operations to verify service functionality.
+     * @throws CustomException if any operation fails
+     * @author Mahmoud-ABK
+     * @since 2025-05-04 20:32:23
+     */
+    public void testTechnicienRUD() throws CustomException {
+        CustomLogger.logInfo("Starting RUD operations test - User: Mahmoud-ABK");
+
+        try {
+            // Read all technicians
+            List<TechnicienDTO> allTechs = technicienService.findAll();
+            CustomLogger.logInfo("Found " + allTechs.size() + " technicians in the database");
+
+            if (!allTechs.isEmpty()) {
+                // Get first technician
+                TechnicienDTO firstTech = technicienService.findById(allTechs.get(0).getId());
+                CustomLogger.logInfo("Retrieved technician: " + firstTech.getNom() + " " + firstTech.getPrenom() +
+                        " (ID: " + firstTech.getId() + ")");
+
+                // Update technician
+                String originalPhone = firstTech.getTel();
+                firstTech.setTel("+21655999999");
+                firstTech.setAdresse("Updated Address 123");
+
+                CustomLogger.logInfo("Updating technician " + firstTech.getId() +
+                        " - Phone: " + originalPhone + " -> " + firstTech.getTel());
+
+                TechnicienDTO updatedTech = technicienService.update(firstTech.getId(), firstTech);
+                CustomLogger.logInfo("Successfully updated technician " + updatedTech.getId());
+                cleanup();
+
+                // Delete last technician
+                Long lastTechId = allTechs.get(allTechs.size() - 1).getId();
+                CustomLogger.logInfo("Attempting to delete technician with ID: " + lastTechId);
+                technicienService.delete(lastTechId);
+                CustomLogger.logInfo("Successfully deleted technician with ID: " + lastTechId);
+                cleanup();
+                // Verify deletion
+                List<TechnicienDTO> remainingTechs = technicienService.findAll();
+                CustomLogger.logInfo("Verification - Remaining technicians: " + remainingTechs.size() +
+                        " (Expected: " + (allTechs.size() - 1) + ")");
+                cleanup();
+            } else {
+                CustomLogger.logInfo("No technicians found in database. Cannot perform RUD operations");
+            }
+
+            CustomLogger.logInfo("RUD operations test completed successfully");
+        } catch (CustomException e) {
+            CustomLogger.logError("RUD operations test failed", e);
+            throw e;
         }
     }
  }
