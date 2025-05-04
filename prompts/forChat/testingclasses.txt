@@ -923,6 +923,7 @@ public class ServiceTest {
     private final TPService tpService;
     private final NotificationService notificationService;
     private final PropositionDeRattrapageRepository propositionDeRattrapageRepository;
+    private final TechnicienService technicienService;
 
 
     public Random RANDOM = new Random();
@@ -954,7 +955,10 @@ public class ServiceTest {
 //rudTest();
 //        testSpecializedFunctionalities();
 //    testAllUntestedExcelFileServiceFunctionalities();
-        testSpecializedFunctionalities();
+//        testSpecializedFunctionalities();
+//        populateTechniciens();
+        testTechnicienRUD();
+
     }
 
     public void testSpecializedFunctionalities() throws CustomException {
@@ -964,12 +968,16 @@ public class ServiceTest {
 //testAllUntestedBrancheServiceFunctionalities();
 //        testAllUntestedEnseignantServiceFunctionalities()
 //        testAllUntestedSalleServiceFunctionalities();
-        testAllUntestedTDServiceFunctionalities();
-        testAllUntestedTPServiceFunctionalities();
+//        testAllUntestedTDServiceFunctionalities();
+//        testAllUntestedTPServiceFunctionalities();
+//        addConflictingSeances();
+//        testAllUntestedNotificationServiceFunctionalities();
+//        testAllUntestedSeanceServiceFunctionalities();
+
         CustomLogger.logInfo("========== Specialized Functions Testing Complete ==========");
     }
 
-    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService, EntityMapper entityMapper, EntityManager entityManager, PropositionDeRattrapageRepository propositionDeRattrapageRepository) {
+    public ServiceTest(AdministrateurService administrateurService, BrancheService brancheService, EtudiantService etudiantService, ExcelFileService excelFileService, SalleService salleService, SeanceService seanceService, EnseignantService enseignantService, TDService tdService, TPService tpService, NotificationService notificationService, EntityMapper entityMapper, EntityManager entityManager, PropositionDeRattrapageRepository propositionDeRattrapageRepository, TechnicienService technicienService) {
         this.administrateurService = administrateurService;
         this.brancheService = brancheService;
         this.etudiantService = etudiantService;
@@ -983,6 +991,7 @@ public class ServiceTest {
         this.entityMapper = entityMapper;
         this.entityManager = entityManager;
         this.propositionDeRattrapageRepository = propositionDeRattrapageRepository;
+        this.technicienService = technicienService;
     }
 
     public void populateDatabase(int sampleSize) throws CustomException {
@@ -2830,6 +2839,541 @@ public class ServiceTest {
             CustomLogger.logInfo("\n----- Cleaning up test data -----");
             clearDatabase();
             CustomLogger.logInfo("Database cleared");
+        }
+    }
+    public void testAllUntestedNotificationServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting NotificationService Functionality Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-04 17:31:03");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            // 1. Test markAsRead and getUnreadNotifications
+            CustomLogger.logInfo("\n----- Testing Notification Read Status Management -----");
+            // Create test notification
+            NotificationDTO testNotification = new NotificationDTO();
+            testNotification.setMessage("Test notification");
+            testNotification.setIsread(false);
+            testNotification.setType("TEST");
+            testNotification.setDate(LocalDateTime.now());
+            NotificationDTO savedNotification = notificationService.create(testNotification);
+
+            // Test getUnreadNotifications
+            List<NotificationDTO> unreadNotifications = notificationService.getUnreadNotifications();
+            CustomLogger.logInfo("Found " + unreadNotifications.size() + " unread notifications");
+
+            // Test markAsRead
+            notificationService.markAsRead(savedNotification.getId());
+            CustomLogger.logInfo("Marked notification as read: " + savedNotification.getId());
+
+            // Verify read status
+            unreadNotifications = notificationService.getUnreadNotifications();
+            CustomLogger.logInfo("Unread notifications after marking as read: " + unreadNotifications.size());
+
+            // 2. Test broadcastNotification
+            CustomLogger.logInfo("\n----- Testing Broadcast Notification -----");
+            NotificationDTO broadcastNotif = new NotificationDTO();
+            broadcastNotif.setMessage("Broadcast test message");
+            broadcastNotif.setType("BROADCAST");
+            notificationService.broadcastNotification(broadcastNotif);
+            CustomLogger.logInfo("Broadcast notification sent");
+
+            // 3. Test Teacher Notifications
+            CustomLogger.logInfo("\n----- Testing Teacher Notifications -----");
+            NotificationDTO teacherNotif = new NotificationDTO();
+            teacherNotif.setMessage("Teacher test message");
+            teacherNotif.setType("TEACHER_BROADCAST");
+            notificationService.sendNotificationToTeachers(teacherNotif);
+            CustomLogger.logInfo("Teacher notification sent");
+
+            // 4. Test Student Notifications
+            CustomLogger.logInfo("\n----- Testing Student Notifications -----");
+            NotificationDTO studentNotif = new NotificationDTO();
+            studentNotif.setMessage("Student test message");
+            studentNotif.setType("STUDENT_BROADCAST");
+            notificationService.sendNotificationToStudents(studentNotif);
+            CustomLogger.logInfo("Student notification sent");
+
+            // 5. Test Branch Notifications
+            CustomLogger.logInfo("\n----- Testing Branch Notifications -----");
+            // Get test branch
+            List<BrancheDTO> branches = brancheService.findAll();
+            if (!branches.isEmpty()) {
+                NotificationDTO branchNotif = new NotificationDTO();
+                branchNotif.setMessage("Branch test message");
+                branchNotif.setType("BRANCH_NOTIFICATION");
+
+                // Test single branch
+                notificationService.sendNotificationToBranche(branchNotif, branches.getFirst());
+                CustomLogger.logInfo("Single branch notification sent");
+
+                // Test multiple branches
+                notificationService.sendNotificationToBranches(branchNotif, branches);
+                CustomLogger.logInfo("Multiple branches notification sent");
+            }
+
+            // 6. Test TD Notifications
+            CustomLogger.logInfo("\n----- Testing TD Notifications -----");
+            List<TDDTO> tds = tdService.findAll();
+            if (!tds.isEmpty()) {
+                NotificationDTO tdNotif = new NotificationDTO();
+                tdNotif.setMessage("TD test message");
+                tdNotif.setType("TD_NOTIFICATION");
+
+                // Test single TD
+                notificationService.sendNotificationToTD(tdNotif, tds.getFirst());
+                CustomLogger.logInfo("Single TD notification sent");
+
+                // Test multiple TDs
+                notificationService.sendNotificationToTDs(tdNotif, tds);
+                CustomLogger.logInfo("Multiple TDs notification sent");
+            }
+
+            // 7. Test TP Notifications
+            CustomLogger.logInfo("\n----- Testing TP Notifications -----");
+            List<TPDTO> tps = tpService.findAll();
+            if (!tps.isEmpty()) {
+                NotificationDTO tpNotif = new NotificationDTO();
+                tpNotif.setMessage("TP test message");
+                tpNotif.setType("TP_NOTIFICATION");
+
+                // Test single TP
+                notificationService.sendNotificationToTP(tpNotif, tps.getFirst());
+                CustomLogger.logInfo("Single TP notification sent");
+
+                // Test multiple TPs
+                notificationService.sendNotificationToTPs(tpNotif, tps);
+                CustomLogger.logInfo("Multiple TPs notification sent");
+            }
+
+            CustomLogger.logInfo("\n========== NotificationService Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            handleTestException("NotificationService", e);
+        } finally {
+            cleanup();
+        }
+    }
+
+    public void testAllUntestedSeanceServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting SeanceService Conflict Detection Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-04 17:31:03");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            // 1. Test getAllConflicts
+            CustomLogger.logInfo("\n----- Testing getAllConflicts -----");
+            List<SeanceConflictDTO> allConflicts = seanceService.getAllConflicts();
+            CustomLogger.logInfo("Found " + allConflicts.size() + " total conflicts");
+
+            if (!allConflicts.isEmpty()) {
+                CustomLogger.logInfo("Sample conflicts:");
+                allConflicts.stream().limit(5).forEach(conflict ->
+                        CustomLogger.logInfo("Conflict between sessions: " +
+                                conflict.getSeance1Id() + " and " + conflict.getSeance2Id())
+                );
+            }
+
+            // 2. Test getRoomConflicts
+            CustomLogger.logInfo("\n----- Testing getRoomConflicts -----");
+            List<SeanceRoomConflictDTO> roomConflicts = seanceService.getRoomConflicts();
+            CustomLogger.logInfo("Found " + roomConflicts.size() + " room conflicts");
+
+            if (!roomConflicts.isEmpty()) {
+                CustomLogger.logInfo("Sample room conflicts:");
+                roomConflicts.stream().limit(5).forEach(conflict -> {
+                    // get the salle in which there is a conflict
+                            try {
+                                Long salleId = seanceService.findById(conflict.getSeance1Id()).getSalleId();
+                                CustomLogger.logInfo("Room conflict in room " + salleId.toString() +
+                                        " between sessions: " + conflict.getSeance1Id() +
+                                        " and " + conflict.getSeance2Id());
+                            } catch (CustomException e) {
+                                CustomLogger.logError(e.getMessage());
+                            }
+                        }
+                );
+            }
+
+            // 3. Test getConflictsForSession by ID
+            CustomLogger.logInfo("\n----- Testing getConflictsForSession by ID -----");
+            // Get an existing session
+            List<SeanceDTO> sessions = seanceService.findAll();
+            if (!sessions.isEmpty()) {
+                SeanceDTO testSession = sessions.getFirst();
+                List<SingleSeanceConflictDTO> sessionConflicts =
+                        seanceService.getConflictsForSession(testSession.getId());
+
+                CustomLogger.logInfo("Found " + sessionConflicts.size() +
+                        " conflicts for session " + testSession.getId());
+
+                if (!sessionConflicts.isEmpty()) {
+                    CustomLogger.logInfo("Conflict details:");
+                    sessionConflicts.forEach(conflict ->
+                            CustomLogger.logInfo("Conflict type: " + conflict.getConflictTypes() +
+                                    ", Conflicting session: " + conflict.getSeanceId())
+                    );
+                }
+            }
+
+            // 4. Test getConflictsForSession by DTO
+            CustomLogger.logInfo("\n----- Testing getConflictsForSession by DTO -----");
+            SeanceDTO mockSession = new SeanceDTO();
+            mockSession.setHeureDebut(LocalTime.of(9, 0).toString());
+            mockSession.setHeureFin(LocalTime.of(10, 30).toString());
+            mockSession.setJour(DayOfWeek.MONDAY.toString());
+            mockSession.setFrequence("WEEKLY");
+
+            List<SingleSeanceConflictDTO> potentialConflicts =
+                    seanceService.getConflictsForSession(mockSession);
+
+            CustomLogger.logInfo("Found " + potentialConflicts.size() +
+                    " potential conflicts for mock session");
+
+            if (!potentialConflicts.isEmpty()) {
+                CustomLogger.logInfo("Potential conflict details:");
+                potentialConflicts.forEach(conflict ->
+                        CustomLogger.logInfo("Conflict type: " + conflict.getConflictTypes() +
+                                ", Conflicting session: " + conflict.getSeanceId())
+                );
+            }
+
+            // Test Summary
+            CustomLogger.logInfo("\n========== Test Results Summary ==========");
+            CustomLogger.logInfo("Total conflicts found: " + allConflicts.size());
+            CustomLogger.logInfo("Room conflicts found: " + roomConflicts.size());
+            CustomLogger.logInfo("Potential conflicts for mock session: " + potentialConflicts.size());
+
+            CustomLogger.logInfo("\n========== SeanceService Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            handleTestException("SeanceService", e);
+        } finally {
+            cleanup();
+        }
+    }
+
+    private void handleTestException(String serviceName, Exception e) throws CustomException {
+        CustomLogger.logError("\n===== ERROR in " + serviceName + " Tests =====");
+        CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
+        CustomLogger.logError("Error message: " + e.getMessage());
+        CustomLogger.logError("Stack trace:");
+        e.printStackTrace();
+        throw new CustomException("Test failed: " + e.getMessage(), e);
+    }
+
+    private void cleanup() {
+        CustomLogger.logInfo("\n----- Cleaning up test data -----");
+        clearDatabase();
+        CustomLogger.logInfo("Database cleared");
+    }
+
+    @Transactional
+    public void addConflictingSeances() {
+        try {
+            // First, verify/create required entities
+            SalleDTO salle1 = createOrGetSalle("Salle-A1", 30);
+            SalleDTO salle2 = createOrGetSalle("Salle-A2", 30);
+            SalleDTO salle3 = createOrGetSalle("Lab-1", 20);
+            SalleDTO salle4 = createOrGetSalle("TD-Room-1", 25);
+            SalleDTO salle5 = createOrGetSalle("Amphi-1", 100);
+
+            EnseignantDTO prof1 = createOrGetEnseignant("PROF001", "John", "Doe");
+            EnseignantDTO prof2 = createOrGetEnseignant("PROF002", "Jane", "Smith");
+            EnseignantDTO prof3 = createOrGetEnseignant("PROF003", "Robert", "Johnson");
+
+            BrancheDTO branch1 = createOrGetBranche("GI", "2A", "INFO");
+            TDDTO td1 = createOrGetTD(1, branch1.getId());
+            TPDTO tp1 = createOrGetTP(1, td1.getId());
+
+            // Base time slots
+            LocalTime baseStart = LocalTime.of(10, 0);
+            LocalTime baseEnd = LocalTime.of(11, 30);
+            DayOfWeek baseDay = DayOfWeek.MONDAY;
+
+            // 1. Base Session (CI)
+            SeanceDTO baseSession = new SeanceDTO();
+            baseSession.setName("Base Session - CI");
+            baseSession.setMatiere("Mathematics");
+            baseSession.setJour(baseDay.toString());
+            baseSession.setHeureDebut(baseStart.toString());
+            baseSession.setHeureFin(baseEnd.toString());
+            baseSession.setFrequence("WEEKLY");
+            baseSession.setType("CI");
+            baseSession.setSalleId(salle1.getId());
+            baseSession.setEnseignantId(prof1.getId());
+            baseSession.setBrancheIds(List.of(branch1.getId()));
+            seanceService.create(baseSession);
+
+            // 2. Room Conflict (Same room, overlapping time)
+            SeanceDTO roomConflict = new SeanceDTO();
+            roomConflict.setName("Room Conflict - TD");
+            roomConflict.setMatiere("Physics");
+            roomConflict.setJour(baseDay.toString());
+            roomConflict.setHeureDebut(baseStart.plusMinutes(30).toString());
+            roomConflict.setHeureFin(baseEnd.plusMinutes(30).toString());
+            roomConflict.setFrequence("WEEKLY");
+            roomConflict.setType("TD");
+            roomConflict.setSalleId(salle1.getId());  // Same room as base
+            roomConflict.setEnseignantId(prof2.getId());
+            roomConflict.setTdIds(List.of(td1.getId()));
+            seanceService.create(roomConflict);
+
+            // 3. Teacher Conflict (Same teacher, different room)
+            SeanceDTO teacherConflict = new SeanceDTO();
+            teacherConflict.setName("Teacher Conflict - CI");
+            teacherConflict.setMatiere("Chemistry");
+            teacherConflict.setJour(baseDay.toString());
+            teacherConflict.setHeureDebut(baseStart.toString());
+            teacherConflict.setHeureFin(baseEnd.toString());
+            teacherConflict.setFrequence("WEEKLY");
+            teacherConflict.setType("CI");
+            teacherConflict.setSalleId(salle2.getId());
+            teacherConflict.setEnseignantId(prof1.getId());  // Same teacher as base
+            teacherConflict.setBrancheIds(List.of(branch1.getId()));
+            seanceService.create(teacherConflict);
+
+            // 4. Group Conflicts (TP/TD level with same branch)
+            SeanceDTO groupConflict = new SeanceDTO();
+            groupConflict.setName("Group Conflict - TP");
+            groupConflict.setMatiere("Lab Work");
+            groupConflict.setJour(baseDay.toString());
+            groupConflict.setHeureDebut(baseStart.toString());
+            groupConflict.setHeureFin(baseEnd.toString());
+            groupConflict.setFrequence("WEEKLY");
+            groupConflict.setType("TP");
+            groupConflict.setSalleId(salle3.getId());
+            groupConflict.setEnseignantId(prof3.getId());
+            groupConflict.setTpIds(List.of(tp1.getId()));
+            seanceService.create(groupConflict);
+
+            // 5. Biweekly Conflict
+            SeanceDTO biweeklySession = new SeanceDTO();
+            biweeklySession.setName("Biweekly Session");
+            biweeklySession.setMatiere("Advanced Math");
+            biweeklySession.setJour(baseDay.toString());
+            biweeklySession.setHeureDebut(baseStart.toString());
+            biweeklySession.setHeureFin(baseEnd.toString());
+            biweeklySession.setFrequence("BIWEEKLY");
+            biweeklySession.setType("TD");
+            biweeklySession.setSalleId(salle4.getId());
+            biweeklySession.setEnseignantId(prof2.getId());
+            biweeklySession.setTdIds(List.of(td1.getId()));
+            seanceService.create(biweeklySession);
+
+            // 6. Catchup Session (Room conflict with base)
+            SeanceDTO catchupSession = new SeanceDTO();
+            catchupSession.setName("Makeup Session");
+            catchupSession.setMatiere("Mathematics Makeup");
+            catchupSession.setJour(baseDay.toString());
+            catchupSession.setHeureDebut(baseStart.toString());
+            catchupSession.setHeureFin(baseEnd.toString());
+            catchupSession.setFrequence("CATCHUP");
+            catchupSession.setType("CI");
+            catchupSession.setSalleId(salle1.getId());  // Same room as base
+            catchupSession.setEnseignantId(prof1.getId());
+            catchupSession.setBrancheIds(List.of(branch1.getId()));
+            catchupSession.setDate(LocalDate.now().toString());
+            seanceService.create(catchupSession);
+            CustomLogger.logInfo("successfully finished add ====================");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to add conflicting sessions: " + e.getMessage(), e);
+        }
+    }
+
+    // Helper methods to create or get required entities
+    private SalleDTO createOrGetSalle(String identifiant, int capacite) {
+        try {
+            SalleDTO salle = new SalleDTO();
+            salle.setIdentifiant(identifiant);
+            salle.setCapacite(capacite);
+            salle.setType("CLASSROOM");
+            return salleService.create(salle);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create/get room: " + e.getMessage(), e);
+        }
+    }
+
+    private EnseignantDTO createOrGetEnseignant(String code, String nom, String prenom) {
+        try {
+            EnseignantDTO enseignant = new EnseignantDTO();
+            enseignant.setCodeEnseignant(code);
+            enseignant.setNom(nom);
+            enseignant.setPrenom(prenom);
+            enseignant.setEmail(nom.toLowerCase() + "." + prenom.toLowerCase() + "@university.edu");
+            return enseignantService.create(enseignant);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create/get teacher: " + e.getMessage(), e);
+        }
+    }
+
+    private BrancheDTO createOrGetBranche(String specialite, String niveau, String departement) {
+        try {
+            BrancheDTO branche = new BrancheDTO();
+            branche.setSpecialite(specialite);
+            branche.setNiveau(niveau);
+            branche.setDepartement(departement);
+            return brancheService.create(branche);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create/get branch: " + e.getMessage(), e);
+        }
+    }
+
+    private TDDTO createOrGetTD(int number, Long brancheId) {
+        try {
+            TDDTO td = new TDDTO();
+            td.setNb(number);
+            td.setBrancheId(brancheId);
+            return tdService.create(td);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create/get TD: " + e.getMessage(), e);
+        }
+    }
+
+    private TPDTO createOrGetTP(int number, Long tdId) {
+        try {
+            TPDTO tp = new TPDTO();
+            tp.setNb(number);
+            tp.setTdId(tdId);
+            return tpService.create(tp);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create/get TP: " + e.getMessage(), e);
+        }
+    }
+    /**
+     * Populates the database with 5 technicians for testing.
+     * Uses the create method from TechnicienService.
+     *
+     * @throws CustomException if creation fails
+     * @author Mahmoud-ABK
+     * @since 2025-05-04 20:32:23
+     */
+    public void populateTechniciens() throws CustomException {
+        CustomLogger.logInfo("Starting technician population - User: Mahmoud-ABK");
+
+        // Create 5 technician DTOs
+        TechnicienDTO tech1 = new TechnicienDTO();
+        tech1.setNom("Martin");
+        tech1.setPrenom("Thomas");
+        tech1.setEmail("t.martin@univ.edu");
+        tech1.setTel("+21655123456");
+        tech1.setAdresse("123 Tech Street");
+        tech1.setCin("12345678");
+        tech1.setCodeTechnicien("TECH001");
+
+        TechnicienDTO tech2 = new TechnicienDTO();
+        tech2.setNom("Bernard");
+        tech2.setPrenom("Sophie");
+        tech2.setEmail("s.bernard@univ.edu");
+        tech2.setTel("+21655234567");
+        tech2.setAdresse("456 Support Ave");
+        tech2.setCin("23456789");
+        tech2.setCodeTechnicien("TECH002");
+
+        TechnicienDTO tech3 = new TechnicienDTO();
+        tech3.setNom("Dubois");
+        tech3.setPrenom("Pierre");
+        tech3.setEmail("p.dubois@univ.edu");
+        tech3.setTel("+21655345678");
+        tech3.setAdresse("789 System Road");
+        tech3.setCin("34567890");
+        tech3.setCodeTechnicien("TECH003");
+
+        TechnicienDTO tech4 = new TechnicienDTO();
+        tech4.setNom("Moreau");
+        tech4.setPrenom("Julie");
+        tech4.setEmail("j.moreau@univ.edu");
+        tech4.setTel("+21655456789");
+        tech4.setAdresse("321 Network Lane");
+        tech4.setCin("45678901");
+        tech4.setCodeTechnicien("TECH004");
+
+        TechnicienDTO tech5 = new TechnicienDTO();
+        tech5.setNom("Petit");
+        tech5.setPrenom("Marc");
+        tech5.setEmail("m.petit@univ.edu");
+        tech5.setTel("+21655567890");
+        tech5.setAdresse("654 Hardware Blvd");
+        tech5.setCin("56789012");
+        tech5.setCodeTechnicien("TECH005");
+
+        try {
+            // Create technicians using service
+            CustomLogger.logInfo("Creating technician 1: " + tech1.getCodeTechnicien());
+            technicienService.create(tech1);
+
+            CustomLogger.logInfo("Creating technician 2: " + tech2.getCodeTechnicien());
+            technicienService.create(tech2);
+
+            CustomLogger.logInfo("Creating technician 3: " + tech3.getCodeTechnicien());
+            technicienService.create(tech3);
+
+            CustomLogger.logInfo("Creating technician 4: " + tech4.getCodeTechnicien());
+            technicienService.create(tech4);
+
+            CustomLogger.logInfo("Creating technician 5: " + tech5.getCodeTechnicien());
+            technicienService.create(tech5);
+
+            CustomLogger.logInfo("Successfully populated 5 technicians");
+        } catch (CustomException e) {
+            CustomLogger.logError("Failed to populate technicians", e);
+            throw e;
+        }
+        cleanup();
+    }
+
+    /**
+     * Tests the Read, Update, and Delete operations for TechnicienService.
+     * Performs a sequence of operations to verify service functionality.
+     * @throws CustomException if any operation fails
+     * @author Mahmoud-ABK
+     * @since 2025-05-04 20:32:23
+     */
+    public void testTechnicienRUD() throws CustomException {
+        CustomLogger.logInfo("Starting RUD operations test - User: Mahmoud-ABK");
+
+        try {
+            // Read all technicians
+            List<TechnicienDTO> allTechs = technicienService.findAll();
+            CustomLogger.logInfo("Found " + allTechs.size() + " technicians in the database");
+
+            if (!allTechs.isEmpty()) {
+                // Get first technician
+                TechnicienDTO firstTech = technicienService.findById(allTechs.get(0).getId());
+                CustomLogger.logInfo("Retrieved technician: " + firstTech.getNom() + " " + firstTech.getPrenom() +
+                        " (ID: " + firstTech.getId() + ")");
+
+                // Update technician
+                String originalPhone = firstTech.getTel();
+                firstTech.setTel("+21655999999");
+                firstTech.setAdresse("Updated Address 123");
+
+                CustomLogger.logInfo("Updating technician " + firstTech.getId() +
+                        " - Phone: " + originalPhone + " -> " + firstTech.getTel());
+
+                TechnicienDTO updatedTech = technicienService.update(firstTech.getId(), firstTech);
+                CustomLogger.logInfo("Successfully updated technician " + updatedTech.getId());
+                cleanup();
+
+                // Delete last technician
+                Long lastTechId = allTechs.get(allTechs.size() - 1).getId();
+                CustomLogger.logInfo("Attempting to delete technician with ID: " + lastTechId);
+                technicienService.delete(lastTechId);
+                CustomLogger.logInfo("Successfully deleted technician with ID: " + lastTechId);
+                cleanup();
+                // Verify deletion
+                List<TechnicienDTO> remainingTechs = technicienService.findAll();
+                CustomLogger.logInfo("Verification - Remaining technicians: " + remainingTechs.size() +
+                        " (Expected: " + (allTechs.size() - 1) + ")");
+                cleanup();
+            } else {
+                CustomLogger.logInfo("No technicians found in database. Cannot perform RUD operations");
+            }
+
+            CustomLogger.logInfo("RUD operations test completed successfully");
+        } catch (CustomException e) {
+            CustomLogger.logError("RUD operations test failed", e);
+            throw e;
         }
     }
  }

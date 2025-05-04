@@ -7498,3 +7498,33 @@ Sessions Distribution by Day:
 2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - Database cleared
 2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - RUD operations test completed successfully
 2025-05-04 21:38:40 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Starting RUD operations test - User: Mahmoud-ABK
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Fetching all technicians
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Found 4 technicians
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Found 4 technicians in the database
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Fetching technician with ID: 2159
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Retrieved technician: Martin Thomas (ID: 2159)
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Updating technician 2159 - Phone: +21655999999 -> +21655999999
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Updating technician with ID: 2159
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Updated technician with ID: 2159
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Successfully updated technician 2159
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Attempting to delete technician with ID: 2162
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Checking if technician with ID: 2162 exists
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Deleting technician with ID: 2162
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Deleted technician with ID: 2162
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Successfully deleted technician with ID: 2162
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Fetching all technicians
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Found 3 technicians
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Verification - Remaining technicians: 3 (Expected: 3)
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - RUD operations test completed successfully
+2025-05-04 21:45:14 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
