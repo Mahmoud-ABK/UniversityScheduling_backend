@@ -28,16 +28,16 @@ import java.util.stream.Collectors;
 public abstract class EntityMapper {
 
     /* Repository dependencies for entity lookup */
-    @Autowired protected BrancheRepository brancheRepository;
-    @Autowired protected TPRepository tpRepository;
-    @Autowired protected PersonneRepository personneRepository;
-    @Autowired protected EnseignantRepository enseignantRepository;
-    @Autowired protected SalleRepository salleRepository;
-    @Autowired protected TDRepository tdRepository;
-    @Autowired protected EtudiantRepository etudiantRepository;
-    @Autowired protected SeanceRepository seanceRepository;
-    @Autowired protected PropositionDeRattrapageRepository propositionDeRattrapageRepository;
-    @Autowired protected SignalRepository signalRepository;
+    @Autowired public BrancheRepository brancheRepository;
+    @Autowired public TPRepository tpRepository;
+    @Autowired public PersonneRepository personneRepository;
+    @Autowired public EnseignantRepository enseignantRepository;
+    @Autowired public SalleRepository salleRepository;
+    @Autowired public TDRepository tdRepository;
+    @Autowired public EtudiantRepository etudiantRepository;
+    @Autowired public SeanceRepository seanceRepository;
+    @Autowired public PropositionDeRattrapageRepository propositionDeRattrapageRepository;
+    @Autowired public SignalRepository signalRepository;
 
     /* Constants for date/time formatting */
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
@@ -55,7 +55,7 @@ public abstract class EntityMapper {
      * @return DayOfWeek enum value, or null if conversion fails
      */
     @Named("stringToDayOfWeek")
-    protected DayOfWeek stringToDayOfWeek(String day) {
+    public DayOfWeek stringToDayOfWeek(String day) {
         if (day == null || day.isEmpty()) {
             return null;
         }
@@ -85,7 +85,7 @@ public abstract class EntityMapper {
      * @return String representation of the day
      */
     @Named("dayOfWeekToString")
-    protected String dayOfWeekToString(DayOfWeek day) {
+    public String dayOfWeekToString(DayOfWeek day) {
         if (day == null) {
             return null;
         }
@@ -99,7 +99,7 @@ public abstract class EntityMapper {
      * @return LocalTime object, or null if conversion fails
      */
     @Named("stringToLocalTime")
-    protected LocalTime stringToLocalTime(String time) {
+    public LocalTime stringToLocalTime(String time) {
         if (time == null || time.isEmpty()) {
             return null;
         }
@@ -118,7 +118,7 @@ public abstract class EntityMapper {
      * @return Time string in HH:mm format
      */
     @Named("localTimeToString")
-    protected String localTimeToString(LocalTime time) {
+    public String localTimeToString(LocalTime time) {
         if (time == null) {
             return null;
         }
@@ -133,7 +133,7 @@ public abstract class EntityMapper {
      * @return FrequenceType enum value
      */
     @Named("stringToFrequenceType")
-    protected FrequenceType stringToFrequenceType(String frequence) {
+    public FrequenceType stringToFrequenceType(String frequence) {
         return FrequenceType.fromString(frequence);
     }
 
@@ -144,7 +144,7 @@ public abstract class EntityMapper {
      * @return String representation of the frequency
      */
     @Named("frequenceTypeToString")
-    protected String frequenceTypeToString(FrequenceType frequence) {
+    public String frequenceTypeToString(FrequenceType frequence) {
         if (frequence == null) {
             return null;
         }
@@ -158,7 +158,7 @@ public abstract class EntityMapper {
      * @return LocalDate object, or null if conversion fails
      */
     @Named("stringToLocalDate")
-    protected LocalDate stringToLocalDate(String date) {
+    public LocalDate stringToLocalDate(String date) {
         if (date == null || date.isEmpty()) {
             return null;
         }
@@ -177,7 +177,7 @@ public abstract class EntityMapper {
      * @return Date string in yyyy-MM-dd format
      */
     @Named("localDateToString")
-    protected String localDateToString(LocalDate date) {
+    public String localDateToString(LocalDate date) {
         if (date == null) {
             return null;
         }
@@ -405,7 +405,7 @@ public abstract class EntityMapper {
      * Converts LocalDateTime to String.
      */
     @Named("localDateTimeToString")
-    protected String localDateTimeToString(LocalDateTime dateTime) {
+    public String localDateTimeToString(LocalDateTime dateTime) {
         if (dateTime == null) {
             return null;
         }
@@ -416,7 +416,7 @@ public abstract class EntityMapper {
      * Converts String to LocalDateTime.
      */
     @Named("stringToLocalDateTime")
-    protected LocalDateTime stringToLocalDateTime(String dateTime) throws CustomException {
+    public LocalDateTime stringToLocalDateTime(String dateTime) throws CustomException {
         if (dateTime == null || dateTime.isEmpty()) {
             return null;
         }
@@ -427,14 +427,14 @@ public abstract class EntityMapper {
         }
     }
     @Named("stringToStatus")
-    protected Status stringToStatus(String status) {
+    public Status stringToStatus(String status) {
         if (status == null) {
             return null;
         }
         return Status.valueOf(status.toUpperCase());
     }
     @Named("statusToString")
-    protected String statusToString(Status status) {
+    public String statusToString(Status status) {
         if (status == null) {
             return null;
         }
@@ -505,7 +505,7 @@ public abstract class EntityMapper {
      * Converts a string to SeanceType enum value.
      */
     @Named("stringToSeanceType")
-    protected SeanceType stringToSeanceType(String type) {
+    public SeanceType stringToSeanceType(String type) {
         if (type == null) {
             return null;
         }
@@ -516,7 +516,7 @@ public abstract class EntityMapper {
      * Converts SeanceType enum to string.
      */
     @Named("seanceTypeToString")
-    protected String seanceTypeToString(SeanceType type) {
+    public String seanceTypeToString(SeanceType type) {
         if (type == null) {
             return null;
         }

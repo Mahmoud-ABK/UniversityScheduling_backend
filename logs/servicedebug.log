@@ -6668,3 +6668,432 @@ Sessions Distribution by Day:
 2025-05-04 15:41:41 [restartedMain] INFO  CustomLogger - Database cleared
 2025-05-04 15:41:41 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
 2025-05-04 15:41:41 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - ========== Starting TDService Functionality Tests ==========
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 17:24:01
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Tutorial Groups -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Selecting test tutorial group -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Selected tutorial group - ID: 46, Number: 4, TP Count: 3
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Testing getTPs functionality -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Fetching practical groups for tutorial group with ID: 46
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Found 1 practical groups for tutorial group with ID: 46
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Retrieved 1 practical groups
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Practical groups details:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - TP ID: 93, Number: 2, Students: 7, Sessions: 5
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+TP Size Distribution:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 7 students: 1 groups
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Testing generateSchedule functionality -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Generating schedule for tutorial group with ID: 46
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Generated schedule with 13 sessions for tutorial group with ID: 46
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Generated schedule with 13 sessions
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Schedule details:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 470, Subject: Computer Architecture, Type: CI, Day: THURSDAY, Time: 08:25 - 10:34, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 475, Subject: Data Structures, Type: CI, Day: TUESDAY, Time: 08:50 - 10:47, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 489, Subject: Computer Architecture, Type: TP, Day: THURSDAY, Time: 09:40 - 11:59, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 493, Subject: Software Engineering, Type: TP, Day: WEDNESDAY, Time: 16:15 - 18:36, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 500, Subject: Database Systems, Type: CI, Day: THURSDAY, Time: 11:10 - 14:01, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 511, Subject: Artificial Intelligence, Type: CI, Day: WEDNESDAY, Time: 13:20 - 15:40, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 512, Subject: Mathematics, Type: CR, Day: THURSDAY, Time: 11:45 - 13:34, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 536, Subject: Chemistry, Type: TP, Day: WEDNESDAY, Time: 09:05 - 11:45, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 537, Subject: Computer Architecture, Type: CR, Day: MONDAY, Time: 11:05 - 12:58, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 552, Subject: Operating Systems, Type: TD, Day: WEDNESDAY, Time: 16:45 - 19:31, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 560, Subject: Data Structures, Type: CI, Day: FRIDAY, Time: 09:30 - 11:24, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 1029, Subject: Mathematics, Type: TD, Day: SUNDAY, Time: 08:50 - 10:28, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 1030, Subject: Chemistry, Type: TP, Day: SATURDAY, Time: 15:40 - 17:35, Room: Assigned
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+Session Type Distribution:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - TD: 2 sessions
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - CI: 5 sessions
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - TP: 4 sessions
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - CR: 2 sessions
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Testing getEtudiants functionality -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Fetching students for tutorial group with ID: 46
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Using repository method to fetch students directly
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Found 7 students for tutorial group with ID: 46
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Retrieved 7 students
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Sample of enrolled students (first 5):
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1069, Name: Miller Michael, Registration: MAT42, TP: 93
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1079, Name: Jones Richard, Registration: MAT52, TP: 93
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1093, Name: Miller Jennifer, Registration: MAT66, TP: 93
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1095, Name: Jones James, Registration: MAT68, TP: 93
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1098, Name: Wilson Richard, Registration: MAT71, TP: 93
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+Student Distribution across TPs:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - TP-93: 7 students
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 1. Practical Groups Test:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Total TPs: 1
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Average students per TP: 7.0
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+2. Schedule Test:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Total sessions: 13
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Unique subjects: 8
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+3. Students Test:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Total students: 7
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Students per TP: 7.00
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+========== TDService Tests Completed Successfully ==========
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - ========== Starting TPService Functionality Tests ==========
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 17:24:01
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Practical Groups -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Found 97 practical groups
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Selecting test practical group -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Selected practical group - ID: 89, Number: 1, TD: 50
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Testing getStudents functionality -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Redirecting getStudents to getEtudiants method for practical group: 89
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Fetching students for practical group with ID: 89
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Found 8 students for practical group with ID: 89
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Retrieved 8 students
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student details:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1045, Name: Thomas Mary, Registration: MAT18, Branch: 24
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1052, Name: Thomas Robert, Registration: MAT25, Branch: 23
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1065, Name: Thomas James, Registration: MAT38, Branch: 23
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1107, Name: White William, Registration: MAT80, Branch: 23
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1129, Name: Smith Elizabeth, Registration: MAT102, Branch: 22
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1136, Name: Jackson Robert, Registration: MAT109, Branch: 23
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1158, Name: Johnson James, Registration: MAT131, Branch: 23
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Student ID: 1159, Name: Johnson David, Registration: MAT132, Branch: 24
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+Student Registration Distribution:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Prefix MA: 8 students
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Testing generateSchedule functionality -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Generating schedule for practical group with ID: 89
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Generated schedule with 7 sessions for practical group with ID: 89
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Generated schedule with 7 sessions
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Schedule details:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 466, Subject: Data Structures, Type: CI, Day: MONDAY, Time: 10:50 - 13:05, Frequency: catch-up
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 510, Subject: Operating Systems, Type: TD, Day: TUESDAY, Time: 15:40 - 17:15, Frequency: catch-up
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 530, Subject: Operating Systems, Type: CI, Day: TUESDAY, Time: 13:30 - 15:45, Frequency: weekly
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 551, Subject: Data Structures, Type: CR, Day: FRIDAY, Time: 15:35 - 18:09, Frequency: catch-up
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 552, Subject: Operating Systems, Type: TD, Day: WEDNESDAY, Time: 16:45 - 19:31, Frequency: 1/15
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 556, Subject: Networks, Type: TD, Day: WEDNESDAY, Time: 10:30 - 13:09, Frequency: weekly
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Session ID: 1034, Subject: Algorithms, Type: CI, Day: TUESDAY, Time: 11:45 - 13:56, Frequency: catch-up
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+Sessions Distribution by Day:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - WEDNESDAY: 2 sessions
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - MONDAY: 1 sessions
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - FRIDAY: 1 sessions
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - TUESDAY: 3 sessions
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 1. Students Test:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Total students: 8
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Branches represented: 3
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+2. Schedule Test:
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Total sessions: 7
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Unique subjects: 4
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger -    - Session types: 3
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+========== TPService Tests Completed Successfully ==========
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-04 15:50:52 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - ========== Starting TDService Functionality Tests ==========
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 17:24:01
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Tutorial Groups -----
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+----- Selecting test tutorial group -----
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Selected tutorial group - ID: 46, Number: 4, TP Count: 3
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+----- Testing getTPs functionality -----
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Fetching practical groups for tutorial group with ID: 46
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Found 1 practical groups for tutorial group with ID: 46
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Retrieved 1 practical groups
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Practical groups details:
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - TP ID: 93, Number: 2, Students: 7, Sessions: 5
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+TP Size Distribution:
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 7 students: 1 groups
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+----- Testing generateSchedule functionality -----
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Generating schedule for tutorial group with ID: 46
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Generated schedule with 13 sessions for tutorial group with ID: 46
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Generated schedule with 13 sessions
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Schedule details:
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 470, Subject: Computer Architecture, Type: CI, Day: THURSDAY, Time: 08:25 - 10:34, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 475, Subject: Data Structures, Type: CI, Day: TUESDAY, Time: 08:50 - 10:47, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 489, Subject: Computer Architecture, Type: TP, Day: THURSDAY, Time: 09:40 - 11:59, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 493, Subject: Software Engineering, Type: TP, Day: WEDNESDAY, Time: 16:15 - 18:36, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 500, Subject: Database Systems, Type: CI, Day: THURSDAY, Time: 11:10 - 14:01, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 511, Subject: Artificial Intelligence, Type: CI, Day: WEDNESDAY, Time: 13:20 - 15:40, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 512, Subject: Mathematics, Type: CR, Day: THURSDAY, Time: 11:45 - 13:34, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 536, Subject: Chemistry, Type: TP, Day: WEDNESDAY, Time: 09:05 - 11:45, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 537, Subject: Computer Architecture, Type: CR, Day: MONDAY, Time: 11:05 - 12:58, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 552, Subject: Operating Systems, Type: TD, Day: WEDNESDAY, Time: 16:45 - 19:31, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 560, Subject: Data Structures, Type: CI, Day: FRIDAY, Time: 09:30 - 11:24, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 1029, Subject: Mathematics, Type: TD, Day: SUNDAY, Time: 08:50 - 10:28, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Session ID: 1030, Subject: Chemistry, Type: TP, Day: SATURDAY, Time: 15:40 - 17:35, Room: Assigned
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+Session Type Distribution:
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - TD: 2 sessions
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - CI: 5 sessions
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - TP: 4 sessions
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - CR: 2 sessions
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+----- Testing getEtudiants functionality -----
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Fetching students for tutorial group with ID: 46
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Using repository method to fetch students directly
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Found 7 students for tutorial group with ID: 46
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Retrieved 7 students
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Sample of enrolled students (first 5):
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Student ID: 1069, Name: Miller Michael, Registration: MAT42, TP: 93
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Student ID: 1079, Name: Jones Richard, Registration: MAT52, TP: 93
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Student ID: 1093, Name: Miller Jennifer, Registration: MAT66, TP: 93
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Student ID: 1095, Name: Jones James, Registration: MAT68, TP: 93
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Student ID: 1098, Name: Wilson Richard, Registration: MAT71, TP: 93
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+Student Distribution across TPs:
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - TP-93: 7 students
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 1. Practical Groups Test:
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger -    - Total TPs: 1
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger -    - Average students per TP: 7.0
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+2. Schedule Test:
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger -    - Total sessions: 13
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger -    - Unique subjects: 8
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+3. Students Test:
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger -    - Total students: 7
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger -    - Students per TP: 7.00
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+========== TDService Tests Completed Successfully ==========
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - ========== Starting TPService Functionality Tests ==========
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 17:24:01
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Practical Groups -----
+2025-05-04 15:51:58 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Found 97 practical groups
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - 
+----- Selecting test practical group -----
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Selected practical group - ID: 89, Number: 1, TD: 50
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - 
+----- Testing getStudents functionality -----
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Redirecting getStudents to getEtudiants method for practical group: 89
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Fetching students for practical group with ID: 89
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Found 8 students for practical group with ID: 89
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Retrieved 8 students
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Student details:
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Student ID: 1045, Name: Thomas Mary, Registration: MAT18, Branch: 24
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Student ID: 1052, Name: Thomas Robert, Registration: MAT25, Branch: 23
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Student ID: 1065, Name: Thomas James, Registration: MAT38, Branch: 23
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Student ID: 1107, Name: White William, Registration: MAT80, Branch: 23
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Student ID: 1129, Name: Smith Elizabeth, Registration: MAT102, Branch: 22
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Student ID: 1136, Name: Jackson Robert, Registration: MAT109, Branch: 23
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Student ID: 1158, Name: Johnson James, Registration: MAT131, Branch: 23
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Student ID: 1159, Name: Johnson David, Registration: MAT132, Branch: 24
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - 
+Student Registration Distribution:
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Prefix MA: 8 students
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - 
+----- Testing generateSchedule functionality -----
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Generating schedule for practical group with ID: 89
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Generated schedule with 7 sessions for practical group with ID: 89
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Generated schedule with 7 sessions
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Schedule details:
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Session ID: 466, Subject: Data Structures, Type: CI, Day: MONDAY, Time: 10:50 - 13:05, Frequency: catch-up
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Session ID: 510, Subject: Operating Systems, Type: TD, Day: TUESDAY, Time: 15:40 - 17:15, Frequency: catch-up
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Session ID: 530, Subject: Operating Systems, Type: CI, Day: TUESDAY, Time: 13:30 - 15:45, Frequency: weekly
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Session ID: 551, Subject: Data Structures, Type: CR, Day: FRIDAY, Time: 15:35 - 18:09, Frequency: catch-up
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Session ID: 552, Subject: Operating Systems, Type: TD, Day: WEDNESDAY, Time: 16:45 - 19:31, Frequency: 1/15
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Session ID: 556, Subject: Networks, Type: TD, Day: WEDNESDAY, Time: 10:30 - 13:09, Frequency: weekly
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Session ID: 1034, Subject: Algorithms, Type: CI, Day: TUESDAY, Time: 11:45 - 13:56, Frequency: catch-up
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - 
+Sessions Distribution by Day:
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - WEDNESDAY: 2 sessions
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - MONDAY: 1 sessions
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - FRIDAY: 1 sessions
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - TUESDAY: 3 sessions
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - 1. Students Test:
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger -    - Total students: 8
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger -    - Branches represented: 3
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - 
+2. Schedule Test:
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger -    - Total sessions: 7
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger -    - Unique subjects: 4
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger -    - Session types: 3
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - 
+========== TPService Tests Completed Successfully ==========
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-04 15:51:59 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - ==================== Starting Operation  ======================
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - ========== Testing Specialized Functionalities ==========
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - ========== Starting TDService Functionality Tests ==========
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 17:24:01
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Tutorial Groups -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Fetching all tutorial groups
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Selecting test tutorial group -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Selected tutorial group - ID: 46, Number: 4, TP Count: 3
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Testing getTPs functionality -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Fetching practical groups for tutorial group with ID: 46
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Found 1 practical groups for tutorial group with ID: 46
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Retrieved 1 practical groups
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Practical groups details:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - TP ID: 93, Number: 2, Students: 7, Sessions: 5
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+TP Size Distribution:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 7 students: 1 groups
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Testing generateSchedule functionality -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Generating schedule for tutorial group with ID: 46
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Generated schedule with 13 sessions for tutorial group with ID: 46
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Generated schedule with 13 sessions
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Schedule details:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 470, Subject: Computer Architecture, Type: CI, Day: THURSDAY, Time: 08:25 - 10:34, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 475, Subject: Data Structures, Type: CI, Day: TUESDAY, Time: 08:50 - 10:47, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 489, Subject: Computer Architecture, Type: TP, Day: THURSDAY, Time: 09:40 - 11:59, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 493, Subject: Software Engineering, Type: TP, Day: WEDNESDAY, Time: 16:15 - 18:36, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 500, Subject: Database Systems, Type: CI, Day: THURSDAY, Time: 11:10 - 14:01, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 511, Subject: Artificial Intelligence, Type: CI, Day: WEDNESDAY, Time: 13:20 - 15:40, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 512, Subject: Mathematics, Type: CR, Day: THURSDAY, Time: 11:45 - 13:34, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 536, Subject: Chemistry, Type: TP, Day: WEDNESDAY, Time: 09:05 - 11:45, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 537, Subject: Computer Architecture, Type: CR, Day: MONDAY, Time: 11:05 - 12:58, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 552, Subject: Operating Systems, Type: TD, Day: WEDNESDAY, Time: 16:45 - 19:31, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 560, Subject: Data Structures, Type: CI, Day: FRIDAY, Time: 09:30 - 11:24, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 1029, Subject: Mathematics, Type: TD, Day: SUNDAY, Time: 08:50 - 10:28, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 1030, Subject: Chemistry, Type: TP, Day: SATURDAY, Time: 15:40 - 17:35, Room: Assigned
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+Session Type Distribution:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - TD: 2 sessions
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - CI: 5 sessions
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - TP: 4 sessions
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - CR: 2 sessions
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Testing getEtudiants functionality -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Fetching students for tutorial group with ID: 46
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Using repository method to fetch students directly
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Found 7 students for tutorial group with ID: 46
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Retrieved 7 students
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Sample of enrolled students (first 5):
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1069, Name: Miller Michael, Registration: MAT42, TP: 93
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1079, Name: Jones Richard, Registration: MAT52, TP: 93
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1093, Name: Miller Jennifer, Registration: MAT66, TP: 93
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1095, Name: Jones James, Registration: MAT68, TP: 93
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1098, Name: Wilson Richard, Registration: MAT71, TP: 93
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+Student Distribution across TPs:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - TP-93: 7 students
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 1. Practical Groups Test:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Total TPs: 1
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Average students per TP: 7.0
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+2. Schedule Test:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Total sessions: 13
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Unique subjects: 8
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+3. Students Test:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Total students: 7
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Students per TP: 7.00
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+========== TDService Tests Completed Successfully ==========
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - ========== Starting TPService Functionality Tests ==========
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Test DateTime: 2025-05-02 17:24:01
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Test User: Mahmoud-ABK
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Retrieving Available Practical Groups -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Fetching all practical groups
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Found 97 practical groups
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Selecting test practical group -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Selected practical group - ID: 89, Number: 1, TD: 50
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Testing getStudents functionality -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Redirecting getStudents to getEtudiants method for practical group: 89
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Fetching students for practical group with ID: 89
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Found 8 students for practical group with ID: 89
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Retrieved 8 students
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student details:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1045, Name: Thomas Mary, Registration: MAT18, Branch: 24
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1052, Name: Thomas Robert, Registration: MAT25, Branch: 23
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1065, Name: Thomas James, Registration: MAT38, Branch: 23
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1107, Name: White William, Registration: MAT80, Branch: 23
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1129, Name: Smith Elizabeth, Registration: MAT102, Branch: 22
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1136, Name: Jackson Robert, Registration: MAT109, Branch: 23
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1158, Name: Johnson James, Registration: MAT131, Branch: 23
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Student ID: 1159, Name: Johnson David, Registration: MAT132, Branch: 24
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+Student Registration Distribution:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Prefix MA: 8 students
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Testing generateSchedule functionality -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Generating schedule for practical group with ID: 89
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Generated schedule with 7 sessions for practical group with ID: 89
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Generated schedule with 7 sessions
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Schedule details:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 466, Subject: Data Structures, Type: CI, Day: MONDAY, Time: 10:50 - 13:05, Frequency: catch-up
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 510, Subject: Operating Systems, Type: TD, Day: TUESDAY, Time: 15:40 - 17:15, Frequency: catch-up
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 530, Subject: Operating Systems, Type: CI, Day: TUESDAY, Time: 13:30 - 15:45, Frequency: weekly
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 551, Subject: Data Structures, Type: CR, Day: FRIDAY, Time: 15:35 - 18:09, Frequency: catch-up
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 552, Subject: Operating Systems, Type: TD, Day: WEDNESDAY, Time: 16:45 - 19:31, Frequency: 1/15
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 556, Subject: Networks, Type: TD, Day: WEDNESDAY, Time: 10:30 - 13:09, Frequency: weekly
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Session ID: 1034, Subject: Algorithms, Type: CI, Day: TUESDAY, Time: 11:45 - 13:56, Frequency: catch-up
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+Sessions Distribution by Day:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - WEDNESDAY: 2 sessions
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - MONDAY: 1 sessions
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - FRIDAY: 1 sessions
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - TUESDAY: 3 sessions
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+========== Test Results Summary ==========
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 1. Students Test:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Total students: 8
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Branches represented: 3
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+2. Schedule Test:
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Total sessions: 7
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Unique subjects: 4
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger -    - Session types: 3
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+========== TPService Tests Completed Successfully ==========
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - ========== Specialized Functions Testing Complete ==========
+2025-05-04 15:54:17 [restartedMain] INFO  CustomLogger - ==================== Finished operation successfully ======================
