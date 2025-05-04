@@ -1,0 +1,28 @@
+
+
+batch1: project information and base layers
+you learn the following files : project-description.md project-hierarchy.txt model.txt  jparepo.txt
+and don't generate an output
+
+for each files summerise what is has to say briefly ( max 4 lines )
+
+batch2:Data transfer objects , mapper and utilitys 
+
+you learn the following files : dto.txt  mapper.txt util.txt
+and don't generate an output
+
+for each files summerise what is has to say briefly ( max 4 lines )
+
+batch 3 : service layer 
+learn ,retrieve and summarize the service.txt 
+
+
+
+
+to test the llm understanding :
+test 0: what did you understand about the project : summerise layers and interactions between project components  
+test 1: list me all model layer entities (summarised) 
+test 2: give me the cascading deletion logic in model.txt 
+test 3: for services layer me service layer and their methods ( list format)
+test 4: for Dtos list me dtos and their equivalent if it exists in model layer 
+Test 5: summerise what you know about the project
