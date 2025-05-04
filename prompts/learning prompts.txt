@@ -27,3 +27,10 @@ test 2: give me the cascading deletion logic in model.txt
 test 3: for services layer me service layer and their methods ( list format)
 test 4: for Dtos list me dtos and their equivalent if it exists in model layer 
 Test 5: summerise what you know about the project
+
+
+src/main/java/com/scheduling/universityschedule_backend/controller
+AdministrateurController
+EnseignantController
+EtudiantController
+SalleController

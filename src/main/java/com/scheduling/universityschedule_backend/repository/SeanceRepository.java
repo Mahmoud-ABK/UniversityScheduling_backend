@@ -295,8 +295,3 @@ WHERE s.jour = :jour
 
 
 }
-/*
-,<- vr
-          CASE WHEN ((s.frequence = :catchup AND s_main.frequence = :biweekly)
-                     OR (s.frequence = :biweekly AND s_main.frequence = :catchup))
-               THEN 'Catch-Up Exception; ' ELSE '' END*/
