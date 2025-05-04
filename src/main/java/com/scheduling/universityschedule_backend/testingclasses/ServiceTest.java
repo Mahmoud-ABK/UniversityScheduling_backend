@@ -79,7 +79,9 @@ public class ServiceTest {
 //        testAllUntestAdministrateurServiceFunctionalities();
 //testAllUntestedBrancheServiceFunctionalities();
 //        testAllUntestedEnseignantServiceFunctionalities()
-        testAllUntestedSalleServiceFunctionalities();
+//        testAllUntestedSalleServiceFunctionalities();
+        testAllUntestedTDServiceFunctionalities();
+        testAllUntestedTPServiceFunctionalities();
         CustomLogger.logInfo("========== Specialized Functions Testing Complete ==========");
     }
 
@@ -1652,6 +1654,289 @@ public class ServiceTest {
             throw e;
         } catch (Exception e) {
             CustomLogger.logError("\n===== UNEXPECTED ERROR in SalleService Tests =====");
+            CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw new CustomException("Unexpected error in tests", e);
+        } finally {
+            CustomLogger.logInfo("\n----- Cleaning up test data -----");
+            clearDatabase();
+            CustomLogger.logInfo("Database cleared");
+        }
+    }
+    public void testAllUntestedTDServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting TDService Functionality Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-02 17:24:01");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            // Get all TDs for testing
+            CustomLogger.logInfo("\n----- Retrieving Available Tutorial Groups -----");
+            List<TDDTO> allTDs = tdService.findAll();
+            if (allTDs.isEmpty()) {
+                throw new CustomException("No tutorial groups available for testing");
+            }
+
+            // Select a test TD that has TPs and students
+            CustomLogger.logInfo("\n----- Selecting test tutorial group -----");
+            TDDTO testTD = allTDs.stream()
+                    .filter(td -> td.getTpIds() != null && !td.getTpIds().isEmpty())
+                    .findFirst()
+                    .orElseThrow(() -> new CustomException("No tutorial group with practical groups found for testing"));
+
+            CustomLogger.logInfo("Selected tutorial group - ID: " + testTD.getId() +
+                    ", Number: " + testTD.getNb() +
+                    ", TP Count: " + testTD.getNbTP());
+
+            // 1. Test getTPs
+            CustomLogger.logInfo("\n----- Testing getTPs functionality -----");
+            List<TPDTO> tpList = tdService.getTPs(testTD.getId());
+            CustomLogger.logInfo("Retrieved " + tpList.size() + " practical groups");
+
+            if (!tpList.isEmpty()) {
+                CustomLogger.logInfo("Practical groups details:");
+                tpList.forEach(tp ->
+                        CustomLogger.logInfo("TP ID: " + tp.getId() +
+                                ", Number: " + tp.getNb() +
+                                ", Students: " + (tp.getEtudiantIds() != null ? tp.getEtudiantIds().size() : 0) +
+                                ", Sessions: " + (tp.getSeanceIds() != null ? tp.getSeanceIds().size() : 0))
+                );
+
+                // TP distribution analysis
+                Map<Integer, Long> tpSizeDistribution = tpList.stream()
+                        .collect(Collectors.groupingBy(
+                                tp -> tp.getEtudiantIds() != null ? tp.getEtudiantIds().size() : 0,
+                                Collectors.counting()
+                        ));
+
+                CustomLogger.logInfo("\nTP Size Distribution:");
+                tpSizeDistribution.forEach((size, count) ->
+                        CustomLogger.logInfo(size + " students: " + count + " groups")
+                );
+            }
+
+            // 2. Test generateSchedule
+            CustomLogger.logInfo("\n----- Testing generateSchedule functionality -----");
+            List<SeanceDTO> tdSchedule = tdService.generateSchedule(testTD.getId());
+            CustomLogger.logInfo("Generated schedule with " + tdSchedule.size() + " sessions");
+
+            if (!tdSchedule.isEmpty()) {
+                CustomLogger.logInfo("Schedule details:");
+                tdSchedule.forEach(session ->
+                        CustomLogger.logInfo("Session ID: " + session.getId() +
+                                ", Subject: " + session.getMatiere() +
+                                ", Type: " + session.getType() +
+                                ", Day: " + session.getJour() +
+                                ", Time: " + session.getHeureDebut() + " - " + session.getHeureFin() +
+                                ", Room: " + (session.getSalleId() != null ? "Assigned" : "Not assigned"))
+                );
+
+                // Session analysis
+                Map<String, Long> sessionTypeDistribution = tdSchedule.stream()
+                        .collect(Collectors.groupingBy(
+                                SeanceDTO::getType,
+                                Collectors.counting()
+                        ));
+
+                CustomLogger.logInfo("\nSession Type Distribution:");
+                sessionTypeDistribution.forEach((type, count) ->
+                        CustomLogger.logInfo(type + ": " + count + " sessions")
+                );
+            }
+
+            // 3. Test getEtudiants
+            CustomLogger.logInfo("\n----- Testing getEtudiants functionality -----");
+            List<EtudiantDTO> tdStudents = tdService.getEtudiants(testTD.getId());
+            CustomLogger.logInfo("Retrieved " + tdStudents.size() + " students");
+
+            if (!tdStudents.isEmpty()) {
+                CustomLogger.logInfo("Sample of enrolled students (first 5):");
+                tdStudents.stream()
+                        .limit(5)
+                        .forEach(student ->
+                                CustomLogger.logInfo("Student ID: " + student.getId() +
+                                        ", Name: " + student.getNom() + " " + student.getPrenom() +
+                                        ", Registration: " + student.getMatricule() +
+                                        ", TP: " + student.getTpId())
+                        );
+
+                // Student distribution analysis
+                Map<Long, Long> studentsByTP = tdStudents.stream()
+                        .collect(Collectors.groupingBy(
+                                EtudiantDTO::getTpId,
+                                Collectors.counting()
+                        ));
+
+                CustomLogger.logInfo("\nStudent Distribution across TPs:");
+                studentsByTP.forEach((tpId, count) ->
+                        CustomLogger.logInfo("TP-" + tpId + ": " + count + " students")
+                );
+            }
+
+            // Test Summary
+            CustomLogger.logInfo("\n========== Test Results Summary ==========");
+            CustomLogger.logInfo("1. Practical Groups Test:");
+            CustomLogger.logInfo("   - Total TPs: " + tpList.size());
+            CustomLogger.logInfo("   - Average students per TP: " +
+                    tpList.stream()
+                            .mapToInt(tp -> tp.getEtudiantIds() != null ? tp.getEtudiantIds().size() : 0)
+                            .average()
+                            .orElse(0));
+
+            CustomLogger.logInfo("\n2. Schedule Test:");
+            CustomLogger.logInfo("   - Total sessions: " + tdSchedule.size());
+            CustomLogger.logInfo("   - Unique subjects: " +
+                    tdSchedule.stream()
+                            .map(SeanceDTO::getMatiere)
+                            .distinct()
+                            .count());
+
+            CustomLogger.logInfo("\n3. Students Test:");
+            CustomLogger.logInfo("   - Total students: " + tdStudents.size());
+            CustomLogger.logInfo("   - Students per TP: " +
+                    String.format("%.2f", (double) tdStudents.size() / (tpList.isEmpty() ? 1 : tpList.size())));
+
+            CustomLogger.logInfo("\n========== TDService Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            CustomLogger.logError("\n===== ERROR in TDService Tests =====");
+            CustomLogger.logError("Error type: CustomException");
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
+            CustomLogger.logError("\n===== UNEXPECTED ERROR in TDService Tests =====");
+            CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw new CustomException("Unexpected error in tests", e);
+        } finally {
+            CustomLogger.logInfo("\n----- Cleaning up test data -----");
+            clearDatabase();
+            CustomLogger.logInfo("Database cleared");
+        }
+    }
+
+    public void testAllUntestedTPServiceFunctionalities() throws CustomException {
+        try {
+            CustomLogger.logInfo("========== Starting TPService Functionality Tests ==========");
+            CustomLogger.logInfo("Test DateTime: 2025-05-02 17:24:01");
+            CustomLogger.logInfo("Test User: Mahmoud-ABK");
+
+            // Get all TPs for testing
+            CustomLogger.logInfo("\n----- Retrieving Available Practical Groups -----");
+            List<TPDTO> allTPs = tpService.findAll();
+            if (allTPs.isEmpty()) {
+                throw new CustomException("No practical groups available for testing");
+            }
+
+            // Select a test TP that has students and sessions
+            CustomLogger.logInfo("\n----- Selecting test practical group -----");
+            TPDTO testTP = allTPs.stream()
+                    .filter(tp -> tp.getEtudiantIds() != null && !tp.getEtudiantIds().isEmpty())
+                    .filter(tp -> tp.getSeanceIds() != null && !tp.getSeanceIds().isEmpty())
+                    .findFirst()
+                    .orElseThrow(() -> new CustomException("No practical group with students and sessions found for testing"));
+
+            CustomLogger.logInfo("Selected practical group - ID: " + testTP.getId() +
+                    ", Number: " + testTP.getNb() +
+                    ", TD: " + testTP.getTdId());
+
+            // 1. Test getStudents (which redirects to getEtudiants)
+            CustomLogger.logInfo("\n----- Testing getStudents functionality -----");
+            List<EtudiantDTO> students = tpService.getStudents(testTP.getId());
+            CustomLogger.logInfo("Retrieved " + students.size() + " students");
+
+            if (!students.isEmpty()) {
+                CustomLogger.logInfo("Student details:");
+                students.forEach(student ->
+                        CustomLogger.logInfo("Student ID: " + student.getId() +
+                                ", Name: " + student.getNom() + " " + student.getPrenom() +
+                                ", Registration: " + student.getMatricule() +
+                                ", Branch: " + student.getBrancheId())
+                );
+
+                // Student registration analysis
+                Map<String, Long> registrationPrefixDistribution = students.stream()
+                        .collect(Collectors.groupingBy(
+                                student -> student.getMatricule().substring(0, 2),
+                                Collectors.counting()
+                        ));
+
+                CustomLogger.logInfo("\nStudent Registration Distribution:");
+                registrationPrefixDistribution.forEach((prefix, count) ->
+                        CustomLogger.logInfo("Prefix " + prefix + ": " + count + " students")
+                );
+            }
+
+            // 2. Test generateSchedule
+            CustomLogger.logInfo("\n----- Testing generateSchedule functionality -----");
+            List<SeanceDTO> tpSchedule = tpService.generateSchedule(testTP.getId());
+            CustomLogger.logInfo("Generated schedule with " + tpSchedule.size() + " sessions");
+
+            if (!tpSchedule.isEmpty()) {
+                CustomLogger.logInfo("Schedule details:");
+                tpSchedule.forEach(session ->
+                        CustomLogger.logInfo("Session ID: " + session.getId() +
+                                ", Subject: " + session.getMatiere() +
+                                ", Type: " + session.getType() +
+                                ", Day: " + session.getJour() +
+                                ", Time: " + session.getHeureDebut() + " - " + session.getHeureFin() +
+                                ", Frequency: " + session.getFrequence())
+                );
+
+                // Schedule analysis
+                Map<String, Long> sessionsByDay = tpSchedule.stream()
+                        .collect(Collectors.groupingBy(
+                                SeanceDTO::getJour,
+                                Collectors.counting()
+                        ));
+
+                CustomLogger.logInfo("\nSessions Distribution by Day:");
+                sessionsByDay.forEach((day, count) ->
+                        CustomLogger.logInfo(day + ": " + count + " sessions")
+                );
+            }
+
+            // Test Summary
+            CustomLogger.logInfo("\n========== Test Results Summary ==========");
+            CustomLogger.logInfo("1. Students Test:");
+            CustomLogger.logInfo("   - Total students: " + students.size());
+            if (!students.isEmpty()) {
+                CustomLogger.logInfo("   - Branches represented: " +
+                        students.stream()
+                                .map(EtudiantDTO::getBrancheId)
+                                .distinct()
+                                .count());
+            }
+
+            CustomLogger.logInfo("\n2. Schedule Test:");
+            CustomLogger.logInfo("   - Total sessions: " + tpSchedule.size());
+            CustomLogger.logInfo("   - Unique subjects: " +
+                    tpSchedule.stream()
+                            .map(SeanceDTO::getMatiere)
+                            .distinct()
+                            .count());
+            CustomLogger.logInfo("   - Session types: " +
+                    tpSchedule.stream()
+                            .map(SeanceDTO::getType)
+                            .distinct()
+                            .count());
+
+            CustomLogger.logInfo("\n========== TPService Tests Completed Successfully ==========");
+
+        } catch (CustomException e) {
+            CustomLogger.logError("\n===== ERROR in TPService Tests =====");
+            CustomLogger.logError("Error type: CustomException");
+            CustomLogger.logError("Error message: " + e.getMessage());
+            CustomLogger.logError("Stack trace:");
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
+            CustomLogger.logError("\n===== UNEXPECTED ERROR in TPService Tests =====");
             CustomLogger.logError("Error type: " + e.getClass().getSimpleName());
             CustomLogger.logError("Error message: " + e.getMessage());
             CustomLogger.logError("Stack trace:");
