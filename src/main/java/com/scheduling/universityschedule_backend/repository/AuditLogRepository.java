@@ -33,4 +33,5 @@ public interface AuditLogRepository extends JpaRepository<AuditLog, Long> {
             @Param("entityType") String entityType,
             @Param("entityId") Long entityId
     );
+
 }

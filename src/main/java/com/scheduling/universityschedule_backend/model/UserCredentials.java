@@ -10,7 +10,10 @@ import com.scheduling.universityschedule_backend.model.enums.UserStatus;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user_credentials")
+@Table(name = "user_credentials", indexes = {
+        @Index(name = "idx_username", columnList = "username"),
+        @Index(name = "idx_personne_id", columnList = "personne_id")
+})
 @Data
 @Builder
 @NoArgsConstructor

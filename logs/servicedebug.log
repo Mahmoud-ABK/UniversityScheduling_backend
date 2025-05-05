@@ -7615,3 +7615,4 @@ Sessions Distribution by Day:
 2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Found 1 logs for Administrateur with ID 1
 2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Finished repository tests.
 2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Finished creating and testing users.
+2025-05-05 17:36:06 [main] INFO  CustomLogger - tested
