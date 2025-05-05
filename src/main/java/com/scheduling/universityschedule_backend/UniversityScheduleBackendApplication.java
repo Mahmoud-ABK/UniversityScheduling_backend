@@ -25,25 +25,25 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) {
-		try {
-			CustomLogger.logInfo("==================== Starting Operation  ======================");
-
-			// Call the populateDatabase method with a sample size of 5
-			// You can adjust this number based on how much test data you want
-//			serviceTest.populateDatabase(30);
-
-
-//			serviceTest.rudTest();
-			serviceTest.debug();
-			CustomLogger.logInfo("==================== Finished operation successfully ======================");
-		} catch (CustomException e) {
-			CustomLogger.logError("Error during testing: " + e.getMessage());
-			//e.printStackTrace();
-			CustomLogger.logError("==================== FINISHED WITH ERROR ======================");
-		} catch (Exception e) {
-			CustomLogger.logError("Unexpected error: " + e.getMessage());
-			//e.printStackTrace();
-			CustomLogger.logError("==================== FINISHED WITH UNEXPECTED ERROR ======================");
-		}
+//		try {
+//			CustomLogger.logInfo("==================== Starting Operation  ======================");
+//
+//			// Call the populateDatabase method with a sample size of 5
+//			// You can adjust this number based on how much test data you want
+////			serviceTest.populateDatabase(30);
+//
+//
+////			serviceTest.rudTest();
+////			serviceTest.debug();
+//			CustomLogger.logInfo("==================== Finished operation successfully ======================");
+//		} catch (CustomException e) {
+//			CustomLogger.logError("Error during testing: " + e.getMessage());
+//			//e.printStackTrace();
+//			CustomLogger.logError("==================== FINISHED WITH ERROR ======================");
+//		} catch (Exception e) {
+//			CustomLogger.logError("Unexpected error: " + e.getMessage());
+//			//e.printStackTrace();
+//			CustomLogger.logError("==================== FINISHED WITH UNEXPECTED ERROR ======================");
+//		}
 	}
 }
