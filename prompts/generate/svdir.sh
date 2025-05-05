@@ -15,9 +15,9 @@ fi
 dest="$ing1/projet-web-mobile/UniversitySchedule_backend/prompts/forChat"
 mkdir -p "$dest"
 
-#########################
-# Special Case: repository
-#########################
+#################################
+# Special Case: repository (JPA)
+#################################
 if [ -d "$srcprj/repository" ]; then
   output_file="$dest/jparepo.txt"
   cat <<'EOL' > "$output_file"
@@ -58,60 +58,31 @@ void deleteAllByIdInBatch(Iterable<ID> ids);
 Here are JPA repositories:
 EOL
 
-  # Append all files in the repository directory
-  cat "$srcprj/repository/"* >> "$output_file"
-  echo "Content from repository/* has been written to $output_file"
+  find "$srcprj/repository" -maxdepth 1 -type f -name "*.java" -exec cat {} + >> "$output_file"
+  echo "JPA repositories written to $output_file"
 fi
 
-#########################
-# Special Case: service/impl
-#########################
-if [ -d "$srcprj/service/impl" ]; then
-  output_file1="$dest/impl1.txt"
-  output_file2="$dest/impl2.txt"
+#################################
+# Recursively Process Other Folders
+#################################
 
-  files=("$srcprj/service/impl/"*) # Get list of files
-  total_files=${#files[@]}
-  mid=$((total_files / 2)) # Find the midpoint to split
+find "$srcprj" -type d | while read -r dir; do
+  # Skip repository folder (handled already)
+  [[ "$dir" == "$srcprj/repository" ]] && continue
 
-  # Write first half to impl1.txt
-  cat "${files[@]:0:mid}" > "$output_file1"
-
-  # Write second half to impl2.txt
-  cat "${files[@]:mid}" > "$output_file2"
-
-  echo "Content from service/impl/* has been split into $output_file1 and $output_file2"
-fi
-
-#########################################
-# Process all other top-level directories
-#########################################
-for d in "$srcprj"/*/; do
-  dir_name=$(basename "$d")
-
-  # Skip directories that were already handled specially
-  if [ "$dir_name" = "repository" ]; then
+  # Skip if no Java files directly in this folder
+  java_files=("$dir"/*.java)
+  if [ ! -e "${java_files[0]}" ]; then
     continue
   fi
 
-  # For the service directory, process only files outside the impl subfolder
-  if [ "$dir_name" = "service" ]; then
-    output_file="$dest/service.txt"
-    # Clear (or create) the output file
-    > "$output_file"
-    for file in "$srcprj/service/"*; do
-      # Skip the impl subdirectory (which was handled above)
-      if [ -d "$file" ]; then
-        continue
-      fi
-      cat "$file" >> "$output_file"
-    done
-    echo "Content from service (excluding impl) has been written to $output_file"
-    continue
-  fi
+  # Create relative name and safe output filename
+  rel_path="${dir#$srcprj/}"
+  [[ "$rel_path" == "$srcprj" ]] && rel_path="root"
+  safe_name="${rel_path//\//__}.txt"
+  output_file="$dest/$safe_name"
 
-  # Process any other directory normally
-  output_file="$dest/${dir_name}.txt"
-  cat "$d"* > "$output_file"
-  echo "Content from ${dir_name}/* has been written to $output_file"
+  # Concatenate all Java files in this directory (not recursively)
+  cat "$dir"/*.java > "$output_file"
+  echo "Folder '$rel_path' content written to $output_file"
 done

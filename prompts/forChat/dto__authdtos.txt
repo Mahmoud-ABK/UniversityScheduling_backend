@@ -1,0 +1,55 @@
+package com.scheduling.universityschedule_backend.dto.authdtos;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class LoginRequestDTO {
+    @NotBlank(message = "Username is required")
+    private String username;
+
+    @NotBlank(message = "Password is required")
+    private String password;
+}
+package com.scheduling.universityschedule_backend.dto.authdtos;
+
+import lombok.Data;
+
+@Data
+public class LoginResponseDTO {
+    private String accessToken;
+    private String refreshToken;
+}
+package com.scheduling.universityschedule_backend.dto.authdtos;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class PasswordChangeRequestDTO {
+    @NotBlank(message = "Old password is required")
+    private String oldPassword;
+
+    @NotBlank(message = "New password is required")
+    private String newPassword;
+}
+package com.scheduling.universityschedule_backend.dto.authdtos;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class PasswordResetRequestDTO {
+    @NotBlank(message = "Email is required")
+    private String email;
+}
+package com.scheduling.universityschedule_backend.dto.authdtos;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class RefreshTokenRequestDTO {
+    @NotBlank(message = "Refresh token is required")
+    private String refreshToken;
+}

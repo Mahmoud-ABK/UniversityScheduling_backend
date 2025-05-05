@@ -35,21 +35,58 @@ void deleteAllByIdInBatch(Iterable<ID> ids);
 Here are JPA repositories:
 package com.scheduling.universityschedule_backend.repository;
 
-import com.scheduling.universityschedule_backend.model.Personne;
+import com.scheduling.universityschedule_backend.model.Administrateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PersonneRepository extends JpaRepository<Personne, Long> {
+public interface AdministrateurRepository extends JpaRepository<Administrateur, Long> {
 }
 package com.scheduling.universityschedule_backend.repository;
 
-import com.scheduling.universityschedule_backend.model.Etudiant;
+import com.scheduling.universityschedule_backend.model.AuditLog;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Repository
+public interface AuditLogRepository extends JpaRepository<AuditLog, Long> {
+
+    List<AuditLog> findByUserLogin(String userLogin);
+
+    List<AuditLog> findByTimestampBetween(LocalDateTime start, LocalDateTime end);
+
+    // Additional useful methods
+    @Query("SELECT a FROM AuditLog a WHERE a.userLogin = :userLogin AND a.timestamp BETWEEN :start AND :end")
+    List<AuditLog> findByUserLoginAndTimeRange(
+            @Param("userLogin") String userLogin,
+            @Param("start") LocalDateTime start,
+            @Param("end") LocalDateTime end
+    );
+
+    List<AuditLog> findByUserLoginAndTimestampAfter(String userLogin, LocalDateTime after);
+
+    List<AuditLog> findTop10ByUserLoginOrderByTimestampDesc(String userLogin);
+
+    @Query("SELECT a FROM AuditLog a WHERE a.entityType = :entityType AND a.entityId = :entityId")
+    List<AuditLog> findByEntityTypeAndEntityId(
+            @Param("entityType") String entityType,
+            @Param("entityId") Long entityId
+    );
+
+}package com.scheduling.universityschedule_backend.repository;
+
+import com.scheduling.universityschedule_backend.model.Branche;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
+public interface BrancheRepository extends JpaRepository<Branche, Long> {
+
 }
 package com.scheduling.universityschedule_backend.repository;
 
@@ -62,21 +99,60 @@ public interface EnseignantRepository extends JpaRepository<Enseignant, Long> {
 }
 package com.scheduling.universityschedule_backend.repository;
 
-import com.scheduling.universityschedule_backend.model.Administrateur;
+import com.scheduling.universityschedule_backend.model.Etudiant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdministrateurRepository extends JpaRepository<Administrateur, Long> {
+public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
 }
 package com.scheduling.universityschedule_backend.repository;
 
-import com.scheduling.universityschedule_backend.model.Technicien;
+import com.scheduling.universityschedule_backend.model.FichierExcel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TechnicienRepository extends JpaRepository<Technicien, Long> {
+public interface FichierExcelRepository extends JpaRepository<FichierExcel, Long> {
+}
+package com.scheduling.universityschedule_backend.repository;
+
+import com.scheduling.universityschedule_backend.model.Notification;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface NotificationRepository extends JpaRepository<Notification, Long> {
+    List<Notification> findByIsreadFalse();
+    /**
+     * Custom query to get all notifications for a specific Personne ID (destination).
+     * @param personneId the ID of the Personne (destination)
+     * @return List of notifications for the specified Personne ID
+     */
+    @Query("SELECT n FROM Notification n WHERE n.recepteur.id = :personneId")
+    List<Notification> findAllByPersonneId(@Param("personneId") Long personneId);
+}
+package com.scheduling.universityschedule_backend.repository;
+
+import com.scheduling.universityschedule_backend.model.Personne;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PersonneRepository extends JpaRepository<Personne, Long> {
+}
+package com.scheduling.universityschedule_backend.repository;
+
+import com.scheduling.universityschedule_backend.model.PropositionDeRattrapage;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PropositionDeRattrapageRepository extends JpaRepository<PropositionDeRattrapage, Long> {
 }
 package com.scheduling.universityschedule_backend.repository;
 
@@ -132,63 +208,6 @@ public interface SalleRepository extends JpaRepository<Salle, Long> {
             @Param("heureFin") LocalTime heureFin,
             @Param("date") LocalDate date
     );
-}
-package com.scheduling.universityschedule_backend.repository;
-
-import com.scheduling.universityschedule_backend.model.Notification;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
-
-@Repository
-public interface NotificationRepository extends JpaRepository<Notification, Long> {
-    List<Notification> findByIsreadFalse();
-    /**
-     * Custom query to get all notifications for a specific Personne ID (destination).
-     * @param personneId the ID of the Personne (destination)
-     * @return List of notifications for the specified Personne ID
-     */
-    @Query("SELECT n FROM Notification n WHERE n.recepteur.id = :personneId")
-    List<Notification> findAllByPersonneId(@Param("personneId") Long personneId);
-}
-package com.scheduling.universityschedule_backend.repository;
-
-import com.scheduling.universityschedule_backend.model.Signal;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface SignalRepository extends JpaRepository<Signal, Long> {
-}
-package com.scheduling.universityschedule_backend.repository;
-
-import com.scheduling.universityschedule_backend.model.FichierExcel;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface FichierExcelRepository extends JpaRepository<FichierExcel, Long> {
-}
-package com.scheduling.universityschedule_backend.repository;
-
-import com.scheduling.universityschedule_backend.model.PropositionDeRattrapage;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface PropositionDeRattrapageRepository extends JpaRepository<PropositionDeRattrapage, Long> {
-}
-package com.scheduling.universityschedule_backend.repository;
-
-import com.scheduling.universityschedule_backend.model.TP;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface TPRepository extends JpaRepository<TP, Long> {
 }
 package com.scheduling.universityschedule_backend.repository;
 
@@ -489,13 +508,12 @@ WHERE s.jour = :jour
 }
 package com.scheduling.universityschedule_backend.repository;
 
-import com.scheduling.universityschedule_backend.model.Branche;
+import com.scheduling.universityschedule_backend.model.Signal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BrancheRepository extends JpaRepository<Branche, Long> {
-
+public interface SignalRepository extends JpaRepository<Signal, Long> {
 }
 package com.scheduling.universityschedule_backend.repository;
 
@@ -522,6 +540,24 @@ public interface TDRepository extends JpaRepository<TD, Long> {
 }
 package com.scheduling.universityschedule_backend.repository;
 
+import com.scheduling.universityschedule_backend.model.Technicien;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TechnicienRepository extends JpaRepository<Technicien, Long> {
+}
+package com.scheduling.universityschedule_backend.repository;
+
+import com.scheduling.universityschedule_backend.model.TP;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TPRepository extends JpaRepository<TP, Long> {
+}
+package com.scheduling.universityschedule_backend.repository;
+
 import com.scheduling.universityschedule_backend.model.UserCredentials;
 import com.scheduling.universityschedule_backend.model.Personne;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -542,40 +578,4 @@ public interface UserCredentialsRepository extends JpaRepository<UserCredentials
     Optional<UserCredentials> findByPersonneId(Long personneId);
 
     void deleteByUsername(String username);
-}package com.scheduling.universityschedule_backend.repository;
-
-import com.scheduling.universityschedule_backend.model.AuditLog;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
-@Repository
-public interface AuditLogRepository extends JpaRepository<AuditLog, Long> {
-
-    List<AuditLog> findByUserLogin(String userLogin);
-
-    List<AuditLog> findByTimestampBetween(LocalDateTime start, LocalDateTime end);
-
-    // Additional useful methods
-    @Query("SELECT a FROM AuditLog a WHERE a.userLogin = :userLogin AND a.timestamp BETWEEN :start AND :end")
-    List<AuditLog> findByUserLoginAndTimeRange(
-            @Param("userLogin") String userLogin,
-            @Param("start") LocalDateTime start,
-            @Param("end") LocalDateTime end
-    );
-
-    List<AuditLog> findByUserLoginAndTimestampAfter(String userLogin, LocalDateTime after);
-
-    List<AuditLog> findTop10ByUserLoginOrderByTimestampDesc(String userLogin);
-
-    @Query("SELECT a FROM AuditLog a WHERE a.entityType = :entityType AND a.entityId = :entityId")
-    List<AuditLog> findByEntityTypeAndEntityId(
-            @Param("entityType") String entityType,
-            @Param("entityId") Long entityId
-    );
-
 }

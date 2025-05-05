@@ -73,7 +73,7 @@ public class ServiceTest {
 //    testAllUntestedExcelFileServiceFunctionalities();
 //        testSpecializedFunctionalities();
 //        populateTechniciens();
-        testTechnicienRUD();
+//        testTechnicienRUD();
 
     }
 

@@ -4,6 +4,7 @@ import com.scheduling.universityschedule_backend.dto.*;
 import com.scheduling.universityschedule_backend.service.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/admin")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdministrateurController {
 
     private final AdministrateurService administrateurService;

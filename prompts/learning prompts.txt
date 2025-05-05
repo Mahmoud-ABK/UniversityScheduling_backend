@@ -6,21 +6,28 @@ batch1: project information and base layers
 you learn the following files : project-description.md project-hierarchy.txt model.txt  jparepo.txt
 and don't generate an output
 
-for each files summerise what is has to say briefly ( max 4 lines )
-
 batch2:Data transfer objects , mapper and utilities 
 
-you learn the following files : dto.txt  mapper.txt util.txt
+you learn the following files : dto.txt  mapper.txt util.txt exception.txt
 and don't generate an output
 
-for each files summerise what is has to say briefly ( max 4 lines )
 
 batch 3 : service layer 
 learn ,retrieve and summarize the service.txt 
 the service implementations are too large , they're provided when needed
 
+batch 4: Controller layer
+you learn the following files : controller.txt
+and don't generate an output
+
+batch5 : security
+you learn the following files : security.txt dto__authdtos.txt model__enums.txt
+and don't generate an output
+
+
 
 to test the llm understanding :
+between batch : for each files summerise what is has to say briefly ( max 4 lines )
 test 0: what did you understand about the project : summerise layers and interactions between project components  
 test 1: list me all model layer entities (summarised) 
 test 2: give me the cascading deletion logic in model.txt 

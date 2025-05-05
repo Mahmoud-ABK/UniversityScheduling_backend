@@ -7616,3 +7616,87 @@ Sessions Distribution by Day:
 2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Finished repository tests.
 2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Finished creating and testing users.
 2025-05-05 17:36:06 [main] INFO  CustomLogger - tested
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - ========== Populating Database Using Service Layer ==========
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created Administrators: 2
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created Teachers: 10
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created Branches: 1
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 1
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Creating new tutorial group
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created tutorial group with ID: 2
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created TDs: 2
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created practical group with ID: 1
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created practical group with ID: 2
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Creating new practical group
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created practical group with ID: 3
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created TPs: 3
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created Students: 30
+2025-05-05 19:33:21 [restartedMain] INFO  CustomLogger - Created Rooms: 3
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Created Sessions: 20
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Created Signals: 3
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Created Notifications: 20
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - ========== Database Population Complete ==========
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Starting technician population - User: Mahmoud-ABK
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Creating technician 1: TECH001
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Creating new technician
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Created technician with ID: 43
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Creating technician 2: TECH002
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Creating new technician
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Created technician with ID: 44
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Creating technician 3: TECH003
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Creating new technician
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Created technician with ID: 45
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Creating technician 4: TECH004
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Creating new technician
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Created technician with ID: 46
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Creating technician 5: TECH005
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Creating new technician
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Created technician with ID: 47
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Successfully populated 5 technicians
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - 
+----- Cleaning up test data -----
+2025-05-05 19:33:22 [restartedMain] INFO  CustomLogger - Database cleared
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - testuser0
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - password :$2a$10$X.GmWa4CXqEeQzNVnRCEPO9xulX3J.W8RsCD8sr9K9PLAil2.0BCW
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - testuser1
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - password :$2a$10$WYBCqY7oisMRDokrEIyQ0OCqc1KX/3qJNM7uwTGfCqv5tWiviL1.O
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - testuser2
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - password :$2a$10$amlxjHMjDkfOi1DRblBuReFqgEfJbWvC3s5h8OCg1s0ebnvKmZq8C
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - testuser3
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - password :$2a$10$tV1DfMbmasrEqAC51TzgwOWroXaeLhlML1ciq57i.W9mDZ0h2jwrO
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - testuser4
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - password :$2a$10$PQ3fgUsJ8BGGINRe1sxqtOH9MgDr.yTM0ATLFI7KSvLETd1DYq.uK
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - testuser5
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - password :$2a$10$IHenK5J./h/wimeCyE9kPO43YIDV4mRZVM5eCgQSlIpG2uvJbKsKW
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - testuser6
+2025-05-05 21:14:07 [restartedMain] INFO  CustomLogger - password :$2a$10$jGu8poXKCUURf59pHdKFf.OgDnt9cdMrPGMLjzKVVjftcx9ESIXJq
+2025-05-05 21:14:12 [restartedMain] INFO  CustomLogger - testuser0
+2025-05-05 21:14:12 [restartedMain] INFO  CustomLogger - password :$2a$10$d0cEVmoUSLxaI9jCi3UrbOUWUQaOV/jfxaRCs.aCOFrquXZMsJdf2
+2025-05-05 21:14:12 [restartedMain] INFO  CustomLogger - testuser1
+2025-05-05 21:14:12 [restartedMain] INFO  CustomLogger - password :$2a$10$CHjCXqWPZojO2ArN8Fp0Ou.puLqBPwiRzp.dZ1sprFh6MaX1bErdy
+2025-05-05 21:14:12 [restartedMain] INFO  CustomLogger - testuser2
+2025-05-05 21:14:12 [restartedMain] INFO  CustomLogger - password :$2a$10$Tc7P/1VoFhcAb4BPY0Kw8uXav0yX9UBTXwIhnG52hWS4h4kVWw67i
+2025-05-05 21:14:12 [restartedMain] INFO  CustomLogger - testuser3
+2025-05-05 21:14:13 [restartedMain] INFO  CustomLogger - password :$2a$10$Vf98rZIX6zRP5Ke2LCAL1OT6dktaWAO4aW7dh8YYVlO6aLffDsJim
+2025-05-05 21:14:13 [restartedMain] INFO  CustomLogger - testuser4
+2025-05-05 21:14:13 [restartedMain] INFO  CustomLogger - password :$2a$10$cOhjrBBpsSVAHSEtVvMpt.mAF1tTtJ4j4e.JhbbhASYtkxIkXEsO2
+2025-05-05 21:14:13 [restartedMain] INFO  CustomLogger - testuser5
+2025-05-05 21:14:13 [restartedMain] INFO  CustomLogger - password :$2a$10$LyJ.XfBFbwOvpQP4SrOUYegn3WXGd7N1LajqHm8IPoV59qcj8TY9W
+2025-05-05 21:14:13 [restartedMain] INFO  CustomLogger - testuser6
+2025-05-05 21:14:13 [restartedMain] INFO  CustomLogger - password :$2a$10$i0O7YDJZgvJZIrcLi96vAeIa04xdQy/czDeqR0VC/7J3KwIvu9VXq
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - testuser0
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - password :$2a$10$NYIL2sWkntmRk0VGHCq2vunqDelbTPJ7EtbtUreM5TlPX3qeICae2
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - testuser1
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - password :$2a$10$V9FmDCibNVVPv/07ZuLqHeMEl.EB.b6CWXPxvUaj65UW5wZR5uftO
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - testuser2
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - password :$2a$10$gkiY.7wqhPC29m2t3K8umOgnG/6.1TcxJ9DePqdQojtxUyCB7/5HS
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - testuser3
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - password :$2a$10$LRg2JesEQwtvK.73Djyduu6yU.O4CxKYdGg/H9pKA6gsUz0OHAN66
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - testuser4
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - password :$2a$10$YosaKWn6k5F5wlcySCDDS.k2jkl.Vdl9zC9QjVwJVm129Qyf.sW72
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - testuser5
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - password :$2a$10$nVMYy5D4b9DA0v418E7CeeGAymjuFeaWLuKSNuG9SFKhinHA1/b6.
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - testuser6
+2025-05-05 21:14:49 [restartedMain] INFO  CustomLogger - password :$2a$10$.SruMK4DxwpX3Wrp1tGaSuvzvqgdvide7J5IVwtjHOWQUTgSvtdTq
