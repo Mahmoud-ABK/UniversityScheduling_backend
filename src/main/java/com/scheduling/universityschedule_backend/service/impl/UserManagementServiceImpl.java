@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,13 +62,24 @@ public class UserManagementServiceImpl implements UserManagementService {
         return toUserDTO(credentials);
     }
 
-    @SneakyThrows
     @Override
     @PreAuthorize("hasAuthority('ROLE_TECHNICIAN')")
     public List<UserDTO> findAll() throws CustomException {
-        return userCredentialsRepository.findAll().stream()
-                .map(this::toUserDTO)
-                .collect(Collectors.toList());
+
+        ArrayList<UserDTO> returnedlist = new ArrayList<>();
+        userCredentialsRepository.findAll().stream().forEach(
+                userCredentials -> {
+                    try {
+                        returnedlist.add(this.toUserDTO(userCredentials));
+                    } catch (CustomException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+        );
+        if (returnedlist.isEmpty()) {
+            throw new CustomException("No users found");
+        }
+        return returnedlist;
     }
 
     @Override
