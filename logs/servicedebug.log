@@ -7588,3 +7588,30 @@ Sessions Distribution by Day:
 2025-05-04 23:56:52 [main] INFO  CustomLogger - Database cleared
 2025-05-04 23:56:52 [main] INFO  CustomLogger - RUD operations test completed successfully
 2025-05-04 23:56:52 [main] INFO  CustomLogger - ==================== Finished operation successfully ======================
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Starting to create test users...
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created administrator 1 with ID: 1
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created admin credentials for username: admin1
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created administrator 2 with ID: 2
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created admin credentials for username: admin2
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created administrator 3 with ID: 3
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created admin credentials for username: admin3
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created technician 1 with ID: 4
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created technician credentials for username: tech1
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created technician 2 with ID: 5
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created technician credentials for username: tech2
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created technician 3 with ID: 6
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Created technician credentials for username: tech3
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Starting repository tests...
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Testing UserCredentials Repository...
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Found admin1: admin1
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - tech1 exists: true
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Found credentials for TECH001: tech1
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Found credentials for personne ID 2: admin2
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Testing AuditLog Repository...
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Found 6 logs for user: Mahmoud-ABK
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Found 6 logs between 2025-05-04T15:37:21 and 2025-05-06T15:37:21
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Found 6 logs for user Mahmoud-ABK in time range
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Found 6 recent logs for user: Mahmoud-ABK
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Found 1 logs for Administrateur with ID 1
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Finished repository tests.
+2025-05-05 16:46:33 [restartedMain] INFO  CustomLogger - Finished creating and testing users.
