@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -58,5 +61,17 @@ public class SalleController {
     public ResponseEntity<Void> deleteRoom(@PathVariable Long id) throws CustomException {
         salleService.delete(id);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/available")
+    public ResponseEntity<List<SalleDTO>> getAvailableRooms(
+            @RequestParam(required = false) String date,
+            @RequestParam String day,
+            @RequestParam String startTime,
+            @RequestParam String endTime) throws CustomException {
+        LocalDate localDate = date != null ? LocalDate.parse(date) : null;
+        DayOfWeek dayOfWeek = DayOfWeek.valueOf(day.toUpperCase());
+        LocalTime start = LocalTime.parse(startTime);
+        LocalTime end = LocalTime.parse(endTime);
+        return ResponseEntity.ok(salleService.getAvailableRooms(localDate, dayOfWeek, start, end));
     }
 }

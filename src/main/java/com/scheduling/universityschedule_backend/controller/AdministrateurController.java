@@ -1,14 +1,19 @@
 package com.scheduling.universityschedule_backend.controller;
 
 import com.scheduling.universityschedule_backend.dto.*;
+import com.scheduling.universityschedule_backend.repository.SeanceRepository;
 import com.scheduling.universityschedule_backend.service.*;
 import com.scheduling.universityschedule_backend.exception.CustomException;
+import jakarta.validation.Valid;
+import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * REST Controller for administrator operations.
@@ -27,17 +32,19 @@ public class AdministrateurController {
     private final SeanceService seanceService;
     private final NotificationService notificationService;
     private final ExcelFileService excelFileService;
+    private final BrancheService brancheService;
 
     @Autowired
     public AdministrateurController(
             AdministrateurService administrateurService,
             SeanceService seanceService,
             NotificationService notificationService,
-            ExcelFileService excelFileService) {
+            ExcelFileService excelFileService, BrancheService brancheService) {
         this.administrateurService = administrateurService;
         this.seanceService = seanceService;
         this.notificationService = notificationService;
         this.excelFileService = excelFileService;
+        this.brancheService = brancheService;
     }
 
     // ============================
@@ -70,6 +77,19 @@ public class AdministrateurController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/seances/batch")
+    public ResponseEntity<BatchDTO> createSeancesBatch(@Valid @RequestBody List<SeanceDTO> seanceDTOs) throws CustomException {
+        List<Long> createdIds = new ArrayList<>();
+        seanceDTOs.forEach(seanceDTO -> {
+            try {
+                createdIds.add(seanceService.create(seanceDTO).getId());
+            } catch (CustomException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        return ResponseEntity.ok(new BatchDTO(createdIds, "Batch creation successful", true, "Seance"));
+    }
     // ============================
     //    Makeup Session Management
     // ============================
@@ -148,22 +168,28 @@ public class AdministrateurController {
 
     @PostMapping("/notifications/branches")
     public ResponseEntity<Void> notifyBranches(
-            @RequestBody NotificationDTO notification,
+            @Valid @RequestBody NotificationDTO notification,
             @RequestParam List<Long> branchIds) throws CustomException {
-        // Note: You'll need to fetch BrancheDTOs using branchIds
-        notificationService.sendNotificationToBranches(notification, null); // Implementation needed
+        List<BrancheDTO> branches = branchIds.stream()
+                .map(id -> {
+                    try {
+                        return brancheService.findById(id);
+                    } catch (CustomException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .collect(Collectors.toList());
+        notificationService.sendNotificationToBranches(notification, branches);
         return ResponseEntity.ok().build();
     }
+
 
     // ============================
     //    Excel File Management
     // ============================
-
     @PostMapping("/excel/upload")
-    public ResponseEntity<Void> uploadExcelFile(
-            @RequestBody FichierExcelDTO file,
-            @RequestBody List<SeanceDTO> seances) throws CustomException {
-        excelFileService.upload(file, seances);
+    public ResponseEntity<Void> uploadExcelFile(@Valid @RequestBody ExcelUploadDTO uploadDTO) throws CustomException {
+        excelFileService.upload(uploadDTO.getFile(), uploadDTO.getSeances());
         return ResponseEntity.ok().build();
     }
 
@@ -171,4 +197,12 @@ public class AdministrateurController {
     public ResponseEntity<List<FichierExcelDTO>> getImportHistory() throws CustomException {
         return ResponseEntity.ok(excelFileService.getImportHistory());
     }
+}
+/**
+ * Wrapper DTO for Excel file uploads
+ */
+@Data
+class ExcelUploadDTO {
+    private FichierExcelDTO file;
+    private List<SeanceDTO> seances;
 }
