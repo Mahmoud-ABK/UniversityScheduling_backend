@@ -26,7 +26,7 @@ public class UniversityScheduleBackendApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) {
-		PasswordEncoderTest.passgen();
+
 
 //		try {
 //			serviceTest.populateDatabase(10);

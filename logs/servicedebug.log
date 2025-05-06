@@ -7714,3 +7714,21 @@ Sessions Distribution by Day:
 2025-05-05 23:47:45 [main] INFO  CustomLogger - password :$2a$10$5WuJ9K14/sCMkhSscZNCUe9fpVKKFZszlcwyVWY9fky9z3VAdiaUW
 2025-05-05 23:47:45 [main] INFO  CustomLogger - testuser6
 2025-05-05 23:47:45 [main] INFO  CustomLogger - password :$2a$10$5mSgN8ihyw9FpnuWVMh9u.CSHOZpvNaMfziTFKsw.4BecVMMdoJ5W
+2025-05-06 02:38:31 [http-nio-8080-exec-6] ERROR CustomLogger - Cannot invoke "Object.toString()" because the return value of "org.springframework.security.core.Authentication.getCredentials()" is null
+2025-05-06 02:44:26 [http-nio-8080-exec-10] ERROR CustomLogger - Cannot invoke "Object.toString()" because the return value of "org.springframework.security.core.Authentication.getCredentials()" is null
+2025-05-06 02:49:03 [http-nio-8080-exec-5] INFO  CustomLogger - Logged out user with token: eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6InRlc3R1c2VyMSIsImlhdCI6MTc0NjQ5NjE0MCwiZXhwIjoxNzQ2NDk3MDQwfQ.LjOe6tdTzil58EIYvZKYPpJH6UcWjqYQ74mJbS6NrnA
+2025-05-06 02:49:18 [http-nio-8080-exec-1] INFO  CustomLogger - Logged out user with token: eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6InRlc3R1c2VyMSIsImlhdCI6MTc0NjQ5NjE1NiwiZXhwIjoxNzQ2NDk3MDU2fQ.Brwvy7CQXIh6T5JP5VGV1_r7lXcPa1_NagRsI_0Ziek
+2025-05-06 03:17:04 [http-nio-8080-exec-8] INFO  CustomLogger - Fetching all technicians
+2025-05-06 03:17:04 [http-nio-8080-exec-8] INFO  CustomLogger - Found 5 technicians
+2025-05-06 03:17:14 [http-nio-8080-exec-10] INFO  CustomLogger - Fetching all technicians
+2025-05-06 03:17:14 [http-nio-8080-exec-10] INFO  CustomLogger - Found 5 technicians
+2025-05-06 03:19:29 [http-nio-8080-exec-3] INFO  CustomLogger - Fetching all technicians
+2025-05-06 03:19:29 [http-nio-8080-exec-3] INFO  CustomLogger - Found 5 technicians
+2025-05-06 03:25:51 [http-nio-8080-exec-6] INFO  CustomLogger - Fetching all technicians
+2025-05-06 03:25:51 [http-nio-8080-exec-6] INFO  CustomLogger - Found 5 technicians
+2025-05-06 03:26:03 [http-nio-8080-exec-8] INFO  CustomLogger - Fetching all technicians
+2025-05-06 03:26:03 [http-nio-8080-exec-8] INFO  CustomLogger - Found 5 technicians
+2025-05-06 03:26:16 [http-nio-8080-exec-10] INFO  CustomLogger - Creating new technician
+2025-05-06 03:26:16 [http-nio-8080-exec-10] INFO  CustomLogger - Created technician with ID: 48
+2025-05-06 03:26:26 [http-nio-8080-exec-2] INFO  CustomLogger - Fetching all technicians
+2025-05-06 03:26:26 [http-nio-8080-exec-2] INFO  CustomLogger - Found 6 technicians

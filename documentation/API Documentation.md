@@ -453,7 +453,7 @@ Base DTO for all individuals.
   "prenom": String,
   "email": String,
   "tel": String,
-  "adresse": багато
+  "adresse": String
 }
 ```
 
