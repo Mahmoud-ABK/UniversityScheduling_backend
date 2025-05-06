@@ -1,6 +1,8 @@
 # University Schedule Management API Documentation
 
-This API documentation provides a comprehensive guide to the RESTful API endpoints for the University Schedule Management System. The system is designed to manage schedules, user accounts, notifications, and resources for students, teachers, administrators, and technicians. The API is built using Spring Boot and follows REST principles.
+This API documentation provides a comprehensive guide to the RESTful API endpoints for the University Schedule Management System. The system is designed to manage schedules, user accounts, notifications, and resources for students, teachers, administrators, and technicians. The API is built using Spring Boot, follows REST principles, and includes Swagger UI for interactive exploration and testing of endpoints.
+
+To explore the API interactively, access the Swagger UI at http://localhost:8080/swagger-ui/index.html (or the appropriate host/port for your deployment). Swagger UI provides a user-friendly interface to view endpoint details, test requests, and inspect responses, including support for JWT authentication for secured endpoints (e.g., /api/admin, /api/technicians, /api/rooms). Public endpoints (e.g., /api/auth, /api/teachers, /api/students) can be tested without authentication.
 
 ---
 

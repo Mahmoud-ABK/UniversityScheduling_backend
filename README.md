@@ -34,9 +34,8 @@ The University Schedule Management System is a RESTful API designed to streamlin
    cd university-schedule-management
    ```
    or
-
    ```bash
-   git clone git@github.com:Mahmoud-ABK/UniversityScheduling_backend.git 
+   git clone git@github.com:Mahmoud-ABK/UniversityScheduling_backend.git
    cd university-schedule-management
    ```
 
@@ -61,6 +60,13 @@ The University Schedule Management System is a RESTful API designed to streamlin
 
 5. **Access the API**:
    The API will be available at `http://localhost:8080`. Use a tool like Postman or cURL to interact with the endpoints.
+
+## Swagger UI
+To explore and test the API interactively, access the **Swagger UI** at `http://localhost:8080/swagger-ui/index.html` (or the appropriate host/port for your deployment). Swagger UI provides a user-friendly interface to:
+- View detailed endpoint documentation, including request/response schemas.
+- Test endpoints directly with the "Try it out" feature.
+- Authenticate for secured endpoints (`/api/admin`, `/api/technicians`, `/api/rooms`) using JWT by entering `Bearer <token>` in the "Authorize" button.
+- Explore public endpoints (`/api/auth`, `/api/teachers`, `/api/students`) without authentication.
 
 ## Usage
 - **Authentication**: Use `/api/auth/login` to obtain a JWT for accessing `/api/admin` and `/api/technicians` endpoints. No authentication is required for `/api/students` and `/api/teachers`.
@@ -114,7 +120,6 @@ Contributions are welcome! To contribute:
 
 Please ensure your code follows the project's coding standards and includes tests where applicable.
 
-
 ---
 
 # Système de Gestion des Emplois du Temps Universitaires
@@ -152,10 +157,9 @@ Le Système de Gestion des Emplois du Temps Universitaires est une API REST con�
    git clone https://github.com/Mahmoud-ABK/UniversityScheduling_backend.git
    cd university-schedule-management
    ```
-   or 
-
+   ou
    ```bash
-   git clone git@github.com:Mahmoud-ABK/UniversityScheduling_backend.git 
+   git clone git@github.com:Mahmoud-ABK/UniversityScheduling_backend.git
    cd university-schedule-management
    ```
 
@@ -180,6 +184,13 @@ Le Système de Gestion des Emplois du Temps Universitaires est une API REST con�
 
 5. **Accéder à l'API** :
    L'API sera disponible à `http://localhost:8080`. Utilisez un outil comme Postman ou cURL pour interagir avec les points de terminaison.
+
+## Swagger UI
+Pour explorer et tester l'API de manière interactive, accédez à l'**interface Swagger UI** à `http://localhost:8080/swagger-ui/index.html` (ou l'hôte/port approprié pour votre déploiement). L'interface Swagger UI offre une interface conviviale pour :
+- Consulter la documentation détaillée des points de terminaison, y compris les schémas de requête/réponse.
+- Tester les points de terminaison directement avec la fonctionnalité "Try it out".
+- S'authentifier pour les points de terminaison sécurisés (`/api/admin`, `/api/technicians`, `/api/rooms`) en utilisant JWT en entrant `Bearer <token>` dans le bouton "Authorize".
+- Explorer les points de terminaison publics (`/api/auth`, `/api/teachers`, `/api/students`) sans authentification.
 
 ## Utilisation
 - **Authentification** : Utilisez `/api/auth/login` pour obtenir un JWT pour accéder aux points de terminaison `/api/admin` et `/api/technicians`. Aucune authentification n'est requise pour `/api/students` et `/api/teachers`.
@@ -232,4 +243,3 @@ Les contributions sont les bienvenues ! Pour contribuer :
 5. Ouvrez une Pull Request.
 
 Veuillez vous assurer que votre code respecte les normes de codage du projet et inclut des tests lorsque cela est applicable.
-
