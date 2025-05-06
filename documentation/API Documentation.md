@@ -132,10 +132,10 @@ Content-Type: application/json
 | POST   | `/notifications/branches`       | Sends a notification to specific branches. | `NotificationDTO`, `branchIds` | None | 200, 400     |
 
 #### Excel File Management
-| Method | Endpoint                  | Description                              | Request Body                   | Response Body                   | Status Codes |
-|--------|---------------------------|------------------------------------------|--------------------------------|---------------------------------|--------------|
-| POST   | `/excel/upload`           | Uploads an Excel file with schedules.    | `FichierExcelDTO`, `List<SeanceDTO>` | None                   | 200, 400     |
-| GET    | `/excel/history`          | Retrieves import history of Excel files. | None                           | `List<FichierExcelDTO>`        | 200          |
+| Method | Endpoint                  | Description                              | Request Body                  | Response Body                   | Status Codes |
+|--------|---------------------------|------------------------------------------|-------------------------------|---------------------------------|--------------|
+| POST   | `/excel/upload`           | Uploads an Excel file with schedules.    | `ExcelUploadDTO` | None                   | 200, 400     |
+| GET    | `/excel/history`          | Retrieves import history of Excel files. | None                          | `List<FichierExcelDTO>`        | 200          |
 
 #### Example: Create a Session
 **Request**:
@@ -178,6 +178,40 @@ Authorization: Bearer <access_token>
   "tpIds": [1]
 }
 ```
+Example: Upload Excel File
+Request:
+
+```Json
+POST /api/admin/excel/upload
+Content-Type: application/json
+Authorization: Bearer <access_token>
+
+{
+  "file": {
+    "fileName": "schedule.xlsx",
+    "status": "PENDING",
+    "errors": [],
+    "importDate": "2025-05-06T10:00:00"
+  },
+  "seances": [
+    {
+      "name": "Math Lecture",
+      "jour": "Monday",
+      "heureDebut": "09:00",
+      "heureFin": "11:00",
+      "type": "CR",
+      "matiere": "Mathematics",
+      "frequence": "weekly",
+      "salleId": 1,
+      "enseignantId": 2,
+      "brancheIds": [1],
+      "tdIds": [1],
+      "tpIds": [1]
+    }
+  ]
+}
+```
+
 
 ---
 
